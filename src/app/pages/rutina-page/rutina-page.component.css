@@ -1,0 +1,15 @@
+.container {
+    max-width: 600px;
+}
+
+h2 {
+    color: #2c3e50;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.list-group-item {
+    background-color: #f8f9fa;
+}

@@ -1,0 +1,104 @@
+// Se deberia verificar el nombre del entrenador en la parte superior
+//Aqui los entrenadores pueden cargar sus rutinas
+// deberian pedir:
+//nombre atleta (desplegable)
+//nombre rutina (input)
+//Cantidad de dias a la semana (desplegable)
+//nivel de la rutina (desplegable)
+// objetivo rutina(desplegable)
+//descripcin de la rutina ( campo de texto con aclaraciones )
+
+// deberia existir tambien un boton para abrir un form y cargar un ejercicio nuevo con su nombre y descripcion
+
+//deberia existir tambien un boton para abrir ventana para copiar rutinas ya cargadas y modificarlas
+
+<div class="container mt-4">
+    <!-- Verificación del Entrenador -->
+    <div class="row">
+        <div class="col">
+            <h3 class="text-center">Bienvenido, <span id="entrenadorNombre">[Nombre del Entrenador]</span></h3>
+        </div>
+    </div>
+
+    <!-- Formulario de Rutinas -->
+    <div class="row mt-4">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card shadow">
+                <div class="card-header text-center bg-primary text-white">
+                    <h5>Cargar Rutina</h5>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <!-- Nombre del Atleta -->
+                        <div class="mb-3">
+                            <label for="nombreAtleta" class="form-label">Nombre del Atleta</label>
+                            <select id="nombreAtleta" class="form-select">
+                                <option value="" disabled selected>Seleccione un atleta</option>
+                                <option value="1">Atleta 1</option>
+                                <option value="2">Atleta 2</option>
+                                <option value="3">Atleta 3</option>
+                            </select>
+                        </div>
+
+                        <!-- Nombre de la Rutina -->
+                        <div class="mb-3">
+                            <label for="nombreRutina" class="form-label">Nombre de la Rutina</label>
+                            <input type="text" id="nombreRutina" class="form-control"
+                                placeholder="Ingrese el nombre de la rutina">
+                        </div>
+
+                        <!-- Cantidad de Días a la Semana -->
+                        <div class="mb-3">
+                            <label for="cantidadDias" class="form-label">Cantidad de Días a la Semana</label>
+                            <select id="cantidadDias" class="form-select">
+                                <option value="" disabled selected>Seleccione la cantidad de días</option>
+                                <option value="1">1 día</option>
+                                <option value="2">2 días</option>
+                                <option value="3">3 días</option>
+                                <option value="4">4 días</option>
+                                <option value="5">5 días</option>
+                                <option value="6">6 días</option>
+                                <option value="7">7 días</option>
+                            </select>
+                        </div>
+
+                        <!-- Nivel de la Rutina -->
+                        <div class="mb-3">
+                            <label for="nivelRutina" class="form-label">Nivel de la Rutina</label>
+                            <select id="nivelRutina" class="form-select">
+                                <option value="" disabled selected>Seleccione el nivel</option>
+                                <option value="principiante">Principiante</option>
+                                <option value="intermedio">Intermedio</option>
+                                <option value="avanzado">Avanzado</option>
+                            </select>
+                        </div>
+
+                        <!-- Objetivo de la Rutina -->
+                        <div class="mb-3">
+                            <label for="objetivoRutina" class="form-label">Objetivo de la Rutina</label>
+                            <select id="objetivoRutina" class="form-select">
+                                <option value="" disabled selected>Seleccione el objetivo</option>
+                                <option value="ganar_masa">Ganar Masa</option>
+                                <option value="perder_peso">Perder Peso</option>
+                                <option value="resistencia">Resistencia</option>
+                                <option value="fuerza">Fuerza</option>
+                            </select>
+                        </div>
+
+                        <!-- Descripción de la Rutina -->
+                        <div class="mb-3">
+                            <label for="descripcionRutina" class="form-label">Descripción de la Rutina</label>
+                            <textarea id="descripcionRutina" class="form-control" rows="4"
+                                placeholder="Aclaraciones o detalles de la rutina"></textarea>
+                        </div>
+
+                        <!-- Botón de Enviar -->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success">Cargar Rutina</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
