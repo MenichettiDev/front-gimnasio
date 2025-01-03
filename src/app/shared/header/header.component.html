@@ -21,6 +21,9 @@
                         <li class="nav-item">
                             <a class="nav-link" routerLink="/regalo">Regalo</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/cargar-pago">Nuevo pago</a>
+                        </li>
                     </ul>
                     <button ngif="!isLoggedIn" class="btn btn-primary" routerLink="/login">Login</button>
                     <button ngif="isLoggedIn" class="btn btn-primary" (click)="logout()">Logout</button>
