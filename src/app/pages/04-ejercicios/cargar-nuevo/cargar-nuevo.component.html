@@ -1,0 +1,36 @@
+<div class="exercise-form">
+    <h2>Formulario de Ejercicio</h2>
+
+    <form (ngSubmit)="onSubmit()" #exerciseForm="ngForm">
+
+        <!-- Select de grupo muscular -->
+        <label for="muscleGroup">Grupo Muscular:</label>
+        <select id="muscleGroup" [(ngModel)]="exercise.muscleGroup" name="muscleGroup" required>
+            <option value="pecho">Pecho</option>
+            <option value="espalda">Espalda</option>
+            <option value="piernas">Piernas</option>
+            <option value="brazos">Brazos</option>
+            <option value="hombros">Hombros</option>
+            <option value="abdominales">Abdominales</option>
+        </select>
+
+        <!-- Input de nombre de ejercicio -->
+        <label for="exerciseName">Nombre del Ejercicio:</label>
+        <input type="text" id="exerciseName" [(ngModel)]="exercise.name" name="name" required>
+
+        <!-- Input de imagen -->
+        <label for="exerciseImage">Imagen:</label>
+        <input type="file" id="exerciseImage" (change)="onImageSelected($event)" accept="image/*">
+
+        <!-- Campo de descripción -->
+        <label for="description">Descripción - Tips:</label>
+        <textarea id="description" [(ngModel)]="exercise.description" name="description" rows="4" required></textarea>
+
+        <button type="submit" [disabled]="!exerciseForm.form.valid">Guardar Ejercicio</button>
+    </form>
+
+    <div *ngIf="imagePreview">
+        <h3>Vista previa de la imagen:</h3>
+        <img [src]="imagePreview" alt="Vista previa" width="150">
+    </div>
+</div>

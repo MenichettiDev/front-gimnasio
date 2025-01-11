@@ -1,21 +1,55 @@
 import { Routes } from '@angular/router';
-import { HomePageComponent } from './pages/home-page/home-page.component';
-import { RutinaPageComponent } from './pages/rutina-page/rutina-page.component';
-import { RegaloPageComponent } from './pages/regalo-page/regalo-page.component';
-import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { guardsGuard } from './guards.guard'; // Importa el guard
-import { CargarRutinaComponent } from './pages/cargar-rutina/cargar-rutina.component';
-import { CargarPagoPageComponent } from './pages/cargar-pago-page/cargar-pago-page.component';
+import { LoginComponent } from './pages/login/login.component';
+import { ResumenComponent } from './pages/01-inicio/resumen/resumen.component';
 
 
 export const routes: Routes = [
-    { path: '', component: HomePageComponent },
-    { path: 'login', component: LoginPageComponent },
-    { path: 'home', component: HomePageComponent },
-    { path: 'rutina', component: RutinaPageComponent, canActivate: [guardsGuard] },
-    { path: 'cargar-rutina', component: CargarRutinaComponent, canActivate: [guardsGuard] },
-    { path: 'cargar-pago', component: CargarPagoPageComponent, canActivate: [guardsGuard] },
-    { path: 'regalo', component: RegaloPageComponent },
-    {path: '**', component: HomePageComponent}
+    // Ruta para el componente Inicio
+    { path: '', loadComponent: () => import('./pages/01-inicio/resumen/resumen.component').then(m => m.ResumenComponent) },
 
+    // Ruta Lazy Loading para todas las páginas dentro de "Rutinas"
+    {
+        path: 'inicio',
+        loadChildren: () => import('./pages/01-inicio/inicio.routes').then(m => m.inicioRoutes)
+    },
+
+    // Ruta Lazy Loading para todas las páginas dentro de "Ejercicios"
+    {
+        path: 'perfil',
+        loadChildren: () => import('./pages/02-perfil/perfil.routes').then(m => m.perfilRoutes)
+    },
+    {
+        path: 'rutinas',
+        loadChildren: () => import('./pages/03-rutinas/rutinas.routes').then(m => m.rutinasRoutes)
+    },
+    {
+        path: 'ejercicios',
+        loadChildren: () => import('./pages/04-ejercicios/ejercicios.routes').then(m => m.ejerciciosRoutes)
+    },
+    {
+        path: 'asistencia',
+        loadChildren: () => import('./pages/05-asistencia/asistencia.routes').then(m => m.asistenciaRoutes)
+    },
+    {
+        path: 'progreso',
+        loadChildren: () => import('./pages/06-progreso/progreso.routes').then(m => m.progresoRoutes)
+    },
+    {
+        path: 'comunidad',
+        loadChildren: () => import('./pages/07-comunidad/comunidad.routes').then(m => m.comunidadRoutes)
+    },
+    {
+        path: 'configuracion',
+        loadChildren: () => import('./pages/08-configuracion/configuracion.routes').then(m => m.configuracionRoutes)
+    },
+    {
+        path: 'ayuda',
+        loadChildren: () => import('./pages/09-ayuda/contacto.routes').then(m => m.ayudaRoutes)
+    },
+    
+
+
+    // Ruta por defecto
+    { path: '**', redirectTo: '' }
 ];

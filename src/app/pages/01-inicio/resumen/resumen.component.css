@@ -1,0 +1,98 @@
+.main-page {
+    padding: 50px 0;
+}
+
+.main-page img {
+    max-height: 500px;
+    /* Altura máxima para mantener proporción */
+}
+
+.main-page h1 {
+    font-family: 'Poppins', sans-serif;
+    /* Tipografía moderna */
+    font-weight: 700;
+}
+
+.main-page p {
+    font-family: 'Open Sans', sans-serif;
+    /* Tipografía elegante y legible */
+    line-height: 1.8;
+}
+
+/* Estilos generales para el contenedor */
+div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+    font-family: 'Roboto', sans-serif;
+    /* Fuente base */
+    color: #333;
+    text-align: center;
+}
+
+/* Estilo para el título */
+h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #2c3e50;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para la frase aleatoria */
+p {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #e74c3c;
+    /* Color rojo para resaltar la frase */
+    line-height: 1.5;
+    margin: 20px 0;
+    font-family: 'Montserrat', sans-serif;
+    /* Fuente más motivacional */
+    letter-spacing: 1px;
+    text-align: center;
+    max-width: 600px;
+}
+
+/* Estilo para el botón */
+button {
+    background-color: #e74c3c;
+    /* Color rojo */
+    color: white;
+    font-size: 1.2rem;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+button:hover {
+    background-color: #c0392b;
+    /* Rojo más oscuro al hacer hover */
+}
+
+/* Animación para dar energía a la frase */
+p {
+    animation: fadeIn 2s ease-in-out;
+}
+
+/* Animación de desvanecimiento de la frase */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,48 @@
+.exercise-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+}
+
+.exercise-form h2 {
+    text-align: center;
+}
+
+.exercise-form label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+.exercise-form input,
+.exercise-form select,
+.exercise-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.exercise-form button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.exercise-form button:disabled {
+    background-color: #ddd;
+}
+
+.exercise-form img {
+    display: block;
+    margin-top: 15px;
+    border: 1px solid #ddd;
+    padding: 5px;
+}

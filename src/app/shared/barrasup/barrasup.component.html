@@ -1,0 +1,33 @@
+<div class="top-bar">
+    <!-- Datos de contacto y horarios -->
+    <div class="contact-info">
+        <span class="phone"> <i class="bx bx-phone"></i> +54 2657 651266 </span>
+        <span class="hours">
+            <i class="bx bx-time"></i> Lun. a Sáb. 10:00hs a 13:00hs / 17:00hs a
+            21:00hs
+        </span>
+    </div>
+
+    <!-- Redes sociales -->
+    <div class="social-icons">
+        <a href="https://www.instagram.com/franco.menichetti89" target="_blank">
+            <i class="bx bxl-instagram"></i>
+        </a>
+        <a href="https://chat.whatsapp.com/C0VMZ2hME9JGqE1uKI2rCY" target="_blank">
+            <i class="bx bxl-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Botón de Login -->
+    <!-- <button (click)="navigateToLogin()" class="btn-login">
+        <i class="bx bx-log-in"></i> Login
+    </button> -->
+    <button *ngIf="!authService.isLoggedIn()" (click)="login()" class="btn-login">
+        <i class="bx bx-log-in"></i> Login
+    </button>
+    <button *ngIf="authService.isLoggedIn()" (click)="logout()" class="btn-login">
+        <i class="bx bx-log-out"></i> Logout
+    </button>
+
+
+</div>

@@ -2,6 +2,7 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 // bootstrapApplication(AppComponent, appConfig)
 //   .catch((err) => console.error(err));
@@ -11,7 +12,7 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
     ...appConfig,
     providers: [
       ...appConfig.providers,
-      provideHttpClient(withFetch()),
+      provideHttpClient(withFetch()), provideAnimationsAsync(),
     ],
   };
   

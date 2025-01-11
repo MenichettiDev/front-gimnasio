@@ -1,0 +1,23 @@
+<!-- <div *ngIf="menus.length === 0">Cargando menús...</div>  -->
+<div *ngIf="menus.length > 0">
+    <div class="sidebar">
+        <ul class="nav flex-column">
+            <li *ngFor="let menu of getMainMenus()" class="nav-item" (click)="toggleSubMenu(menu)">
+                <a class="nav-link" [routerLink]="menu.menu_link">{{ menu.menu_descripcion }}</a>
+        
+                <!-- Sub Menús (solo si están expandidos) -->
+                <ul *ngIf="menu.expanded" class="sub-menu">
+                    <li *ngFor="let subMenu of getSubMenus(menu)">
+                        <a class="nav-link" [routerLink]="subMenu.menu_link">{{ subMenu.menu_descripcion }}</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        
+        
+    </div>
+</div>
+<div>
+
+    
+</div>

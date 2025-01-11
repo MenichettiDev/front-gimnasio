@@ -1,0 +1,70 @@
+<div class="login-container">
+  <div class="container">
+    <!-- Icono de cerrar -->
+    <button (click)="closeLogin()" class="close-btn" aria-label="Cerrar formulario de login">
+      <i class="bx bx-x"></i> <!-- Icono de 'X' -->
+    </button>
+    <!-- Formulario reactivo con Angular -->
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" aria-labelledby="login-form-title">
+        <h1>Login</h1>
+      <div class="form-group">
+        <input
+          type="text"
+          formControlName="usuario"
+          id="usuario"
+          placeholder="Usuario"
+          required
+        />
+        <i class='bx bxs-user' aria-label="Icono de usuario"></i>
+        <!-- Mensaje de error para el campo 'usuario' -->
+        <div
+          *ngIf="
+            loginForm.get('usuario')?.invalid &&
+            loginForm.get('usuario')?.touched
+          "
+          class="error-message"
+        >
+          El usuario es requerido
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input
+          type="password"
+          formControlName="contrasenia"
+          id="contrasenia"
+          placeholder="Contraseña"
+          required
+        />
+        <i class='bx bxs-lock-alt' aria-label="Icono de contraseña"></i>
+        <!-- Mensaje de error para el campo 'contrasenia' -->
+        <div
+          *ngIf="
+            loginForm.get('contrasenia')?.invalid &&
+            loginForm.get('contrasenia')?.touched
+          "
+          class="error-message"
+        >
+          La contraseña es requerida
+        </div>
+      </div>
+
+      <div class="remember-forgot">
+        <label><input type="checkbox" aria-label="Recordar usuario"> Recordar
+        </label>
+        <a href="#" aria-label="Enlace para recuperar la contraseña">Olvide mi contraseña</a>
+      </div>
+
+      <!-- Mostrar mensaje de error global si existe -->
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+
+        <button type="submit" class="btn" [disabled]="loginForm.invalid">Iniciar Sesión</button>
+
+        <div class="register-link">
+          <p>¿No tienes una cuenta? <a href="/register">Registrate</a></p>
+        </div>
+    </form>
+  </div>
+</div>

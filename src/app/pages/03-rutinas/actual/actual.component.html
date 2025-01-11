@@ -1,0 +1,27 @@
+<!-- rutina.component.html -->
+
+<div class="container">
+    <h2>Mi Rutina de Ejercicios</h2>
+
+    <div *ngFor="let dia of rutina; let i = index" class="dia-rutina">
+        <h3>{{ dia.dia }}</h3>
+        <div *ngFor="let ejercicio of dia.ejercicios" class="card" [ngClass]="{'completado': ejercicio.completado}">
+            <div class="card-body">
+                <h4>{{ ejercicio.nombre }}</h4>
+                <p>{{ ejercicio.descripcion }}</p>
+                <input type="checkbox" [(ngModel)]="ejercicio.completado" (change)="calcularProgreso(i)" />
+                <label>Completado</label>
+            </div>
+        </div>
+        <div class="progreso">
+            <p>Progreso del día: {{ calcularPorcentajeDia(dia.ejercicios) }}%</p>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="progreso-general">
+        <h4>Progreso Semanal</h4>
+        <p>{{ progresoGeneral }}%</p>
+    </div>
+</div>
