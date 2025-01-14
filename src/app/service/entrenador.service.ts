@@ -2,21 +2,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Entrenador } from '../data/interfaces/entrenadorInterface';
 
-// Modelo de Entrenador (opcional, dependiendo de cómo tengas la respuesta)
-export interface Entrenador {
-  id_entrenador: number;
-  dni: string;
-  email: string;
-  nombre: string;
-  apellido: string;
-  apodo: string;
-  fecha_nacimiento: Date;
-  celular: string;
-  foto_archivo: string;
-
-  // Otros campos según la API
-}
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +15,7 @@ export class EntrenadorService {
   constructor(private http: HttpClient) { }
 
   // Método para obtener los entrenadores
-  obtenerEntrenadores():  Observable<{ entrenadores: Entrenador[] }> {
+  getEntrenadores():  Observable<{ entrenadores: Entrenador[] }> {
     // console.log("buscando entrenadores...");
     return this.http.get<{ entrenadores: Entrenador[]}>(this.apiUrl);
   }

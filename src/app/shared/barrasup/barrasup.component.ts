@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../service/auth/auth.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-barrasup',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './barrasup.component.html',
   styleUrl: './barrasup.component.css'
 })

@@ -1,0 +1,8 @@
+<div>
+    <label for="entrenador">Selecciona un Entrenador</label>
+    <select id="entrenador" [(ngModel)]="selectedEntrenador">
+        <option *ngFor="let entrenador of entrenadores" [value]="entrenador.id_entrenador">
+            {{  entrenador.apodo  }} <!--  el campo que se mostrará según tu modelo -->
+        </option>
+    </select>
+</div>

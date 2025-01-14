@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../../service/auth/auth.service';
 import { FrasesService } from '../../../service/frases.service';
-import { Entrenador, EntrenadorService } from '../../../service/entrenador.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SidebarComponent } from "../../../shared/sidebar/sidebar.component";
@@ -15,14 +14,12 @@ import { SidebarComponent } from "../../../shared/sidebar/sidebar.component";
 export class ResumenComponent {
 
   fraseAleatoria: string = "";
-  entrenadores: Entrenador[] = [];
 
-  constructor(private authService: AuthService, private frasesService: FrasesService, private entrenadoresService: EntrenadorService) { }
+  constructor(private authService: AuthService, private frasesService: FrasesService) { }
 
   // Se ejecuta cuando el componente se inicializa
   ngOnInit(): void {
     this.fraseAleatoria = this.frasesService.getFraseAleatoria();
-    this.obtenerEntrenadores();
   }
 
 
@@ -31,15 +28,5 @@ export class ResumenComponent {
   }
 
   // Llamada al servicio para obtener los entrenadores
-  obtenerEntrenadores(): void {
-    this.entrenadoresService.obtenerEntrenadores().subscribe(
-      (data) => {
-        this.entrenadores = data.entrenadores; // Asignas los datos a la variable del componente
-        console.log('entrenadores: ', JSON.stringify(this.entrenadores))
-      },
-      (error) => {
-        console.error('Error al obtener entrenadores', error);
-      }
-    );
-  }
+  
 }

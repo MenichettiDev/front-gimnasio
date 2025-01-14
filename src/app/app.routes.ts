@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { guardsGuard } from './guards.guard'; // Importa el guard
-import { LoginComponent } from './pages/login/login.component';
 import { ResumenComponent } from './pages/01-inicio/resumen/resumen.component';
+import { LoginComponent } from './pages/00-login/login.component';
 
 
 export const routes: Routes = [
@@ -9,11 +9,7 @@ export const routes: Routes = [
     { path: '', loadComponent: () => import('./pages/01-inicio/resumen/resumen.component').then(m => m.ResumenComponent) },
 
     // Ruta Lazy Loading para todas las páginas dentro de "Rutinas"
-    {
-        path: 'inicio',
-        loadChildren: () => import('./pages/01-inicio/inicio.routes').then(m => m.inicioRoutes)
-    },
-
+    { path: 'login', component: LoginComponent },
     // Ruta Lazy Loading para todas las páginas dentro de "Ejercicios"
     {
         path: 'perfil',
