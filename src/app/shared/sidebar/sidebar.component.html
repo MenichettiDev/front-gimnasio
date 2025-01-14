@@ -1,23 +1,26 @@
-<!-- <div *ngIf="menus.length === 0">Cargando menús...</div>  -->
 <div *ngIf="menus.length > 0">
     <div class="sidebar">
+        <!-- Espacio para la imagen en la parte superior -->
+        <div class="sidebar-img">
+            <img src="images/rat.jpeg" alt="Logo" class="img-fluid rounded-circle">
+        </div>
         <ul class="nav flex-column">
-            <li *ngFor="let menu of getMainMenus()" class="nav-item" (click)="toggleSubMenu(menu)">
-                <a class="nav-link" [routerLink]="menu.menu_link">{{ menu.menu_descripcion }}</a>
-        
+            <li *ngFor="let menu of getMainMenus()" class="nav-item">
+                <a class="nav-link" [routerLink]="menu.menu_link" (click)="toggleSubMenu(menu)">
+                    <i class="{{ menu.menu_icono }}"></i> {{ menu.menu_descripcion }}
+                </a>
+
                 <!-- Sub Menús (solo si están expandidos) -->
                 <ul *ngIf="menu.expanded" class="sub-menu">
-                    <li *ngFor="let subMenu of getSubMenus(menu)">
-                        <a class="nav-link" [routerLink]="subMenu.menu_link">{{ subMenu.menu_descripcion }}</a>
+                    <li *ngFor="let subMenu of getSubMenus(menu)" class="nav-item">
+                        <a class="nav-link" [routerLink]="subMenu.menu_link">
+                            <i class="{{subMenu.menu_icono}}"></i> {{ subMenu.menu_descripcion }}
+                        </a>
                     </li>
                 </ul>
             </li>
         </ul>
-        
-        
     </div>
-</div>
-<div>
 
-    
+
 </div>

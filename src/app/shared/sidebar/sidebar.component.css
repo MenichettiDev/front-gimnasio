@@ -1,56 +1,99 @@
+/* Sidebar con fondo oscuro y diseño atractivo */
 .sidebar {
     width: 250px;  
-    background-color: black;  /* Fondo negro */
+    background-color: #343a40;  /* Fondo oscuro */
     color: #d3d3d3;  /* Gris claro */
-    padding: 15px;
+    padding: 20px;
     position: fixed;
-    left: 0;
     top: 0;
+    left: 0;
     bottom: 0;
     z-index: 1000;
-    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Esto asegura que el contenido se estire para ocupar todo el alto */
+    justify-content: flex-start; /* Esto asegura que los menús se alineen correctamente */
+    transition: width 0.3s ease;
+}
+
+/* Espacio para la imagen en la parte superior */
+.sidebar-img {
+    text-align: center;
+    margin-bottom: 20px;  /* Espacio debajo de la imagen */
+}
+
+.sidebar-img img {
+    width: 180px;  /* Ajusta el tamaño de la imagen */
+    height: 180px;  /* Hace la imagen cuadrada */
+    border-radius: 50%;  /* Hace la imagen redonda */
+    object-fit: cover;  /* Asegura que la imagen se recorte de manera proporcional */
+    margin-bottom: 15px;  /* Espacio debajo de la imagen */
 }
 
 /* Sin subrayado en los enlaces */
 .nav-link {
     color: #d3d3d3;  /* Gris claro */
-    text-decoration: none;  /* Eliminar subrayado */
+    text-decoration: none;
+    font-weight: 500;
+    padding-left: 15px;
 }
 
 /* Cambiar color de los enlaces al pasar el ratón */
 .nav-link:hover {
-    color: #fff;  /* Blanco en el hover */
-    text-decoration: none;  /* No subrayar en hover */
+    color: #ffffff;
+    background-color: #4c5b6b;  /* Fondo azul claro en hover */
+    text-decoration: none;
 }
 
 /* Submenú */
 .sub-menu {
     padding-left: 20px;
+    margin-top: 5px;
+    background-color: #343a40;  /* Fondo igual al sidebar */
+    border-radius: 5px;
+}
+
+/* Estilo para los íconos en los ítems */
+.nav-item i {
+    margin-right: 10px; /* Espacio entre el ícono y el texto */
+}
+
+/* Efecto hover sobre los íconos */
+.nav-item i:hover {
+    color: #4c5b6b;  /* Cambia el color del icono en hover */
 }
 
 /* Sombra a la derecha para separar visualmente */
 .sidebar {
-    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
-/* Estilo de los íconos en los ítems */
-.sidebar .nav-item i {
-    cursor: pointer;
-}
-
-/* Estilo para mover el Login y Logout al pie */
+/* Estilo de la parte inferior del sidebar */
 .footer {
     position: absolute;
-    bottom: 15px; /* Asegura que esté al fondo */
-    left: 0;
+    bottom: 20px;
     width: 100%;
-    margin-top: auto;
 }
 
-/* Los ítems de Login y Logout también tendrán un estilo limpio */
-.footer .nav-item {
-    margin-top: 10px;  /* Espaciado entre los elementos */
+/* Estilo de los enlaces en el footer */
+.footer .nav-item a {
+    font-size: 14px;
+    padding-left: 15px;
+}
+
+/* Botón de Login/Logout con icono */
+.footer .nav-link {
+    display: flex;
+    align-items: center;
+    color: #d3d3d3;
+}
+
+.footer .nav-link:hover {
+    background-color: transparent;
+    color: #ffffff;
+}
+
+/* Agregar un ícono de bootstrap para los ítems */
+.bi {
+    font-size: 18px;
 }
