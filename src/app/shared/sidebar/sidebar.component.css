@@ -63,6 +63,30 @@
     color: #4c5b6b;  /* Cambia el color del icono en hover */
 }
 
+/* Eliminar las bolitas de los ítems de la lista */
+.sidebar ul {
+    list-style: none;  /* Elimina las bolitas o puntos de la lista */
+    padding-left: 0;   /* Elimina el sangrado por defecto en las listas */
+    margin-left: 0;    /* Elimina el margen izquierdo */
+}
+
+.nav-item {
+    padding-left: 0;  /* Asegura que no haya sangrado en cada item de la lista */
+}
+
+.nav-item a {
+    display: flex;
+    align-items: center;  /* Asegura que el ícono y texto estén alineados */
+    text-decoration: none;
+    color: #d3d3d3;  /* Gris claro */
+}
+
+/* Opcional: Eliminar el borde o relleno de los ítems (si lo hubiese) */
+.nav-item {
+    border: none;  /* Si hay algún borde, lo elimina */
+    padding: 0;    /* Elimina el relleno de los ítems */
+}
+
 /* Sombra a la derecha para separar visualmente */
 .sidebar {
     box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5);
