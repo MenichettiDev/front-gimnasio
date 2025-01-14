@@ -10,7 +10,7 @@
 
 /* Barra superior con fondo verde forest y transparencia */
 .top-bar {
-    background-color: rgba(1, 48, 3, 0.733);
+    background-color: #343a40;
     /* Color verde forest con 70% de transparencia */
     padding: 10px 20px;
     display: flex;
@@ -35,7 +35,7 @@
     background: transparent;
     border: none;
     color: white;
-    font-size: 18px;
+    font-size: 20px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -51,39 +51,18 @@
     border-radius: 5px;
 }
 
-/* Contenedor de los datos de contacto y horarios */
-.contact-info {
-    display: flex;
-    gap: 20px;
-    /* Espacio entre los elementos */
-    align-items: center;
-    font-size: 14px;
-    justify-content: center;
-    flex-grow: 1;
-    /* Permite que la información de contacto ocupe el espacio disponible */
-}
-
-.contact-info span {
-    display: flex;
-    align-items: center;
-}
-
-.contact-info i {
-    margin-right: 5px;
-    /* Espacio entre el ícono y el texto */
-}
 
 /* Contenedor de los iconos de redes sociales */
 .social-icons {
     display: flex;
-    gap: 10px;
+    gap: 20px;
     /* Espacio entre los iconos */
     margin-left: auto;
 }
 
 .social-icons a {
     color: white;
-    font-size: 20px;
+    font-size: 25px;
     text-decoration: none;
 }
 
@@ -92,62 +71,4 @@
     /* Efecto de hover en los íconos */
 }
 
-/* Contenedor de login en la página de login */
-.login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: url('/images/background_login.png') no-repeat;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-}
 
-/* Estilo para el contenedor del logo */
-.logo-container {
-    display: flex;
-    justify-content: center;
-    /* Centra el logo horizontalmente */
-    align-items: center;
-    /* Centra el logo verticalmente */
-    height: 200px;
-    /* Ajusta la altura del contenedor */
-    margin-top: 30px;
-    /* Espacio superior */
-}
-
-/* Logo con animación sutil */
-.logo {
-    width: 500px;
-    /* Tamaño del logo */
-    height: auto;
-    /* Mantiene las proporciones del logo */
-    animation: scaleAndFade 6s ease-in-out infinite;
-    /* Llama a la animación */
-}
-
-
-/* Definición de la animación 'scaleAndFade' */
-@keyframes scaleAndFade {
-    0% {
-        transform: scale(1);
-        /* Tamaño normal */
-        opacity: 0.9;
-        /* Opacidad más baja al inicio */
-    }
-
-    50% {
-        transform: scale(1.05);
-        /* Aumento leve */
-        opacity: 1;
-        /* Opacidad total en el medio de la animación */
-    }
-
-    100% {
-        transform: scale(1);
-        /* Vuelve al tamaño normal */
-        opacity: 0.9;
-        /* Opacidad más baja al final */
-    }
-}
