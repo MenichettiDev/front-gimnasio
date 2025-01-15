@@ -1,4 +1,20 @@
-
+<!-- Barra superior -->
 <app-barrasup></app-barrasup>
-<app-sidebar></app-sidebar>
-<router-outlet></router-outlet>
+
+<div class="container-fluid mt-3">
+    <div class="row">
+        <!-- Sidebar fijo a la izquierda -->
+        <div class="col-2 p-0">
+            <app-sidebar></app-sidebar>
+        </div>
+
+        <!-- Contenido principal -->
+        <div class="col-10 ms-auto">
+            <router-outlet></router-outlet>
+
+            <!-- Otro componente debajo del router-outlet -->
+            <app-cbo-entrenador></app-cbo-entrenador>
+            <app-cbo-atleta></app-cbo-atleta>
+        </div>
+    </div>
+</div>

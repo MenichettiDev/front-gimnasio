@@ -1,8 +1,9 @@
-<div>
-    <label for="entrenador">Selecciona un Entrenador</label>
-    <select id="entrenador" [(ngModel)]="selectedEntrenador">
+<div class="mb-3 col-4">
+    <label for="entrenador" class="form-label fs-5">Selecciona un Entrenador</label>
+    <select id="entrenador" [(ngModel)]="selectedEntrenador" class="form-select form-select-lg" aria-label="Selecciona un entrenador">
+        <option value="" disabled selected>Selecciona un entrenador</option>
         <option *ngFor="let entrenador of entrenadores" [value]="entrenador.id_entrenador">
-            {{  entrenador.apodo  }} <!--  el campo que se mostrará según tu modelo -->
+            {{ entrenador.apodo }}
         </option>
     </select>
 </div>
