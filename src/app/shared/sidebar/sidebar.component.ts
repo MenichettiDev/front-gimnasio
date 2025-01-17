@@ -37,7 +37,7 @@ export class SidebarComponent implements OnInit, OnChanges {
 
   getMenus(): void {
     this.userId = this.userId || '4'; // Si no hay userId, se asigna 4
-    this.menuService.cargarMenus(this.userId).subscribe(
+    this.menuService.getMenusByIdPersona(this.userId).subscribe(
       (data) => {
         // Asignamos la propiedad `expanded` con valor `false` a cada menú
         this.menus = data.map((menu: Menu) => ({ ...menu, expanded: false }));
