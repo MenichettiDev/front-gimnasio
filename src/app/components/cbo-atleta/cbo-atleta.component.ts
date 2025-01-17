@@ -14,7 +14,7 @@ import { AtletaService } from '../../service/atleta.service';
 export class CboAtletaComponent {
 
   atletas: Atleta[] = [];  // Lista de entrenadores
-  selectedAtleta: any;    // Para el valor seleccionado
+  selectedAtleta: Atleta | null = null;    // Para el valor seleccionado
 
   constructor(private atletaService: AtletaService) { }
 

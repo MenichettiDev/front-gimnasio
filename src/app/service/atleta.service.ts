@@ -7,7 +7,7 @@ import { Atleta } from '../data/interfaces/atletaInterface';
   providedIn: 'root'
 })
 export class AtletaService {
-  private apiUrl = 'http://localhost:7000/obtener-Atletas'; // URL de tu API
+  private apiUrl = 'http://localhost:7000/getAtletas'; // URL de tu API
 
   constructor(private http: HttpClient) { }
 

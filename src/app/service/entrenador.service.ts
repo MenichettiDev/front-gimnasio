@@ -10,7 +10,7 @@ import { Entrenador } from '../data/interfaces/entrenadorInterface';
 })
 export class EntrenadorService {
 
-  private apiUrl = 'http://localhost:7000/obtener-Entrenadores'; // URL de tu API
+  private apiUrl = 'http://localhost:7000/getEntrenadores'; // URL de tu API
 
   constructor(private http: HttpClient) { }
 

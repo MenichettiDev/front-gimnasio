@@ -13,7 +13,6 @@ export interface Entrenador {
     celular: string;
     direccion: string;
     email: string;
-    password: string;
     foto_archivo: string;
 
     // Otros campos según la API
