@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class MenuService {
 
-  private apiUrl = 'http://localhost:7000/menus'; // URL de tu API
+  private apiUrl = 'http://localhost:7000/menusByIdPersona'; // URL de tu API
 
   constructor(private http: HttpClient) {}
 
