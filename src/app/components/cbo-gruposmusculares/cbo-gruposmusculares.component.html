@@ -1,1 +1,12 @@
-<p>cbo-gruposmusculares works!</p>
+<div class="mb-3 col-4">
+    <label for="grupoMuscular" class="form-label fs-5">Selecciona un musculo</label>
+    <select id="grupoMuscular"  
+        (change)="onGrupoMuscularChange($event)" 
+        [(ngModel)]="musculoSeleccionado"
+        class="form-select form-select-lg" aria-label="Selecciona un grupo muscular">
+        <option value="" disabled selected>Selecciona un musculo</option>
+        <option *ngFor="let musculo of gruposMusculares" [ngValue]="musculo">
+            {{ musculo.nombre }}
+        </option>
+    </select>
+</div>

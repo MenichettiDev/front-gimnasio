@@ -19,7 +19,7 @@ export class EjerciciosService {
   }
 
   // Método para obtener ejercicios por grupo muscular
-  getEjercicioPorGrupoMuscular(grupoMuscular: number): Observable<Ejercicio[]> {
-    return this.http.post<Ejercicio[]>(this.apiUrlGetEjercicioByGrupoMuscular,{ grupoMuscular });
+  getEjercicioPorGrupoMuscular(id_grupo_muscular: number): Observable<Ejercicio[]> {
+    return this.http.post<Ejercicio[]>(this.apiUrlGetEjercicioByGrupoMuscular,{ id_grupo_muscular });
   }
 }
