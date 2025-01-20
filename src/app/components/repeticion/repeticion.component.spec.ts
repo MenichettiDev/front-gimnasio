@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CboFrecuenciaComponent } from './cbo-frecuencia.component';
+import { RepeticionComponent } from './repeticion.component';
 
-describe('CboFrecuenciaComponent', () => {
-  let component: CboFrecuenciaComponent;
-  let fixture: ComponentFixture<CboFrecuenciaComponent>;
+describe('RepeticionComponent', () => {
+  let component: RepeticionComponent;
+  let fixture: ComponentFixture<RepeticionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CboFrecuenciaComponent]
+      imports: [RepeticionComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CboFrecuenciaComponent);
+    fixture = TestBed.createComponent(RepeticionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

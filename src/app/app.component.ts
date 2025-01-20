@@ -9,10 +9,11 @@ import { CboAtletaComponent } from "./components/cbo-atleta/cbo-atleta.component
 import { CboDiasComponent } from "./components/cbo-dias/cbo-dias.component";
 import { CboGruposmuscularesComponent } from "./components/cbo-gruposmusculares/cbo-gruposmusculares.component";
 import { CboEjercicioComponent } from "./components/cbo-ejercicio/cbo-ejercicio.component";
+import { RepeticionComponent } from "./components/repeticion/repeticion.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, SidebarComponent, CommonModule, BarrasupComponent, CboEntrenadorComponent, CboAtletaComponent, CboDiasComponent, CboGruposmuscularesComponent, CboEjercicioComponent],
+  imports: [RouterOutlet, SidebarComponent, CommonModule, BarrasupComponent, CboEntrenadorComponent, CboAtletaComponent, CboDiasComponent, CboGruposmuscularesComponent, CboEjercicioComponent, RepeticionComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

@@ -9,15 +9,18 @@
         </div>
 
         <!-- Contenido principal -->
-        <div class="col-10 ms-auto">
+        <div class="col-10 ms-auto ps-5"> <!-- Se añadió ps-4 para crear espacio a la izquierda -->
             <router-outlet></router-outlet>
-
+        
             <!-- Otro componente debajo del router-outlet -->
-            <app-cbo-entrenador></app-cbo-entrenador>
-            <app-cbo-atleta></app-cbo-atleta>
-            <app-cbo-dias></app-cbo-dias>
-            <app-cbo-gruposmusculares></app-cbo-gruposmusculares>
-            <app-cbo-ejercicio></app-cbo-ejercicio>
+            <div class="d-flex flex-column gap-2"> <!-- Flexbox para mejor alineación -->
+                <app-cbo-entrenador></app-cbo-entrenador>
+                <app-cbo-atleta></app-cbo-atleta>
+                <app-cbo-dias></app-cbo-dias>
+                <app-cbo-gruposmusculares></app-cbo-gruposmusculares>
+                <app-cbo-ejercicio></app-cbo-ejercicio>
+                <app-repeticion></app-repeticion>
+            </div>
         </div>
     </div>
 </div>

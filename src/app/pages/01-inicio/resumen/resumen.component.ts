@@ -4,11 +4,10 @@ import { FrasesService } from '../../../service/frases.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Frase } from '../../../data/interfaces/fraseInterface';
-import { SidebarComponent } from "../../../shared/sidebar/sidebar.component";
 
 @Component({
   selector: 'app-resumen',
-  imports: [CommonModule, FormsModule, SidebarComponent],
+  imports: [CommonModule, FormsModule],
   templateUrl: './resumen.component.html',
   styleUrl: './resumen.component.css'
 })
