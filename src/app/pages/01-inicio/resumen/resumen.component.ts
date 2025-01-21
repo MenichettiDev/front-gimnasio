@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../../service/auth/auth.service';
 import { FrasesService } from '../../../service/frases.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,11 +12,10 @@ import { Frase } from '../../../data/interfaces/fraseInterface';
 })
 export class ResumenComponent {
 
-  fraseAleatoria: Frase | null = null;
+  fraseAleatoria: String | null = null;
 
-  constructor(private authService: AuthService, private frasesService: FrasesService) { }
+  constructor( private frasesService: FrasesService) { }
 
-  // Se ejecuta cuando el componente se inicializa
   ngOnInit(): void {
     this.obtenerFraseAleatoria();
   }
@@ -26,7 +24,8 @@ export class ResumenComponent {
   obtenerFraseAleatoria() {
     this.frasesService.getFraseAleatoria().subscribe(
       ( data ) => {
-        this.fraseAleatoria = data;
+        console.log( data );
+        this.fraseAleatoria = data.frase;
       }, ( error ) => {
         console.error( error );
       }

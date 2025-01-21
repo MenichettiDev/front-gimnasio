@@ -1,1 +1,11 @@
-<p>cbo-gimnasio works!</p>
+<div class="mb-3 col-4">
+    <label for="gimnasio" class="form-label fs-5">Selecciona un gimnasio</label>
+    <select id="gimnasio" [(ngModel)]="selectedGimnasio" 
+    (change)="onGimnasioChange($event)"
+    class="form-select form-select-lg" aria-label="Selecciona un gimnasio">
+        <option value="" disabled selected>Selecciona un atleta</option>
+        <option *ngFor="let gimnasio of gimnasios" [ngValue]="gimnasio">
+            {{ gimnasio.nombre  }}
+        </option>
+    </select>
+</div>

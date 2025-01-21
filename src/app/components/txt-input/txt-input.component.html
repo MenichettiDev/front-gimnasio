@@ -1,1 +1,16 @@
-<p>txt-input works!</p>
+<div class="mb-3 col-4">
+    <label for="txtInput" class="form-label fs-5">{{ label }}</label>
+    <input id="txtInput" type="text" 
+    [(ngModel)]="value" 
+    class="form-control" 
+    [placeholder]="placeholder"
+        [attr.aria-label]="label" 
+        (ngModelChange)="onValueChange()" />
+</div>
+
+<!-- Como usar??? -->
+<!-- <app-txt-input 
+    [label]="'Ingrese su objetivo'" 
+    [placeholder]="'Escriba su objetivo aquí'"
+    [(value)]="selectedObjetivo">
+</app-txt-input> -->

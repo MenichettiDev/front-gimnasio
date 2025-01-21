@@ -1,1 +1,9 @@
-<p>cbo-membresia works!</p>
+<div class="mb-3 col-4">
+    <label for="membresia" class="form-label fs-5">Selecciona una membresia</label>
+    <select id="membresia" [(ngModel)]="selectedMembresia" class="form-select form-select-lg" aria-label="Selecciona una membresia">
+        <option value="" disabled selected>Selecciona una membresia</option>
+        <option *ngFor="let membresia of membresias" [ngValue]="membresia">
+            {{ membresia.nombre + ' - $' + membresia.precio }}
+        </option>
+    </select>
+</div>

@@ -1,1 +1,9 @@
-<p>cbo-niveldificultad works!</p>
+<div class="mb-3 col-4">
+    <label for="dificultad" class="form-label fs-5">Selecciona una dificultad</label>
+    <select id="dificultad" [(ngModel)]="selectedDificultad" class="form-select form-select-lg" aria-label="Selecciona un atleta">
+        <option value="" disabled selected>Selecciona una dificultad</option>
+        <option *ngFor="let dificultad of dificultades" [ngValue]="dificultad">
+            {{ dificultad.nombre }} 
+        </option>
+    </select>
+</div>

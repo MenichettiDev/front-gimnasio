@@ -19,8 +19,8 @@ export class MembresiaService {
   }
 
   // Método para obtener membresías por ID de gimnasio
-  getMembresiasByIdGimnasio(idGimnasio: number): Observable<Membresia[]> {
-    const body = { idGimnasio };  // Enviar el ID del gimnasio como parte del cuerpo de la solicitud
+  getMembresiasByIdGimnasio(id_gimnasio: number): Observable<Membresia[]> {
+    const body = { id_gimnasio };  // Enviar el ID del gimnasio como parte del cuerpo de la solicitud
     return this.http.post<Membresia[]>(this.apiUrlGetMembresiasByIdGimnasio, body);
   }
 }
