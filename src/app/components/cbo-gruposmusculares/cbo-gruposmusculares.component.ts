@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';  // Necesitamos importar NgFor para usarlo
 import { FormsModule } from '@angular/forms';
 import { GrupoMuscular } from '../../data/interfaces/grupoMuscularInterface';
-import { AtletaService } from '../../service/atleta.service';
 import { GruposMuscularesService } from '../../service/grupos-musculares.service';
 import { SharedGrupoMuscularService } from '../../service/shared-grupo-muscular.service';
 

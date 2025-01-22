@@ -9,7 +9,7 @@ import { Menu } from '../data/interfaces/menuInterface'; // Ruta a la interfaz '
 export class MenuService {
 
   private apiUrlGetMenus = 'http://localhost:7000/getMenus'; // URL para obtener todos los menús
-  private apiUrlGetMenusByIdPersona = 'http://localhost:7000/menusByIdPerfil'; // URL para obtener menús por ID de persona
+  private apiUrlGetMenusByIdAcceso = 'http://localhost:7000/menusByIdAcceso'; // URL para obtener menús por ID de persona
 
   constructor(private http: HttpClient) {}
 
@@ -19,7 +19,7 @@ export class MenuService {
   }
 
   // Método para obtener los menús por ID de persona
-  getMenusByIdPersona(id_perfil: number): Observable<Menu[]> {
-    return this.http.post<Menu[]>(this.apiUrlGetMenusByIdPersona, { id_perfil });
+  getMenusByIdAcceso(id_acceso: number): Observable<Menu[]> {
+    return this.http.post<Menu[]>(this.apiUrlGetMenusByIdAcceso, { id_acceso });
   }
 }

@@ -1,5 +1,5 @@
 <div class="mb-3 col-4">
-    <label for="atleta" class="form-label fs-5">Selecciona un atleta</label>
+    <label for="atleta" class="form-label fs-5">{{ label }}</label>
     <select id="atleta" [(ngModel)]="selectedAtleta" class="form-select form-select-lg" aria-label="Selecciona un entrenador">
         <option value="" disabled selected>Selecciona un atleta</option>
         <option *ngFor="let atleta of atletas" [value]="atleta.id_atleta">

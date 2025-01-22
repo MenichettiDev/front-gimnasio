@@ -12,7 +12,7 @@ import { Frase } from '../../../data/interfaces/fraseInterface';
 })
 export class ResumenComponent {
 
-  fraseAleatoria: String | null = null;
+  fraseAleatoria: Frase | null = null;
 
   constructor( private frasesService: FrasesService) { }
 
@@ -24,8 +24,8 @@ export class ResumenComponent {
   obtenerFraseAleatoria() {
     this.frasesService.getFraseAleatoria().subscribe(
       ( data ) => {
-        console.log( data );
-        this.fraseAleatoria = data.frase;
+        console.log( 'frase aleatoria' + data );
+        this.fraseAleatoria = data;
       }, ( error ) => {
         console.error( error );
       }

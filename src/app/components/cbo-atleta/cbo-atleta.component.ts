@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, input, OnInit } from '@angular/core';
 import { EntrenadorService } from '../../service/entrenador.service'; // Asegúrate de que la ruta sea correcta
 import { CommonModule } from '@angular/common';  // Necesitamos importar NgFor para usarlo
 import { FormsModule } from '@angular/forms';
@@ -12,7 +12,7 @@ import { AtletaService } from '../../service/atleta.service';
   styleUrl: './cbo-atleta.component.css'
 })
 export class CboAtletaComponent {
-
+  @Input() label: string = 'Seleccione un atleta';
   atletas: Atleta[] = [];  // Lista de entrenadores
   selectedAtleta: Atleta | null = null;    // Para el valor seleccionado
 

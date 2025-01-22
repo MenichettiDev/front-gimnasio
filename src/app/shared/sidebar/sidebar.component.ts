@@ -14,7 +14,7 @@ import { Menu } from '../../data/interfaces/menuInterface';  // Asegúrate de qu
 })
 export class SidebarComponent implements OnInit, OnChanges {
   // @Input() id_perfil: string = '';  // Recibe el ID del usuario desde el componente padre
-  id_acceso: number = 4;
+  id_acceso: number = 1;
   menus: Menu[] = [];  // Menús cargados
   expandedMenus: Set<number> = new Set();  // Para manejar los estados de expansión de los submenús
 
@@ -24,6 +24,7 @@ export class SidebarComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     const user = this.authService.getUser();
+    console.log('usuario...' + user);
     if (user) {
       this.id_acceso = user.usuario[0].id_acceso; 
       // console.log( user.usuario[0] + 'usuario logueado');
@@ -40,10 +41,10 @@ export class SidebarComponent implements OnInit, OnChanges {
   }
 
   getMenus(): void {
-    // this.id_perfil = this.id_perfil ; // Si no hay userId, se asigna 4
-    this.menuService.getMenusByIdPersona(this.id_acceso).subscribe(
+    console.log(this.id_acceso);
+    this.menuService.getMenusByIdAcceso(this.id_acceso).subscribe(
       (data) => {
-        // console.log("hasta aqui.." + data)
+        console.log("hasta aqui.." + data)
         // Asignamos la propiedad `expanded` con valor `false` a cada menú
         this.menus = data.map((menu: Menu) => ({ ...menu, expanded: false }));
         console.log(this.menus);
