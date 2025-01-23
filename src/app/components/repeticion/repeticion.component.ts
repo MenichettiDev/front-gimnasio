@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';// Asegúrate de que la ruta sea correcta
+import { Component, Input, OnInit } from '@angular/core';// Asegúrate de que la ruta sea correcta
 import { CommonModule } from '@angular/common';  // Necesitamos importar NgFor para usarlo
 import { FormsModule } from '@angular/forms';
 import { Repeticion } from '../../data/interfaces/repeticionInterface';
@@ -13,6 +13,8 @@ import { RepeticionService } from '../../service/repeticion.service';
 })
 export class RepeticionComponent {
 
+  @Input() label: string = "Selecciona un tipo de repetición";  // Para el label del combo
+  
   repeticiones: Repeticion[] = [];  // Lista de entrenadores
   selectedRepeticion: Repeticion | null = null;    // Para el valor seleccionado
 

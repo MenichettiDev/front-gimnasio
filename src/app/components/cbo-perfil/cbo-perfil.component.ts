@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';// Asegúrate de que la ruta sea correcta
+import { Component, Input } from '@angular/core';// Asegúrate de que la ruta sea correcta
 import { CommonModule } from '@angular/common';  // Necesitamos importar NgFor para usarlo
 import { FormsModule } from '@angular/forms';
 
@@ -9,6 +9,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './cbo-perfil.component.css'
 })
 export class CboPerfilComponent {
+
+@Input() label: string = "Selecciona el perfil";  // Para el label del combo
 
   perfiles = [
     { id_perfil: 1, nombre: 'Admin'},

@@ -1,0 +1,10 @@
+<div class="mb-3 col-4">
+    <label for="dateInput" class="form-label fs-5">{{ label }}</label>
+    <input id="dateInput" 
+    type="date" 
+    [(ngModel)]="value" 
+    class="form-control" 
+    [placeholder]="placeholder"
+    [attr.aria-label]="label" 
+    (ngModelChange)="onValueChange()" />
+</div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';// Asegúrate de que la ruta sea correcta
+import { Component, Input } from '@angular/core';// Asegúrate de que la ruta sea correcta
 import { CommonModule } from '@angular/common';  // Necesitamos importar NgFor para usarlo
 import { FormsModule } from '@angular/forms';
 
@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class CboNiveldificultadComponent {
 
-
+@Input() label: string = "Selecciona el nivel de dificultad";  // Para el label del combo
   // Arreglo con datos hard de atletas
   dificultades = [
     { id_dificultad: 1, nombre: 'Principiante'},

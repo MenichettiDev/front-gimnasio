@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { SharedGrupoMuscularService } from '../../service/shared-grupo-muscular.service';
 import { GrupoMuscular } from '../../data/interfaces/grupoMuscularInterface';
 import { EjerciciosService } from '../../service/ejercicios.service';
@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class CboEjercicioComponent implements OnInit {
 
+  @Input() label: string = "Selecciona un Ejercicio";  // Para el label del combo
   grupoSeleccionado: GrupoMuscular | null = null;
   ejercicios: Ejercicio[] = []; // Cambia el tipo según tu modelo de ejercicios
   selectedEjercicio: Ejercicio | null = null; // Cambia el tipo según tu modelo de ejerc

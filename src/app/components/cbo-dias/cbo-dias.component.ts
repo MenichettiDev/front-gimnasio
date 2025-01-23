@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -9,6 +9,9 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './cbo-dias.component.css'
 })
 export class CboDiasComponent {
+
+@Input() label: string = "Selecciona la cantidad de días a entrenar";  // Para el label del combo
+
   diasDeEntrenamiento = [1, 2, 3, 4, 5, 6, 7];  // Número de días de entrenamiento
 
   diasSeleccionados: number = 3; // Variable que guarda la cantidad seleccionada

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MenuService } from '../../service/menu.service'; // Asegúrate de que la ruta sea correcta
 import { CommonModule } from '@angular/common';  // Necesitamos importar NgFor para usarlo
 import { FormsModule } from '@angular/forms';
@@ -13,6 +13,7 @@ import { Menu } from '../../data/interfaces/menuInterface';
 })
 export class CboMenuComponent {
 
+  @Input() label: string = "Selecciona un Menú";  // Para el label del combo
   menus: Menu[] = [];  // Lista de entrenadores
   selectedMenu: Menu | null = null;    // Para el valor seleccionado
 

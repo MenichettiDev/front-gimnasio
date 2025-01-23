@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { SharedGimnasioService } from '../../service/shared-gimnasio.service';
 import { Gimnasio } from '../../data/interfaces/gimnasioInterface';
 import { MembresiaService } from '../../service/membresia.service';
@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class CboMembresiaComponent {
 
+  @Input() label: string = "Selecciona una Membresía";  // Para el label del combo
   gimnasioSeleccionado: Gimnasio | null = null;
   membresias: Membresia[] = []; // Cambia el tipo según tu modelo de ejercicios
   selectedMembresia: Membresia | null = null; // Cambia el tipo según tu modelo de ejerc

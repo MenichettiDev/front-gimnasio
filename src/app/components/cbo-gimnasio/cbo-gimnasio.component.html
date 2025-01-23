@@ -1,5 +1,5 @@
 <div class="mb-3 col-4">
-    <label for="gimnasio" class="form-label fs-5">Selecciona un gimnasio</label>
+    <label for="gimnasio" class="form-label fs-5"> {{ label }}</label>
     <select id="gimnasio" [(ngModel)]="selectedGimnasio" 
     (change)="onGimnasioChange($event)"
     class="form-select form-select-lg" aria-label="Selecciona un gimnasio">

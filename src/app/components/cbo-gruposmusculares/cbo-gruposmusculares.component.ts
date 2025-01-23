@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';  // Necesitamos importar NgFor para usarlo
 import { FormsModule } from '@angular/forms';
 import { GrupoMuscular } from '../../data/interfaces/grupoMuscularInterface';
@@ -13,6 +13,7 @@ import { SharedGrupoMuscularService } from '../../service/shared-grupo-muscular.
 })
 export class CboGruposmuscularesComponent {
 
+  @Input() label: string = "Selecciona un Grupo Muscular";  // Para el label del combo
   gruposMusculares: GrupoMuscular[] = [];  // Lista de entrenadores
   musculoSeleccionado: GrupoMuscular | null = null;    // Para el valor seleccionado
 

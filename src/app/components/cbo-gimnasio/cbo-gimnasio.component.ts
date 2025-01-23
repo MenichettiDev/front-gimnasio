@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { GimnasioService } from '../../service/gimnasio.service'; // Asegúrate de que la ruta sea correcta
 import { CommonModule } from '@angular/common';  // Necesitamos importar NgFor para usarlo
 import { FormsModule } from '@angular/forms';
@@ -13,6 +13,7 @@ import { SharedGimnasioService } from '../../service/shared-gimnasio.service';
 })
 export class CboGimnasioComponent {
 
+  @Input() label: string = "Selecciona un Gimnasio";  // Para el label del combo
   gimnasios: Gimnasio[] = [];  // Lista de entrenadores
   selectedGimnasio: Gimnasio | null = null;    // Para el valor seleccionado
 

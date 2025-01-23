@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { EntrenadorService } from '../../service/entrenador.service'; // Asegúrate de que la ruta sea correcta
 import { CommonModule } from '@angular/common';  // Necesitamos importar NgFor para usarlo
 import { Entrenador } from '../../data/interfaces/entrenadorInterface';
@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class CboEntrenadorComponent implements OnInit {
 
+  @Input() label: string = "Selecciona un Entrenador";  // Para el label del combo
   entrenadores: Entrenador[] = [];  // Lista de entrenadores
   selectedEntrenador: any;    // Para el valor seleccionado
 

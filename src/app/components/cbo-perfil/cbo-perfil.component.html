@@ -1,5 +1,5 @@
 <div class="mb-3 col-4">
-    <label for="perfil" class="form-label fs-5">Selecciona un perfil</label>
+    <label for="perfil" class="form-label fs-5">{{ label }}</label>
     <select id="perfil" [(ngModel)]="selectedPerfil" class="form-select form-select-lg" aria-label="Selecciona un perfil">
         <option value="" disabled selected>Selecciona un perfil</option>
         <option *ngFor="let perfil of perfiles" [ngValue]="perfil">

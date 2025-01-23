@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TxtFechaComponent } from './txt-fecha.component';
+import { InputFechaComponent } from './input-fecha.component';
 
-describe('TxtFechaComponent', () => {
-  let component: TxtFechaComponent;
-  let fixture: ComponentFixture<TxtFechaComponent>;
+describe('InputFechaComponent', () => {
+  let component: InputFechaComponent;
+  let fixture: ComponentFixture<InputFechaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TxtFechaComponent]
+      imports: [InputFechaComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TxtFechaComponent);
+    fixture = TestBed.createComponent(InputFechaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -16,8 +16,10 @@ import { CboMenuComponent } from "./components/cbo-menu/cbo-menu.component";
 import { CboNiveldificultadComponent } from "./components/cbo-niveldificultad/cbo-niveldificultad.component";
 import { CboObjetivoComponent } from "./components/cbo-objetivo/cbo-objetivo.component";
 import { CboPerfilComponent } from "./components/cbo-perfil/cbo-perfil.component";
-import { TxtInputComponent } from "./components/txt-input/txt-input.component";
 import { FormsModule } from '@angular/forms';
+import { InputTextoComponent } from "./components/input-texto/input-texto.component";
+import { InputFechaComponent } from "./components/input-fecha/input-fecha.component";
+import { RbEstadoComponent } from "./components/rb-estado/rb-estado.component";
 
 @Component({
   selector: 'app-root',
@@ -28,7 +30,7 @@ import { FormsModule } from '@angular/forms';
     CboEjercicioComponent, RepeticionComponent,
     CboGimnasioComponent, CboMembresiaComponent,
     CboMenuComponent, CboNiveldificultadComponent,
-    CboObjetivoComponent, CboPerfilComponent, TxtInputComponent, FormsModule],
+    CboObjetivoComponent, CboPerfilComponent, FormsModule, InputTextoComponent, InputFechaComponent, RbEstadoComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -36,6 +38,8 @@ export class AppComponent {
 
   selectedObjetivo: string = '';
   currentRoute: string = '';
+  selectedFecha: string = '';
+  selectedEstado: string = '';
 
   constructor(
     public router: Router,

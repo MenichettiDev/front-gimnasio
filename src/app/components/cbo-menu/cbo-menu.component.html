@@ -1,5 +1,5 @@
 <div class="mb-3 col-4">
-    <label for="menu" class="form-label fs-5">Selecciona un menu</label>
+    <label for="menu" class="form-label fs-5">{{ label }}</label>
     <select id="menu" [(ngModel)]="selectedMenu" class="form-select form-select-lg" aria-label="Selecciona un menu">
         <option value="" disabled selected>Selecciona un atleta</option>
         <option *ngFor="let menu of menus" [ngValue]="menu">

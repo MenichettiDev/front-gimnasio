@@ -1,5 +1,5 @@
 <div class="mb-3 col-4">
-    <label for="objetivo" class="form-label fs-5">Selecciona un objetivo</label>
+    <label for="objetivo" class="form-label fs-5">{{ label }}</label>
     <select id="objetivo" [(ngModel)]="selectedObjetivo" class="form-select form-select-lg" aria-label="Selecciona un objetivo">
         <option value="" disabled selected>Selecciona un objetivo</option>
         <option *ngFor="let objetivo of objetivos" [ngValue]="objetivo">
