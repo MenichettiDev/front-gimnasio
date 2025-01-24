@@ -24,7 +24,7 @@ export class SidebarComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     const user = this.authService.getUser();
-    console.log('usuario...' + user);
+    // console.log('usuario...' + user);
     if (user) {
       this.id_acceso = user.usuario[0].id_acceso; 
       // console.log( user.usuario[0] + 'usuario logueado');
@@ -41,13 +41,13 @@ export class SidebarComponent implements OnInit, OnChanges {
   }
 
   getMenus(): void {
-    console.log(this.id_acceso);
+    // console.log(this.id_acceso);
     this.menuService.getMenusByIdAcceso(this.id_acceso).subscribe(
       (data) => {
-        console.log("hasta aqui.." + data)
+        // console.log("hasta aqui.." + data)
         // Asignamos la propiedad `expanded` con valor `false` a cada menú
         this.menus = data.map((menu: Menu) => ({ ...menu, expanded: false }));
-        console.log(this.menus);
+        // console.log(this.menus);
       },
       (error) => {
         console.error('Error al obtener los menús:', error);
@@ -58,7 +58,7 @@ export class SidebarComponent implements OnInit, OnChanges {
   // Método para ejecutar el logout cuando se haga clic en el ícono
   logout(): void {
     this.authService.logout(); // Llamar al método logout() del AuthService
-    console.log('Usuario deslogueado');
+    // console.log('Usuario deslogueado');
     if (this.router.url === '/home') {
       window.location.reload();
     } else {

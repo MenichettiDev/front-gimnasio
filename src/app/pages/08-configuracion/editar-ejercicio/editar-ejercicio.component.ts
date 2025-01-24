@@ -20,6 +20,7 @@ export class EditarEjercicioComponent implements OnInit {
   selectedGrupoMuscular: GrupoMuscular | null = null;
   selectedEjercicio: Ejercicio | null = null;
   isEditable: boolean = false;
+  gruposMusculares: GrupoMuscular[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -30,7 +31,19 @@ export class EditarEjercicioComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
+    this.obtenerGruposMusculares();
     this.subscribeToGrupoMuscularChanges();
+  }
+
+  obtenerGruposMusculares(): void {
+    this.grupoMuscularService.getGruposMusculares().subscribe(
+      (data) => {
+        this.gruposMusculares = data; // Llenar el combo
+      },
+      (error) => {
+        console.error('Error al obtener grupos musculares', error);
+      }
+    );
   }
 
   createForm(): void {
@@ -60,6 +73,7 @@ export class EditarEjercicioComponent implements OnInit {
   onGrupoMuscularChange(musculo: GrupoMuscular): void {
     if (musculo) {
       this.selectedGrupoMuscular = musculo;
+      console.log('frupo muscular seleccionado: ' + musculo);
       this.exerciseForm.controls['idGrupoMuscular'].setValue(musculo.id_grupo_muscular);
       this.isEditable = true;
       this.sharedGrupoMuscularService.setSelectedGrupo(musculo);
