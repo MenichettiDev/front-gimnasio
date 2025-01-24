@@ -1,0 +1,44 @@
+/* Ajustes para evitar solapamientos */
+html, body {
+    height: 100%;
+}
+
+.container-fluid {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Mantiene el contenedor lleno de la ventana */
+}
+
+.row {
+    height: 100%; /* Ajusta el contenido para que ocupe todo el espacio vertical */
+}
+.alto {
+    height: 60px; /* Ajusta el contenido para que ocupe todo el espacio vertical */
+}
+.col-10 {
+    margin-bottom: 200px;
+}
+
+.col-2, .col-10 {
+    height: 100%; /* Mantiene las columnas alineadas y sin solaparse */
+    overflow: hidden; /* Evita que los elementos se desbordeten */
+}
+
+.app-barrasup {
+    z-index: 100; /* Asegura que la barra superior esté encima */
+}
+
+.app-sidebar {
+    z-index: 90; /* Asegura que el sidebar esté debajo de la barra superior */
+}
+.app-barrasup {
+    z-index: 100;
+}
+
+.app-sidebar {
+    z-index: 90;
+}
+
+.col-10 {
+    z-index: 80;
+}

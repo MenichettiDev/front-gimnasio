@@ -6,7 +6,7 @@
         </div>
         <ul class="nav flex-column">
             <li *ngFor="let menu of getMainMenus()" class="nav-item">
-                <a class="nav-link" [routerLink]="menu.menu_link" (click)="toggleSubMenu(menu)">
+                <a class="nav-link"  (click)="toggleSubMenu(menu)">
                     <i class="{{ menu.menu_icono }}"></i> {{ menu.menu_descripcion }}
                 </a>
 

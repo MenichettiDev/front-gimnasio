@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';  // Necesitamos importar NgFor para usarlo
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { GrupoMuscular } from '../../data/interfaces/grupoMuscularInterface';
 import { GruposMuscularesService } from '../../service/grupos-musculares.service';
@@ -7,30 +7,30 @@ import { SharedGrupoMuscularService } from '../../service/shared-grupo-muscular.
 
 @Component({
   selector: 'app-cbo-gruposmusculares',
-  imports: [CommonModule, FormsModule],  // Importamos NgFor para usarlo en el template
+  imports: [CommonModule, FormsModule],
   templateUrl: './cbo-gruposmusculares.component.html',
   styleUrl: './cbo-gruposmusculares.component.css'
 })
-export class CboGruposmuscularesComponent {
+export class CboGruposmuscularesComponent implements OnInit {
+  @Input() label: string = 'Selecciona un Grupo Muscular'; // Label opcional
+  @Output() valueChange = new EventEmitter<GrupoMuscular>(); // Para emitir el valor al padre
 
-  @Input() label: string = "Selecciona un Grupo Muscular";  // Para el label del combo
-  gruposMusculares: GrupoMuscular[] = [];  // Lista de entrenadores
-  musculoSeleccionado: GrupoMuscular | null = null;    // Para el valor seleccionado
+  gruposMusculares: GrupoMuscular[] = []; // Lista de grupos musculares
+  musculoSeleccionado: GrupoMuscular | null = null; // Valor seleccionado
 
   constructor(
     private grupoMuscularService: GruposMuscularesService,
     private sharedService: SharedGrupoMuscularService
   ) {}
+
   ngOnInit(): void {
     this.obtenerGruposMusculares();
   }
 
-  // Método para obtener los entrenadores
   obtenerGruposMusculares(): void {
-    console.log('resp api ok');
     this.grupoMuscularService.getGruposMusculares().subscribe(
       (data) => {
-        this.gruposMusculares = data;  // Asignamos los datos de los entrenadores
+        this.gruposMusculares = data; // Llenar el combo
       },
       (error) => {
         console.error('Error al obtener grupos musculares', error);
@@ -38,10 +38,12 @@ export class CboGruposmuscularesComponent {
     );
   }
 
-  onGrupoMuscularChange(event: any): void {
+  onGrupoMuscularChange(): void {
     if (this.musculoSeleccionado) {
-      // console.log('Grupo muscular seleccionado: ' + this.musculoSeleccionado.nombre);
-      this.sharedService.setSelectedGrupo(this.musculoSeleccionado);
+      this.valueChange.emit(this.musculoSeleccionado); // Emitir el objeto seleccionado
+      this.sharedService.setSelectedGrupo(this.musculoSeleccionado); // Actualizar el servicio compartido
     }
   }
+
+  
 }

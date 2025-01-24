@@ -1,5 +1,7 @@
 <!-- Barra superior -->
-<app-barrasup></app-barrasup>
+<div class="alto">
+    <app-barrasup></app-barrasup>
+</div>
 
 <div class="container-fluid mt-3">
     <div class="row">
@@ -10,38 +12,7 @@
 
         <!-- Contenido principal -->
         <div class="col-10">
-            <div class="row">
-                <!-- Aquí va el Router Outlet -->
-                <div class="col-12">
-                    <router-outlet></router-outlet>
-                    <!-- Este es el espacio donde se renderizan los componentes según la ruta -->
-                </div>
-                <!-- Columna 1: Ocupa la mitad de la pantalla -->
-                <div class="col-6 d-flex flex-column gap-2">
-                    <app-cbo-entrenador></app-cbo-entrenador>
-                    <app-cbo-atleta [label]="'Selecciona un atletaaa'"></app-cbo-atleta>
-                    <app-cbo-dias></app-cbo-dias>
-                    <app-cbo-gruposmusculares></app-cbo-gruposmusculares>
-                    <app-cbo-ejercicio></app-cbo-ejercicio>
-                    <app-repeticion></app-repeticion>
-                    <app-cbo-gimnasio></app-cbo-gimnasio>
-                    <app-cbo-membresia></app-cbo-membresia>
-                </div>
-
-                <!-- Columna 2: Ocupa la mitad de la pantalla -->
-                <div class="col-6 custom-column d-flex flex-column gap-2">
-                    <app-cbo-menu></app-cbo-menu>
-                    <app-cbo-niveldificultad></app-cbo-niveldificultad>
-                    <app-cbo-objetivo></app-cbo-objetivo>
-                    <app-cbo-perfil></app-cbo-perfil>
-                    <app-input-texto [label]="'Ingrese su objetivo'" [placeholder]="'Escriba su objetivo aquí'"
-                        [(value)]="selectedObjetivo">
-                    </app-input-texto>
-                    <app-input-fecha [label]="'Fecha de inicio'" [(value)]="selectedFecha"></app-input-fecha>
-                    <app-rb-estado [label]="'Estado'" [options]="['Activo', 'Inactivo']" [(value)]="selectedEstado"></app-rb-estado>
-
-                </div>
-            </div>
+            <router-outlet ></router-outlet>
         </div>
     </div>
 </div>

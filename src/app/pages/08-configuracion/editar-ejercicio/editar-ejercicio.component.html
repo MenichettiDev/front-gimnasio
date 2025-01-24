@@ -1,0 +1,67 @@
+<div class="container mt-3">
+    <form [formGroup]="exerciseForm" (ngSubmit)="onSubmit()">
+        <!-- ID Ejercicio -->
+        <div class="mb-3">
+            <label for="idEjercicio" class="form-label">ID Ejercicio</label>
+            <input id="idEjercicio" type="text" formControlName="idEjercicio" class="form-control" readonly>
+        </div>
+
+        <!-- Grupo Muscular -->
+        <div class="mb-3">
+            <label for="grupoMuscular" class="form-label">Grupo Muscular</label>
+            <app-cbo-gruposmusculares [(ngModel)]="selectedGrupoMuscular"
+                (valueChange)="onGrupoMuscularChange($event)"></app-cbo-gruposmusculares>
+        </div>
+
+        <!-- Ejercicio -->
+        <div class="mb-3">
+            <label for="ejercicio" class="form-label">Ejercicio</label>
+            <app-cbo-ejercicio [grupoMuscularId]="selectedGrupoMuscular?.id_grupo_muscular ?? null"
+                [(ngModel)]="selectedEjercicio" (valueChange)="onEjercicioChange($event)"></app-cbo-ejercicio>
+        </div>
+
+        <!-- Nombre -->
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input id="nombre" type="text" formControlName="nombre" class="form-control" [disabled]="!isEditable">
+        </div>
+
+        <!-- Imagen 1 -->
+        <div class="mb-3">
+            <label for="img1" class="form-label">Imagen 1</label>
+            <input id="img1" type="text" formControlName="img1" class="form-control" [disabled]="!isEditable">
+        </div>
+
+        <!-- Imagen 2 -->
+        <div class="mb-3">
+            <label for="img2" class="form-label">Imagen 2</label>
+            <input id="img2" type="text" formControlName="img2" class="form-control" [disabled]="!isEditable">
+        </div>
+
+        <!-- Imagen 3 -->
+        <div class="mb-3">
+            <label for="img3" class="form-label">Imagen 3</label>
+            <input id="img3" type="text" formControlName="img3" class="form-control" [disabled]="!isEditable">
+        </div>
+
+        <!-- Descripción -->
+        <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripción</label>
+            <textarea id="descripcion" formControlName="descripcion" class="form-control" rows="3"
+                [disabled]="!isEditable"></textarea>
+        </div>
+
+        <!-- Link Video -->
+        <div class="mb-3">
+            <label for="linkVideo" class="form-label">Link Video</label>
+            <input id="linkVideo" type="text" formControlName="linkVideo" class="form-control" [disabled]="!isEditable">
+        </div>
+
+        <!-- Botones -->
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-warning" [disabled]="!isEditable">Modificar</button>
+            <button type="button" class="btn btn-danger" (click)="onDelete()" [disabled]="!isEditable">Eliminar
+                Ejercicio</button>
+        </div>
+    </form>
+</div>

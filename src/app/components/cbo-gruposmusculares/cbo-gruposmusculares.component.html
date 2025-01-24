@@ -1,8 +1,6 @@
 <div class="mb-3 col-4">
     <label for="grupoMuscular" class="form-label fs-5">{{ label }}</label>
-    <select id="grupoMuscular"  
-        (change)="onGrupoMuscularChange($event)" 
-        [(ngModel)]="musculoSeleccionado"
+    <select id="grupoMuscular" (change)="onGrupoMuscularChange()" [(ngModel)]="musculoSeleccionado"
         class="form-select form-select-lg" aria-label="Selecciona un grupo muscular">
         <option value="" disabled selected>Selecciona un musculo</option>
         <option *ngFor="let musculo of gruposMusculares" [ngValue]="musculo">
