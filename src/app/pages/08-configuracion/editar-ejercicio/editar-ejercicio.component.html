@@ -11,14 +11,19 @@
         <!-- Ejercicio -->
         <div class="mb-3">
             <label for="ejercicio" class="form-label">Ejercicio</label>
-            <app-cbo-ejercicio [grupoMuscularId]="selectedGrupoMuscular?.id_grupo_muscular ?? null"
+            <app-cbo-ejercicio [grupoMuscularId]="selectedGrupoMuscular ?? null"
             formControlName="idEjercicio" (valueChange)="onEjercicioChange($event)"></app-cbo-ejercicio>
         </div>
 
         <!-- ID Ejercicio -->
         <div class="mb-3">
-            <label for="idEjercicio" class="form-label">ID Ejercicio</label>
-            <input id="idEjercicio" type="text" formControlName="idEjercicio" class="form-control" readonly>
+            <label for="id_ejercicio" class="form-label">ID Ejercicio</label>
+            <input id="id_ejercicio" type="text" formControlName="id_ejercicio" class="form-control" readonly>
+        </div>
+        <!-- ID grupo muscular -->
+        <div class="mb-3">
+            <label for="id_grupo_muscular" class="form-label">ID Grupo Muscular</label>
+            <input id="id_grupo_muscular" type="text" formControlName="id_grupo_muscular" class="form-control" readonly>
         </div>
 
         <!-- Nombre -->
@@ -35,26 +40,26 @@
 
         <!-- Imagen 1 -->
         <div class="mb-3">
-            <label for="img1" class="form-label">Imagen 1</label>
-            <input id="img1" type="text" formControlName="img1" class="form-control">
+            <label for="img_1" class="form-label">Imagen 1</label>
+            <input id="img_1" type="text" formControlName="img_1" class="form-control">
         </div>
 
         <!-- Imagen 2 -->
         <div class="mb-3">
-            <label for="img2" class="form-label">Imagen 2</label>
-            <input id="img2" type="text" formControlName="img2" class="form-control">
+            <label for="img_2" class="form-label">Imagen 2</label>
+            <input id="img_2" type="text" formControlName="img_2" class="form-control">
         </div>
 
         <!-- Imagen 3 -->
         <div class="mb-3">
-            <label for="img3" class="form-label">Imagen 3</label>
-            <input id="img3" type="text" formControlName="img3" class="form-control">
+            <label for="img_3" class="form-label">Imagen 3</label>
+            <input id="img_3" type="text" formControlName="img_3" class="form-control">
         </div>
 
         <!-- Link Video -->
         <div class="mb-3">
-            <label for="linkVideo" class="form-label">Link Video</label>
-            <input id="linkVideo" type="text" formControlName="linkVideo" class="form-control">
+            <label for="link_video" class="form-label">Link Video</label>
+            <input id="link_video" type="text" formControlName="link_video" class="form-control">
         </div>
 
         <!-- Botones -->

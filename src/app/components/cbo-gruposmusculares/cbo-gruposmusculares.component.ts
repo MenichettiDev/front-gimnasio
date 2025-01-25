@@ -1,6 +1,6 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, forwardRef } from '@angular/core';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { GrupoMuscular } from '../../data/interfaces/grupoMuscularInterface';
 import { GruposMuscularesService } from '../../service/grupos-musculares.service';
 import { SharedGrupoMuscularService } from '../../service/shared-grupo-muscular.service';
@@ -9,14 +9,24 @@ import { SharedGrupoMuscularService } from '../../service/shared-grupo-muscular.
   selector: 'app-cbo-gruposmusculares',
   imports: [CommonModule, FormsModule],
   templateUrl: './cbo-gruposmusculares.component.html',
-  styleUrl: './cbo-gruposmusculares.component.css'
+  styleUrls: ['./cbo-gruposmusculares.component.css'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => CboGruposmuscularesComponent),
+      multi: true
+    }
+  ]
 })
-export class CboGruposmuscularesComponent implements OnInit {
-  @Input() label: string = 'Selecciona un Grupo Muscular'; // Label opcional
-  @Output() valueChange = new EventEmitter<GrupoMuscular>(); // Para emitir el valor al padre
+export class CboGruposmuscularesComponent implements OnInit, ControlValueAccessor {
+  @Input() label: string = 'Selecciona un Grupo Muscular';
+  @Output() valueChange = new EventEmitter<number>();
 
-  gruposMusculares: GrupoMuscular[] = []; // Lista de grupos musculares
-  musculoSeleccionado: GrupoMuscular | null = null; // Valor seleccionado
+  gruposMusculares: GrupoMuscular[] = [];
+  musculoSeleccionado: GrupoMuscular | null = null;
+
+  private onChange: (value: number) => void = () => {};
+  private onTouched: () => void = () => {};
 
   constructor(
     private grupoMuscularService: GruposMuscularesService,
@@ -30,7 +40,7 @@ export class CboGruposmuscularesComponent implements OnInit {
   obtenerGruposMusculares(): void {
     this.grupoMuscularService.getGruposMusculares().subscribe(
       (data) => {
-        this.gruposMusculares = data; // Llenar el combo
+        this.gruposMusculares = data;
       },
       (error) => {
         console.error('Error al obtener grupos musculares', error);
@@ -40,10 +50,26 @@ export class CboGruposmuscularesComponent implements OnInit {
 
   onGrupoMuscularChange(): void {
     if (this.musculoSeleccionado) {
-      this.valueChange.emit(this.musculoSeleccionado); // Emitir el objeto seleccionado
-      this.sharedService.setSelectedGrupo(this.musculoSeleccionado); // Actualizar el servicio compartido
+      this.onChange(this.musculoSeleccionado.id_grupo_muscular);
+      this.valueChange.emit(this.musculoSeleccionado.id_grupo_muscular);
+      this.sharedService.setSelectedGrupo(this.musculoSeleccionado);
     }
   }
 
-  
+  // Métodos de ControlValueAccessor
+  writeValue(value: number): void {
+    this.musculoSeleccionado = this.gruposMusculares.find(m => m.id_grupo_muscular === value) || null;
+  }
+
+  registerOnChange(fn: (value: number) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+    // Aquí puedes manejar el estado deshabilitado si es necesario
+  }
 }
