@@ -5,17 +5,28 @@ import { CboEjercicioComponent } from '../../../components/cbo-ejercicio/cbo-eje
 import { GruposMuscularesService } from '../../../service/grupos-musculares.service';
 import { EjerciciosService } from '../../../service/ejercicios.service';
 import { SharedGrupoMuscularService } from '../../../service/shared-grupo-muscular.service';
+import { ConfirmacionService } from '../../../service/confirmacion.service';
 import { CommonModule } from '@angular/common';
 import { GrupoMuscular } from '../../../data/interfaces/grupoMuscularInterface';
-import { Ejercicio } from '../../../data/interfaces/ejercicioInterface';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { ConfirmationService, MessageService } from 'primeng/api';
+
 
 @Component({
   selector: 'app-editar-ejercicio',
-  imports: [CboGruposmuscularesComponent, CboEjercicioComponent, FormsModule, CommonModule, ReactiveFormsModule],
+  imports: [CboGruposmuscularesComponent,
+    CboEjercicioComponent, FormsModule,
+    CommonModule, ReactiveFormsModule,
+    ToastModule, ConfirmDialogModule,
+    ProgressSpinnerModule],
   templateUrl: './editar-ejercicio.component.html',
-  styleUrls: ['./editar-ejercicio.component.css']
+  styleUrls: ['./editar-ejercicio.component.css'],
+  // providers: [ConfirmationService, MessageService],
 })
 export class EditarEjercicioComponent implements OnInit {
+  loading: boolean = false;
   exerciseForm: FormGroup = new FormGroup({});
   selectedGrupoMuscular: number | null = null;
   selectedEjercicio: number | null = null;
@@ -26,7 +37,8 @@ export class EditarEjercicioComponent implements OnInit {
     private fb: FormBuilder,
     private grupoMuscularService: GruposMuscularesService,
     private ejercicioService: EjerciciosService,
-    private sharedGrupoMuscularService: SharedGrupoMuscularService
+    private sharedGrupoMuscularService: SharedGrupoMuscularService,
+    private confirmacionService: ConfirmacionService
   ) { }
 
   ngOnInit(): void {
@@ -93,19 +105,19 @@ export class EditarEjercicioComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
-    if (this.exerciseForm.valid) {
-      this.ejercicioService.updateEjercicio(this.exerciseForm.value).subscribe(response => {
-        alert('Ejercicio modificado exitosamente');
-        this.isEditable = false;
-        // Limpiar el formulario
-        this.resetStatus();
+  // onSubmit(): void {
+  //   if (this.exerciseForm.valid) {
+  //     this.ejercicioService.updateEjercicio(this.exerciseForm.value).subscribe(response => {
+  //       alert('Ejercicio modificado exitosamente');
+  //       this.isEditable = false;
+  //       // Limpiar el formulario
+  //       this.resetStatus();
 
-      }, error => {
-        console.error('Error al modificar ejercicio', error);
-      });
-    }
-  }
+  //     }, error => {
+  //       console.error('Error al modificar ejercicio', error);
+  //     });
+  //   }
+  // }
 
   onDelete(): void {
     if (this.selectedEjercicio) {
@@ -119,19 +131,36 @@ export class EditarEjercicioComponent implements OnInit {
     }
   }
 
+  async onSubmit() {
+    const confirmed = await this.confirmacionService.confirmAction('¿Estás seguro de que deseas proceder?', 'Confirmación');
+    if (confirmed) {
+      this.loading = true; // Mostrar spinner
+      ////////////
+      if (this.exerciseForm.valid) {
+        this.ejercicioService.updateEjercicio(this.exerciseForm.value).subscribe(response => {
+          alert('Ejercicio modificado exitosamente');
+          this.isEditable = false;
+          // Limpiar el formulario
+          this.resetStatus();
+
+        }, error => {
+          // console.error('Error al modificar ejercicio', error);
+          this.confirmacionService.showError('Error al modificar ejercicio');
+        });
+      }
+      /////////////////
+      setTimeout(() => {
+        this.loading = false; // Ocultar spinner
+        this.confirmacionService.showSuccess('Operación exitosa');
+      }, 2000); // Simula un retraso de 2 segundos
+    }
+  }
+
   resetStatus(): void {
-    this.exerciseForm.reset(); // Restablece todos los controles del formulario
-
-    // Desplazar la pantalla hacia arriba
-    window.scrollTo(0, 0); // Desplaza la pantalla hacia la parte superior
-
-    // Restablecer el grupo muscular seleccionado
-    this.selectedGrupoMuscular = null; // Limpia la selección del grupo muscular
-
-    // Si tienes un control específico para el grupo muscular en el formulario, puedes restablecerlo así:
-    this.exerciseForm.controls['idGrupoMuscular'].setValue(null); // Asegúrate de que el control tenga el nombre correcto
-
-    // Si necesitas recargar los grupos musculares, puedes llamar a obtenerGruposMusculares() aquí
-    this.obtenerGruposMusculares(); // Recargar grupos musculares
-}
+    this.exerciseForm.reset();
+    window.scrollTo(0, 0);
+    this.selectedGrupoMuscular = null;
+    this.exerciseForm.controls['idGrupoMuscular'].setValue(null);
+    this.obtenerGruposMusculares();
+  }
 }
