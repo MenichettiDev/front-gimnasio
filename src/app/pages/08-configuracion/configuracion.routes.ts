@@ -7,5 +7,4 @@ export const configuracionRoutes: Routes = [
 
   // Rutas para los diferentes componentes de Configuración
   { path: 'editar-perfil', loadComponent: () => import('./editar-perfil/editar-perfil.component').then(m => m.EditarPerfilComponent) },
-  { path: 'editar-ejercicio', loadComponent: () => import('./editar-ejercicio/editar-ejercicio.component').then(m => m.EditarEjercicioComponent) },
 ];

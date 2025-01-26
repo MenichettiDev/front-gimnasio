@@ -1,36 +1,59 @@
-<div class="exercise-form">
-    <h2>Formulario de Ejercicio</h2>
+<p-toast></p-toast>
+<p-confirmDialog header="Confirmación" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
-    <form (ngSubmit)="onSubmit()" #exerciseForm="ngForm">
+<p-progressSpinner *ngIf="loading" [style]="{'width': '50px', 'height': '50px'}"></p-progressSpinner>
 
-        <!-- Select de grupo muscular -->
-        <label for="muscleGroup">Grupo Muscular:</label>
-        <select id="muscleGroup" [(ngModel)]="exercise.muscleGroup" name="muscleGroup" required>
-            <option value="pecho">Pecho</option>
-            <option value="espalda">Espalda</option>
-            <option value="piernas">Piernas</option>
-            <option value="brazos">Brazos</option>
-            <option value="hombros">Hombros</option>
-            <option value="abdominales">Abdominales</option>
-        </select>
+<div class="container mt-3">
+    <form [formGroup]="exerciseForm" (ngSubmit)="cargarEjercicio()">
+        
+        <!-- Nombre -->
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input id="nombre" type="text" formControlName="nombre" class="form-control">
+        </div>
+        
+        <!-- Grupo Muscular -->
+        <div class="mb-3">
+            <label for="grupoMuscular" class="form-label">Grupo Muscular</label>
+            <app-cbo-gruposmusculares formControlName="id_grupo_muscular"
+            ></app-cbo-gruposmusculares>
+        </div>
+        
+        
 
-        <!-- Input de nombre de ejercicio -->
-        <label for="exerciseName">Nombre del Ejercicio:</label>
-        <input type="text" id="exerciseName" [(ngModel)]="exercise.name" name="name" required>
+        <!-- Descripción -->
+        <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripción</label>
+            <textarea id="descripcion" formControlName="descripcion" class="form-control" rows="3"></textarea>
+        </div>
 
-        <!-- Input de imagen -->
-        <label for="exerciseImage">Imagen:</label>
-        <input type="file" id="exerciseImage" (change)="onImageSelected($event)" accept="image/*">
+        <!-- Imagen 1 -->
+        <div class="mb-3">
+            <label for="img_1" class="form-label">Imagen 1</label>
+            <input id="img_1" type="text" formControlName="img_1" class="form-control">
+        </div>
 
-        <!-- Campo de descripción -->
-        <label for="description">Descripción - Tips:</label>
-        <textarea id="description" [(ngModel)]="exercise.description" name="description" rows="4" required></textarea>
+        <!-- Imagen 2 -->
+        <div class="mb-3">
+            <label for="img_2" class="form-label">Imagen 2</label>
+            <input id="img_2" type="text" formControlName="img_2" class="form-control">
+        </div>
 
-        <button type="submit" [disabled]="!exerciseForm.form.valid">Guardar Ejercicio</button>
+        <!-- Imagen 3 -->
+        <div class="mb-3">
+            <label for="img_3" class="form-label">Imagen 3</label>
+            <input id="img_3" type="text" formControlName="img_3" class="form-control">
+        </div>
+
+        <!-- Link Video -->
+        <div class="mb-3">
+            <label for="link_video" class="form-label">Link Video</label>
+            <input id="link_video" type="text" formControlName="link_video" class="form-control">
+        </div>
+
+        <!-- Botones -->
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-warning" [disabled]="!exerciseForm.valid">Cargar</button>
+        </div>
     </form>
-
-    <div *ngIf="imagePreview">
-        <h3>Vista previa de la imagen:</h3>
-        <img [src]="imagePreview" alt="Vista previa" width="150">
-    </div>
 </div>

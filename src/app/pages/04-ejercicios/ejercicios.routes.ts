@@ -8,5 +8,7 @@ export const ejerciciosRoutes: Routes = [
     // Rutas para los diferentes componentes de Ejercicios
     { path: 'buscar', loadComponent: () => import('./buscar/buscar.component').then(m => m.BuscarComponent) },
     { path: 'cargar-nuevo', loadComponent: () => import('./cargar-nuevo/cargar-nuevo.component').then(m => m.CargarNuevoComponent) },
+
+    { path: 'editar-ejercicio', loadComponent: () => import('./editar-ejercicio/editar-ejercicio.component').then(m => m.EditarEjercicioComponent) },
     { path: 'coach', loadComponent: () => import('./coach/coach.component').then(m => m.CoachComponent) }
 ];

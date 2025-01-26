@@ -11,7 +11,6 @@ import { GrupoMuscular } from '../../../data/interfaces/grupoMuscularInterface';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { ConfirmationService, MessageService } from 'primeng/api';
 
 
 @Component({
@@ -22,8 +21,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     ToastModule, ConfirmDialogModule,
     ProgressSpinnerModule],
   templateUrl: './editar-ejercicio.component.html',
-  styleUrls: ['./editar-ejercicio.component.css'],
-  // providers: [ConfirmationService, MessageService],
+  styleUrl: './editar-ejercicio.component.css'
 })
 export class EditarEjercicioComponent implements OnInit {
   loading: boolean = false;
@@ -105,56 +103,82 @@ export class EditarEjercicioComponent implements OnInit {
     });
   }
 
-  // onSubmit(): void {
-  //   if (this.exerciseForm.valid) {
-  //     this.ejercicioService.updateEjercicio(this.exerciseForm.value).subscribe(response => {
-  //       alert('Ejercicio modificado exitosamente');
-  //       this.isEditable = false;
-  //       // Limpiar el formulario
-  //       this.resetStatus();
 
-  //     }, error => {
-  //       console.error('Error al modificar ejercicio', error);
-  //     });
-  //   }
-  // }
-
-  onDelete(): void {
-    if (this.selectedEjercicio) {
-      this.ejercicioService.deleteEjercicio(this.selectedEjercicio).subscribe(response => {
-        alert('Ejercicio eliminado exitosamente');
-        this.createForm();
-        this.resetStatus();
-      }, error => {
-        console.error('Error al eliminar ejercicio', error);
-      });
-    }
-  }
-
-  async onSubmit() {
+  async onDelete() {
     const confirmed = await this.confirmacionService.confirmAction('¿Estás seguro de que deseas proceder?', 'Confirmación');
+    
     if (confirmed) {
       this.loading = true; // Mostrar spinner
-      ////////////
-      if (this.exerciseForm.valid) {
-        this.ejercicioService.updateEjercicio(this.exerciseForm.value).subscribe(response => {
-          alert('Ejercicio modificado exitosamente');
-          this.isEditable = false;
-          // Limpiar el formulario
-          this.resetStatus();
-
-        }, error => {
-          // console.error('Error al modificar ejercicio', error);
-          this.confirmacionService.showError('Error al modificar ejercicio');
-        });
+  
+      // Log para depuración
+      console.log('Ejercicio seleccionado:', this.selectedEjercicio);
+  
+      if (this.selectedEjercicio) {
+        // Llamar al servicio para eliminar el ejercicio
+        this.ejercicioService.deleteEjercicio(this.selectedEjercicio).subscribe(
+          response => {
+            // Si la respuesta es exitosa
+            this.createForm(); // Recrear el formulario
+            this.resetStatus(); // Limpiar el estado
+  
+            // Detener el spinner y mostrar mensaje de éxito
+            this.loading = false;
+            this.confirmacionService.showSuccess('Ejercicio eliminado exitosamente');
+          },
+          error => {
+            // Si ocurre un error
+            this.loading = false; // Detener el spinner
+            console.error('Error al eliminar el ejercicio', error);
+            this.confirmacionService.showError('Error al eliminar ejercicio');
+          }
+        );
+      } else {
+        // Si no hay un ejercicio seleccionado
+        this.loading = false;
+        this.confirmacionService.showError('No se ha seleccionado un ejercicio para eliminar');
       }
-      /////////////////
-      setTimeout(() => {
-        this.loading = false; // Ocultar spinner
-        this.confirmacionService.showSuccess('Operación exitosa');
-      }, 2000); // Simula un retraso de 2 segundos
     }
   }
+  
+
+  async onUpdate() {
+    const confirmed = await this.confirmacionService.confirmAction('¿Estás seguro de que deseas proceder?', 'Confirmación');
+    
+    if (confirmed) {
+      this.loading = true; // Mostrar spinner
+  
+      // Log para depuración
+      console.log(this.exerciseForm.value, 'ejercicio a actualizar');
+  
+      if (this.exerciseForm.valid) {
+        // Llamar al servicio para actualizar el ejercicio
+        this.ejercicioService.updateEjercicio(this.exerciseForm.value).subscribe(
+          response => {
+            // Si la respuesta es exitosa
+            this.isEditable = false;
+  
+            // Limpiar el formulario
+            this.resetStatus();
+  
+            // Detener el spinner y mostrar mensaje de éxito
+            this.loading = false;
+            this.confirmacionService.showSuccess('Operación exitosa');
+          },
+          error => {
+            // Si ocurre un error
+            this.loading = false; // Detener el spinner
+            console.error('Error al actualizar el ejercicio', error);
+            this.confirmacionService.showError('Error al modificar ejercicio');
+          }
+        );
+      } else {
+        // Si el formulario no es válido
+        this.loading = false;
+        this.confirmacionService.showError('Por favor, complete todos los campos');
+      }
+    }
+  }
+  
 
   resetStatus(): void {
     this.exerciseForm.reset();

@@ -13,6 +13,7 @@ export class EjerciciosService {
   private apiUrlGetEjercicioById = 'http://localhost:7000/getEjercicioByIdEjercicio'; // URL de tu API para obtener ejercicio por ID
   private apiUrlUpdateEjercicio = 'http://localhost:7000/updateEjercicio'; // URL de tu API para actualizar ejercicio
   private apiUrlDeleteEjercicio = 'http://localhost:7000/deleteEjercicio'; // URL de tu API para eliminar ejercicio
+  private apiUrlCreateEjercicio = 'http://localhost:7000/crearEjercicio'; // URL de tu API para eliminar ejercicio
 
   constructor(private http: HttpClient) { }
 
@@ -31,6 +32,10 @@ export class EjerciciosService {
     return this.http.post<Ejercicio>(this.apiUrlGetEjercicioById, { id_ejercicio });
   }
 
+  // Método para crear ejercicio
+  createEjercicio(ejercicio: Ejercicio): Observable<Ejercicio> {
+    return this.http.post<Ejercicio>(this.apiUrlCreateEjercicio, ejercicio);
+  }
   // Método para actualizar ejercicio
   updateEjercicio(ejercicio: Ejercicio): Observable<Ejercicio> {
     return this.http.post<Ejercicio>(this.apiUrlUpdateEjercicio, ejercicio);
