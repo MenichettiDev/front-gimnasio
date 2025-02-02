@@ -3,13 +3,14 @@ import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/f
 import { RepeticionService } from '../../service/repeticion.service';
 import { Repeticion } from '../../data/interfaces/repeticionInterface';
 import { CommonModule } from '@angular/common';
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectButtonModule } from 'primeng/selectbutton'; // Importa el módulo correcto
+import { SelectModule } from 'primeng/select'; 
 
 @Component({
   selector: 'app-cbo-repeticiones',
   templateUrl: './cbo-repeticiones.component.html',
   styleUrls: ['./cbo-repeticiones.component.css'],
-  imports: [FormsModule, CommonModule, DropdownModule ],
+  imports: [FormsModule, CommonModule, SelectButtonModule, SelectModule], // Cambia DropdownModule por SelectButtonModule
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -20,7 +21,6 @@ import { DropdownModule } from 'primeng/dropdown';
 })
 export class CboRepeticionesComponent implements OnInit, ControlValueAccessor {
   @Input() label: string = "Selecciona un tipo de repetición"; // Para el label del combo
-
   repeticiones: Repeticion[] = []; // Lista de repeticiones
   selectedRepeticion: Repeticion | null = null; // Valor seleccionado (objeto repeticion)
   isDisabled: boolean = false; // Estado de deshabilitado
@@ -47,7 +47,7 @@ export class CboRepeticionesComponent implements OnInit, ControlValueAccessor {
     );
   }
 
-  // Maneja cambios en el dropdown
+  // Maneja cambios en el select
   onValueChange(): void {
     this.onChange(this.selectedRepeticion); // Notifica a Angular sobre el cambio
     this.onTouched(); // Marca el control como "tocado"

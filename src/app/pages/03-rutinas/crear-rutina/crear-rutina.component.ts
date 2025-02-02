@@ -40,7 +40,6 @@ import { CalendarModule } from 'primeng/calendar';
     ButtonModule,
     CalendarModule,
     FormsModule,
-    
   ]
 })
 export class CrearRutinaComponent implements OnInit {
@@ -56,6 +55,14 @@ export class CrearRutinaComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
+
+    // Escuchar cambios en el campo 'cantidad_dias'
+    this.rutinaForm.get('cantidad_dias')?.valueChanges.subscribe((cantidadDias: number) => {
+      this.dias.clear(); // Limpiar los días existentes
+      this.collapsed = []; // Reiniciar el estado colapsado
+      this.agregarDias(cantidadDias); // Agregar nuevos días
+    });
+
   }
 
   createForm(): void {
@@ -69,7 +76,6 @@ export class CrearRutinaComponent implements OnInit {
       id_atleta: ['', Validators.required],
       dias: this.fb.array([])
     });
-
     this.agregarDias(this.rutinaForm.get('cantidad_dias')?.value);
   }
 
@@ -109,9 +115,7 @@ export class CrearRutinaComponent implements OnInit {
       this.marcarCamposInvalidos();
       return;
     }
-
     this.loading = true;
-
     const rutinaData = {
       rutina: {
         id_creador: this.authService.getUser(),
@@ -128,9 +132,7 @@ export class CrearRutinaComponent implements OnInit {
       })),
       fecha_asignacion: this.rutinaForm.get('fecha_asignacion')?.value
     };
-
     console.log('Datos a enviar:', rutinaData);
-
     // Simulamos el envío al backend
     setTimeout(() => {
       this.loading = false;
@@ -159,5 +161,12 @@ export class CrearRutinaComponent implements OnInit {
 
   cancelar(): void {
     this.router.navigate(['/home']);
+  }
+
+  // Filtrar ejercicios según el grupo muscular seleccionado
+  filtrarEjercicios(diaIndex: number, ejercicioIndex: number, grupoMuscularId: number): void {
+    const ejercicio = (this.dias.at(diaIndex).get('ejercicios') as FormArray).at(ejercicioIndex);
+    ejercicio.get('id_ejercicio')?.setValue(''); // Limpiar el ejercicio seleccionado
+    console.log(`Filtrando ejercicios para el grupo muscular ${grupoMuscularId}`);
   }
 }

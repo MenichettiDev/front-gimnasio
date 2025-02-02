@@ -1,9 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-cbo-perfil',
   templateUrl: './cbo-perfil.component.html',
+  imports: [ FormsModule, CommonModule],
   styleUrls: ['./cbo-perfil.component.css'],
   providers: [
     {

@@ -1,9 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-rb-estado',
   templateUrl: './rb-estado.component.html',
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   styleUrls: ['./rb-estado.component.css'],
   providers: [
     {
