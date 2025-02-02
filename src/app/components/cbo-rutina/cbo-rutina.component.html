@@ -1,10 +1,16 @@
 <div class="mb-3 col-4">
-    <label for="rutina" class="form-label fs-5">{{ label }}</label>
-    <select id="rutina" [(ngModel)]="selectedRutina" class="form-select form-select-lg"
-        aria-label="Selecciona una rutina">
-        <option value="" disabled selected>Selecciona una rutina</option>
-        <option *ngFor="let rutina of rutinas" [value]="rutina.id_rutina">
-            {{ rutina.nombre }}
-        </option>
+    <label [for]="'rutina-' + label" class="form-label fs-5">{{ label }}</label>
+    <select
+      [id]="'rutina-' + label"
+      [(ngModel)]="selectedRutina"
+      (ngModelChange)="onValueChange()"
+      class="form-select form-select-lg"
+      aria-label="Selecciona una rutina"
+      [disabled]="isDisabled"
+    >
+      <option value="" disabled selected>Selecciona una rutina</option>
+      <option *ngFor="let rutina of rutinas" [value]="rutina.id_rutina">
+        {{ rutina.nombre }}
+      </option>
     </select>
-</div>
+  </div>

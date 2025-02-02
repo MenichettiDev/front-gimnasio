@@ -1,23 +1,51 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, forwardRef, Input } from '@angular/core';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-input-texto',
-  imports: [FormsModule, CommonModule],
   templateUrl: './input-texto.component.html',
-  styleUrl: './input-texto.component.css'
+  styleUrls: ['./input-texto.component.css'],
+  imports: [ CommonModule, FormsModule],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => InputTextoComponent),
+      multi: true,
+    },
+  ],
 })
-export class InputTextoComponent {
+export class InputTextoComponent implements ControlValueAccessor {
   @Input() label: string = ''; // Recibe un texto para el label
   @Input() placeholder: string = ''; // Recibe un placeholder para el input
-  @Input() value: string = ''; // Recibe el valor inicial del input
 
-  // El evento de salida para enviar el valor de vuelta al componente padre
-  @Output() valueChange = new EventEmitter<string>();
+  value: string = ''; // Valor interno del input
+  isDisabled: boolean = false; // Estado de deshabilitado
 
-  onValueChange() {
-    // Emitir el valor cada vez que se cambie
-    this.valueChange.emit(this.value);
+  // Funciones de callback registradas por Angular
+  onChange: any = () => {};
+  onTouched: any = () => {};
+
+  // Implementación de ControlValueAccessor
+  writeValue(value: any): void {
+    this.value = value || ''; // Actualiza el valor interno
+  }
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn; // Registra la función de cambio
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn; // Registra la función de "tocado"
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+    this.isDisabled = isDisabled; // Habilita/deshabilita el control
+  }
+
+  // Maneja cambios en el input
+  onValueChange(): void {
+    this.onChange(this.value); // Notifica a Angular sobre el cambio
+    this.onTouched(); // Marca el control como "tocado"
   }
 }

@@ -1,26 +1,49 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-
+import { Component, Input, forwardRef } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-rb-estado',
-  imports: [FormsModule, CommonModule],
   templateUrl: './rb-estado.component.html',
-  styleUrl: './rb-estado.component.css'
+  styleUrls: ['./rb-estado.component.css'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => RbEstadoComponent),
+      multi: true,
+    },
+  ],
 })
-export class RbEstadoComponent {
-
+export class RbEstadoComponent implements ControlValueAccessor {
   @Input() label: string = ''; // Etiqueta para el grupo de radio buttons
   @Input() options: string[] = []; // Lista de opciones para los radio buttons
   @Input() name: string = 'radioGroup'; // Nombre del grupo de radio buttons
-  @Input() value: string = ''; // Valor inicial del radio button seleccionado
+  value: string = ''; // Valor seleccionado
+  isDisabled: boolean = false; // Estado de deshabilitado
 
-  // Evento de salida para emitir el valor seleccionado
-  @Output() valueChange = new EventEmitter<string>();
+  // Funciones de callback registradas por Angular
+  private onChange: (value: string) => void = () => {};
+  private onTouched: () => void = () => {};
 
-  onValueChange() {
-    // Emitir el valor seleccionado al componente padre
-    this.valueChange.emit(this.value);
+  // Maneja cambios en los radio buttons
+  onValueChange(): void {
+    this.onChange(this.value); // Notifica a Angular sobre el cambio
+    this.onTouched(); // Marca el control como "tocado"
+  }
+
+  // Métodos de ControlValueAccessor
+  writeValue(value: string): void {
+    this.value = value || ''; // Actualiza el valor interno
+  }
+
+  registerOnChange(fn: (value: string) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+    this.isDisabled = isDisabled; // Habilita/deshabilita el control
   }
 }

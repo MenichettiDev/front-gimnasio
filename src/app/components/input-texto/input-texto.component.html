@@ -1,9 +1,13 @@
 <div class="mb-3 col-4">
-    <label for="txtInput" class="form-label fs-5">{{ label }}</label>
-    <input id="txtInput" type="text" 
-    [(ngModel)]="value" 
-    class="form-control" 
-    [placeholder]="placeholder"
-        [attr.aria-label]="label" 
-        (ngModelChange)="onValueChange()" />
-</div>
+    <label [for]="'txtInput-' + label" class="form-label fs-5">{{ label }}</label>
+    <input
+      [id]="'txtInput-' + label"
+      type="text"
+      [(ngModel)]="value"
+      class="form-control"
+      [placeholder]="placeholder"
+      [attr.aria-label]="label"
+      [disabled]="isDisabled"
+      (ngModelChange)="onValueChange()"
+    />
+  </div>

@@ -1,22 +1,33 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { EntrenadorService } from '../../service/entrenador.service'; // Asegúrate de que la ruta sea correcta
-import { CommonModule } from '@angular/common';  // Necesitamos importar NgFor para usarlo
+import { Component, Input, forwardRef, OnInit } from '@angular/core';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { EntrenadorService } from '../../service/entrenador.service';
 import { Entrenador } from '../../data/interfaces/entrenadorInterface';
-import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cbo-entrenador',
-  imports: [CommonModule, FormsModule],  // Importamos NgFor para usarlo en el template
   templateUrl: './cbo-entrenador.component.html',
-  styleUrl: './cbo-entrenador.component.css'
+  styleUrls: ['./cbo-entrenador.component.css'],
+  imports:[ CommonModule, FormsModule],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => CboEntrenadorComponent),
+      multi: true,
+    },
+  ],
 })
-export class CboEntrenadorComponent implements OnInit {
+export class CboEntrenadorComponent implements OnInit, ControlValueAccessor {
+  @Input() label: string = "Selecciona un Entrenador"; // Para el label del combo
+  entrenadores: Entrenador[] = []; // Lista de entrenadores
+  selectedEntrenador: number = 0; // Valor seleccionado (id_entrenador)
+  isDisabled: boolean = false; // Estado de deshabilitado
 
-  @Input() label: string = "Selecciona un Entrenador";  // Para el label del combo
-  entrenadores: Entrenador[] = [];  // Lista de entrenadores
-  selectedEntrenador: any;    // Para el valor seleccionado
+  // Funciones de callback registradas por Angular
+  private onChange: (value: number) => void = () => {};
+  private onTouched: () => void = () => {};
 
-  constructor(private entrenadorService: EntrenadorService) { }
+  constructor(private entrenadorService: EntrenadorService) {}
 
   ngOnInit(): void {
     this.obtenerEntrenadores();
@@ -26,11 +37,34 @@ export class CboEntrenadorComponent implements OnInit {
   obtenerEntrenadores(): void {
     this.entrenadorService.getEntrenadores().subscribe(
       (data) => {
-        this.entrenadores = data.entrenadores;  // Asignamos los datos de los entrenadores
+        this.entrenadores = data.entrenadores; // Asignamos los datos de los entrenadores
       },
       (error) => {
         console.error('Error al obtener entrenadores', error);
       }
     );
+  }
+
+  // Maneja cambios en el select
+  onValueChange(): void {
+    this.onChange(this.selectedEntrenador); // Notifica a Angular sobre el cambio
+    this.onTouched(); // Marca el control como "tocado"
+  }
+
+  // Métodos de ControlValueAccessor
+  writeValue(value: number): void {
+    this.selectedEntrenador = value ; // Actualiza el valor interno
+  }
+
+  registerOnChange(fn: (value: number) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+    this.isDisabled = isDisabled; // Habilita/deshabilita el control
   }
 }

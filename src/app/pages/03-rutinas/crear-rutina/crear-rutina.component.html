@@ -1,104 +1,74 @@
-<!-- // Se deberia verificar el nombre del entrenador en la parte superior
-//Aqui los entrenadores pueden cargar sus rutinas
-// deberian pedir:
-//nombre atleta (desplegable)
-//nombre rutina (input)
-//Cantidad de dias a la semana (desplegable)
-//nivel de la rutina (desplegable)
-// objetivo rutina(desplegable)
-//descripcin de la rutina ( campo de texto con aclaraciones )
-
-// deberia existir tambien un boton para abrir un form y cargar un ejercicio nuevo con su nombre y descripcion
-
-//deberia existir tambien un boton para abrir ventana para copiar rutinas ya cargadas y modificarlas -->
-
-<div class="container mt-4">
-    <!-- Verificación del Entrenador -->
-    <div class="row">
-        <div class="col">
-            <h3 class="text-center">Bienvenido, <span id="entrenadorNombre">[Nombre del Entrenador]</span></h3>
+<div class="container">
+    <h2>Crear Rutina</h2>
+    <form [formGroup]="rutinaForm" (ngSubmit)="guardarRutina()">
+        <!-- Datos Generales -->
+        <div class="form-group">
+            <app-input-texto label="Nombre de la rutina" formControlName="nombre"></app-input-texto>
         </div>
-    </div>
-
-    <!-- Formulario de Rutinas -->
-    <div class="row mt-4">
-        <div class="col-lg-8 offset-lg-2">
-            <div class="card shadow">
-                <div class="card-header text-center bg-primary text-white">
-                    <h5>Cargar Rutina</h5>
+        <div class="box-card border-top">
+            <div class="box-card-header">
+                <!-- Combo de Días -->
+                <div class="row mb-2">
+                    <div class="col-md-6">
+                        <app-cbo-atleta formControlName="id_atleta"></app-cbo-atleta>
+                    </div>
+                    <div class="col-md-6">
+                        <app-cbo-dias formControlName="cantidad_dias"></app-cbo-dias>
+                        <app-input-fecha label="Fecha de asignación"
+                            formControlName="fecha_asignacion"></app-input-fecha>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <form>
-                        <!-- Nombre del Atleta -->
-                        <div class="mb-3">
-                            <label for="nombreAtleta" class="form-label">Nombre del Atleta</label>
-                            <select id="nombreAtleta" class="form-select">
-                                <option value="" disabled selected>Seleccione un atleta</option>
-                                <option value="1">Atleta 1</option>
-                                <option value="2">Atleta 2</option>
-                                <option value="3">Atleta 3</option>
-                            </select>
+                <div class="row mb-2">
+                    <div class="col-md-3">
+                        <app-cbo-niveldificultad formControlName="nivel_atleta"></app-cbo-niveldificultad>
+                    </div>
+                    <div class="col-md-3">
+                        <app-cbo-objetivo formControlName="objetivo"></app-cbo-objetivo>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <app-input-texto label="Descripción de la rutina" formControlName="descripcion"></app-input-texto>
+                </div>
+            </div>
+            <div class="box-card-body">
+                <div *ngFor="let dia of dias.controls; let i = index" class="card mb-3">
+                    <div class="card-header">
+                        Día {{ i + 1 }}
+                        <button type="button" class="btn btn-link" (click)="toggleCollapse(i)">
+                            {{ collapsed[i] ? 'Expandir' : 'Colapsar' }}
+                        </button>
+                    </div>
+                    <div class="card-body" [ngClass]="{ 'd-none': collapsed[i] }">
+                        <!-- Sub Cards de Ejercicios -->
+                        <div *ngFor="let ejercicio of getEjercicios(dia).controls; let j = index"
+                            class="sub-card mb-3 p-3 border">
+                            <app-cbo-gruposmusculares formControlName="id_grupo_muscular"></app-cbo-gruposmusculares>
+                            <app-cbo-ejercicio
+                                [grupoMuscularId]="ejercicio.get('id_grupo_muscular')?.value"></app-cbo-ejercicio>
+                            <app-cbo-repeticiones formControlName="id_repeticion"></app-cbo-repeticiones>
+                            <button type="button" class="btn btn-danger btn-sm" (click)="eliminarEjercicio(i, j)">
+                                <i class="bi bi-trash"></i> Eliminar
+                            </button>
                         </div>
-
-                        <!-- Nombre de la Rutina -->
-                        <div class="mb-3">
-                            <label for="nombreRutina" class="form-label">Nombre de la Rutina</label>
-                            <input type="text" id="nombreRutina" class="form-control"
-                                placeholder="Ingrese el nombre de la rutina">
-                        </div>
-
-                        <!-- Cantidad de Días a la Semana -->
-                        <div class="mb-3">
-                            <label for="cantidadDias" class="form-label">Cantidad de Días a la Semana</label>
-                            <select id="cantidadDias" class="form-select">
-                                <option value="" disabled selected>Seleccione la cantidad de días</option>
-                                <option value="1">1 día</option>
-                                <option value="2">2 días</option>
-                                <option value="3">3 días</option>
-                                <option value="4">4 días</option>
-                                <option value="5">5 días</option>
-                                <option value="6">6 días</option>
-                                <option value="7">7 días</option>
-                            </select>
-                        </div>
-
-                        <!-- Nivel de la Rutina -->
-                        <div class="mb-3">
-                            <label for="nivelRutina" class="form-label">Nivel de la Rutina</label>
-                            <select id="nivelRutina" class="form-select">
-                                <option value="" disabled selected>Seleccione el nivel</option>
-                                <option value="principiante">Principiante</option>
-                                <option value="intermedio">Intermedio</option>
-                                <option value="avanzado">Avanzado</option>
-                            </select>
-                        </div>
-
-                        <!-- Objetivo de la Rutina -->
-                        <div class="mb-3">
-                            <label for="objetivoRutina" class="form-label">Objetivo de la Rutina</label>
-                            <select id="objetivoRutina" class="form-select">
-                                <option value="" disabled selected>Seleccione el objetivo</option>
-                                <option value="ganar_masa">Ganar Masa</option>
-                                <option value="perder_peso">Perder Peso</option>
-                                <option value="resistencia">Resistencia</option>
-                                <option value="fuerza">Fuerza</option>
-                            </select>
-                        </div>
-
-                        <!-- Descripción de la Rutina -->
-                        <div class="mb-3">
-                            <label for="descripcionRutina" class="form-label">Descripción de la Rutina</label>
-                            <textarea id="descripcionRutina" class="form-control" rows="4"
-                                placeholder="Aclaraciones o detalles de la rutina"></textarea>
-                        </div>
-
-                        <!-- Botón de Enviar -->
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-success">Cargar Rutina</button>
-                        </div>
-                    </form>
+                        <button type="button" class="btn btn-success btn-sm" (click)="agregarEjercicio(i)">
+                            <i class="bi bi-plus-circle"></i> Agregar Ejercicio
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col-12 flex justify-content-end">
+                    <p-button icon="pi pi-arrow-left" label="Anterior" styleClass="p-button-rounded p-button-secondary"
+                        (onClick)="anterior()"></p-button>
+                    <p-button icon="pi pi-check" label="Confirmar" styleClass="p-button-rounded p-button-success ms-2"
+                        (onClick)="guardarRutina()"></p-button>
+                    <p-button icon="pi pi-times" label="Cancelar" styleClass="p-button-rounded p-button-danger ms-2"
+                        (onClick)="cancelar()"></p-button>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
+
+    <!-- Spinner -->
+    <p-progressSpinner *ngIf="loading" styleClass="w-8 h-8" strokeWidth="4" animationDuration=".5s"></p-progressSpinner>
 </div>

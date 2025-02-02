@@ -1,48 +1,79 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, forwardRef, OnInit } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { SharedGimnasioService } from '../../service/shared-gimnasio.service';
-import { Gimnasio } from '../../data/interfaces/gimnasioInterface';
 import { MembresiaService } from '../../service/membresia.service';
+import { Gimnasio } from '../../data/interfaces/gimnasioInterface';
 import { Membresia } from '../../data/interfaces/membresiaInterface';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-cbo-membresia',
-  imports: [CommonModule, FormsModule],  // Importamos NgFor para usarlo en el template
   templateUrl: './cbo-membresia.component.html',
-  styleUrl: './cbo-membresia.component.css'
+  styleUrls: ['./cbo-membresia.component.css'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => CboMembresiaComponent),
+      multi: true,
+    },
+  ],
 })
-export class CboMembresiaComponent {
-
-  @Input() label: string = "Selecciona una Membresía";  // Para el label del combo
+export class CboMembresiaComponent implements OnInit, ControlValueAccessor {
+  @Input() label: string = "Selecciona una Membresía"; // Para el label del combo
   gimnasioSeleccionado: Gimnasio | null = null;
-  membresias: Membresia[] = []; // Cambia el tipo según tu modelo de ejercicios
-  selectedMembresia: Membresia | null = null; // Cambia el tipo según tu modelo de ejerc
+  membresias: Membresia[] = []; // Lista de membresías
+  selectedMembresia: Membresia | null = null; // Valor seleccionado (objeto membresía)
+  isDisabled: boolean = false; // Estado de deshabilitado
+
+  // Funciones de callback registradas por Angular
+  private onChange: (value: any) => void = () => {};
+  private onTouched: () => void = () => {};
 
   constructor(
     private sharedService: SharedGimnasioService,
-    private membresiaService: MembresiaService // Asegúrate de importar el servicio correct
+    private membresiaService: MembresiaService
   ) {}
 
   ngOnInit(): void {
     this.sharedService.selectedGimnasio$.subscribe((gimnasio) => {
       this.gimnasioSeleccionado = gimnasio;
-      console.log('grupo seleccionado: ' + gimnasio)
       if (gimnasio) {
-        this.cargarMembresias(gimnasio.id_gimnasio); // Cambia según tu lógica
+        this.cargarMembresias(gimnasio.id_gimnasio); // Carga las membresías según el gimnasio seleccionado
       }
     });
   }
 
+  // Método para cargar las membresías
   cargarMembresias(id_gimnasio: number): void {
-    this.membresiaService.getMembresiasByIdGimnasio( id_gimnasio ).subscribe(
+    this.membresiaService.getMembresiasByIdGimnasio(id_gimnasio).subscribe(
       (data) => {
-        this.membresias = data;  // Asignamos los datos de los entrenadores
+        this.membresias = data; // Asignamos los datos de las membresías
       },
       (error) => {
-        console.error('Error al obtener ejercicios', error);
+        console.error('Error al obtener membresías', error);
       }
     );
   }
-  
+
+  // Maneja cambios en el select
+  onValueChange(): void {
+    this.onChange(this.selectedMembresia); // Notifica a Angular sobre el cambio
+    this.onTouched(); // Marca el control como "tocado"
+  }
+
+  // Métodos de ControlValueAccessor
+  writeValue(value: any): void {
+    this.selectedMembresia = value || null; // Actualiza el valor interno
+  }
+
+  registerOnChange(fn: (value: any) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+    this.isDisabled = isDisabled; // Habilita/deshabilita el control
+  }
 }

@@ -1,0 +1,15 @@
+<div class="mb-3 col-4">
+    <label [for]="'repeticion-' + label" class="form-label fs-5">{{ label }}</label>
+    <p-dropdown
+      [id]="'repeticion-' + label"
+      [(ngModel)]="selectedRepeticion"
+      (onChange)="onValueChange()"
+      class="form-select form-select-lg"
+      aria-label="Selecciona una repetición"
+      [disabled]="isDisabled"
+      [options]="repeticiones"
+      optionLabel="nombre"
+      placeholder="Selecciona una repetición"
+    >
+    </p-dropdown>
+  </div>

@@ -1,9 +1,0 @@
-<div class="mb-3 col-4">
-    <label for="repeticion" class="form-label fs-5"> {{ label }} </label>
-    <select id="repeticion" [(ngModel)]="selectedRepeticion" class="form-select form-select-lg" aria-label="Selecciona una repeticion">
-        <option value="" disabled selected>Selecciona una repeticion</option>
-        <option *ngFor="let repeticion of repeticiones" [ngValue]="repeticion">
-            {{ repeticion.nombre }}
-        </option>
-    </select>
-</div>

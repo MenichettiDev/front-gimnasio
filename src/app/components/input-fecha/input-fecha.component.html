@@ -1,10 +1,15 @@
 <div class="mb-3 col-4">
-    <label for="dateInput" class="form-label fs-5">{{ label }}</label>
-    <input id="dateInput" 
-    type="date" 
-    [(ngModel)]="value" 
-    class="form-control" 
-    [placeholder]="placeholder"
-    [attr.aria-label]="label" 
-    (ngModelChange)="onValueChange()" />
-</div>
+    <label [for]="'dateInput-' + label" class="form-label fs-5">{{ label }}</label>
+    <!-- Usando PrimeNG p-calendar -->
+    <p-datePicker
+  [id]="'dateInput-' + label"
+  [(ngModel)]="value"
+  [showIcon]="true"
+  dateFormat="yy-mm-dd"
+  class="form-control"
+  [attr.aria-label]="label"
+  (ngModelChange)="onValueChange($event)"
+  [disabled]="isDisabled"
+>
+</p-datePicker>
+  </div>

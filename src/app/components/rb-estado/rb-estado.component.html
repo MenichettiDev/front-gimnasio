@@ -1,16 +1,16 @@
 <div class="mb-3 col-4">
-    <label class="form-label fs-5">{{ label }}</label>
-    <div *ngFor="let option of options" class="form-check">
-      <input
-        class="form-check-input"
-        type="radio"
-        [id]="option"
-        [name]="name"
-        [value]="option"
-        [(ngModel)]="value"
-        (ngModelChange)="onValueChange()"
-      />
-      <label class="form-check-label" [for]="option">{{ option }}</label>
-    </div>
+  <label class="form-label fs-5">{{ label }}</label>
+  <div *ngFor="let option of options" class="form-check">
+    <input
+      class="form-check-input"
+      type="radio"
+      [id]="option"
+      [name]="name"
+      [value]="option"
+      [(ngModel)]="value"
+      (ngModelChange)="onValueChange()"
+      [disabled]="isDisabled"
+    />
+    <label class="form-check-label" [for]="option">{{ option }}</label>
   </div>
-  
+</div>

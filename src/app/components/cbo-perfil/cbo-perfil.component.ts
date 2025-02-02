@@ -1,28 +1,56 @@
-import { Component, Input } from '@angular/core';// Asegúrate de que la ruta sea correcta
-import { CommonModule } from '@angular/common';  // Necesitamos importar NgFor para usarlo
-import { FormsModule } from '@angular/forms';
+import { Component, Input, forwardRef } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-cbo-perfil',
-  imports: [CommonModule, FormsModule],
   templateUrl: './cbo-perfil.component.html',
-  styleUrl: './cbo-perfil.component.css'
+  styleUrls: ['./cbo-perfil.component.css'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => CboPerfilComponent),
+      multi: true,
+    },
+  ],
 })
-export class CboPerfilComponent {
+export class CboPerfilComponent implements ControlValueAccessor {
+  @Input() label: string = "Selecciona el perfil"; // Para el label del combo
 
-@Input() label: string = "Selecciona el perfil";  // Para el label del combo
-
+  // Arreglo con datos hard de perfiles
   perfiles = [
-    { id_perfil: 1, nombre: 'Admin'},
+    { id_perfil: 1, nombre: 'Admin' },
     { id_perfil: 2, nombre: 'Entrenador' },
     { id_perfil: 3, nombre: 'Atleta' },
-    { id_perfil: 3, nombre: 'Visita' }
+    { id_perfil: 4, nombre: 'Visita' }, // Corregido el ID duplicado
   ];
 
-  // Variable para almacenar el atleta seleccionado
-  selectedPerfil: number | null = null;
+  selectedPerfil: any | null = null; // Valor seleccionado (objeto perfil)
+  isDisabled: boolean = false; // Estado de deshabilitado
 
-  constructor() { }
+  // Funciones de callback registradas por Angular
+  private onChange: (value: any) => void = () => {};
+  private onTouched: () => void = () => {};
 
+  // Maneja cambios en el select
+  onValueChange(): void {
+    this.onChange(this.selectedPerfil); // Notifica a Angular sobre el cambio
+    this.onTouched(); // Marca el control como "tocado"
+  }
 
+  // Métodos de ControlValueAccessor
+  writeValue(value: any): void {
+    this.selectedPerfil = value || null; // Actualiza el valor interno
+  }
+
+  registerOnChange(fn: (value: any) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+    this.isDisabled = isDisabled; // Habilita/deshabilita el control
+  }
 }

@@ -20,6 +20,7 @@ import { SharedGrupoMuscularService } from '../../service/shared-grupo-muscular.
 })
 export class CboGruposmuscularesComponent implements OnInit, ControlValueAccessor {
   @Input() label: string = 'Selecciona un Grupo Muscular';
+  @Input() grupo: GrupoMuscular[] = [];
   @Output() valueChange = new EventEmitter<number>();
 
   gruposMusculares: GrupoMuscular[] = [];

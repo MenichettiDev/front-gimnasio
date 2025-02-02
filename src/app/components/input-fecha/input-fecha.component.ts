@@ -1,24 +1,52 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-
+import { Component, Input, forwardRef } from '@angular/core';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { DatePickerModule } from 'primeng/datepicker';
 
 @Component({
   selector: 'app-input-fecha',
-  imports: [FormsModule, CommonModule],
   templateUrl: './input-fecha.component.html',
-  styleUrl: './input-fecha.component.css'
+  standalone: true, 
+  styleUrls: ['./input-fecha.component.css'],
+  imports: [DatePickerModule, CommonModule, FormsModule],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => InputFechaComponent),
+      multi: true,
+    },
+  ],
 })
-export class InputFechaComponent {
-  @Input() label: string = ''; // Recibe un texto para el label
-  @Input() placeholder: string = ''; // Placeholder para el input (aunque no se usa en 'date' normalmente)
-  @Input() value: string = ''; // Recibe el valor inicial del input (formato: YYYY-MM-DD)
+export class InputFechaComponent implements ControlValueAccessor {
+  @Input() label: string = 'Selecciona una fecha'; // Etiqueta del campo
+  value: Date | null = null; // Valor interno del componente
+  isDisabled: boolean = false; // Estado de deshabilitado
 
-  // El evento de salida para enviar el valor de vuelta al componente padre
-  @Output() valueChange = new EventEmitter<string>();
+  // Funciones de callback registradas por Angular
+  private onChange: (value: Date | null) => void = () => {};
+  private onTouched: () => void = () => {};
 
-  onValueChange() {
-    // Emitir el valor cada vez que se cambie
-    this.valueChange.emit(this.value);
+  // Maneja cambios en el calendario
+  onValueChange(event: Date | null): void {
+    this.value = event; // Actualiza el valor interno
+    this.onChange(this.value); // Notifica a Angular sobre el cambio
+    this.onTouched(); // Marca el control como "tocado"
+  }
+
+  // Métodos de ControlValueAccessor
+  writeValue(value: Date | null): void {
+    this.value = value || null; // Actualiza el valor interno
+  }
+
+  registerOnChange(fn: (value: Date | null) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+    this.isDisabled = isDisabled; // Habilita/deshabilita el control
   }
 }
