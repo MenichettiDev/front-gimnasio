@@ -3,14 +3,12 @@ import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/f
 import { RepeticionService } from '../../service/repeticion.service';
 import { Repeticion } from '../../data/interfaces/repeticionInterface';
 import { CommonModule } from '@angular/common';
-import { SelectButtonModule } from 'primeng/selectbutton'; // Importa el módulo correcto
-import { SelectModule } from 'primeng/select'; 
 
 @Component({
   selector: 'app-cbo-repeticiones',
   templateUrl: './cbo-repeticiones.component.html',
   styleUrls: ['./cbo-repeticiones.component.css'],
-  imports: [FormsModule, CommonModule, SelectButtonModule, SelectModule], // Cambia DropdownModule por SelectButtonModule
+  imports: [FormsModule, CommonModule],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -40,6 +38,7 @@ export class CboRepeticionesComponent implements OnInit, ControlValueAccessor {
     this.repeticionService.getRepeticion().subscribe(
       (data) => {
         this.repeticiones = data; // Asignamos los datos de las repeticiones
+        console.log('Repeticiones obtenidas', this.repeticiones);
       },
       (error) => {
         console.error('Error al obtener repeticiones', error);

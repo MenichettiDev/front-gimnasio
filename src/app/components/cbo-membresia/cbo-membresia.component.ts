@@ -1,14 +1,16 @@
 import { Component, Input, forwardRef, OnInit } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { SharedGimnasioService } from '../../service/shared-gimnasio.service';
 import { MembresiaService } from '../../service/membresia.service';
 import { Gimnasio } from '../../data/interfaces/gimnasioInterface';
 import { Membresia } from '../../data/interfaces/membresiaInterface';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cbo-membresia',
   templateUrl: './cbo-membresia.component.html',
   styleUrls: ['./cbo-membresia.component.css'],
+  imports: [ CommonModule, FormsModule ],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

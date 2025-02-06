@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators, AbstractControl, FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators, AbstractControl, FormsModule, FormControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -111,11 +111,21 @@ export class CrearRutinaComponent implements OnInit {
   }
 
   guardarRutina(): void {
+    console.log('Iniciando el proceso de guardar rutina...');
+  
+    // Verificar si el formulario es inválido
     if (this.rutinaForm.invalid) {
+      console.warn('El formulario es inválido. Marcando campos como tocados...');
       this.marcarCamposInvalidos();
       return;
     }
+  
+    console.log('El formulario es válido. Preparando datos para enviar...');
+  
+    // Activar el spinner de carga
     this.loading = true;
+  
+    // Construir el objeto de datos de la rutina
     const rutinaData = {
       rutina: {
         id_creador: this.authService.getUser(),
@@ -126,17 +136,32 @@ export class CrearRutinaComponent implements OnInit {
         descripcion: this.rutinaForm.get('descripcion')?.value,
         id_atleta: this.rutinaForm.get('id_atleta')?.value
       },
-      ejercicios: this.dias.controls.map((dia, index) => ({
-        dia: index + 1,
-        ejercicios: dia.get('ejercicios')?.value
-      })),
+      ejercicios: this.dias.controls.map((dia, index) => {
+        const ejerciciosDia = dia.get('ejercicios')?.value;
+        console.log(`Ejercicios del día ${index + 1}:`, ejerciciosDia);
+        return {
+          dia: index + 1,
+          ejercicios: ejerciciosDia
+        };
+      }),
       fecha_asignacion: this.rutinaForm.get('fecha_asignacion')?.value
     };
-    console.log('Datos a enviar:', rutinaData);
-    // Simulamos el envío al backend
+  
+    // Mostrar los datos que se enviarán
+    console.log('Datos completos a enviar:', rutinaData);
+  
+    // Simular el envío al backend
+    console.log('Simulando el envío al backend...');
     setTimeout(() => {
+      console.log('Respuesta simulada recibida. Desactivando el spinner...');
       this.loading = false;
+  
+      // Mostrar mensaje de éxito
+      console.log('Mostrando mensaje de éxito...');
       this.mostrarMensajeExito();
+  
+      // Navegar a la página de inicio
+      console.log('Navegando a la página de inicio...');
       this.router.navigate(['/home']);
     }, 2000);
   }
@@ -163,10 +188,20 @@ export class CrearRutinaComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  // Filtrar ejercicios según el grupo muscular seleccionado
   filtrarEjercicios(diaIndex: number, ejercicioIndex: number, grupoMuscularId: number): void {
+    console.log('ID del grupo muscular seleccionado:', grupoMuscularId); // Verifica este valor
     const ejercicio = (this.dias.at(diaIndex).get('ejercicios') as FormArray).at(ejercicioIndex);
-    ejercicio.get('id_ejercicio')?.setValue(''); // Limpiar el ejercicio seleccionado
-    console.log(`Filtrando ejercicios para el grupo muscular ${grupoMuscularId}`);
+  
+    // Limpiar el ejercicio seleccionado
+    ejercicio.get('id_ejercicio')?.setValue('');
+  
+    // Actualizar el valor del grupo muscular en el formulario
+    ejercicio.get('id_grupo_muscular')?.setValue(grupoMuscularId);
   }
+
+  getControl(diaIndex: number, ejercicioIndex: number, controlName: string): FormControl {
+    const ejercicio = (this.dias.at(diaIndex).get('ejercicios') as FormArray).at(ejercicioIndex);
+    return ejercicio.get(controlName) as FormControl;
+  }
+  
 }

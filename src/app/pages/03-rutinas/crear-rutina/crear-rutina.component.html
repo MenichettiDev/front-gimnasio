@@ -44,19 +44,20 @@
                         <div class="row">
                             <!-- Combo de Grupo Muscular -->
                             <div class="col-md-4">
-                                <app-cbo-gruposmusculares formControlName="id_grupo_muscular"
+                                <app-cbo-gruposmusculares [formControl]="getControl(i, j, 'id_grupo_muscular')"
                                     (valueChange)="filtrarEjercicios(i, j, $event)">
                                 </app-cbo-gruposmusculares>
                             </div>
                             <!-- Combo de Ejercicio -->
                             <div class="col-md-4">
-                                <app-cbo-ejercicio formControlName="id_ejercicio"
+                                <app-cbo-ejercicio [formControl]="getControl(i, j, 'id_ejercicio')"
                                     [grupoMuscularId]="ejercicio.get('id_grupo_muscular')?.value">
                                 </app-cbo-ejercicio>
                             </div>
                             <!-- Combo de Repeticiones -->
                             <div class="col-md-3">
-                                <app-cbo-repeticiones formControlName="id_repeticion" >
+                                <app-cbo-repeticiones
+                                    [formControl]="getControl(i, j, 'id_repeticion')">
                                 </app-cbo-repeticiones>
                             </div>
                             <!-- Botón Eliminar -->
