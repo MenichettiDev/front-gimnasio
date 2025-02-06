@@ -2,6 +2,7 @@
   <label [for]="'repeticion-' + label" class="form-label fs-5">{{ label }}</label>
   <select
     [id]="'repeticion-' + label"
+    [(ngModel)]="selectedRepeticion"
     (change)="onValueChange()"
     class="form-select form-select-lg"
     aria-label="Selecciona una repetición"

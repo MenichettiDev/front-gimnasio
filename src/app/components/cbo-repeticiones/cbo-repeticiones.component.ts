@@ -1,4 +1,4 @@
-import { Component, Input, forwardRef, OnInit } from '@angular/core';
+import { Component, Input, forwardRef, OnInit, Output, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { RepeticionService } from '../../service/repeticion.service';
 import { Repeticion } from '../../data/interfaces/repeticionInterface';
@@ -19,6 +19,7 @@ import { CommonModule } from '@angular/common';
 })
 export class CboRepeticionesComponent implements OnInit, ControlValueAccessor {
   @Input() label: string = "Selecciona un tipo de repetición"; // Para el label del combo
+  @Output() valueChange: EventEmitter<number> = new EventEmitter<number>();
   repeticiones: Repeticion[] = []; // Lista de repeticiones
   selectedRepeticion: Repeticion | null = null; // Valor seleccionado (objeto repeticion)
   isDisabled: boolean = false; // Estado de deshabilitado
@@ -47,10 +48,12 @@ export class CboRepeticionesComponent implements OnInit, ControlValueAccessor {
   }
 
   // Maneja cambios en el select
-  onValueChange(): void {
-    this.onChange(this.selectedRepeticion); // Notifica a Angular sobre el cambio
-    this.onTouched(); // Marca el control como "tocado"
-  }
+onValueChange(): void {
+  const idRepeticion = this.selectedRepeticion?.id_repeticion || undefined; // Obtiene el ID de la repetición
+  this.valueChange.emit(idRepeticion); // Emite el ID al padre
+  this.onChange(idRepeticion); // Notifica a Angular sobre el cambio
+  this.onTouched(); // Marca el control como "tocado"
+}
 
   // Métodos de ControlValueAccessor
   writeValue(value: any): void {

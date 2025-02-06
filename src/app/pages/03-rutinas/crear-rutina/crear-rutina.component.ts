@@ -111,24 +111,50 @@ export class CrearRutinaComponent implements OnInit {
   }
 
   guardarRutina(): void {
-    console.log('Iniciando el proceso de guardar rutina...');
+    console.log('Valores actuales del formulario:', this.rutinaForm.value);
+    console.log( this.authService.getUser().usuario[0].id_persona);
   
-    // Verificar si el formulario es inválido
     if (this.rutinaForm.invalid) {
-      console.warn('El formulario es inválido. Marcando campos como tocados...');
+      console.warn('El formulario es inválido.');
       this.marcarCamposInvalidos();
       return;
     }
   
-    console.log('El formulario es válido. Preparando datos para enviar...');
+    // Validar que la fecha no esté vacía
+    const fechaAsignacion = this.rutinaForm.get('fecha_asignacion')?.value;
+    if (!fechaAsignacion) {
+      console.error('La fecha de asignación no puede estar vacía.');
+      return;
+    }
   
-    // Activar el spinner de carga
-    this.loading = true;
+    // Validar que todos los ejercicios tengan repeticiones seleccionadas
+    const diasArray = this.dias as FormArray;
+    let hayErrores = false;
   
-    // Construir el objeto de datos de la rutina
+    diasArray.controls.forEach((dia, diaIndex) => {
+      const ejerciciosArray = dia.get('ejercicios') as FormArray;
+      ejerciciosArray.controls.forEach((ejercicio, ejercicioIndex) => {
+        const repeticion = ejercicio.get('id_repeticion')?.value;
+        if (!repeticion) {
+          console.error(`Falta seleccionar repeticiones para el ejercicio ${ejercicioIndex + 1} del día ${diaIndex + 1}.`);
+          hayErrores = true;
+        }
+      });
+    });
+  
+    if (hayErrores) {
+      console.warn('Corrige los errores antes de continuar.');
+      return;
+    }
+  
+    // Continuar con la construcción del objeto
+    this.construirYEnviarDatos();
+  }
+
+  construirYEnviarDatos(): void {
     const rutinaData = {
       rutina: {
-        id_creador: this.authService.getUser(),
+        id_creador: this.authService.getUser().usuario[0].id_persona, 
         nombre: this.rutinaForm.get('nombre')?.value,
         cantidad_dias: this.rutinaForm.get('cantidad_dias')?.value,
         nivel_atleta: this.rutinaForm.get('nivel_atleta')?.value,
@@ -136,39 +162,67 @@ export class CrearRutinaComponent implements OnInit {
         descripcion: this.rutinaForm.get('descripcion')?.value,
         id_atleta: this.rutinaForm.get('id_atleta')?.value
       },
-      ejercicios: this.dias.controls.map((dia, index) => {
-        const ejerciciosDia = dia.get('ejercicios')?.value;
-        console.log(`Ejercicios del día ${index + 1}:`, ejerciciosDia);
+      ejercicios: (this.dias as FormArray).controls.map((dia, diaIndex) => {
+        const ejerciciosDia = (dia.get('ejercicios') as FormArray).controls.map((ejercicio) => {
+          return {
+            id_grupo_muscular: ejercicio.get('id_grupo_muscular')?.value,
+            id_ejercicio: ejercicio.get('id_ejercicio')?.value,
+            id_repeticion: ejercicio.get('id_repeticion')?.value
+          };
+        });
         return {
-          dia: index + 1,
+          dia: diaIndex + 1, // Los días deben ser numerados desde 1
           ejercicios: ejerciciosDia
         };
       }),
-      fecha_asignacion: this.rutinaForm.get('fecha_asignacion')?.value
+      fecha_asignacion: this.formatoFecha(this.rutinaForm.get('fecha_asignacion')?.value)
     };
   
-    // Mostrar los datos que se enviarán
-    console.log('Datos completos a enviar:', rutinaData);
+    console.log('Datos formateados para enviar:', rutinaData);
   
     // Simular el envío al backend
-    console.log('Simulando el envío al backend...');
-    setTimeout(() => {
-      console.log('Respuesta simulada recibida. Desactivando el spinner...');
-      this.loading = false;
+    // setTimeout(() => {
+    //   console.log('Respuesta simulada recibida.');
+    //   this.loading = false;
   
-      // Mostrar mensaje de éxito
-      console.log('Mostrando mensaje de éxito...');
-      this.mostrarMensajeExito();
+    //   // Mostrar mensaje de éxito
+    //   this.mostrarMensajeExito();
   
-      // Navegar a la página de inicio
-      console.log('Navegando a la página de inicio...');
-      this.router.navigate(['/home']);
-    }, 2000);
+    //   // Navegar a la página de inicio
+    //   this.router.navigate(['/home']);
+    // }, 2000);
+  }
+
+  formatoFecha(fecha: Date | string): string {
+    if (!fecha) return '';
+    const fechaDate = new Date(fecha);
+    const year = fechaDate.getFullYear();
+    const month = String(fechaDate.getMonth() + 1).padStart(2, '0');
+    const day = String(fechaDate.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 
   marcarCamposInvalidos(): void {
-    Object.values(this.rutinaForm.controls).forEach(control => {
-      control.markAsTouched();
+    Object.keys(this.rutinaForm.controls).forEach((controlName) => {
+      const control = this.rutinaForm.get(controlName);
+      if (control?.invalid) {
+        console.warn(`Campo inválido: ${controlName}`, control.errors);
+      }
+      control?.markAsTouched();
+    });
+  
+    // También verifica los FormArrays anidados
+    this.dias.controls.forEach((dia, diaIndex) => {
+      const ejerciciosArray = dia.get('ejercicios') as FormArray;
+      ejerciciosArray.controls.forEach((ejercicio, ejercicioIndex) => {
+        Object.keys((ejercicio as FormGroup).controls).forEach((controlName) => {
+          const control = ejercicio.get(controlName);
+          if (control?.invalid) {
+            console.warn(`Ejercicio inválido en día ${diaIndex + 1}, campo: ${controlName}`, control.errors);
+          }
+          control?.markAsTouched();
+        });
+      });
     });
   }
 
@@ -201,6 +255,7 @@ export class CrearRutinaComponent implements OnInit {
 
   getControl(diaIndex: number, ejercicioIndex: number, controlName: string): FormControl {
     const ejercicio = (this.dias.at(diaIndex).get('ejercicios') as FormArray).at(ejercicioIndex);
+    // console.log(`Obteniendo control '${controlName}' para el día ${diaIndex + 1}, ejercicio ${ejercicioIndex + 1}:`, ejercicio.get(controlName));
     return ejercicio.get(controlName) as FormControl;
   }
   
