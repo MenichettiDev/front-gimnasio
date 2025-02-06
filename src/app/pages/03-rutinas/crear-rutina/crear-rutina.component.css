@@ -3,3 +3,46 @@ mat-form-field {
     width: 100%;
     margin-bottom: 1rem;
 }
+
+.collapsed {
+    display: none;
+    /* Oculta el contenido cuando está colapsado */
+}
+
+.card-header button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    /* Espacio entre el ícono y el texto */
+    text-decoration: none;
+    /* Elimina el subrayado */
+    color: inherit;
+    /* Usa el color del texto del contenedor padre */
+    background-color: transparent;
+    /* Fondo transparente */
+    border: none;
+    /* Sin borde */
+    font-size: 1rem;
+    /* Tamaño de fuente adecuado */
+    cursor: pointer;
+    /* Cambia el cursor al pasar el mouse */
+}
+
+.card-header button:hover {
+    text-decoration: none;
+    /* Sin subrayado al pasar el mouse */
+    color: #333;
+    /* Color más oscuro al pasar el mouse */
+}
+
+.card-header button i.bx {
+    font-size: 1.2rem;
+    /* Tamaño del ícono */
+    color: inherit;
+    /* Usa el color del texto del botón */
+}
+
+.card-header button:hover i.bx {
+    color: #333;
+    /* Cambia el color del ícono al pasar el mouse */
+}

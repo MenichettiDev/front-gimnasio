@@ -88,7 +88,7 @@ export class CrearRutinaComponent implements OnInit {
       this.dias.push(this.fb.group({
         ejercicios: this.fb.array([])
       }));
-      this.collapsed.push(true);
+      this.collapsed.push(false);
     }
   }
 

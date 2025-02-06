@@ -33,44 +33,51 @@
             <!-- Creacion de cards de dias -->
             <div class="box-card-body">
                 <div *ngFor="let dia of dias.controls; let i = index" class="card mb-3">
+                    <!-- Cabecera del día -->
                     <div class="card-header">
                         Día {{ i + 1 }}
                         <button type="button" class="btn btn-link" (click)="toggleCollapse(i)">
+                            <i class="bx bx-menu"></i>
                             {{ collapsed[i] ? 'Expandir' : 'Colapsar' }}
                         </button>
                     </div>
-                    <div *ngFor="let ejercicio of getEjercicios(dia).controls; let j = index"
-                        class="sub-card mb-3 p-3 border">
-                        <div class="row">
-                            <!-- Combo de Grupo Muscular -->
-                            <div class="col-md-4">
-                                <app-cbo-gruposmusculares [formControl]="getControl(i, j, 'id_grupo_muscular')"
-                                    (valueChange)="filtrarEjercicios(i, j, $event)">
-                                </app-cbo-gruposmusculares>
-                            </div>
-                            <!-- Combo de Ejercicio -->
-                            <div class="col-md-4">
-                                <app-cbo-ejercicio [formControl]="getControl(i, j, 'id_ejercicio')"
-                                    [grupoMuscularId]="ejercicio.get('id_grupo_muscular')?.value">
-                                </app-cbo-ejercicio>
-                            </div>
-                            <!-- Combo de Repeticiones -->
-                            <div class="col-md-3">
-                                <app-cbo-repeticiones
-                                    [formControl]="getControl(i, j, 'id_repeticion')">
-                                </app-cbo-repeticiones>
-                            </div>
-                            <!-- Botón Eliminar -->
-                            <div class="col-md-1 d-flex align-items-center">
-                                <button type="button" class="btn btn-danger btn-sm" (click)="eliminarEjercicio(i, j)">
-                                    <i class="bi bi-trash"></i>
-                                </button>
+
+                    <!-- Contenido del día -->
+                    <div *ngIf="!collapsed[i]" class="card-body">
+                        <div *ngFor="let ejercicio of getEjercicios(dia).controls; let j = index"
+                            class="sub-card mb-3 p-3 border">
+                            <div class="row">
+                                <!-- Combo de Grupo Muscular -->
+                                <div class="col-md-4">
+                                    <app-cbo-gruposmusculares [formControl]="getControl(i, j, 'id_grupo_muscular')"
+                                        (valueChange)="filtrarEjercicios(i, j, $event)">
+                                    </app-cbo-gruposmusculares>
+                                </div>
+                                <!-- Combo de Ejercicio -->
+                                <div class="col-md-4">
+                                    <app-cbo-ejercicio [formControl]="getControl(i, j, 'id_ejercicio')"
+                                        [grupoMuscularId]="ejercicio.get('id_grupo_muscular')?.value">
+                                    </app-cbo-ejercicio>
+                                </div>
+                                <!-- Combo de Repeticiones -->
+                                <div class="col-md-3">
+                                    <app-cbo-repeticiones [formControl]="getControl(i, j, 'id_repeticion')">
+                                    </app-cbo-repeticiones>
+                                </div>
+                                <!-- Botón Eliminar -->
+                                <div class="col-md-1 d-flex align-items-center">
+                                    <button type="button" class="btn btn-danger btn-sm"
+                                        (click)="eliminarEjercicio(i, j)">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
+                        <!-- Botón Agregar Ejercicio -->
+                        <button type="button" class="btn btn-success btn-sm" (click)="agregarEjercicio(i)">
+                            <i class="bi bi-plus-circle"></i> Agregar Ejercicio
+                        </button>
                     </div>
-                    <button type="button" class="btn btn-success btn-sm" (click)="agregarEjercicio(i)">
-                        <i class="bi bi-plus-circle"></i> Agregar Ejercicio
-                    </button>
                 </div>
             </div>
             <div>
