@@ -1,103 +1,99 @@
-import { Component, inject, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MenuService } from '../../service/menu.service';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../service/auth/auth.service';
-import { Router } from '@angular/router';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Menu } from '../../data/interfaces/menuInterface';  // Asegúrate de que la ruta es correcta
 
 @Component({
   selector: 'app-sidebar',
+  standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
-export class SidebarComponent implements OnInit, OnChanges {
-  // @Input() id_perfil: string = '';  // Recibe el ID del usuario desde el componente padre
-  id_acceso: number = 1;
-  menus: Menu[] = [];  // Menús cargados
-  expandedMenus: Set<number> = new Set();  // Para manejar los estados de expansión de los submenús
+export class SidebarComponent implements OnInit {
+  id_acceso: number = 1;  // ID de acceso del usuario
+  menus: Menu[] = [];  // Lista de menús cargados
+  isSidebarVisible: boolean = true;  // Controla la visibilidad del sidebar
 
-  public menuService = inject(MenuService);  // Inyección del servicio
+  // Inyección de dependencias
+  public menuService = inject(MenuService);
   public authService = inject(AuthService);
-  private router = inject(Router);  // Inyectar el Router
+  private router = inject(Router);
 
   ngOnInit(): void {
+    this.loadUserData();  // Cargar datos del usuario al iniciar
+    this.getMenus();      // Obtener los menús
+  }
+
+  // Cargar datos del usuario
+  loadUserData(): void {
     const user = this.authService.getUser();
-    // console.log('usuario...' + user);
     if (user) {
-      this.id_acceso = user.usuario[0].id_acceso; 
-      // console.log( user.usuario[0] + 'usuario logueado');
-      // console.log( this.id_acceso + 'perfil');
-
-    }
-    this.getMenus();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['userId'] && this.id_acceso) {
-      this.getMenus();
+      this.id_acceso = user.usuario[0].id_acceso;
     }
   }
 
+  // Obtener los menús desde el servicio
   getMenus(): void {
-    // console.log(this.id_acceso);
-    this.menuService.getMenusByIdAcceso(this.id_acceso).subscribe(
-      (data) => {
-        // console.log("hasta aqui.." + data)
-        // Asignamos la propiedad `expanded` con valor `false` a cada menú
-        this.menus = data.map((menu: Menu) => ({ ...menu, expanded: false }));
-        // console.log(this.menus);
+    this.menuService.getMenusByIdAcceso(this.id_acceso).subscribe({
+      next: (data) => {
+        // Asignamos la propiedad `expanded` con valor `false` para cada menú
+        this.menus = data.map((menu: Menu) => ({
+          ...menu,
+          expanded: false // Inicialmente todos los menús están colapsados
+        }));
       },
-      (error) => {
+      error: (error) => {
         console.error('Error al obtener los menús:', error);
+        // Mostrar un mensaje de error al usuario
+        alert('No se pudieron cargar los menús. Inténtelo de nuevo más tarde.');
       }
-    );
+    });
   }
 
-  // Método para ejecutar el logout cuando se haga clic en el ícono
+  // Cerrar sesión
   logout(): void {
-    this.authService.logout(); // Llamar al método logout() del AuthService
-    // console.log('Usuario deslogueado');
-    if (this.router.url === '/home') {
-      window.location.reload();
-    } else {
-      this.router.navigate(['/home']);
-    }
+    this.authService.logout();
+    this.router.navigate(['/home']);
   }
 
-  // Método para redirigir al login (si no está autenticado)
+  // Redirigir al login
   login(): void {
-    this.router.navigate(['/login']);  // Asumimos que tienes una ruta de login
+    this.router.navigate(['/login']);
   }
 
-  // Obtener solo los menús principales (menu_principal == 1)
+  // Obtener los menús principales
   getMainMenus(): Menu[] {
     return this.menus.filter(menu => menu.menu_principal === 1);
   }
 
-  // Obtener submenús para un menú principal específico (menu_principal == 0)
+  // Obtener los submenús de un menú principal
   getSubMenus(menu: Menu): Menu[] {
     return this.menus.filter(subMenu =>
       subMenu.menu_principal === 0 && subMenu.menu_grupo === menu.menu_grupo);
   }
 
-
-  // Alternar la visibilidad de los submenús (independientemente para cada menú)
+  // Alternar la visibilidad de los submenús
   toggleSubMenu(menu: Menu): void {
-    // Si el menú ya está expandido, lo colapsamos
+    // Cerrar todos los menús abiertos antes de abrir el seleccionado
+    this.menus.forEach(m => {
+      if (m !== menu) {
+        m.expanded = false;
+      }
+    });
+    // Alternar estado de expansión del menú seleccionado
     menu.expanded = !menu.expanded;
-    // Si se quiere colapsar todos los submenús al expandir uno solo, descomentar el siguiente código:
-    // if (!this.multiple) {
-    //   this.menus.forEach(m => {
-    //     if (m !== menu) m.expanded = false;
-    //   });
-    // }
   }
-
 
   // Verificar si un menú está expandido
   isMenuExpanded(menu: Menu): boolean {
-    return this.expandedMenus.has(menu.cod_menu);
+    return !!menu.expanded; // Convierte `undefined` a `false`
+  }
+
+  // Alternar la visibilidad del sidebar
+  toggleSidebar(): void {
+    this.isSidebarVisible = !this.isSidebarVisible;
   }
 }

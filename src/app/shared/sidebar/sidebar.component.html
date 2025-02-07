@@ -1,26 +1,45 @@
+<!-- Sidebar -->
 <div *ngIf="menus.length > 0">
-    <div class="sidebar">
-        <!-- Espacio para la imagen en la parte superior -->
-        <div class="sidebar-img">
-            <img src="images/rat.jpeg" alt="Logo" class="img-fluid rounded-circle">
-        </div>
-        <ul class="nav flex-column">
-            <li *ngFor="let menu of getMainMenus()" class="nav-item">
-                <a class="nav-link"  (click)="toggleSubMenu(menu)">
-                    <i class="{{ menu.menu_icono }}"></i> {{ menu.menu_descripcion }}
-                </a>
-
-                <!-- Sub Menús (solo si están expandidos) -->
-                <ul *ngIf="menu.expanded" class="sub-menu">
-                    <li *ngFor="let subMenu of getSubMenus(menu)" class="nav-item">
-                        <a class="nav-link" [routerLink]="subMenu.menu_link">
-                            <i class="{{subMenu.menu_icono}}"></i> {{ subMenu.menu_descripcion }}
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+  <div class="sidebar" [ngClass]="{'hidden': !isSidebarVisible}">
+    <!-- Botón para ocultar/mostrar el sidebar -->
+    <div class="sidebar-toggle" (click)="toggleSidebar()">
+      <i class="toggle-icon" [ngClass]="{'rotate': !isSidebarVisible}"></i>
     </div>
 
+    <!-- Espacio para la imagen en la parte superior -->
+    <div class="sidebar-img">
+      <img src="images/gymrats_v002_W.png" alt="Logo">
+    </div>
 
+    <!-- Lista de menús principales -->
+    <ul class="nav flex-column">
+      <!-- Iterar sobre los menús principales -->
+      <li *ngFor="let menu of getMainMenus()" class="nav-item">
+        <!-- Enlace del menú principal -->
+        <a class="nav-link" (click)="toggleSubMenu(menu)" [attr.aria-expanded]="isMenuExpanded(menu)">
+          <i class="{{ menu.menu_icono }}"></i> <!-- Ícono del menú -->
+          <span>{{ menu.menu_descripcion }}</span> <!-- Descripción del menú -->
+          <!-- Flecha para indicar submenú -->
+          <i class="arrow" [ngClass]="{'rotate': isMenuExpanded(menu)}"></i>
+        </a>
+
+        <!-- Submenús (solo si están expandidos) -->
+        <ul [ngClass]="{'sub-menu': true, 'expanded': isMenuExpanded(menu)}">
+          <!-- Iterar sobre los submenús -->
+          <li *ngFor="let subMenu of getSubMenus(menu)" class="nav-item">
+            <!-- Enlace del submenú -->
+            <a class="nav-link" [routerLink]="subMenu.menu_link" routerLinkActive="active">
+              <i class="{{ subMenu.menu_icono }}"></i> <!-- Ícono del submenú -->
+              <span>{{ subMenu.menu_descripcion }}</span> <!-- Descripción del submenú -->
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- Contenido principal -->
+<div class="main-content" [ngClass]="{'expanded': !isSidebarVisible}">
+  <!-- Aquí va el contenido principal de tu aplicación -->
 </div>
