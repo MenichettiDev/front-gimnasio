@@ -110,47 +110,6 @@ export class CrearRutinaComponent implements OnInit {
     ejerciciosArray.removeAt(ejercicioIndex);
   }
 
-  guardarRutina(): void {
-    console.log('Valores actuales del formulario:', this.rutinaForm.value);
-    console.log( this.authService.getUser().usuario[0].id_persona);
-  
-    if (this.rutinaForm.invalid) {
-      console.warn('El formulario es inválido.');
-      this.marcarCamposInvalidos();
-      return;
-    }
-  
-    // Validar que la fecha no esté vacía
-    const fechaAsignacion = this.rutinaForm.get('fecha_asignacion')?.value;
-    if (!fechaAsignacion) {
-      console.error('La fecha de asignación no puede estar vacía.');
-      return;
-    }
-  
-    // Validar que todos los ejercicios tengan repeticiones seleccionadas
-    const diasArray = this.dias as FormArray;
-    let hayErrores = false;
-  
-    diasArray.controls.forEach((dia, diaIndex) => {
-      const ejerciciosArray = dia.get('ejercicios') as FormArray;
-      ejerciciosArray.controls.forEach((ejercicio, ejercicioIndex) => {
-        const repeticion = ejercicio.get('id_repeticion')?.value;
-        if (!repeticion) {
-          console.error(`Falta seleccionar repeticiones para el ejercicio ${ejercicioIndex + 1} del día ${diaIndex + 1}.`);
-          hayErrores = true;
-        }
-      });
-    });
-  
-    if (hayErrores) {
-      console.warn('Corrige los errores antes de continuar.');
-      return;
-    }
-  
-    // Continuar con la construcción del objeto
-    this.construirYEnviarDatos();
-  }
-
   construirYEnviarDatos(): void {
     const rutinaData = {
       rutina: {
@@ -181,17 +140,19 @@ export class CrearRutinaComponent implements OnInit {
     console.log('Datos formateados para enviar:', rutinaData);
   
     // Simular el envío al backend
-    // setTimeout(() => {
-    //   console.log('Respuesta simulada recibida.');
-    //   this.loading = false;
+    setTimeout(() => {
+      console.log('Respuesta simulada recibida.');
+      this.loading = false;
   
-    //   // Mostrar mensaje de éxito
-    //   this.mostrarMensajeExito();
+      // Mostrar mensaje de éxito
+      this.mostrarMensajeExito();
   
-    //   // Navegar a la página de inicio
-    //   this.router.navigate(['/home']);
-    // }, 2000);
+      // Navegar a la página de inicio
+      this.router.navigate(['/home']);
+    }, 2000);
   }
+  
+  
 
   formatoFecha(fecha: Date | string): string {
     if (!fecha) return '';
@@ -259,4 +220,44 @@ export class CrearRutinaComponent implements OnInit {
     return ejercicio.get(controlName) as FormControl;
   }
   
+  guardarRutina(): void {
+    console.log('Valores actuales del formulario:', this.rutinaForm.value);
+    console.log( this.authService.getUser().usuario[0].id_persona);
+  
+    if (this.rutinaForm.invalid) {
+      console.warn('El formulario es inválido.');
+      this.marcarCamposInvalidos();
+      return;
+    }
+  
+    // Validar que la fecha no esté vacía
+    const fechaAsignacion = this.rutinaForm.get('fecha_asignacion')?.value;
+    if (!fechaAsignacion) {
+      console.error('La fecha de asignación no puede estar vacía.');
+      return;
+    }
+  
+    // Validar que todos los ejercicios tengan repeticiones seleccionadas
+    const diasArray = this.dias as FormArray;
+    let hayErrores = false;
+  
+    diasArray.controls.forEach((dia, diaIndex) => {
+      const ejerciciosArray = dia.get('ejercicios') as FormArray;
+      ejerciciosArray.controls.forEach((ejercicio, ejercicioIndex) => {
+        const repeticion = ejercicio.get('id_repeticion')?.value;
+        if (!repeticion) {
+          console.error(`Falta seleccionar repeticiones para el ejercicio ${ejercicioIndex + 1} del día ${diaIndex + 1}.`);
+          hayErrores = true;
+        }
+      });
+    });
+  
+    if (hayErrores) {
+      console.warn('Corrige los errores antes de continuar.');
+      return;
+    }
+  
+    // Continuar con la construcción del objeto
+    this.construirYEnviarDatos();
+  }
 }

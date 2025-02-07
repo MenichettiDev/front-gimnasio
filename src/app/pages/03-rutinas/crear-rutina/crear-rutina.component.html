@@ -1,32 +1,35 @@
 <div class="container">
     <h2>Crear Rutina</h2>
     <form [formGroup]="rutinaForm" (ngSubmit)="guardarRutina()">
-        <!-- Primera fila: Datos generales -->
+        <!-- Primera fila: Nombre, atleta y cantidad de días -->
         <div class="row mb-3">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <app-input-texto label="Nombre de la rutina" formControlName="nombre"></app-input-texto>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <app-cbo-atleta formControlName="id_atleta"></app-cbo-atleta>
             </div>
+            <div class="col-md-4">
+                <app-cbo-dias formControlName="cantidad_dias"></app-cbo-dias>
+            </div>
         </div>
 
-        <!-- Segunda fila: Nivel del atleta y objetivo -->
+        <!-- Segunda fila: Nivel del atleta, objetivo y fecha de asignación -->
         <div class="row mb-3">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <app-cbo-niveldificultad formControlName="nivel_atleta"></app-cbo-niveldificultad>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <app-cbo-objetivo formControlName="objetivo"></app-cbo-objetivo>
+            </div>
+            <div class="col-md-4">
+                <app-input-fecha label="Fecha de asignación" formControlName="fecha_asignacion"></app-input-fecha>
             </div>
         </div>
 
-        <!-- Tercera fila: Fecha de asignación, descripción y días -->
+        <!-- Tercera fila: Descripción de la rutina -->
         <div class="row mb-3">
-            <div class="col-md-6">
-                <app-input-fecha label="Fecha de asignación" formControlName="fecha_asignacion"></app-input-fecha>
-            </div>
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <app-input-texto label="Descripción de la rutina" formControlName="descripcion"></app-input-texto>
             </div>
         </div>
