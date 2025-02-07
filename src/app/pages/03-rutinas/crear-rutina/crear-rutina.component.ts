@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../service/auth/auth.service';
+import { RutinasService } from '../../../service/rutinas.service';
+import { ConfirmacionService } from '../../../service/confirmacion.service';
 import { CboGruposmuscularesComponent } from '../../../components/cbo-gruposmusculares/cbo-gruposmusculares.component';
 import { CboEjercicioComponent } from '../../../components/cbo-ejercicio/cbo-ejercicio.component';
 import { CboRepeticionesComponent } from '../../../components/cbo-repeticiones/cbo-repeticiones.component';
@@ -50,8 +52,10 @@ export class CrearRutinaComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
+    private rutinaService : RutinasService,
+    private confirmacionService : ConfirmacionService,
     public router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.createForm();
@@ -113,7 +117,7 @@ export class CrearRutinaComponent implements OnInit {
   construirYEnviarDatos(): void {
     const rutinaData = {
       rutina: {
-        id_creador: this.authService.getUser().usuario[0].id_persona, 
+        id_creador: this.authService.getUser().usuario[0].id_persona,
         nombre: this.rutinaForm.get('nombre')?.value,
         cantidad_dias: this.rutinaForm.get('cantidad_dias')?.value,
         nivel_atleta: this.rutinaForm.get('nivel_atleta')?.value,
@@ -136,23 +140,36 @@ export class CrearRutinaComponent implements OnInit {
       }),
       fecha_asignacion: this.formatoFecha(this.rutinaForm.get('fecha_asignacion')?.value)
     };
-  
+
     console.log('Datos formateados para enviar:', rutinaData);
-  
-    // Simular el envío al backend
-    setTimeout(() => {
-      console.log('Respuesta simulada recibida.');
+
+    if (rutinaData) {
+      // Llamar al servicio para crear el ejercicio
+      this.rutinaService.createRutina(rutinaData).subscribe(
+        response => {
+
+          this.loading = false; // Detener el spinner
+          this.confirmacionService.showSuccess('Operación exitosa');
+        },
+        error => {
+          // Si ocurre un error
+          this.loading = false; // Detener el spinner
+          console.error('Error al crear la rutina', error);
+          this.confirmacionService.showError('Error al crear la rutina');
+        }
+      );
+    } else {
+      // Si el formulario no es válido
       this.loading = false;
-  
-      // Mostrar mensaje de éxito
-      this.mostrarMensajeExito();
-  
+      this.confirmacionService.showError('Por favor, complete todos los campos');
+    }
+
       // Navegar a la página de inicio
       this.router.navigate(['/home']);
-    }, 2000);
+    
   }
-  
-  
+
+
 
   formatoFecha(fecha: Date | string): string {
     if (!fecha) return '';
@@ -171,7 +188,7 @@ export class CrearRutinaComponent implements OnInit {
       }
       control?.markAsTouched();
     });
-  
+
     // También verifica los FormArrays anidados
     this.dias.controls.forEach((dia, diaIndex) => {
       const ejerciciosArray = dia.get('ejercicios') as FormArray;
@@ -187,9 +204,6 @@ export class CrearRutinaComponent implements OnInit {
     });
   }
 
-  mostrarMensajeExito(): void {
-    // Usar PrimeNG para mostrar un mensaje de éxito
-  }
 
   getEjercicios(dia: AbstractControl): FormArray {
     return dia.get('ejercicios') as FormArray;
@@ -206,10 +220,10 @@ export class CrearRutinaComponent implements OnInit {
   filtrarEjercicios(diaIndex: number, ejercicioIndex: number, grupoMuscularId: number): void {
     console.log('ID del grupo muscular seleccionado:', grupoMuscularId); // Verifica este valor
     const ejercicio = (this.dias.at(diaIndex).get('ejercicios') as FormArray).at(ejercicioIndex);
-  
+
     // Limpiar el ejercicio seleccionado
     ejercicio.get('id_ejercicio')?.setValue('');
-  
+
     // Actualizar el valor del grupo muscular en el formulario
     ejercicio.get('id_grupo_muscular')?.setValue(grupoMuscularId);
   }
@@ -219,28 +233,28 @@ export class CrearRutinaComponent implements OnInit {
     // console.log(`Obteniendo control '${controlName}' para el día ${diaIndex + 1}, ejercicio ${ejercicioIndex + 1}:`, ejercicio.get(controlName));
     return ejercicio.get(controlName) as FormControl;
   }
-  
+
   guardarRutina(): void {
     console.log('Valores actuales del formulario:', this.rutinaForm.value);
-    console.log( this.authService.getUser().usuario[0].id_persona);
-  
+    console.log(this.authService.getUser().usuario[0].id_persona);
+
     if (this.rutinaForm.invalid) {
       console.warn('El formulario es inválido.');
       this.marcarCamposInvalidos();
       return;
     }
-  
+
     // Validar que la fecha no esté vacía
     const fechaAsignacion = this.rutinaForm.get('fecha_asignacion')?.value;
     if (!fechaAsignacion) {
       console.error('La fecha de asignación no puede estar vacía.');
       return;
     }
-  
+
     // Validar que todos los ejercicios tengan repeticiones seleccionadas
     const diasArray = this.dias as FormArray;
     let hayErrores = false;
-  
+
     diasArray.controls.forEach((dia, diaIndex) => {
       const ejerciciosArray = dia.get('ejercicios') as FormArray;
       ejerciciosArray.controls.forEach((ejercicio, ejercicioIndex) => {
@@ -251,12 +265,12 @@ export class CrearRutinaComponent implements OnInit {
         }
       });
     });
-  
+
     if (hayErrores) {
       console.warn('Corrige los errores antes de continuar.');
       return;
     }
-  
+
     // Continuar con la construcción del objeto
     this.construirYEnviarDatos();
   }

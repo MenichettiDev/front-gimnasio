@@ -11,6 +11,7 @@ export class RutinasService {
   private apiUrlGetRutinaByIdAtleta = 'http://localhost:7000/getRutinaByIdAtleta'; // URL de la API para obtener rutina por ID de atleta
   private apiUrlGetRutinaByIdCreador = 'http://localhost:7000/getRutinaByIdCreador'; // URL de la API para obtener rutina por ID de creador
   private apiUrlGetRutinasFree = 'http://localhost:7000/getRutinasFree'; // URL de la API para obtener rutinas gratuitas
+  private apiUrlCreateRutina = 'http://localhost:7000/crearRutinaYAsignarAtleta'; 
 
   constructor(private http: HttpClient) { }
 
@@ -28,4 +29,9 @@ export class RutinasService {
   getRutinasFree(): Observable<Rutina[]> {
     return this.http.get<Rutina[]>(this.apiUrlGetRutinasFree);
   }
+
+  // Método para crear rutina
+    createRutina(rutina: any): Observable<any> {
+      return this.http.post<any>(this.apiUrlCreateRutina, rutina);
+    }
 }
