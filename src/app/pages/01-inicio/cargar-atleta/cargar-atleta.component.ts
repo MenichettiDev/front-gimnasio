@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CboGimnasioComponent } from "../../../components/cbo-gimnasio/cbo-gimnasio.component";
+import { AuthService } from '../../../service/auth/auth.service';
+import { Entrenador } from '../../../data/interfaces/entrenadorInterface';
 
 @Component({
   selector: 'app-cargar-atleta',
@@ -13,9 +15,11 @@ export class CargarAtletaComponent implements OnInit {
 
   atletaForm!: FormGroup ;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,private authService : AuthService) { }
 
   ngOnInit(): void {
+
+    
     this.atletaForm = this.fb.group({
       dni: ['', [Validators.required, Validators.minLength(8)]],
       nombre: ['', Validators.required],
@@ -29,10 +33,14 @@ export class CargarAtletaComponent implements OnInit {
       foto_archivo: [''],
     });
   }
-
+  
   onSubmit(): void {
     if (this.atletaForm.valid) {
       const atletaData = this.atletaForm.value;
+      
+      // const usuario  = this.authService.getUser();
+      // console.log(usuario);
+      // atletaData.id_entrenador = usuario.id_entrenador;
       console.log('Datos del atleta:', atletaData);
 
       // Aquí puedes enviar los datos al backend o realizar otras acciones
