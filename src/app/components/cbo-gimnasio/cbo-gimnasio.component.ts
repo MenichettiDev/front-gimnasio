@@ -19,29 +19,24 @@ import { CommonModule } from '@angular/common';
   ],
 })
 export class CboGimnasioComponent implements OnInit, ControlValueAccessor {
-  @Input() label: string = "Selecciona un Gimnasio"; // Para el label del combo
-  gimnasios: Gimnasio[] = []; // Lista de gimnasios
-  selectedGimnasio: Gimnasio | null = null; // Valor seleccionado (objeto gimnasio)
-  isDisabled: boolean = false; // Estado de deshabilitado
+  @Input() label: string = 'Selecciona un Gimnasio';
+  @Input() emitOnlyId: boolean = false; // Nuevo parámetro para controlar el comportamiento
+  gimnasios: Gimnasio[] = [];
+  selectedGimnasio: Gimnasio | null = null;
 
-  // Funciones de callback registradas por Angular
   private onChange: (value: any) => void = () => {};
   private onTouched: () => void = () => {};
 
-  constructor(
-    private gimnasioService: GimnasioService,
-    private sharedService: SharedGimnasioService
-  ) {}
+  constructor(private gimnasioService: GimnasioService) {}
 
   ngOnInit(): void {
     this.obtenerGimnasios();
   }
 
-  // Método para obtener los gimnasios
   obtenerGimnasios(): void {
     this.gimnasioService.getGimnasios().subscribe(
       (data) => {
-        this.gimnasios = data; // Asignamos los datos de los gimnasios
+        this.gimnasios = data;
       },
       (error) => {
         console.error('Error al obtener gimnasios', error);
@@ -49,18 +44,22 @@ export class CboGimnasioComponent implements OnInit, ControlValueAccessor {
     );
   }
 
-  // Maneja cambios en el select
   onGimnasioChange(event: any): void {
-    if (this.selectedGimnasio) {
-      this.sharedService.setSelectedGimnasio(this.selectedGimnasio); // Compartir gimnasio seleccionado
-    }
-    this.onChange(this.selectedGimnasio); // Notifica a Angular sobre el cambio
-    this.onTouched(); // Marca el control como "tocado"
+    const valueToEmit = this.emitOnlyId
+      ? this.selectedGimnasio?.id_gimnasio || null // Emite solo el ID si emitOnlyId es true
+      : this.selectedGimnasio; // Emite el objeto completo si emitOnlyId es false
+    this.onChange(valueToEmit); // Emite el valor correspondiente
+    this.onTouched();
   }
 
-  // Métodos de ControlValueAccessor
   writeValue(value: any): void {
-    this.selectedGimnasio = value || null; // Actualiza el valor interno
+    if (this.emitOnlyId) {
+      // Si emitOnlyId es true, busca el gimnasio por ID
+      this.selectedGimnasio = this.gimnasios.find((g) => g.id_gimnasio === value) || null;
+    } else {
+      // Si emitOnlyId es false, asigna el objeto directamente
+      this.selectedGimnasio = value || null;
+    }
   }
 
   registerOnChange(fn: (value: any) => void): void {
@@ -69,9 +68,5 @@ export class CboGimnasioComponent implements OnInit, ControlValueAccessor {
 
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
-  }
-
-  setDisabledState?(isDisabled: boolean): void {
-    this.isDisabled = isDisabled; // Habilita/deshabilita el control
   }
 }

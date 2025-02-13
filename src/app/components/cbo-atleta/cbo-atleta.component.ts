@@ -8,7 +8,8 @@ import { CommonModule } from '@angular/common';
   selector: 'app-cbo-atleta',
   templateUrl: './cbo-atleta.component.html',
   styleUrls: ['./cbo-atleta.component.css'],
-  imports:[ CommonModule, FormsModule],
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -18,9 +19,10 @@ import { CommonModule } from '@angular/common';
   ],
 })
 export class CboAtletaComponent implements ControlValueAccessor {
-  @Input() label: string = 'Seleccione un atleta';
-  atletas: Atleta[] = []; // Lista de atletas
-  selectedAtleta: string | null = null; // Valor seleccionado (id_atleta)
+  @Input() label: string = 'Seleccione un atleta'; // Etiqueta del combo
+  @Input() idEntrenador!: number; // ID del entrenador (entrada obligatoria)
+  atletas: Atleta[] = []; // Lista de atletas filtrados por entrenador
+  selectedAtleta: number | null = null; // Valor seleccionado (id_atleta)
   isDisabled: boolean = false; // Estado de deshabilitado
 
   // Funciones de callback registradas por Angular
@@ -30,12 +32,16 @@ export class CboAtletaComponent implements ControlValueAccessor {
   constructor(private atletaService: AtletaService) {}
 
   ngOnInit(): void {
-    this.obtenerAtletas();
+    if (!this.idEntrenador) {
+      console.error('El ID del entrenador es obligatorio');
+      return;
+    }
+    this.obtenerAtletasPorEntrenador();
   }
 
-  // Método para obtener los atletas
-  obtenerAtletas(): void {
-    this.atletaService.getAtletas().subscribe(
+  // Método para obtener los atletas del entrenador
+  obtenerAtletasPorEntrenador(): void {
+    this.atletaService.getAtletasPorEntrenador(this.idEntrenador).subscribe(
       (data) => {
         this.atletas = data.atletas; // Asignamos los datos de los atletas
       },
@@ -64,7 +70,10 @@ export class CboAtletaComponent implements ControlValueAccessor {
 
   // Maneja cambios en el select
   onValueChange(): void {
-    this.onChange(this.selectedAtleta); // Notifica a Angular sobre el cambio
-    this.onTouched(); // Marca el control como "tocado"
+    // Asegúrate de que el valor sea un número antes de emitirlo
+    if (typeof this.selectedAtleta === 'number') {
+      this.onChange(this.selectedAtleta); // Emitir el valor seleccionado
+    }
+    this.onTouched();
   }
 }

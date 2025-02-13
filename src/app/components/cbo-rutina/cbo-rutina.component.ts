@@ -1,7 +1,7 @@
 import { Component, Input, forwardRef, OnInit } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { RutinasService } from '../../service/rutinas.service';
-import { Rutina } from '../../data/interfaces/rutinaInterface';
+import { Rutina } from '../../data/interfaces/tbRutinaInterface';
 import { CommonModule } from '@angular/common';
 
 @Component({

@@ -1,1 +1,26 @@
-<p>mis-rutinas works!</p>
+<div class="container">
+    <h2>Mis Rutinas</h2>
+
+    <!-- Combo para seleccionar el atleta -->
+    <div class="form-group">
+        <label for="atleta">Selecciona un atleta:</label>
+        <app-cbo-atleta [idEntrenador]="idEntrenador" >
+        </app-cbo-atleta>
+    </div>
+
+    <!-- Mostrar las rutinas del atleta seleccionado -->
+    <div *ngIf="atletaSeleccionado">
+        <h3>Rutinas del Atleta</h3>
+        <ul class="list-group">
+            <li *ngFor="let rutina of rutinas" class="list-group-item">
+                <strong>{{ rutina.rutina.nombre }}</strong> - {{ rutina.rutina.objetivo }}
+                <p>{{ rutina.rutina.descripcion }}</p>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Mensaje si no hay atleta seleccionado -->
+    <div *ngIf="!atletaSeleccionado">
+        <p>Selecciona un atleta para ver sus rutinas.</p>
+    </div>
+</div>

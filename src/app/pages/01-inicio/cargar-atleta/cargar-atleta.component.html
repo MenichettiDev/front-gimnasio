@@ -1,1 +1,88 @@
-<p>cargar-atleta works!</p>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="text-center">Registro de Atleta</h4>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="atletaForm" (ngSubmit)="onSubmit()">
+
+                        <!-- Nombre -->
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" id="nombre" formControlName="nombre" class="form-control"
+                                placeholder="Ingrese el nombre">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="apodo" class="form-label">Apodo</label>
+                            <input type="text" id="apodo" formControlName="apodo" class="form-control"
+                                placeholder="Ingrese el apodo">
+                        </div>
+
+                        <!-- Apellido -->
+                        <div class="mb-3">
+                            <label for="apellido" class="form-label">Apellido</label>
+                            <input type="text" id="apellido" formControlName="apellido" class="form-control"
+                                placeholder="Ingrese el apellido">
+                        </div>
+
+                        <!-- DNI -->
+                        <div class="mb-3">
+                            <label for="dni" class="form-label">DNI</label>
+                            <input type="text" id="dni" formControlName="dni" class="form-control"
+                                placeholder="Ingrese el DNI">
+                        </div>
+
+                        <!-- Fecha de Nacimiento -->
+                        <div class="mb-3">
+                            <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
+                            <input type="date" id="fecha_nacimiento" formControlName="fecha_nacimiento"
+                                class="form-control">
+                        </div>
+
+                        <!-- Celular -->
+                        <div class="mb-3">
+                            <label for="celular" class="form-label">Celular</label>
+                            <input type="text" id="celular" formControlName="celular" class="form-control"
+                                placeholder="Ingrese el celular">
+                        </div>
+
+                        <!-- Dirección -->
+                        <div class="mb-3">
+                            <label for="direccion" class="form-label">Dirección</label>
+                            <input type="text" id="direccion" formControlName="direccion" class="form-control"
+                                placeholder="Ingrese la dirección">
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" id="email" formControlName="email" class="form-control"
+                                placeholder="Ingrese el email">
+                        </div>
+
+                        <!-- Foto -->
+                        <div class="mb-3">
+                            <label for="foto_archivo" class="form-label">Foto</label>
+                            <input type="file" id="foto_archivo" formControlName="foto_archivo" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <app-cbo-gimnasio formControlName="id_gimnasio" [emitOnlyId]="true">
+                            </app-cbo-gimnasio>
+                        </div>
+
+                        <!-- Botón de Envío -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary" [disabled]="atletaForm.invalid">
+                                Registrar Atleta
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
