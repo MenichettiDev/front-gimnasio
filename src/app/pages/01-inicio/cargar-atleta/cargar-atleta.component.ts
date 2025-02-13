@@ -6,6 +6,7 @@ import { AuthService } from '../../../service/auth/auth.service';
 import { Entrenador } from '../../../data/interfaces/entrenadorInterface';
 import { EntrenadorService } from '../../../service/entrenador.service';
 import { Persona } from '../../../data/interfaces/tbPersonaInterface';
+import { AtletaService } from '../../../service/atleta.service';
 
 @Component({
   selector: 'app-cargar-atleta',
@@ -15,16 +16,19 @@ import { Persona } from '../../../data/interfaces/tbPersonaInterface';
 })
 export class CargarAtletaComponent implements OnInit {
 
-  atletaForm!: FormGroup ;
-  usuario : Persona | null = null;
+  atletaForm!: FormGroup;
+  usuario: Persona | null = null;
 
-  constructor(private fb: FormBuilder,private authService : AuthService, private entrenadorService : EntrenadorService) { }
+  constructor(private fb: FormBuilder,
+    private authService: AuthService,
+    private entrenadorService: EntrenadorService,
+    private atletaService: AtletaService) { }
 
   ngOnInit(): void {
-    
-    this.usuario  = this.authService.getUser().usuario[0];
-    console.log(this.usuario!.id_persona , '   usuario');
-    
+
+    this.usuario = this.authService.getUser().usuario[0];
+    console.log(this.usuario!.id_persona, '   usuario');
+
     this.atletaForm = this.fb.group({
       dni: ['', [Validators.required, Validators.minLength(8)]],
       nombre: ['', Validators.required],
@@ -38,20 +42,27 @@ export class CargarAtletaComponent implements OnInit {
       foto_archivo: [''],
     });
   }
-  
+
   onSubmit(): void {
-    if (this.atletaForm.valid && this.usuario ) {
+    if (this.atletaForm.valid && this.usuario) {
       const atletaData = this.atletaForm.value;
-      
+
 
       this.entrenadorService.getEntrenadorById(this.usuario?.id_persona).subscribe(
         (data) => {
           atletaData.id_entrenador = data.id_entrenador;
-          
+
+          //Crear atleta
+          this.atletaService.crearAtleta(atletaData).subscribe({
+            next: (response) => {
+              console.log('Atleta creado:', response);
+            },
+            error: (err) => {
+              console.error('Error al crear atleta:', err);
+            },
+          });
         }
       )
-      
-      console.log('Datos del atleta:', atletaData);
       // Aquí puedes enviar los datos al backend o realizar otras acciones
     } else {
       console.error('El formulario no es válido');
