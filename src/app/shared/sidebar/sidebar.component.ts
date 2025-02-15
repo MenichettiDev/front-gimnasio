@@ -30,8 +30,9 @@ export class SidebarComponent implements OnInit {
   // Cargar datos del usuario
   loadUserData(): void {
     const user = this.authService.getUser();
+    console.log( user[0].id_acceso , 'usuario..');
     if (user) {
-      this.id_acceso = user.usuario[0].id_acceso;
+      this.id_acceso = user[0].id_acceso ;
     }
   }
 
