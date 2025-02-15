@@ -123,7 +123,8 @@ export class CrearRutinaComponent implements OnInit {
         nivel_atleta: this.rutinaForm.get('nivel_atleta')?.value,
         objetivo: this.rutinaForm.get('objetivo')?.value,
         descripcion: this.rutinaForm.get('descripcion')?.value,
-        id_atleta: this.rutinaForm.get('id_atleta')?.value
+        id_atleta: this.rutinaForm.get('id_atleta')?.value,
+        fecha_asignacion: this.formatoFecha(this.rutinaForm.get('fecha_asignacion')?.value)
       },
       ejercicios: (this.dias as FormArray).controls.map((dia, diaIndex) => {
         const ejerciciosDia = (dia.get('ejercicios') as FormArray).controls.map((ejercicio) => {
@@ -138,7 +139,6 @@ export class CrearRutinaComponent implements OnInit {
           ejercicios: ejerciciosDia
         };
       }),
-      fecha_asignacion: this.formatoFecha(this.rutinaForm.get('fecha_asignacion')?.value)
     };
 
     console.log('Datos formateados para enviar:', rutinaData);

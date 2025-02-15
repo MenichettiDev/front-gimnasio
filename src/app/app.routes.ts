@@ -12,6 +12,10 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     // Ruta Lazy Loading para todas las páginas dentro de "Ejercicios"
     {
+        path: 'inicio',
+        loadChildren: () => import('./pages/01-inicio/inicio.routes').then(m => m.inicioRoutes)
+    },
+    {
         path: 'perfil',
         loadChildren: () => import('./pages/02-perfil/perfil.routes').then(m => m.perfilRoutes)
     },

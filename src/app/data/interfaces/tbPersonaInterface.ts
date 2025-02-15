@@ -1,8 +1,8 @@
-export interface Entrenador {
-    id_entrenador: number;
-    fecha_ingreso: Date;
-    estado: string;
+export interface Persona {
     id_persona: number;
+    dni: string;
+    fecha_: Date;
+    estado: string;
     id_acceso: number;
     nombre: string;
     apellido: string;

@@ -9,7 +9,7 @@
     [disabled]="isDisabled"
     placeholder="Selecciona una repetición"
   >
-    <option value="" disabled selected>Tipo de repeticion</option>
+    <!-- <option value="" disabled selected>Tipo de repeticion</option> -->
     <option *ngFor="let repeticion of repeticiones" [ngValue]="repeticion">
       {{ repeticion.nombre }}
     </option>

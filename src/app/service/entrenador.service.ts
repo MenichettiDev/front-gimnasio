@@ -9,7 +9,7 @@ import { Entrenador } from '../data/interfaces/entrenadorInterface';
 export class EntrenadorService {
 
   private apiUrlGetEntrenadores = 'http://localhost:7000/getEntrenadores'; // URL de tu API para obtener entrenadores
-  private apiUrlGetEntrenadorById = 'http://localhost:7000/getEntrenadorById'; // URL de tu API para obtener entrenador por ID
+  private apiUrlGetEntrenadorByIdPersona = 'http://localhost:7000/getEntrenadorByIdPersona'; // URL de tu API para obtener entrenador por ID
 
   constructor(private http: HttpClient) { }
 
@@ -19,7 +19,7 @@ export class EntrenadorService {
   }
 
   // Método para obtener un entrenador por su ID
-  getEntrenadorById(id: number): Observable<Entrenador> {
-    return this.http.post<Entrenador>(this.apiUrlGetEntrenadorById, { id });
+  getEntrenadorById(id_persona: number): Observable<Entrenador> {
+    return this.http.post<Entrenador>(this.apiUrlGetEntrenadorByIdPersona, { id_persona });
   }
 }
