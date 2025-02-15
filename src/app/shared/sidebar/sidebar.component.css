@@ -1,123 +1,184 @@
-/* Sidebar con fondo oscuro y diseño atractivo */
+/* Sidebar con fondo negro semi-transparente */
 .sidebar {
-    width: 250px;  
-    background-color: #343a40;  /* Fondo oscuro */
-    color: #d3d3d3;  /* Gris claro */
-    padding: 20px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    z-index: 1000;
-    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* Esto asegura que los menús se alineen correctamente */
-    transition: width 0.3s ease;
+  width: 230px;  /* Ancho más grande del sidebar */
+  background-color: rgba(43, 1, 75, 0.74);  /* Fondo negro con 70% de opacidad */
+  color: #d3d3d3;  /* Gris claro */
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1000;
+  box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  transition: width 0.3s ease, padding 0.3s ease;
+}
+
+
+/* Clase para ocultar el sidebar */
+.sidebar.hidden {
+  width: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.sidebar.hidden .sidebar-toggle {
+  right: -40px; /* Ajusta la posición cuando el sidebar está oculto */
 }
 
 /* Espacio para la imagen en la parte superior */
 .sidebar-img {
-    text-align: center;
-    margin-bottom: 20px;  /* Espacio debajo de la imagen */
+  text-align: center;
+  margin-bottom: 30px;  /* Espacio más grande debajo de la imagen */
 }
 
 .sidebar-img img {
-    width: 180px;  /* Ajusta el tamaño de la imagen */
-    height: 180px;  /* Hace la imagen cuadrada */
-    border-radius: 50%;  /* Hace la imagen redonda */
-    object-fit: cover;  /* Asegura que la imagen se recorte de manera proporcional */
-    margin-bottom: 15px;  /* Espacio debajo de la imagen */
+  width: 180px;  /* Ajusta el tamaño de la imagen */
+  height: 180px;  /* Hace la imagen cuadrada */
+  object-fit: contain;
+  margin-bottom: 20px;
+  margin-top: 80px;
+  transition: opacity 0.3s ease;
+}
+
+/* Ocultar la imagen cuando el sidebar está oculto */
+.sidebar.hidden .sidebar-img img {
+  opacity: 0;
 }
 
 /* Sin subrayado en los enlaces */
 .nav-link {
-    color: #d3d3d3;  /* Gris claro */
-    text-decoration: none;
-    font-weight: 500;
-    padding-left: 15px;
+  font-size: 16px;  /* Tamaño más grande para el texto */
+  color: #ffffff;  /* Gris claro */
+  text-decoration: none;
+  font-weight: 500;
+  padding-left: 15px;
+  cursor: pointer;  /* Cambia el cursor a la mano al pasar el ratón */
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espacio entre ícono y texto */
+  transition: background-color 0.3s ease;
 }
 
 /* Cambiar color de los enlaces al pasar el ratón */
 .nav-link:hover {
-    color: #ffffff;
-    background-color: #4c5b6b;  /* Fondo azul claro en hover */
-    text-decoration: none;
+  color: #ffffff;
+  background-color: #5706b48c;  /* Fondo azul claro en hover */
+  text-decoration: none;
 }
 
-/* Submenú */
+/* Submenú oculto inicialmente */
 .sub-menu {
-    padding-left: 20px;
-    margin-top: 5px;
-    background-color: #343a40;  /* Fondo igual al sidebar */
-    border-radius: 5px;
+  padding-left: 30px;
+  margin-top: 5px;
+  border-radius: 5px;
+  overflow: hidden; /* Para evitar que se desborde el contenido al deslizar */
+  max-height: 0; /* Inicialmente el submenú estará colapsado */
+  transition: max-height 0.3s ease; /* Deslizamiento suave */
 }
 
-/* Estilo para los íconos en los ítems */
-.nav-item i {
-    margin-right: 10px; /* Espacio entre el ícono y el texto */
+/* Cuando el submenú está expandido */
+.sub-menu.expanded {
+  max-height: 500px; /* Ajusta el alto del submenú automáticamente cuando está expandido */
 }
 
-/* Efecto hover sobre los íconos */
-.nav-item i:hover {
-    color: #4c5b6b;  /* Cambia el color del icono en hover */
+/* Eliminar las bolitas (marcadores) en los submenús */
+.sub-menu ul {
+  list-style-type: none;  /* Asegura que no haya marcadores o bolitas */
+  padding-left: 0;   /* Elimina el sangrado izquierdo de la lista */
+  margin-left: 0;    /* Elimina el margen izquierdo */
 }
 
-/* Eliminar las bolitas de los ítems de la lista */
-.sidebar ul {
-    list-style: none;  /* Elimina las bolitas o puntos de la lista */
-    padding-left: 0;   /* Elimina el sangrado por defecto en las listas */
-    margin-left: 0;    /* Elimina el margen izquierdo */
+/* Asegúrate de que los submenús también no tengan marcador */
+.sub-menu .nav-item {
+  list-style-type: none;  /* Elimina las bolitas de los submenús */
+  padding: 5px 0;  /* Reducir el espacio entre las líneas de los submenús */
+  margin: 0;  /* Eliminar márgenes innecesarios */
+  line-height: 1.4; /* Ajustar la altura de línea para que el espacio entre las líneas sea más pequeño */
 }
 
-.nav-item {
-    padding-left: 0;  /* Asegura que no haya sangrado en cada item de la lista */
+/* Asegúrate de que los enlaces no tengan márgenes o padding innecesarios */
+.sub-menu .nav-link {
+  padding: 5px 15px;  /* Ajusta el padding de los enlaces del submenú */
+  margin: 0;  /* Eliminar márgenes adicionales */
 }
 
-.nav-item a {
-    display: flex;
-    align-items: center;  /* Asegura que el ícono y texto estén alineados */
-    text-decoration: none;
-    color: #d3d3d3;  /* Gris claro */
+/* Flecha para los submenús */
+.arrow {
+  width: 8px; /* Hacemos la flecha más pequeña */
+  height: 8px;
+  border-top: 2px solid #b0b0b0;  /* Color de la flecha */
+  border-right: 2px solid #b0b0b0;
+  display: inline-block;
+  transform: rotate(45deg);  /* Ángulo de 45 grados para dar la forma de flecha */
+  margin-left: auto;  /* Espacio entre el texto y la flecha */
+  transition: transform 0.3s ease, border-color 0.3s ease;  /* Transición suave */
 }
 
-/* Opcional: Eliminar el borde o relleno de los ítems (si lo hubiese) */
-.nav-item {
-    border: none;  /* Si hay algún borde, lo elimina */
-    padding: 0;    /* Elimina el relleno de los ítems */
+/* Flecha rotada cuando el submenú está expandido */
+.arrow.rotate {
+  transform: rotate(135deg);  /* Cambia el ángulo cuando está expandido */
+  border-top-color: #4c5b6b;  /* Color de la flecha cuando se expande */
+  border-right-color: #4c5b6b;  /* Color de la flecha cuando se expande */
 }
 
-/* Sombra a la derecha para separar visualmente */
-.sidebar {
-    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5);
+/* Botón para ocultar/mostrar el sidebar */
+.sidebar-toggle {
+  position: absolute;
+  top: 20px;
+  right: -15px; /* Coloca el botón fuera del sidebar */
+  width: 30px;
+  height: 30px;
+  background-color: #04df13bb; /* Color de fondo */
+  border-radius: 50%; /* Forma circular */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1001; /* Asegúrate de que esté por encima del sidebar */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra suave */
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-/* Estilo de la parte inferior del sidebar */
-.footer {
-    position: absolute;
-    bottom: 20px;
-    width: 100%;
+/* Efecto hover para el botón */
+.sidebar-toggle:hover {
+  background-color: #038a0c; /* Cambia el color de fondo al pasar el ratón */
 }
 
-/* Estilo de los enlaces en el footer */
-.footer .nav-item a {
-    font-size: 14px;
-    padding-left: 15px;
+/* Ícono del botón */
+.toggle-icon {
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid white; /* Flecha hacia la izquierda */
+  border-right: 2px solid white;
+  transform: rotate(45deg); /* Gira la flecha */
+  transition: transform 0.3s ease;
 }
 
-/* Botón de Login/Logout con icono */
-.footer .nav-link {
-    display: flex;
-    align-items: center;
-    color: #d3d3d3;
+/* Rotación del ícono cuando el sidebar está oculto */
+.toggle-icon.rotate {
+  transform: rotate(-135deg); /* Gira la flecha hacia la derecha */
 }
 
-.footer .nav-link:hover {
-    background-color: transparent;
-    color: #ffffff;
+/* Botón flotante para mostrar el sidebar */
+.floating-sidebar-toggle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(43, 1, 75, 0.74);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
 }
 
-/* Agregar un ícono de bootstrap para los ítems */
-.bi {
-    font-size: 18px;
+.floating-sidebar-toggle i {
+  font-size: 20px;
 }
