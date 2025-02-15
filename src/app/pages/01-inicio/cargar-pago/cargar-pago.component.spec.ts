@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CboFormaPagoComponent } from './cbo-forma-pago.component';
+import { CargarPagoComponent } from './cargar-pago.component';
 
-describe('CboFormaPagoComponent', () => {
-  let component: CboFormaPagoComponent;
-  let fixture: ComponentFixture<CboFormaPagoComponent>;
+describe('CargarPagoComponent', () => {
+  let component: CargarPagoComponent;
+  let fixture: ComponentFixture<CargarPagoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CboFormaPagoComponent]
+      imports: [CargarPagoComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CboFormaPagoComponent);
+    fixture = TestBed.createComponent(CargarPagoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

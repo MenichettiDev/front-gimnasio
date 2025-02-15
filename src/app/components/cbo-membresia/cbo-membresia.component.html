@@ -1,16 +1,16 @@
 <div class="mb-3 col-4">
-  <label [for]="'membresia-' + label" class="form-label fs-5">{{ label }}</label>
-  <select
-    [id]="'membresia-' + label"
-    [(ngModel)]="selectedMembresia"
-    (ngModelChange)="onValueChange()"
-    class="form-select form-select-lg"
-    aria-label="Selecciona una membresía"
-    [disabled]="isDisabled"
-  >
-    <option value="" disabled selected>Selecciona una membresía</option>
-    <option *ngFor="let membresia of membresias" [ngValue]="membresia">
-      {{ membresia.nombre + ' - $' + membresia.precio }}
-    </option>
-  </select>
-</div>
+    <label [for]="'membresia-' + label" class="form-label fs-5">{{ label }}</label>
+    <select
+      [id]="'membresia-' + label"
+      [(ngModel)]="selectedMembresia"
+      (ngModelChange)="onValueChange()"
+      class="form-select form-select-lg"
+      aria-label="Selecciona una membresía"
+      [disabled]="isDisabled"
+    >
+      <option value="" disabled selected>Selecciona una membresía</option>
+      <option *ngFor="let membresia of membresias" [ngValue]="membresia">
+        {{ membresia.nombre + ' - $' + membresia.precio }}
+      </option>
+    </select>
+  </div>

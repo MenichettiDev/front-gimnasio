@@ -1,16 +1,18 @@
-<div class="mb-3 col-4">
+<div class="mb-3" *ngIf="gimnasios && gimnasios.length > 0">
   <label [for]="'gimnasio-' + label" class="form-label fs-5">{{ label }}</label>
   <select
     [id]="'gimnasio-' + label"
     [(ngModel)]="selectedGimnasio"
+    (change)="onGimnasioChange($event)"
     class="form-select form-select-lg"
     aria-label="Selecciona un gimnasio"
-    [disabled]="isDisabled"
-    (ngModelChange)="onGimnasioChange()"
   >
     <option value="" disabled selected>Selecciona un gimnasio</option>
-    <option *ngFor="let gimnasio of gimnasios" [value]="gimnasio.id_gimnasio">
+    <option *ngFor="let gimnasio of gimnasios" [ngValue]="gimnasio">
       {{ gimnasio.nombre }}
     </option>
   </select>
+</div>
+<div class="mb-3" *ngIf="!gimnasios || gimnasios.length === 0">
+  <p>No hay gimnasios disponibles.</p>
 </div>

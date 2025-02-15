@@ -1,43 +1,42 @@
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card shadow">
-                <div class="card-header bg-primary text-white">
-                    <h4 class="text-center">Registro de pago de atleta</h4>
-                </div>
-                <div class="card-body">
-                    <form [formGroup]="pagoForm" (ngSubmit)="onSubmit()">
-                        <!-- Atleta -->
-                        <div class="mb-3">
-                            <app-cbo-atleta [idEntrenador]="id_entrenador!" formControlName="atleta"></app-cbo-atleta>
-                        </div>
-                        <!-- Gimnasio -->
-                        <div class="mb-3">
-                            <app-cbo-gimnasio [emitOnlyId]="true" formControlName="gimnasio"></app-cbo-gimnasio>
-                        </div>
-                        <!-- Membresía -->
-                        <div class="mb-3">
-                            <app-cbo-membresia> </app-cbo-membresia>
-                        </div>
-                        <!-- Monto -->
-                        <div class="mb-3">
-                            <label for="monto" class="form-label">Monto</label>
-                            <input type="text" id="monto" formControlName="monto" class="form-control"
-                                placeholder="Ingrese el monto">
-                        </div>
-                        <!-- Forma de Pago -->
-                        <div class="mb-3">
-                            <label for="forma_pago" class="form-label">Forma de pago</label>
-                            <input type="text" id="forma_pago" formControlName="forma_pago" class="form-control"
-                                placeholder="Ingrese la forma de pago">
-                        </div>
-                        <!-- Botón de Envío -->
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-primary">Registrar Pago</button>
-                        </div>
-                    </form>
-                </div>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Pago a Atletas</title>
+    <!-- Incluir Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2>Formulario de Pago a Atletas</h2>
+
+        <form>
+            <!-- Select para elegir atleta -->
+            <div class="mb-3">
+                <label for="atleta" class="form-label">Seleccione un Atleta</label>
+                <select id="atleta" class="form-select" required>
+                    <option value="" disabled selected>Selecciona un atleta</option>
+                    <!-- Aquí irían los atletas cuando los traigas de la DB -->
+                    
+                </select>
             </div>
-        </div>
+
+            <!-- Input para monto a cobrar -->
+            <div class="mb-3">
+                <label for="monto" class="form-label">Monto a Cobrar</label>
+                <input type="number" id="monto" class="form-control" placeholder="Ingrese el monto" required>
+            </div>
+
+            <!-- Botón de guardar pago -->
+            <button type="submit" class="btn btn-primary">Guardar Pago</button>
+        </form>
     </div>
-</div>
+
+    <!-- Incluir los scripts de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

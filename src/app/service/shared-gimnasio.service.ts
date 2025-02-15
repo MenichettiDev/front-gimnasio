@@ -7,10 +7,10 @@ import { Gimnasio } from '../data/interfaces/gimnasioInterface';
 })
 export class SharedGimnasioService {
 
-  private selectedGimnasioSubject = new BehaviorSubject<number | null>(null);
+  private selectedGimnasioSubject = new BehaviorSubject<Gimnasio | null>(null);
   selectedGimnasio$ = this.selectedGimnasioSubject.asObservable();
 
-  setSelectedGimnasio(gimnasio: number): void {
+  setSelectedGimnasio(gimnasio: Gimnasio): void {
     this.selectedGimnasioSubject.next(gimnasio);
   }
 

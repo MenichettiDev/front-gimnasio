@@ -21,10 +21,7 @@ import { CommonModule } from '@angular/common';
 })
 export class CboMembresiaComponent implements OnInit, ControlValueAccessor {
   @Input() label: string = "Selecciona una Membresía"; // Para el label del combo
-  @Input() id_gimnasio!: number; // ID del gimnasio (entrada obligatoria)
-  @Input() emitOnlyId: boolean = false; // Booleano para emitir solo el ID (por defecto es false)
-
-  gimnasioSeleccionado: number | null = null;
+  gimnasioSeleccionado: Gimnasio | null = null;
   membresias: Membresia[] = []; // Lista de membresías
   selectedMembresia: Membresia | null = null; // Valor seleccionado (objeto membresía)
   isDisabled: boolean = false; // Estado de deshabilitado
@@ -39,17 +36,10 @@ export class CboMembresiaComponent implements OnInit, ControlValueAccessor {
   ) {}
 
   ngOnInit(): void {
-    if (this.id_gimnasio) {
-      this.cargarMembresias(this.id_gimnasio); // Carga las membresías según el ID del gimnasio proporcionado
-    } else {
-      console.warn('No se proporcionó un id_gimnasio.');
-    }
-
-    // Escucha cambios en el gimnasio seleccionado desde el servicio compartido
     this.sharedService.selectedGimnasio$.subscribe((gimnasio) => {
       this.gimnasioSeleccionado = gimnasio;
       if (gimnasio) {
-        this.cargarMembresias(gimnasio); // Carga las membresías según el gimnasio seleccionado
+        this.cargarMembresias(gimnasio.id_gimnasio); // Carga las membresías según el gimnasio seleccionado
       }
     });
   }
@@ -68,11 +58,7 @@ export class CboMembresiaComponent implements OnInit, ControlValueAccessor {
 
   // Maneja cambios en el select
   onValueChange(): void {
-    const valueToEmit = this.emitOnlyId && this.selectedMembresia
-      ? this.selectedMembresia.id_membresia // Emite solo el ID si emitOnlyId es true
-      : this.selectedMembresia; // Emite el objeto completo si emitOnlyId es false
-
-    this.onChange(valueToEmit); // Notifica a Angular sobre el cambio
+    this.onChange(this.selectedMembresia); // Notifica a Angular sobre el cambio
     this.onTouched(); // Marca el control como "tocado"
   }
 
