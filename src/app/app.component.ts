@@ -3,12 +3,11 @@ import { RouterOutlet, ActivatedRoute, Router } from '@angular/router';
 import { SidebarComponent } from "./shared/sidebar/sidebar.component";
 import { AuthService } from './service/auth/auth.service';
 import { CommonModule } from '@angular/common';
-import { BarrasupComponent } from "./shared/barrasup/barrasup.component";
 
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, SidebarComponent,
-    CommonModule, BarrasupComponent],
+    CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

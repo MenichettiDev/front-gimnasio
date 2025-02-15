@@ -26,7 +26,7 @@ export class CargarAtletaComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.usuario = this.authService.getUser().usuario[0];
+    this.usuario = this.authService.getUser();
     console.log(this.usuario!.id_persona, '   usuario');
 
     this.atletaForm = this.fb.group({

@@ -9,28 +9,29 @@
                     <form [formGroup]="pagoForm" (ngSubmit)="onSubmit()">
                         <!-- Atleta -->
                         <div class="mb-3">
-                            <app-cbo-atleta [idEntrenador]="id_entrenador!" formControlName="atleta"></app-cbo-atleta>
+                            <app-cbo-atleta [emitOnlyId]="true" [idEntrenador]="id_entrenador"
+                                (valueChange)="onAtletaSeleccionado($event)"></app-cbo-atleta>
                         </div>
-                        <!-- Gimnasio -->
                         <div class="mb-3">
                             <app-cbo-gimnasio [emitOnlyId]="true" formControlName="gimnasio"></app-cbo-gimnasio>
                         </div>
-                        <!-- Membresía -->
+                        <!-- 
+
                         <div class="mb-3">
                             <app-cbo-membresia> </app-cbo-membresia>
                         </div>
-                        <!-- Monto -->
+
                         <div class="mb-3">
                             <label for="monto" class="form-label">Monto</label>
                             <input type="text" id="monto" formControlName="monto" class="form-control"
                                 placeholder="Ingrese el monto">
                         </div>
-                        <!-- Forma de Pago -->
+
                         <div class="mb-3">
                             <label for="forma_pago" class="form-label">Forma de pago</label>
                             <input type="text" id="forma_pago" formControlName="forma_pago" class="form-control"
                                 placeholder="Ingrese la forma de pago">
-                        </div>
+                        </div> -->
                         <!-- Botón de Envío -->
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary">Registrar Pago</button>

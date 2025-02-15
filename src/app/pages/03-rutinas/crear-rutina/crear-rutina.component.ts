@@ -117,13 +117,13 @@ export class CrearRutinaComponent implements OnInit {
   construirYEnviarDatos(): void {
     const rutinaData = {
       rutina: {
-        id_creador: this.authService.getUser().usuario[0].id_persona,
+        id_creador: this.authService.getUser()[0].id_persona,
         nombre: this.rutinaForm.get('nombre')?.value,
         cantidad_dias: this.rutinaForm.get('cantidad_dias')?.value,
         nivel_atleta: this.rutinaForm.get('nivel_atleta')?.value,
         objetivo: this.rutinaForm.get('objetivo')?.value,
         descripcion: this.rutinaForm.get('descripcion')?.value,
-        id_atleta: this.rutinaForm.get('id_atleta')?.value,
+        id_atleta: this.rutinaForm.get('id_atleta')?.value.id_atleta,
         fecha_asignacion: this.formatoFecha(this.rutinaForm.get('fecha_asignacion')?.value)
       },
       ejercicios: (this.dias as FormArray).controls.map((dia, diaIndex) => {
@@ -236,7 +236,7 @@ export class CrearRutinaComponent implements OnInit {
 
   guardarRutina(): void {
     console.log('Valores actuales del formulario:', this.rutinaForm.value);
-    console.log(this.authService.getUser().usuario[0].id_persona);
+    console.log(this.authService.getUser()[0].id_persona);
 
     if (this.rutinaForm.invalid) {
       console.warn('El formulario es inválido.');

@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AtletaService } from '../../service/atleta.service';
 import { Atleta } from '../../data/interfaces/atletaInterface';
@@ -18,30 +18,38 @@ import { CommonModule } from '@angular/common';
     },
   ],
 })
-export class CboAtletaComponent implements ControlValueAccessor {
-  @Input() label: string = 'Seleccione un atleta'; // Etiqueta del combo
-  @Input() idEntrenador!: number; // ID del entrenador (entrada obligatoria)
-  atletas: Atleta[] = []; // Lista de atletas filtrados por entrenador
-  selectedAtleta: number | null = null; // Valor seleccionado (id_atleta)
-  isDisabled: boolean = false; // Estado de deshabilitado
+export class CboAtletaComponent implements ControlValueAccessor {@Input() label: string = 'Selecciona un Atleta'; // Etiqueta del combo
+  @Input() emitOnlyId: boolean = false; // Controla si se emite solo el ID o el objeto completo
+  @Input() idEntrenador: number | null = null; // ID del entrenador para filtrar atletas
+  @Output() valueChange = new EventEmitter<number | Atleta>(); // Emite el valor seleccionado (ID o objeto completo)
+
+  atletas: Atleta[] = []; // Lista de atletas
+  selectedAtleta: number | null = null; // Valor seleccionado (ID del atleta)
+  isDisabled: boolean = false; // Estado deshabilitado
 
   // Funciones de callback registradas por Angular
-  onChange: any = () => {};
-  onTouched: any = () => {};
+  private onChange: (value: any) => void = () => {};
+  private onTouched: () => void = () => {};
 
   constructor(private atletaService: AtletaService) {}
 
   ngOnInit(): void {
-    if (!this.idEntrenador) {
-      console.error('El ID del entrenador es obligatorio');
-      return;
-    }
-    this.obtenerAtletasPorEntrenador();
+    this.obtenerAtletas();
   }
 
-  // Método para obtener los atletas del entrenador
-  obtenerAtletasPorEntrenador(): void {
-    this.atletaService.getAtletasPorEntrenador(this.idEntrenador).subscribe(
+  // Método para obtener los atletas
+  obtenerAtletas(): void {
+    let atletasObservable;
+
+    if (this.idEntrenador) {
+      // Cargar atletas por entrenador
+      atletasObservable = this.atletaService.getAtletasPorEntrenador(this.idEntrenador);
+    } else {
+      // Cargar todos los atletas
+      atletasObservable = this.atletaService.getAtletas();
+    }
+
+    atletasObservable.subscribe(
       (data) => {
         this.atletas = data.atletas; // Asignamos los datos de los atletas
       },
@@ -51,29 +59,42 @@ export class CboAtletaComponent implements ControlValueAccessor {
     );
   }
 
-  // Implementación de ControlValueAccessor
+  // Maneja cambios en el select
+  onValueChange(): void {
+    if (this.selectedAtleta === null) {
+      return; // No emitir si no hay un atleta seleccionado
+    }
+  
+    const valueToEmit = this.emitOnlyId
+      ? this.selectedAtleta // Emite solo el ID si emitOnlyId es true
+      : this.atletas.find((a) => a.id_atleta === this.selectedAtleta); // Emite el objeto completo si emitOnlyId es false
+  
+    if (valueToEmit) {
+      this.onChange(valueToEmit); // Notifica a Angular sobre el cambio
+      this.onTouched(); // Marca el control como "tocado"
+      this.valueChange.emit(valueToEmit); // Emite el valor seleccionado
+    }
+  }
+
+  // Métodos de ControlValueAccessor
   writeValue(value: any): void {
-    this.selectedAtleta = value || null; // Actualiza el valor interno
+    if (this.emitOnlyId) {
+      this.selectedAtleta = value; // Asigna directamente el ID
+    } else {
+      const atleta = this.atletas.find((a) => a.id_atleta === value);
+      this.selectedAtleta = atleta ? atleta.id_atleta : null; // Busca el atleta por ID
+    }
   }
 
-  registerOnChange(fn: any): void {
-    this.onChange = fn; // Registra la función de cambio
+  registerOnChange(fn: (value: any) => void): void {
+    this.onChange = fn;
   }
 
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn; // Registra la función de "tocado"
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
   }
 
   setDisabledState?(isDisabled: boolean): void {
     this.isDisabled = isDisabled; // Habilita/deshabilita el control
-  }
-
-  // Maneja cambios en el select
-  onValueChange(): void {
-    // Asegúrate de que el valor sea un número antes de emitirlo
-    if (typeof this.selectedAtleta === 'number') {
-      this.onChange(this.selectedAtleta); // Emitir el valor seleccionado
-    }
-    this.onTouched();
   }
 }

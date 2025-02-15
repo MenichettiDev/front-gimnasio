@@ -9,6 +9,7 @@ import { CboGimnasioComponent } from "../../../components/cbo-gimnasio/cbo-gimna
 import { Membresia } from '../../../data/interfaces/membresiaInterface';
 import { MembresiaService } from '../../../service/membresia.service';
 import { CommonModule } from '@angular/common';
+import { Atleta } from '../../../data/interfaces/atletaInterface';
 
 @Component({
   selector: 'app-cargar-pago',
@@ -29,8 +30,16 @@ export class CargarPagoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.id_entrenador = this.authService.getUser().usuario[0].id_entrenador;
+    this.id_entrenador = this.authService.getUser()[0].id_entrenador;
     this.createForm();
+  }
+
+  onAtletaSeleccionado(value: number | Atleta): void {
+    if (typeof value === 'number') {
+      console.log('ID del atleta seleccionado:', value);
+    } else {
+      console.log('Atleta seleccionado:', value);
+    }
   }
 
   createForm(): void {

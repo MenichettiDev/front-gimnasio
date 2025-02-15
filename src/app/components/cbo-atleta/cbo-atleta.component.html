@@ -1,4 +1,4 @@
-<div class="mb-3 col-4">
+<!-- <div class="mb-3 col-4">
   <label [for]="'atleta-' + label" class="form-label fs-5">{{ label }}</label>
   <select
     [id]="'atleta-' + label"
@@ -10,6 +10,20 @@
   >
     <option value="" disabled selected>Selecciona un atleta</option>
     <option *ngFor="let atleta of atletas" [value]="atleta.id_atleta">
+      {{ atleta.nombre }} {{ atleta.apellido }}
+    </option>
+  </select>
+</div> -->
+
+<div>
+  <label>{{ label }}</label>
+  <select
+    [(ngModel)]="selectedAtleta"
+    (ngModelChange)="onValueChange()"
+    [disabled]="isDisabled"
+  >
+    <option [ngValue]="null">Seleccione una opción</option>
+    <option *ngFor="let atleta of atletas" [ngValue]="atleta.id_atleta">
       {{ atleta.nombre }} {{ atleta.apellido }}
     </option>
   </select>
