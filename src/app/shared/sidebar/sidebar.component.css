@@ -1,7 +1,7 @@
-/* Sidebar con fondo oscuro y diseño atractivo */
+/* Sidebar con fondo negro semi-transparente */
 .sidebar {
   width: 230px;  /* Ancho más grande del sidebar */
-  background-color: #000000;  /* Fondo oscuro */
+  background-color: rgba(43, 1, 75, 0.74);  /* Fondo negro con 70% de opacidad */
   color: #d3d3d3;  /* Gris claro */
   padding: 20px;
   position: fixed;
@@ -15,6 +15,7 @@
   justify-content: flex-start;
   transition: width 0.3s ease, padding 0.3s ease;
 }
+
 
 /* Clase para ocultar el sidebar */
 .sidebar.hidden {
@@ -63,7 +64,7 @@
 /* Cambiar color de los enlaces al pasar el ratón */
 .nav-link:hover {
   color: #ffffff;
-  background-color: #4c5b6b;  /* Fondo azul claro en hover */
+  background-color: #5706b48c;  /* Fondo azul claro en hover */
   text-decoration: none;
 }
 
@@ -129,7 +130,7 @@
   right: -15px; /* Coloca el botón fuera del sidebar */
   width: 30px;
   height: 30px;
-  background-color: #4c5b6b; /* Color de fondo */
+  background-color: #04df13bb; /* Color de fondo */
   border-radius: 50%; /* Forma circular */
   display: flex;
   align-items: center;
@@ -142,7 +143,7 @@
 
 /* Efecto hover para el botón */
 .sidebar-toggle:hover {
-  background-color: #3a4654; /* Cambia el color de fondo al pasar el ratón */
+  background-color: #038a0c; /* Cambia el color de fondo al pasar el ratón */
 }
 
 /* Ícono del botón */
@@ -158,4 +159,26 @@
 /* Rotación del ícono cuando el sidebar está oculto */
 .toggle-icon.rotate {
   transform: rotate(-135deg); /* Gira la flecha hacia la derecha */
+}
+
+/* Botón flotante para mostrar el sidebar */
+.floating-sidebar-toggle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(43, 1, 75, 0.74);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+}
+
+.floating-sidebar-toggle i {
+  font-size: 20px;
 }

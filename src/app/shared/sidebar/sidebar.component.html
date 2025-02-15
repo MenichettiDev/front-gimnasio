@@ -39,6 +39,11 @@
   </div>
 </div>
 
+<!-- Botón flotante para mostrar el sidebar cuando está oculto -->
+<div class="floating-sidebar-toggle" *ngIf="!isSidebarVisible" (click)="toggleSidebar()">
+  <i class="bi bi-list"></i> <!-- Ícono de menú hamburguesa -->
+</div>
+
 <!-- Contenido principal -->
 <div class="main-content" [ngClass]="{'expanded': !isSidebarVisible}">
   <!-- Aquí va el contenido principal de tu aplicación -->
