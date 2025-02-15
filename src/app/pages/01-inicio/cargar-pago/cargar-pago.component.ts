@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { Atleta } from '../../../data/interfaces/atletaInterface';
 import { GimnasioService } from '../../../service/gimnasio.service';
 import { CboFormasPagoComponent } from "../../../components/cbo-forma-pago/cbo-forma-pago.component";
+import { PagoService } from '../../../service/pago.service';
 
 @Component({
   selector: 'app-cargar-pago',
@@ -29,7 +30,8 @@ export class CargarPagoComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private gimnasioService: GimnasioService,
-    private membresiaService: MembresiaService
+    private membresiaService: MembresiaService,
+    private pagoService : PagoService
   ) {
     this.pagoForm = this.fb.group({
       id_atleta: [null, Validators.required],
@@ -78,6 +80,17 @@ export class CargarPagoComponent implements OnInit {
     console.log('Datos del formulario:', formData);
 
     // Aquí puedes enviar los datos al backend
+    this.pagoService.createPago(formData).subscribe({
+      next: (response) => {
+        console.log('Pago creado exitosamente:', response);
+        alert('Pago registrado correctamente'); // Mensaje de éxito
+        this.pagoForm.reset(); // Limpia el formulario después del envío
+      },
+      error: (error) => {
+        console.error('Error al crear el pago:', error);
+        alert('Ocurrió un error al registrar el pago'); // Mensaje de error
+      }
+    });
   }
 
   onFormaPagoChange(idFormaPago: number): void {
