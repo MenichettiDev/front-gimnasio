@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs'; // Para manejar estados dinámicos
+import { Entrenador } from '../../data/interfaces/entrenadorInterface';
 
 @Injectable({
   providedIn: 'root',
