@@ -10,6 +10,7 @@ export class GimnasioService {
 
   private apiUrlGetGimnasios = 'http://localhost:7000/getGimnasios'; // URL para obtener todos los gimnasios
   private apiUrlGetGimnasioByIdEntrenador = 'http://localhost:7000/getGimnasioByIdEntrenador'; // URL para obtener gimnasio por ID de entrenador
+  private apiUrlGetGimnasioByIdAtleta = 'http://localhost:7000/getGimnasioByIdAtleta'; // URL para obtener gimnasio por ID de entrenador
 
   constructor(private http: HttpClient) { }
 
@@ -22,5 +23,10 @@ export class GimnasioService {
   getGimnasioByIdEntrenador(idEntrenador: number): Observable<Gimnasio> {
     const body = { idEntrenador };  // Enviar el ID del entrenador en el cuerpo de la solicitud
     return this.http.post<Gimnasio>(this.apiUrlGetGimnasioByIdEntrenador, body);
+  }
+
+  getGimnasioByIdAtleta(id_atleta: number): Observable<Gimnasio> {
+    const body = { id_atleta };  // Enviar el ID del entrenador en el cuerpo de la solicitud
+    return this.http.post<Gimnasio>(this.apiUrlGetGimnasioByIdAtleta, body);
   }
 }

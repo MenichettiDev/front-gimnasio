@@ -10,68 +10,63 @@ import { Membresia } from '../../../data/interfaces/membresiaInterface';
 import { MembresiaService } from '../../../service/membresia.service';
 import { CommonModule } from '@angular/common';
 import { Atleta } from '../../../data/interfaces/atletaInterface';
+import { GimnasioService } from '../../../service/gimnasio.service';
+import { CboFormasPagoComponent } from "../../../components/cbo-forma-pago/cbo-forma-pago.component";
 
 @Component({
   selector: 'app-cargar-pago',
-  imports: [CboAtletaComponent, CboMembresiaComponent, CboGimnasioComponent, ReactiveFormsModule],
+  imports: [CboAtletaComponent, CboMembresiaComponent, ReactiveFormsModule, CommonModule, CboFormasPagoComponent],
   templateUrl: './cargar-pago.component.html',
   styleUrl: './cargar-pago.component.css'
 })
 export class CargarPagoComponent implements OnInit {
   id_entrenador: number | null = null;
   id_gimnasio: number | null = null;
-  membresias: Membresia[] = []; // Lista de membresías cargadas dinámicamente
-  pagoForm: FormGroup = new FormGroup({});
+  gimnasioAtleta: string | null = null;
+  pagoForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
+    private gimnasioService: GimnasioService,
     private membresiaService: MembresiaService
-  ) {}
-
-  ngOnInit(): void {
-    this.id_entrenador = this.authService.getUser()[0].id_entrenador;
-    this.createForm();
-  }
-
-  onAtletaSeleccionado(value: number | Atleta): void {
-    if (typeof value === 'number') {
-      console.log('ID del atleta seleccionado:', value);
-    } else {
-      console.log('Atleta seleccionado:', value);
-    }
-  }
-
-  createForm(): void {
+  ) {
     this.pagoForm = this.fb.group({
-      atleta: ['', Validators.required],
-      gimnasio: ['', Validators.required],
-      membresia: ['', Validators.required],
-      monto: ['', [Validators.required, Validators.min(0)]],
-      forma_pago: ['', Validators.required],
+      id_atleta: [null, Validators.required],
+      id_gimnasio: [null, Validators.required],
+      id_membresia: [null, Validators.required],
+      monto: [null, Validators.required],
+      id_forma_pago: [null, Validators.required],
     });
   }
 
-  onGimnasioSeleccionado(idGimnasio: number | null): void {
-    if (idGimnasio) {
-      this.id_gimnasio = idGimnasio; // Actualiza el ID del gimnasio
-      this.cargarMembresias(idGimnasio); // Carga las membresías asociadas al gimnasio
-    } else {
-      this.membresias = []; // Limpia las membresías si no hay gimnasio seleccionado
-    }
+  ngOnInit(): void {
+    this.id_entrenador = this.authService.getUser()[0].id_entrenador;
   }
 
-  cargarMembresias(idGimnasio: number): void {
-    this.membresiaService.getMembresiasByIdGimnasio(idGimnasio).subscribe(
-      (data) => {
-        this.membresias = data; // Asigna las membresías obtenidas
+  // Maneja la selección de un atleta
+  onAtletaSeleccionado(value: number | Atleta): void {
+    const idAtleta = typeof value === 'number' ? value : value.id_atleta;
+  
+    this.gimnasioService.getGimnasioByIdAtleta(idAtleta).subscribe(
+      (gimnasio) => {
+        this.gimnasioAtleta = gimnasio.nombre; // Almacena el nombre del gimnasio
+        this.id_gimnasio = gimnasio.id_gimnasio; // Almacena el ID del gimnasio
+        this.pagoForm.get('id_gimnasio')?.setValue(gimnasio.id_gimnasio); // Actualiza el formulario
+        this.pagoForm.get('id_atleta')?.setValue(idAtleta); // Actualiza el control 'atleta'
       },
       (error) => {
-        console.error('Error al cargar membresías', error);
+        console.error('Error al obtener el gimnasio del atleta:', error);
       }
     );
   }
 
+  // Maneja la selección de una membresía
+  onMembresiaSeleccionada(membresia: Membresia): void {
+    this.pagoForm.get('id_membresia')?.setValue(membresia.id_membresia); // Actualiza el formulario
+  }
+
+  // Envía el formulario
   onSubmit(): void {
     if (this.pagoForm.invalid) {
       console.warn('El formulario es inválido.');
@@ -79,8 +74,19 @@ export class CargarPagoComponent implements OnInit {
     }
 
     const formData = this.pagoForm.value;
+    formData.fecha_pago = this.getFechaActual();
     console.log('Datos del formulario:', formData);
 
     // Aquí puedes enviar los datos al backend
   }
+
+  onFormaPagoChange(idFormaPago: number): void {
+    console.log('Forma de pago seleccionada:', idFormaPago);
+    this.pagoForm.get('id_forma_pago')?.setValue(idFormaPago); // Actualiza el control 'forma_pago'
   }
+
+  getFechaActual(): string {
+    const fechaActual = new Date(); // Obtiene la fecha y hora actual
+    return fechaActual.toISOString().split('T')[0]; // Formato YYYY-MM-DD
+  }
+}

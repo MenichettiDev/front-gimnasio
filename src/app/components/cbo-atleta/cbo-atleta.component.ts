@@ -18,6 +18,7 @@ import { CommonModule } from '@angular/common';
     },
   ],
 })
+
 export class CboAtletaComponent implements ControlValueAccessor {@Input() label: string = 'Selecciona un Atleta'; // Etiqueta del combo
   @Input() emitOnlyId: boolean = false; // Controla si se emite solo el ID o el objeto completo
   @Input() idEntrenador: number | null = null; // ID del entrenador para filtrar atletas

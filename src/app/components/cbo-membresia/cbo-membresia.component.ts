@@ -1,4 +1,4 @@
-import { Component, Input, forwardRef, OnInit } from '@angular/core';
+import { Component, Input, forwardRef, OnInit, Output, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { SharedGimnasioService } from '../../service/shared-gimnasio.service';
 import { MembresiaService } from '../../service/membresia.service';
@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-cbo-membresia',
   templateUrl: './cbo-membresia.component.html',
   styleUrls: ['./cbo-membresia.component.css'],
-  imports: [ CommonModule, FormsModule ],
+  imports: [CommonModule, FormsModule],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -23,6 +23,7 @@ export class CboMembresiaComponent implements OnInit, ControlValueAccessor {
   @Input() label: string = "Selecciona una Membresía"; // Para el label del combo
   @Input() id_gimnasio!: number; // ID del gimnasio (entrada obligatoria)
   @Input() emitOnlyId: boolean = false; // Booleano para emitir solo el ID (por defecto es false)
+  @Output() valueChange = new EventEmitter< Membresia>();
 
   gimnasioSeleccionado: number | null = null;
   membresias: Membresia[] = []; // Lista de membresías
@@ -30,13 +31,13 @@ export class CboMembresiaComponent implements OnInit, ControlValueAccessor {
   isDisabled: boolean = false; // Estado de deshabilitado
 
   // Funciones de callback registradas por Angular
-  private onChange: (value: any) => void = () => {};
-  private onTouched: () => void = () => {};
+  private onChange: (value: any) => void = () => { };
+  private onTouched: () => void = () => { };
 
   constructor(
     private sharedService: SharedGimnasioService,
     private membresiaService: MembresiaService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     if (this.id_gimnasio) {
@@ -68,12 +69,11 @@ export class CboMembresiaComponent implements OnInit, ControlValueAccessor {
 
   // Maneja cambios en el select
   onValueChange(): void {
-    const valueToEmit = this.emitOnlyId && this.selectedMembresia
-      ? this.selectedMembresia.id_membresia // Emite solo el ID si emitOnlyId es true
-      : this.selectedMembresia; // Emite el objeto completo si emitOnlyId es false
-
-    this.onChange(valueToEmit); // Notifica a Angular sobre el cambio
-    this.onTouched(); // Marca el control como "tocado"
+    if (this.selectedMembresia) {
+      this.onChange(this.selectedMembresia); // Notifica a Angular sobre el cambio
+      this.onTouched(); // Marca el control como "tocado"
+      this.valueChange.emit(this.selectedMembresia); // Emite la membresía seleccionada
+    }
   }
 
   // Métodos de ControlValueAccessor

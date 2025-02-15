@@ -9,16 +9,20 @@
                     <form [formGroup]="pagoForm" (ngSubmit)="onSubmit()">
                         <!-- Atleta -->
                         <div class="mb-3">
-                            <app-cbo-atleta [emitOnlyId]="true" [idEntrenador]="id_entrenador"
+                            <app-cbo-atleta [emitOnlyId]="false" [idEntrenador]="id_entrenador"
                                 (valueChange)="onAtletaSeleccionado($event)"></app-cbo-atleta>
                         </div>
                         <div class="mb-3">
-                            <app-cbo-gimnasio [emitOnlyId]="true" formControlName="gimnasio"></app-cbo-gimnasio>
+                            <label> Gimnasio del Atleta: </label><br>
+                            <label> {{ gimnasioAtleta }} </label>
                         </div>
-                        <!-- 
 
                         <div class="mb-3">
-                            <app-cbo-membresia> </app-cbo-membresia>
+                            <ng-container *ngIf="id_gimnasio !== null">
+                                <app-cbo-membresia [id_gimnasio]="id_gimnasio"
+                                    (valueChange)="onMembresiaSeleccionada($event)">
+                                </app-cbo-membresia>
+                            </ng-container>
                         </div>
 
                         <div class="mb-3">
@@ -27,11 +31,11 @@
                                 placeholder="Ingrese el monto">
                         </div>
 
+
                         <div class="mb-3">
-                            <label for="forma_pago" class="form-label">Forma de pago</label>
-                            <input type="text" id="forma_pago" formControlName="forma_pago" class="form-control"
-                                placeholder="Ingrese la forma de pago">
-                        </div> -->
+                            <app-cbo-forma-pago label="Forma de Pago"
+                                (valueChange)="onFormaPagoChange($event)"></app-cbo-forma-pago>
+                        </div>
                         <!-- Botón de Envío -->
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary">Registrar Pago</button>
