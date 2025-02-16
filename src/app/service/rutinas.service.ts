@@ -20,8 +20,8 @@ export class RutinasService {
   constructor(private http: HttpClient) { }
 
   // Método para obtener la rutina por ID de atleta
-  getRutinaByIdAtleta(id_Atleta: number): Observable<plan[]> {
-    return this.http.post<plan[]>(this.apiUrlGetRutinaByIdAtleta, { id_Atleta });
+  getRutinaByIdAtleta(id_atleta: number): Observable<plan[]> {
+    return this.http.post<plan[]>(this.apiUrlGetRutinaByIdAtleta, { id_atleta });
   }
 
   // Método para obtener las rutinas creadas por un creador por ID
