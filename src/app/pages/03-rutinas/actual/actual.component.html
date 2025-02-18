@@ -1,7 +1,7 @@
-<!-- rutina.component.html -->
-
 <div class="container">
     <h2>Mi Rutina de Ejercicios</h2>
+
+    <!-- Detalles de la Rutina -->
     <div class="card mb-4">
         <div class="card-body">
             <h2 class="card-title">{{ rutinaSeleccionada.nombre }}</h2>
@@ -11,6 +11,7 @@
             </p>
         </div>
     </div>
+
     <!-- Card por Día -->
     <div *ngFor="let dia of rutina; let i = index" class="card mb-3">
         <div class="card-header" (click)="toggleDia(i)">
@@ -20,16 +21,16 @@
             <!-- Card por Grupo Muscular -->
             <div *ngFor="let grupoMuscular of obtenerGruposMusculares(dia.ejercicios); let j = index" class="card mb-3">
                 <div class="card-header" (click)="toggleGrupoMuscular(i, j)">
-                    <h4 class="mb-0">Grupo Muscular {{ grupoMuscular }}</h4>
+                    <h4 class="mb-0">{{ grupoMuscular }}</h4>
                 </div>
                 <div class="card-body" [ngClass]="{'d-none': !dia.gruposMusculares[j].expandido}">
                     <!-- Card por Ejercicio -->
                     <div *ngFor="let ejercicio of obtenerEjerciciosPorGrupoMuscular(dia.ejercicios, grupoMuscular); let k = index"
                         class="card mb-3">
                         <div class="card-body">
-                            <h5>{{ ejercicio.nombre }}</h5>
-                            <p>{{ ejercicio.descripcion }}</p>
-                            <p>Repeticiones: {{ ejercicio.repeticiones }}</p>
+                            <h5>{{ ejercicio.nombre_ejercicio }}</h5>
+                            <p>{{ ejercicio.descripcion_ejercicio }}</p>
+                            <p>Repeticiones: {{ ejercicio.frecuencia_repeticion }}</p>
                             <input type="checkbox" [(ngModel)]="ejercicio.completado" (change)="calcularProgreso(i)" />
                             <label>Completado</label>
                         </div>
