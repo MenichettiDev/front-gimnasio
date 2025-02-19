@@ -37,31 +37,6 @@ export class ActualComponent implements OnInit {
     this.obtenerRutinas(idAtleta);
   }
 
-  // Método para obtener las rutinas desde el backend
-  // obtenerRutinas(idAtleta: number): void {
-  //   this.rutinasService.getRutinaByIdAtleta(idAtleta).subscribe(
-  //     (data: plan[]) => {
-  //       if (data.length > 0) {
-  //         const ultimaRutina = data[0];
-  //         this.rutinaSeleccionada = {
-  //           nombre: ultimaRutina.rutina.nombre,
-  //           objetivo: ultimaRutina.rutina.objetivo,
-  //           descripcion: ultimaRutina.rutina.descripcion,
-  //           fecha_asignacion: ultimaRutina.rutina.fecha_asignacion,
-  //         };
-  //         this.rutina = this.mapearRutina(ultimaRutina); // Mapea los datos de la API al formato que necesita el componente
-  //         console.log( 'rutina armada' , this.rutina );
-  //         this.obtenerDetallesAdicionales(); // Llamar a la función para obtener detalles adicionales
-  //       } else {
-  //         console.warn('No se encontraron rutinas para el atleta.');
-  //       }
-  //     },
-  //     (error) => {
-  //       console.error('Error al obtener las rutinas:', error);
-  //     }
-  //   );
-  // }
-
   obtenerRutinas(idAtleta: number): void {
     this.rutinasService.getRutinaByIdAtleta(idAtleta).subscribe(
       async (data: plan[]) => {
@@ -85,65 +60,6 @@ export class ActualComponent implements OnInit {
     );
   }
 
-//   obtenerDetallesAdicionales(): void {
-//     console.log("Iniciando obtención de detalles adicionales...");
-
-//     this.rutina.forEach((dia) => {
-//         console.log("Procesando día:", dia);
-
-//         dia.ejercicios.forEach((ejercicio: ejercicioRutina) => {
-//             console.log("Procesando ejercicio:", ejercicio);
-
-//             // Obtener nombre y descripción del ejercicio
-//             this.ejercicioService.getEjercicioById(ejercicio.id_ejercicio).subscribe((ejercicioDetalle) => {
-//                 console.log("Detalles del ejercicio obtenidos:", ejercicioDetalle);
-
-//                 this.detallesEjercicios[ejercicio.id_ejercicio] = {
-//                     nombre: ejercicioDetalle.nombre,
-//                     descripcion: ejercicioDetalle.descripcion,
-//                 };
-//             });
-
-//             // Obtener nombre del grupo muscular
-//             this.grupoMuscularService.getGrupoMuscularById(ejercicio.id_grupo_muscular).subscribe((grupoDetalle) => {
-//                 console.log("Detalles del grupo muscular obtenidos:", grupoDetalle);
-
-//                 this.detallesGruposMusculares[ejercicio.id_grupo_muscular] = {
-//                     nombre: grupoDetalle.nombre,
-//                 };
-//             });
-
-//             // Obtener detalles de la repetición
-//             this.repeticionService.getRepeticionById(ejercicio.id_repeticion).subscribe((repeticionDetalle) => {
-//                 console.log("Detalles de la repetición obtenidos:", repeticionDetalle);
-
-//                 this.detallesRepeticiones[ejercicio.id_repeticion] = {
-//                     frecuencia: repeticionDetalle.frecuencia,
-//                 };
-//             });
-//         });
-//     });
-
-//     console.log("Finalizada la obtención de detalles adicionales.");
-// }
-
-  // Método para mapear los datos de la API al formato que necesita el componente
-  // mapearRutina(rutina: plan): any[] {
-  //   return rutina.ejercicios.map((dia) => ({
-  //     dia: dia.dia, // Número del día
-  //     ejercicios: dia.ejercicios.map((ejercicio) => ({
-  //       id_grupo_muscular: ejercicio.id_grupo_muscular,
-  //       id_ejercicio: ejercicio.id_ejercicio, 
-  //       repeticiones: ejercicio.id_repeticion,
-  //       completado: false, // Inicializamos todos los ejercicios como no completados
-  //     })),
-  //     expandido: false, // Estado inicial de la card del día (colapsada)
-  //     gruposMusculares: this.obtenerGruposMusculares(dia.ejercicios).map((grupo) => ({
-  //       nombre: grupo,
-  //       expandido: false, // Estado inicial de la card del grupo muscular (colapsada)
-  //     })),
-  //   }));
-  // }
   async mapearRutina(rutina: plan): Promise<any[]> {
     const rutinaMapeada = await Promise.all(rutina.ejercicios.map(async (dia) => {
       const ejerciciosMapeados = await Promise.all(dia.ejercicios.map(async (ejercicio) => {
@@ -153,11 +69,18 @@ export class ActualComponent implements OnInit {
             .then(data => data || { nombre: '---', descripcion: '---' }) // Valor predeterminado si es undefined
             .catch(() => ({ nombre: '---', descripcion: '---' })), // Valor predeterminado si hay error
           this.grupoMuscularService.getGrupoMuscularById(ejercicio.id_grupo_muscular).toPromise()
-            .then(data => data || { nombre: '---' }) // Valor predeterminado si es undefined
-            .catch(() => ({ nombre: '---' })), // Valor predeterminado si hay error
+            .then(data => {
+              // Guardar el detalle del grupo muscular en this.detallesGruposMusculares
+              this.detallesGruposMusculares[ejercicio.id_grupo_muscular] = data || { nombre: '---' };
+              return this.detallesGruposMusculares[ejercicio.id_grupo_muscular];
+            })
+            .catch(() => {
+              this.detallesGruposMusculares[ejercicio.id_grupo_muscular] = { nombre: '---' };
+              return this.detallesGruposMusculares[ejercicio.id_grupo_muscular];
+            }),
           this.repeticionService.getRepeticionById(ejercicio.id_repeticion).toPromise()
-            .then(data => data || { frecuencia: '---' }) // Valor predeterminado si es undefined
-            .catch(() => ({ frecuencia: '---' })), // Valor predeterminado si hay error
+            .then(data => data || { frecuencia: '---', nombre: '---' }) // Valor predeterminado si es undefined
+            .catch(() => ({ frecuencia: '---', nombre: '---' })), // Valor predeterminado si hay error
         ]);
   
         return {
@@ -165,7 +88,8 @@ export class ActualComponent implements OnInit {
           nombre_ejercicio: ejercicioDetalle.nombre,
           descripcion_ejercicio: ejercicioDetalle.descripcion,
           nombre_grupo_muscular: grupoDetalle.nombre,
-          frecuencia_repeticion: repeticionDetalle.frecuencia,
+          repeticion_frecuencia: repeticionDetalle.frecuencia,
+          repeticion_nombre: repeticionDetalle.nombre,
           completado: false, // Inicializamos todos los ejercicios como no completados
         };
       }));
@@ -175,7 +99,7 @@ export class ActualComponent implements OnInit {
         ejercicios: ejerciciosMapeados,
         expandido: false, // Estado inicial de la card del día (colapsada)
         gruposMusculares: this.obtenerGruposMusculares(dia.ejercicios).map((grupo) => ({
-          nombre: grupo,
+          nombre: this.detallesGruposMusculares[grupo]?.nombre || '---',
           expandido: false, // Estado inicial de la card del grupo muscular (colapsada)
         })),
       };
