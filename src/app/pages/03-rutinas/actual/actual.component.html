@@ -21,7 +21,7 @@
             <!-- Card por Grupo Muscular -->
             <div *ngFor="let grupoMuscular of obtenerGruposMusculares(dia.ejercicios); let j = index" class="card mb-3">
                 <div class="card-header" (click)="toggleGrupoMuscular(i, j)">
-                    <h4 class="mb-0">{{ grupoMuscular }}</h4>
+                    <h4 class="mb-0">{{ detallesGruposMusculares[grupoMuscular]?.nombre || '---' }}</h4>
                 </div>
                 <div class="card-body" [ngClass]="{'d-none': !dia.gruposMusculares[j].expandido}">
                     <!-- Card por Ejercicio -->
