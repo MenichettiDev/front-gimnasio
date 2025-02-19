@@ -15,7 +15,7 @@
     <!-- Card por Día -->
     <div *ngFor="let dia of rutina; let i = index" class="card mb-3">
         <div class="card-header" (click)="toggleDia(i)">
-            <h3 class="mb-0">Día {{ dia.dia }} - {{ obtenerNombresGruposMusculares(dia.ejercicios).join(', ') }}</h3>
+            <h3 class="mb-0">Día {{  dia.dia }} - {{ obtenerNombresGruposMusculares(dia.ejercicios).join(', ') }}</h3>
         </div>
         <div class="card-body" [ngClass]="{'d-none': !dia.expandido}">
             <!-- Card por Grupo Muscular -->
@@ -30,7 +30,7 @@
                         <div class="card-body">
                             <h5>{{ ejercicio.nombre_ejercicio }}</h5>
                             <p>{{ ejercicio.descripcion_ejercicio }}</p>
-                            <p>Repeticiones: {{ ejercicio.frecuencia_repeticion }}</p>
+                            <p>Repeticiones:  {{ ejercicio.repeticion_frecuencia }}</p>
                             <input type="checkbox" [(ngModel)]="ejercicio.completado" (change)="calcularProgreso(i)" />
                             <label>Completado</label>
                         </div>
