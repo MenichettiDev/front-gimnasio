@@ -1,0 +1,23 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  select {
+    display: block;
+    margin-bottom: 20px;
+    padding: 5px;
+    width: 100%;
+  }
+  
+  .imagenes img {
+    max-width: 100px;
+    margin-right: 10px;
+    margin-top: 10px;
+  }
+  
+  a {
+    color: blue;
+    text-decoration: underline;
+  }

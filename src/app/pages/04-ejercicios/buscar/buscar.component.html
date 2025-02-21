@@ -1,1 +1,56 @@
-<p>buscar works!</p>
+<p-toast></p-toast>
+<p-confirmDialog header="Confirmación" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<p-progressSpinner *ngIf="loading" [style]="{'width': '50px', 'height': '50px'}"></p-progressSpinner>
+
+<div class="container mt-3">
+    <form [formGroup]="exerciseForm" (ngSubmit)="onBuscar()">
+        <!-- Grupo Muscular -->
+        <div class="mb-3">
+            <label for="grupoMuscular" class="form-label">Grupo Muscular</label>
+            <app-cbo-gruposmusculares formControlName="idGrupoMuscular"
+                (valueChange)="onGrupoMuscularChange($event)"></app-cbo-gruposmusculares>
+        </div>
+
+        <!-- Ejercicio -->
+        <div class="mb-3">
+            <label for="ejercicio" class="form-label">Ejercicio</label>
+            <app-cbo-ejercicio [grupoMuscularId]="selectedGrupoMuscular ?? null"
+                formControlName="idEjercicio" (valueChange)="onEjercicioChange($event)"></app-cbo-ejercicio>
+        </div>
+
+        <!-- Botón de búsqueda -->
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-success" [disabled]="!exerciseForm.valid">Buscar</button>
+        </div>
+    </form>
+
+    <!-- Resultados de la búsqueda -->
+    <div *ngIf="exerciseForm.get('nombre')?.value" class="mt-4">
+        <!-- Cards con imágenes -->
+        <div class="row">
+            <div class="col-md-4" *ngIf="exerciseForm.get('img_1')?.value">
+                <div class="card">
+                    <img [src]="exerciseForm.get('img_1')?.value" class="card-img-top" alt="Imagen 1">
+                </div>
+            </div>
+            <div class="col-md-4" *ngIf="exerciseForm.get('img_2')?.value">
+                <div class="card">
+                    <img [src]="exerciseForm.get('img_2')?.value" class="card-img-top" alt="Imagen 2">
+                </div>
+            </div>
+            <div class="col-md-4" *ngIf="exerciseForm.get('img_3')?.value">
+                <div class="card">
+                    <img [src]="exerciseForm.get('img_3')?.value" class="card-img-top" alt="Imagen 3">
+                </div>
+            </div>
+        </div>
+
+        <!-- Link del video -->
+        <div class="mt-3" *ngIf="exerciseForm.get('link_video')?.value">
+            <label class="form-label">Video del ejercicio:</label>
+            <a [href]="exerciseForm.get('link_video')?.value" target="_blank" class="form-control">
+                {{ exerciseForm.get('link_video')?.value }}
+            </a>
+        </div>
+    </div>
+</div>
