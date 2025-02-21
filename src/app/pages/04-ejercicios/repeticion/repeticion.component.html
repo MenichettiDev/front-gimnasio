@@ -1,0 +1,47 @@
+<div class="container">
+    <h2>Gestión de Repeticiones</h2>
+
+    <!-- Formulario para crear/editar repeticiones -->
+    <form (ngSubmit)="modoEdicion ? guardarCambios() : crearRepeticion()">
+        <div>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" [(ngModel)]="nuevaRepeticion.nombre" name="nombre" required />
+        </div>
+        <div>
+            <label for="frecuencia">Frecuencia:</label>
+            <input type="text" id="frecuencia" [(ngModel)]="nuevaRepeticion.frecuencia" name="frecuencia" required />
+        </div>
+        <div>
+            <label for="comentario">Comentario:</label>
+            <textarea id="comentario" [(ngModel)]="nuevaRepeticion.comentario" name="comentario"></textarea>
+        </div>
+        <button type="submit">{{ modoEdicion ? 'Guardar Cambios' : 'Crear Repetición' }}</button>
+        <button type="button" *ngIf="modoEdicion" (click)="resetFormulario()">Cancelar</button>
+    </form>
+
+    <!-- Lista de repeticiones -->
+    <h3>Lista de Repeticiones</h3>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Frecuencia</th>
+                <th>Comentario</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let repeticion of repeticiones">
+                <td>{{ repeticion.id_repeticion }}</td>
+                <td>{{ repeticion.nombre }}</td>
+                <td>{{ repeticion.frecuencia }}</td>
+                <td>{{ repeticion.comentario }}</td>
+                <td>
+                    <button (click)="editarRepeticion(repeticion)">Editar</button>
+                    <button (click)="eliminarRepeticion(repeticion.id_repeticion)">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

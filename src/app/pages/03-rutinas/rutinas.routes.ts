@@ -8,7 +8,6 @@ export const rutinasRoutes: Routes = [
     // Rutas para los diferentes componentes de Rutinas
     { path: 'actual', loadComponent: () => import('./actual/actual.component').then(m => m.ActualComponent) },
     { path: 'coach', loadComponent: () => import('./coach/coach.component').then(m => m.CoachComponent) },
-    { path: 'crear-frecuencia', loadComponent: () => import('./crear-frecuencia/crear-frecuencia.component').then(m => m.CrearFrecuenciaComponent) },
     { path: 'crear-rutina', loadComponent: () => import('./crear-rutina/crear-rutina.component').then(m => m.CrearRutinaComponent) },
     { path: 'especificas', loadComponent: () => import('./especificas/especificas.component').then(m => m.EspecificasComponent) },
     { path: 'favoritas', loadComponent: () => import('./favoritas/favoritas.component').then(m => m.FavoritasComponent) },

@@ -10,5 +10,7 @@ export const ejerciciosRoutes: Routes = [
     { path: 'cargar-nuevo', loadComponent: () => import('./cargar-nuevo/cargar-nuevo.component').then(m => m.CargarNuevoComponent) },
 
     { path: 'editar-ejercicio', loadComponent: () => import('./editar-ejercicio/editar-ejercicio.component').then(m => m.EditarEjercicioComponent) },
+    
+    { path: 'crear-repeticion', loadComponent: () => import('./repeticion/repeticion.component').then(m => m.RepeticionComponent) },
     { path: 'coach', loadComponent: () => import('./coach/coach.component').then(m => m.CoachComponent) }
 ];
