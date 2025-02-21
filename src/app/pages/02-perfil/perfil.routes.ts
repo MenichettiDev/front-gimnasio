@@ -7,6 +7,7 @@ export const perfilRoutes: Routes = [
 
     // Ruta para el componente Coach
     { path: 'coach', loadComponent: () => import('./coach/coach.component').then(m => m.CoachComponent) },
+    { path: 'perfil', loadComponent: () => import('./perfil/perfil.component').then(m => m.PerfilComponent) },
 
     // Ruta para el componente Estadísticas
     { path: 'estadisticas', loadComponent: () => import('./estadisticas/estadisticas.component').then(m => m.EstadisticasComponent) }
