@@ -1,28 +1,32 @@
-<div class="container">
-    <h2>Gestión de Repeticiones</h2>
+<div class="container mt-4">
+    <h2 class="mb-4">Gestión de Repeticiones</h2>
 
     <!-- Formulario para crear/editar repeticiones -->
-    <form (ngSubmit)="modoEdicion ? guardarCambios() : crearRepeticion()">
-        <div>
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" [(ngModel)]="nuevaRepeticion.nombre" name="nombre" required />
+    <form (ngSubmit)="modoEdicion ? guardarCambios() : crearRepeticion()" class="mb-4 p-4 border rounded bg-light">
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre:</label>
+            <input type="text" id="nombre" class="form-control" [(ngModel)]="nuevaRepeticion.nombre" name="nombre" required />
+        </div>
+        <div class="mb-3">
+            <label for="frecuencia" class="form-label">Frecuencia:</label>
+            <input type="text" id="frecuencia" class="form-control" [(ngModel)]="nuevaRepeticion.frecuencia" name="frecuencia" required />
+        </div>
+        <div class="mb-3">
+            <label for="comentario" class="form-label">Comentario:</label>
+            <textarea id="comentario" class="form-control" [(ngModel)]="nuevaRepeticion.comentario" name="comentario"></textarea>
         </div>
         <div>
-            <label for="frecuencia">Frecuencia:</label>
-            <input type="text" id="frecuencia" [(ngModel)]="nuevaRepeticion.frecuencia" name="frecuencia" required />
+            <button type="submit" class="btn btn-primary me-2">
+                {{ modoEdicion ? 'Guardar Cambios' : 'Crear Repetición' }}
+            </button>
+            <button type="button" *ngIf="modoEdicion" class="btn btn-secondary" (click)="resetFormulario()">Cancelar</button>
         </div>
-        <div>
-            <label for="comentario">Comentario:</label>
-            <textarea id="comentario" [(ngModel)]="nuevaRepeticion.comentario" name="comentario"></textarea>
-        </div>
-        <button type="submit">{{ modoEdicion ? 'Guardar Cambios' : 'Crear Repetición' }}</button>
-        <button type="button" *ngIf="modoEdicion" (click)="resetFormulario()">Cancelar</button>
     </form>
 
     <!-- Lista de repeticiones -->
-    <h3>Lista de Repeticiones</h3>
-    <table border="1">
-        <thead>
+    <h3 class="mb-3">Lista de Repeticiones</h3>
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
@@ -38,8 +42,14 @@
                 <td>{{ repeticion.frecuencia }}</td>
                 <td>{{ repeticion.comentario }}</td>
                 <td>
-                    <button (click)="editarRepeticion(repeticion)">Editar</button>
-                    <button (click)="eliminarRepeticion(repeticion.id_repeticion)">Eliminar</button>
+                    <button class="btn btn-sm btn-warning me-2" (click)="editarRepeticion(repeticion)">
+                        <i class="fas fa-edit"></i> <!-- Icono de editar -->
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-sm btn-danger" (click)="eliminarRepeticion(repeticion.id_repeticion)">
+                        <i class="fas fa-trash-alt"></i> <!-- Icono de eliminar -->
+                    </button>
                 </td>
             </tr>
         </tbody>
