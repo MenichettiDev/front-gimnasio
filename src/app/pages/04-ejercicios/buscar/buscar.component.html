@@ -26,31 +26,48 @@
 
     <!-- Resultados de la búsqueda -->
     <div *ngIf="exerciseForm.get('nombre')?.value" class="mt-4">
-        <!-- Cards con imágenes -->
-        <div class="row">
-            <div class="col-md-4" *ngIf="exerciseForm.get('img_1')?.value">
+        <!-- Mostrar el nombre del ejercicio -->
+        <div class="mb-3">
+            <label class="form-label">Nombre del ejercicio:</label>
+            <p>{{ exerciseForm.get('nombre')?.value }}</p>
+        </div>
+    
+        <!-- Mostrar la descripción del ejercicio -->
+        <div class="mb-3">
+            <label class="form-label">Descripción:</label>
+            <p>{{ exerciseForm.get('descripcion')?.value }}</p>
+        </div>
+    
+        <!-- Mostrar las imágenes del ejercicio -->
+        <div class="row mb-3">
+            <div class="col-md-4">
                 <div class="card">
-                    <img [src]="exerciseForm.get('img_1')?.value" class="card-img-top" alt="Imagen 1">
+                    <img [src]="exerciseForm.get('img_1')?.value || 'images/rat.jpeg'" class="card-img-top" alt="Imagen 1">
                 </div>
             </div>
-            <div class="col-md-4" *ngIf="exerciseForm.get('img_2')?.value">
+            <div class="col-md-4">
                 <div class="card">
-                    <img [src]="exerciseForm.get('img_2')?.value" class="card-img-top" alt="Imagen 2">
+                    <img [src]="exerciseForm.get('img_2')?.value || 'images/rat.jpeg'" class="card-img-top" alt="Imagen 2">
                 </div>
             </div>
-            <div class="col-md-4" *ngIf="exerciseForm.get('img_3')?.value">
+            <div class="col-md-4">
                 <div class="card">
-                    <img [src]="exerciseForm.get('img_3')?.value" class="card-img-top" alt="Imagen 3">
+                    <img [src]="exerciseForm.get('img_3')?.value || 'images/rat.jpeg'" class="card-img-top" alt="Imagen 3">
                 </div>
             </div>
         </div>
-
-        <!-- Link del video -->
-        <div class="mt-3" *ngIf="exerciseForm.get('link_video')?.value">
+    
+        <!-- Mostrar el enlace del video -->
+        <div class="mb-3" *ngIf="exerciseForm.get('link_video')?.value">
             <label class="form-label">Video del ejercicio:</label>
-            <a [href]="exerciseForm.get('link_video')?.value" target="_blank" class="form-control">
-                {{ exerciseForm.get('link_video')?.value }}
-            </a>
+            <!-- Mostrar el video incrustado -->
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe 
+                    class="embed-responsive-item" 
+                    [src]="getSafeUrl(exerciseForm.get('link_video')?.value)" 
+                    allowfullscreen>
+                </iframe>
+            </div>
         </div>
     </div>
 </div>

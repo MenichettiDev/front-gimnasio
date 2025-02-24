@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CboGruposmuscularesComponent } from '../../../components/cbo-gruposmusculares/cbo-gruposmusculares.component';
 import { CboEjercicioComponent } from '../../../components/cbo-ejercicio/cbo-ejercicio.component';
 import { GruposMuscularesService } from '../../../service/grupos-musculares.service';
@@ -11,6 +11,7 @@ import { GrupoMuscular } from '../../../data/interfaces/grupoMuscularInterface';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-buscar',
@@ -29,14 +30,17 @@ export class BuscarComponent implements OnInit {
   selectedEjercicio: number | null = null;
   isEditable: boolean = false;
   gruposMusculares: GrupoMuscular[] = [];
+  safeVideoUrl: SafeResourceUrl | null = null; // Variable para almacenar la URL sanitizada
 
   constructor(
     private fb: FormBuilder,
     private grupoMuscularService: GruposMuscularesService,
     private ejercicioService: EjerciciosService,
     private sharedGrupoMuscularService: SharedGrupoMuscularService,
-    private confirmacionService: ConfirmacionService
-  ) { }
+    private confirmacionService: ConfirmacionService,
+    private sanitizer: DomSanitizer
+  ) {}
+
 
   ngOnInit(): void {
     this.createForm();
@@ -68,7 +72,7 @@ export class BuscarComponent implements OnInit {
       descripcion: [''],
       link_video: ['']
     });
-    this.exerciseForm.disable();
+    // this.exerciseForm.disable();
   }
 
   subscribeToGrupoMuscularChanges(): void {
@@ -113,8 +117,9 @@ export class BuscarComponent implements OnInit {
 
     this.ejercicioService.getEjercicioById(this.selectedEjercicio).subscribe(
       (data) => {
-        this.exerciseForm.patchValue(data);
-        this.exerciseForm.enable();
+        console.log('Ejercicio encontrado', data);
+        this.exerciseForm.patchValue(data); // Actualiza el formulario con los datos del ejercicio
+        this.exerciseForm.enable(); // Habilita el formulario si está deshabilitado
         this.loading = false;
       },
       (error) => {
@@ -133,4 +138,30 @@ export class BuscarComponent implements OnInit {
     this.exerciseForm.controls['idGrupoMuscular'].setValue(null);
     this.obtenerGruposMusculares();
   }
+
+  // Método para sanitizar la URL del video
+  getSafeUrl(url: string): SafeResourceUrl {
+    // Verifica si la URL es de YouTube
+    if (url.includes('youtube.com/watch?v=')) {
+        console.log('URL original:', url); // Depuración
+        const urlParams = new URLSearchParams(new URL(url).search);
+        const videoId = urlParams.get('v');
+        console.log('ID del video extraído:', videoId); // Depuración
+        if (videoId) {
+            // Convierte la URL al formato de incrustación
+            url = `https://www.youtube.com/embed/${videoId}`;
+        }
+    } else if (url.includes('youtu.be/')) {
+        // Maneja URLs cortas de YouTube
+        const videoId = url.split('youtu.be/')[1].split('?')[0];
+        console.log('ID del video extraído (URL corta):', videoId); // Depuración
+        if (videoId) {
+            url = `https://www.youtube.com/embed/${videoId}`;
+        }
+    }
+
+    // Sanitiza la URL para que Angular la permita en el iframe
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+}
+
 }
