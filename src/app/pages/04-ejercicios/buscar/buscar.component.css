@@ -1,23 +1,46 @@
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  select {
-    display: block;
-    margin-bottom: 20px;
-    padding: 5px;
-    width: 100%;
-  }
-  
-  .imagenes img {
-    max-width: 100px;
-    margin-right: 10px;
-    margin-top: 10px;
-  }
-  
-  a {
-    color: blue;
-    text-decoration: underline;
-  }
+   /* Aumentar el tamaño de la letra del nombre del ejercicio */
+   .nombre-ejercicio {
+     font-size: 1.9rem;
+     /* Tamaño de la fuente */
+     font-weight: bold;
+     /* Negrita */
+     color: #2c3e50;
+     /* Color del texto */
+   }
+
+   /* Aumentar el tamaño de la letra de las descripciones */
+   .descripcion-ejercicio {
+     font-size: 1.7rem;
+     /* Tamaño de la fuente */
+     line-height: 1.5;
+     /* Espaciado entre líneas */
+     color: #333;
+     /* Color del texto */
+   }
+
+   /* Ajustar el tamaño del video */
+   .video-container {
+     width: 100%;
+     /* Ancho del contenedor */
+     max-width: 800px;
+     /* Ancho máximo */
+     margin: 0 auto;
+     /* Centrar el contenedor */
+   }
+
+   .video-container iframe {
+     width: 100%;
+     /* Ancho del iframe */
+     height: 400px;
+     /* Altura del iframe */
+     border: none;
+     /* Eliminar borde */
+   }
+
+   /* Estilos adicionales para las imágenes */
+   .card-img-top {
+     max-height: 200px;
+     /* Altura máxima de las imágenes */
+     object-fit: cover;
+     /* Ajustar la imagen sin distorsionar */
+   }

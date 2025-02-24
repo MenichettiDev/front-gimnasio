@@ -29,13 +29,13 @@
         <!-- Mostrar el nombre del ejercicio -->
         <div class="mb-3">
             <label class="form-label">Nombre del ejercicio:</label>
-            <p>{{ exerciseForm.get('nombre')?.value }}</p>
+            <p class="nombre-ejercicio">{{ exerciseForm.get('nombre')?.value }}</p>
         </div>
     
         <!-- Mostrar la descripción del ejercicio -->
         <div class="mb-3">
             <label class="form-label">Descripción:</label>
-            <p>{{ exerciseForm.get('descripcion')?.value }}</p>
+            <p class="descripcion-ejercicio">{{ exerciseForm.get('descripcion')?.value }}</p>
         </div>
     
         <!-- Mostrar las imágenes del ejercicio -->
@@ -58,9 +58,8 @@
         </div>
     
         <!-- Mostrar el enlace del video -->
-        <div class="mb-3" *ngIf="exerciseForm.get('link_video')?.value">
+        <div class="mb-3 video-container" *ngIf="exerciseForm.get('link_video')?.value">
             <label class="form-label">Video del ejercicio:</label>
-            <!-- Mostrar el video incrustado -->
             <div class="embed-responsive embed-responsive-16by9">
                 <iframe 
                     class="embed-responsive-item" 
