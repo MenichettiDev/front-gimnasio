@@ -1,58 +1,71 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
-
+/* Reset básico */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", "sans-serif";
+  font-family: "Poppins", sans-serif;
 }
 
-.login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: url('/images/rat.jpeg') no-repeat;
-  background-size: cover;
-  background-position: center;
+/* Configuración del html y body */
+html, body {
+  height: 100%; /* Altura completa de la ventana */
+  width: 100%; /* Ancho completo de la ventana */
+  display: flex; /* Usar flexbox para centrar */
+  justify-content: center; /* Centrado horizontal */
+  align-items: center; /* Centrado vertical */
+  background-color: #f0f0f0; /* Fondo claro */
+  overflow: hidden; /* Evitar scroll innecesario */
 }
 
+/* Contenedor principal */
+.row {
+  display: flex; /* Flexbox para centrar */
+  justify-content: center; /* Centrado horizontal */
+  align-items: center; /* Centrado vertical */
+  width: 100%; /* Ancho completo */
+  height: 100%; /* Altura completa */
+}
+
+/* Estilo del formulario */
 .container {
-  width: 420px;
-  background: transparent;
-  border: 2px solid rgba(255, 255, 255, .2);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-  color: #fff;
-  border-radius: 10px;
-  padding: 30px 40px;
+  width: 420px; /* Ancho fijo */
+  background: transparent; /* Fondo transparente */
+  border: 2px solid rgba(255, 255, 255, 0.2); /* Borde semitransparente */
+  backdrop-filter: blur(10px); /* Efecto de desenfoque */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Sombra suave */
+  color: #fff; /* Texto blanco */
+  border-radius: 10px; /* Bordes redondeados */
+  padding: 30px 40px; /* Espaciado interno */
+  display: flex; /* Flexbox para organizar contenido */
+  flex-direction: column; /* Organización vertical */
+  justify-content: center; /* Centrado vertical del contenido */
+  opacity: 0; /* Inicialmente invisible */
+  animation: fadeInForm 1.7s forwards; /* Animación de entrada */
 }
 
+/* Resto de estilos (sin cambios) */
 .container h1 {
   font-size: 36px;
   text-align: center;
 }
-
-.container .form-group {
+.form-group {
   position: relative;
   width: 100%;
   height: 50px;
   margin: 35px 0;
 }
-
 .form-group input {
   width: 100%;
   height: 100%;
   background: transparent;
   border: none;
   outline: none;
-  border: 2px solid rgba(255, 255, 255, .2);
+  border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 40px;
   font-size: 16px;
   color: #fff;
   padding: 20px 45px 20px 20px;
 }
-
 .form-group i {
   position: absolute;
   right: 20px;
@@ -60,130 +73,47 @@
   transform: translateY(-50%);
   font-size: 20px;
 }
-
-.form-group input::placeholder {
-  color: #fff;
-}
-
-.container .remember-forgot {
+.remember-forgot {
   display: flex;
-  justify-content:  space-between;
+  justify-content: space-between;
   font-size: 14.5px;
   margin: -5px 0 5px;
 }
-
-.remember-forgot label input {
-  accent-color: #fff;
-  margin-right: 3px;
-}
-
-.remember-forgot a {
-  color: #fff;
-  text-decoration: underline;
-}
-
-.remember-forgot a:hover {
-  text-decoration: underline;
-
-}
-
-.container .btn {
+.btn {
   width: 100%;
   height: 45px;
   background: #fff;
   border: none;
   outline: none;
   border-radius: 40px;
-  box-shadow: 0 0 10px rbga(0,0,0,.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   font-size: 16px;
   color: #333;
   font-weight: 600;
   margin-top: 10px;
 }
-
-.text-center {
+.register-link {
   font-size: 14.5px;
   text-align: center;
-  margin-top: 20px;
+  margin: 20px 0 15px;
 }
-
-.text-center a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.text-center a:hover {
-  text-decoration: underline;
-}
-
-.container .register-link {
-  font-size: 14.5px;
-  text-align: center;
-  margin: 20px 0 15px ;
-}
-
-.register-link p a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.register-link p a:hover {
-  text-decoration: underline;
-}
-
-/* Animación al enfocar el campo de entrada */
-.form-group input:focus {
-  border-color: #fff; /* Cambia el color del borde al enfocar */
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8); /* Añade un resplandor sutil */
-  transition: border-color 0.3s, box-shadow 0.3s; /* Añadir transición suave */
-}
-
-/* Animación para los íconos al pasar el cursor */
-.form-group i:hover {
-  transform: scale(1.2); /* Aumenta el tamaño del icono */
-  transition: transform 0.3s ease; /* Transición suave */
-}
-
-/* Animación para el botón "Iniciar sesión" al pasar el cursor */
-.container .btn:hover {
-  background: #f2f2f2; /* Cambia el color de fondo */
-  color: #333; /* Cambia el color del texto */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Añadir sombra sutil */
-  transform: translateY(-3px); /* Eleva el botón ligeramente */
-  transition: all 0.3s ease; /* Transición suave */
-}
-
-/* Animación para los mensajes de error */
 .error-message {
   opacity: 0;
-  animation: fadeIn 0.5s forwards; /* Animación de desvanecimiento */
+  animation: fadeIn 0.5s forwards;
   text-align: center;
   width: 100%;
 }
-
-/* Definir la animación de desvanecimiento */
 @keyframes fadeIn {
   to {
-    opacity: 1; /* Al final de la animación, la opacidad será 1 */
+    opacity: 1;
   }
 }
-
-/* Animación de entrada para el formulario */
-.container {
-  opacity: 0;
-  animation: fadeInForm 1.7s forwards; /* Animación de entrada */
-}
-
 @keyframes fadeInForm {
   to {
-    opacity: 1; /* El formulario se vuelve completamente visible */
+    opacity: 1;
   }
 }
-
-/* Estilos para el botón de cerrar */
 .close-btn {
   background: transparent;
   border: none;
@@ -195,13 +125,32 @@
   cursor: pointer;
   z-index: 999;
 }
-
 .close-btn:hover {
-  color: red; /* Cambiar el color cuando el usuario pasa el ratón por encima */
+  color: red;
 }
-
-.close-btn i {
-  font-size: 24px;
+@media (max-width: 480px) {
+  .container {
+    width: 90%;
+    padding: 20px;
+  }
+  .container h1 {
+    font-size: 28px;
+  }
+  .form-group input {
+    font-size: 14px;
+    padding: 15px 35px 15px 15px;
+  }
+  .btn {
+    height: 40px;
+    font-size: 14px;
+  }
+  .register-link p {
+    font-size: 13px;
+  }
+  .remember-forgot {
+    font-size: 12px;
+  }
+  .form-group i {
+    font-size: 18px;
+  }
 }
-
-

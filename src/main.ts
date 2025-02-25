@@ -3,18 +3,17 @@ import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { BarrasupComponent } from './app/shared/barrasup/barrasup.component';
 
-// bootstrapApplication(AppComponent, appConfig)
-//   .catch((err) => console.error(err));
+const updatedAppConfig = {
+  ...appConfig,
+  providers: [
+    ...appConfig.providers,
+    provideHttpClient(withFetch()),
+    provideAnimationsAsync(),
+    BarrasupComponent, // Registra BarrasupComponent en los proveedores
+  ],
+};
 
-
-  const updatedAppConfig = {
-    ...appConfig,
-    providers: [
-      ...appConfig.providers,
-      provideHttpClient(withFetch()), provideAnimationsAsync(),
-    ],
-  };
-  
-  bootstrapApplication(AppComponent, updatedAppConfig)
-    .catch((err) => console.error(err));
+bootstrapApplication(AppComponent, updatedAppConfig)
+  .catch((err) => console.error(err));
