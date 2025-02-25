@@ -1,18 +1,14 @@
 <!-- Barra superior -->
-<!--<div class="alto">
-    <app-barrasup></app-barrasup>
-</div> -->
+<div class="alto">
+  <app-barrasup></app-barrasup>
+</div>
 
-<div class="container-fluid mt-3">
-    <div class="row">
-        <!-- Sidebar fijo a la izquierda -->
-        <div class="col-2 p-0">
-            <app-sidebar></app-sidebar>
-        </div>
-
-        <!-- Contenido principal -->
-        <div class="col-10">
-            <router-outlet></router-outlet>
-        </div>
+<!-- Contenido principal -->
+<div class="container-fluid">
+  <div class="row">
+    <!-- Aquí se podrían agregar más elementos como un sidebar si lo deseas -->
+    <div class="col-12">
+      <router-outlet></router-outlet> <!-- Aquí se inyectará el componente de resumen o cualquier otro componente según la ruta -->
     </div>
+  </div>
 </div>

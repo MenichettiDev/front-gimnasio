@@ -1,25 +1,19 @@
 <div class="top-bar">
+  <!-- Redes sociales -->
+  <div class="social-icons">
+    <a href="https://www.instagram.com/franco.menichetti89" target="_blank">
+      <i class="bx bxl-instagram"></i>
+    </a>
+    <a href="https://chat.whatsapp.com/C0VMZ2hME9JGqE1uKI2rCY" target="_blank">
+      <i class="bx bxl-whatsapp"></i>
+    </a>
+  </div>
 
-    <!-- Redes sociales -->
-    <div class="social-icons">
-        <a href="https://www.instagram.com/franco.menichetti89" target="_blank">
-            <i class="bx bxl-instagram"></i>
-        </a>
-        <a href="https://chat.whatsapp.com/C0VMZ2hME9JGqE1uKI2rCY" target="_blank">
-            <i class="bx bxl-whatsapp"></i>
-        </a>
-    </div>
-
-    <!-- Botón de Login -->
-    <!-- <button (click)="navigateToLogin()" class="btn-login">
-        <i class="bx bx-log-in"></i> Login
-    </button> -->
-    <button *ngIf="!authService.isLoggedIn()" (click)="login()" class="btn-login">
-        <i class="bx bx-log-in"></i> Login
-    </button>
-    <button *ngIf="authService.isLoggedIn()" (click)="logout()" class="btn-login">
-        <i class="bx bx-log-out"></i> Logout
-    </button>
-
-
+  <!-- Botón de Login / Logout -->
+  <button *ngIf="!isLoggedIn" (click)="login()" class="btn-login">
+    <i class="bx bx-log-in"></i> Login
+  </button>
+  <button *ngIf="isLoggedIn" (click)="logout()" class="btn-login">
+    <i class="bx bx-log-out"></i> Logout
+  </button>
 </div>

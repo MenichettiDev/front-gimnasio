@@ -8,7 +8,7 @@ import { Frase } from '../../../data/interfaces/fraseInterface';
   selector: 'app-resumen',
   imports: [CommonModule, FormsModule],
   templateUrl: './resumen.component.html',
-  styleUrl: './resumen.component.css'
+  styleUrls: ['./resumen.component.css']
 })
 export class ResumenComponent {
 
@@ -33,5 +33,5 @@ export class ResumenComponent {
   }
 
   // Llamada al servicio para obtener los entrenadores
-  
+
 }

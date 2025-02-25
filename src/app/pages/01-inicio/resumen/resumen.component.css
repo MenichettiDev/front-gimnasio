@@ -1,98 +1,98 @@
+/* Estilo general */
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: #fff;
+  overflow: hidden; /* Ocultar la barra de desplazamiento */
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;  /* Centramos todo el contenido vertical y horizontal */
+}
+
 .main-page {
-    padding: 50px 0;
+  width: 100%;  /* Para asegurar que el contenedor ocupe todo el ancho de la pantalla */
+  height: 100%;  /* Aseguramos que ocupe todo el alto */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
 }
 
-.main-page img {
-    max-height: 500px;
-    /* Altura máxima para mantener proporción */
+/* Estilo del texto */
+.text-content {
+  max-width: 500px;
+  width: 100%; /* Asegura que el contenedor de texto no se desborde */
+  padding: 20px;
 }
 
-.main-page h1 {
-    font-family: 'Poppins', sans-serif;
-    /* Tipografía moderna */
-    font-weight: 700;
+.main-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+  margin-bottom: 20px;
 }
 
-.main-page p {
-    font-family: 'Open Sans', sans-serif;
-    /* Tipografía elegante y legible */
-    line-height: 1.8;
+.random-quote {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #ffdd57;
+  /* Amarillo dorado para resaltar */
+  line-height: 1.6;
+  margin: 20px 0;
+  animation: fadeIn 2s ease-in-out;
 }
 
-/* Estilos generales para el contenedor */
-div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #f4f4f4;
-    font-family: 'Roboto', sans-serif;
-    /* Fuente base */
-    color: #333;
-    text-align: center;
-}
-
-/* Estilo para el título */
-h1 {
-    font-size: 3rem;
-    font-weight: bold;
-    color: #2c3e50;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    letter-spacing: 2px;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Estilo para la frase aleatoria */
-p {
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: #e74c3c;
-    /* Color rojo para resaltar la frase */
-    line-height: 1.5;
-    margin: 20px 0;
-    font-family: 'Montserrat', sans-serif;
-    /* Fuente más motivacional */
-    letter-spacing: 1px;
-    text-align: center;
-    max-width: 600px;
-}
-
-/* Estilo para el botón */
-button {
-    background-color: #e74c3c;
-    /* Color rojo */
-    color: white;
-    font-size: 1.2rem;
-    padding: 10px 30px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-weight: 700;
-    text-transform: uppercase;
-}
-
-button:hover {
-    background-color: #c0392b;
-    /* Rojo más oscuro al hacer hover */
-}
-
-/* Animación para dar energía a la frase */
-p {
-    animation: fadeIn 2s ease-in-out;
-}
-
-/* Animación de desvanecimiento de la frase */
+/* Animación de desvanecimiento */
 @keyframes fadeIn {
-    0% {
-        opacity: 0;
-        transform: translateY(50px);
-    }
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* Botón */
+.btn-refresh {
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  /* Gradiente llamativo */
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 12px 35px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(255, 126, 95, 0.4);
+  text-transform: uppercase;
+}
+
+.btn-refresh:hover {
+  background: linear-gradient(135deg, #feb47b, #ff7e5f);
+  /* Invertir gradiente */
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 126, 95, 0.6);
+}
+
+.btn-refresh:active {
+  transform: translateY(0);
+  box-shadow: 0 5px 10px rgba(255, 126, 95, 0.4);
+}
+
+/* Icono dentro del botón */
+.btn-refresh i {
+  margin-right: 8px;
+  font-size: 1.3rem;
 }
