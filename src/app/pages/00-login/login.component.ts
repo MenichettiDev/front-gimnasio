@@ -38,11 +38,17 @@ export class LoginComponent implements OnInit {
           (response) => {
             this.authService.saveUser(response);
             // Redirige al usuario a la página de inicio
-            this.router.navigate(['/home']);
+            this.router.navigate(['/inicio']);
           },
           (error) => {
             console.error('Error de login', error);
-            this.errorMessage = 'Credenciales incorrectas.';
+            if (error.status === 401) {
+              // Error de credenciales incorrectas
+              this.errorMessage = 'Credenciales incorrectas.';
+            } else {
+              // Error general
+              this.errorMessage = 'Hubo un problema al intentar iniciar sesión. Por favor, intente nuevamente.';
+            }
           }
         );
     } else {
