@@ -1,7 +1,7 @@
 /* Sidebar con fondo negro semi-transparente */
 .sidebar {
   width: 230px;  /* Ancho más grande del sidebar */
-  background-color: rgba(43, 1, 75, 0.74);  /* Fondo negro con 70% de opacidad */
+  background-color: rgba(43, 1, 75, 0.94);  /* Fondo negro con 70% de opacidad */
   color: #d3d3d3;  /* Gris claro */
   padding: 20px;
   position: fixed;
@@ -183,30 +183,3 @@
   font-size: 20px;
 }
 
-/* Clases agregadas por Franco---para desplazar el sidebar */
-
-/* Sidebar con fondo negro semi-transparente */
-.sidebar {
-  width: 230px; /* Ancho más grande del sidebar */
-  background-color: rgba(43, 1, 75, 0.74); /* Fondo negro con 70% de opacidad */
-  color: #d3d3d3; /* Gris claro */
-  padding: 20px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  z-index: 1000;
-  box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  transition: width 0.3s ease, padding 0.3s ease;
-  overflow-y: auto; /* Permitir desplazamiento vertical */
-}
-
-/* Clase para ocultar el sidebar */
-.sidebar.hidden {
-  width: 0;
-  padding: 0;
-  overflow: hidden;
-}
