@@ -12,7 +12,7 @@ export const guardsGuard: CanActivateFn = (route, state) => {
       if (isLoggedIn) {
         return true; // Permite el acceso si está logueado
       } else {
-        router.navigate(['/login']); // Redirige al login si no está logueado
+        router.navigate(['/login/home']); // Redirige al login si no está logueado
         return false; // Bloquea el acceso
       }
     })

@@ -12,26 +12,6 @@ import { Frase } from '../../../data/interfaces/fraseInterface';
 })
 export class ResumenComponent {
 
-  fraseAleatoria: Frase | null = null;
 
-  constructor( private frasesService: FrasesService) { }
-
-  ngOnInit(): void {
-    this.obtenerFraseAleatoria();
-  }
-
-
-  obtenerFraseAleatoria() {
-    this.frasesService.getFraseAleatoria().subscribe(
-      ( data ) => {
-        console.log( 'frase aleatoria' + data );
-        this.fraseAleatoria = data;
-      }, ( error ) => {
-        console.error( error );
-      }
-    );
-  }
-
-  // Llamada al servicio para obtener los entrenadores
 
 }
