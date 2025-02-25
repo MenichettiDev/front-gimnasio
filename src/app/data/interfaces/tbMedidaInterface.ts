@@ -1,5 +1,5 @@
 export interface Medida {
-    id_proceso: number;
+    id_medida: number;
     id_atleta: number;
     fecha_medicion: string;
     peso: number;
