@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { AuthService } from '../../service/auth/auth.service';
+import { AuthService } from '../../../service/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -38,7 +38,8 @@ export class LoginComponent implements OnInit {
           (response) => {
             this.authService.saveUser(response);
             // Redirige al usuario a la página de inicio
-            this.router.navigate(['/inicio']);
+            // this.router.navigate(['/inicio/resumen']);
+            window.location.href = '/inicio/resumen';
           },
           (error) => {
             console.error('Error de login', error);
@@ -68,8 +69,8 @@ export class LoginComponent implements OnInit {
     const control = this.loginForm.get(field);
     return control?.invalid && control?.touched ? true : false;
   }
-   // Método para manejar el cierre del formulario y navegar al home
-   closeLogin() {
+  // Método para manejar el cierre del formulario y navegar al home
+  closeLogin() {
     this.router.navigate(['/']); // Navega a la página de inicio (home)
   }
 }

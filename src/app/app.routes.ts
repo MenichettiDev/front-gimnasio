@@ -1,16 +1,20 @@
 import { Routes } from '@angular/router';
 import { guardsGuard } from './guards.guard'; // Importa el guard
 import { ResumenComponent } from './pages/01-inicio/resumen/resumen.component';
-import { LoginComponent } from './pages/00-login/login.component';
+import { LoginComponent } from './pages/00-login/login/login.component';
 
 
 export const routes: Routes = [
     // Ruta para el componente Inicio
-    { path: '', loadComponent: () => import('./pages/01-inicio/resumen/resumen.component').then(m => m.ResumenComponent) },
+    { path: '', loadComponent: () => import('./pages/00-login/home/home.component').then(m => m.HomeComponent) },
 
     // Ruta Lazy Loading para todas las páginas dentro de "Rutinas"
-    { path: 'login', component: LoginComponent },
+    // { path: 'login', component: LoginComponent },
     // Ruta Lazy Loading para todas las páginas dentro de "Ejercicios"
+    {
+        path: 'login',
+        loadChildren: () => import('./pages/00-login/login.routes').then(m => m.loginRoutes)
+    },
     {
         path: 'inicio',
         loadChildren: () => import('./pages/01-inicio/inicio.routes').then(m => m.inicioRoutes)
@@ -51,5 +55,5 @@ export const routes: Routes = [
 
 
     // Ruta por defecto
-    { path: '**', redirectTo: '' }
+    { path: '**', redirectTo: 'home' }
 ];

@@ -29,4 +29,9 @@ export class AppComponent {
     public authService: AuthService
   ) { }
 
+
+  shouldShowSidebar(): boolean {
+    const currentRoute = this.router.url;
+    return !['login/login', 'login/home'].includes(currentRoute);
+  }
 }

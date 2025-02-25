@@ -42,12 +42,14 @@ export class BarrasupComponent implements OnInit, OnDestroy {
     if (this.router.url === '/home') {
       window.location.reload();
     } else {
-      this.router.navigate(['/home']);
+      // this.router.navigate(['/home']);
+      window.location.href = 'login/home';
     }
   }
 
   // Método para redirigir al login
   login(): void {
-    this.router.navigate(['/login']);  // Asume que tienes una ruta para login
+    // this.router.navigate(['/login/login']); 
+    window.location.href = '/login/login'; // Asume que tienes una ruta para login
   }
 }

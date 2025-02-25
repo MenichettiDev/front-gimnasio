@@ -3,6 +3,11 @@
   <app-barrasup></app-barrasup>
 </div>
 
+<!-- Sidebar condicional -->
+<div *ngIf="shouldShowSidebar()">
+  <app-sidebar></app-sidebar>
+</div>
+
 <!-- Contenido principal -->
 <div class="container-fluid">
   <div class="row">
