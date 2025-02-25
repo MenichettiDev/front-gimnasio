@@ -17,15 +17,6 @@ html, body {
   overflow: hidden; /* Evitar scroll innecesario */
 }
 
-/* Contenedor principal */
-.row {
-  display: flex; /* Flexbox para centrar */
-  justify-content: center; /* Centrado horizontal */
-  align-items: center; /* Centrado vertical */
-  width: 100%; /* Ancho completo */
-  height: 100%; /* Altura completa */
-}
-
 /* Estilo del formulario */
 .container {
   width: 420px; /* Ancho fijo */
@@ -39,11 +30,15 @@ html, body {
   display: flex; /* Flexbox para organizar contenido */
   flex-direction: column; /* Organización vertical */
   justify-content: center; /* Centrado vertical del contenido */
-  opacity: 0; /* Inicialmente invisible */
+  position: absolute; /* Esto asegura que esté centrado en la pantalla */
+  top: 50%; /* Centrado vertical */
+  left: 50%; /* Centrado horizontal */
+  transform: translate(-50%, -50%); /* Ajuste para asegurar que el centro esté perfectamente alineado */
+  opacity: 1; /* Inicialmente visible */
   animation: fadeInForm 1.7s forwards; /* Animación de entrada */
 }
 
-/* Resto de estilos (sin cambios) */
+/* Estilo del formulario */
 .container h1 {
   font-size: 36px;
   text-align: center;
@@ -128,6 +123,8 @@ html, body {
 .close-btn:hover {
   color: red;
 }
+
+/* Ajustes para pantallas pequeñas */
 @media (max-width: 480px) {
   .container {
     width: 90%;
