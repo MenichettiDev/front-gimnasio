@@ -1,0 +1,144 @@
+<div class="container">
+    <h2>Medidas del Atleta</h2>
+
+    <!-- Formulario para crear/editar medidas -->
+    <div class="form-container">
+        <h3>{{ medidaSeleccionada ? 'Editar Medida' : 'Crear Nueva Medida' }}</h3>
+        <form (ngSubmit)="medidaSeleccionada ? actualizarMedida() : crearMedida()">
+            <!-- Fecha de Medición -->
+            <div class="form-group">
+                <label for="fecha_medicion">Fecha de Medición:</label>
+                <input type="date" id="fecha_medicion" [(ngModel)]="medidaForm.fecha_medicion" name="fecha_medicion"
+                    required />
+            </div>
+
+            <!-- Peso -->
+            <div class="form-group">
+                <label for="peso">Peso (kg):</label>
+                <input type="number" id="peso" [(ngModel)]="medidaForm.peso" name="peso" required />
+            </div>
+
+            <!-- Altura -->
+            <div class="form-group">
+                <label for="altura">Altura (m):</label>
+                <input type="number" id="altura" [(ngModel)]="medidaForm.altura" name="altura" required />
+            </div>
+
+            <!-- Bíceps -->
+            <div class="form-group">
+                <label for="biceps">Bíceps (cm):</label>
+                <input type="number" id="biceps" [(ngModel)]="medidaForm.biceps" name="biceps" required />
+            </div>
+
+            <!-- Pecho -->
+            <div class="form-group">
+                <label for="pecho">Pecho (cm):</label>
+                <input type="number" id="pecho" [(ngModel)]="medidaForm.pecho" name="pecho" required />
+            </div>
+
+            <!-- Hombros -->
+            <div class="form-group">
+                <label for="hombros">Hombros (cm):</label>
+                <input type="number" id="hombros" [(ngModel)]="medidaForm.hombros" name="hombros" required />
+            </div>
+
+            <!-- Cintura -->
+            <div class="form-group">
+                <label for="cintura">Cintura (cm):</label>
+                <input type="number" id="cintura" [(ngModel)]="medidaForm.cintura" name="cintura" required />
+            </div>
+
+            <!-- Glúteos -->
+            <div class="form-group">
+                <label for="gluteos">Glúteos (cm):</label>
+                <input type="number" id="gluteos" [(ngModel)]="medidaForm.gluteos" name="gluteos" required />
+            </div>
+
+            <!-- Cuádriceps -->
+            <div class="form-group">
+                <label for="cuadriceps">Cuádriceps (cm):</label>
+                <input type="number" id="cuadriceps" [(ngModel)]="medidaForm.cuadriceps" name="cuadriceps" required />
+            </div>
+
+            <!-- Gemelos -->
+            <div class="form-group">
+                <label for="gemelos">Gemelos (cm):</label>
+                <input type="number" id="gemelos" [(ngModel)]="medidaForm.gemelos" name="gemelos" required />
+            </div>
+
+            <!-- Antebrazo -->
+            <div class="form-group">
+                <label for="antebrazo">Antebrazo (cm):</label>
+                <input type="number" id="antebrazo" [(ngModel)]="medidaForm.antebrazo" name="antebrazo" required />
+            </div>
+
+            <!-- Cuello -->
+            <div class="form-group">
+                <label for="cuello">Cuello (cm):</label>
+                <input type="number" id="cuello" [(ngModel)]="medidaForm.cuello" name="cuello" required />
+            </div>
+
+            <!-- Grasa Corporal -->
+            <div class="form-group">
+                <label for="grasa_corporal">Grasa Corporal (%):</label>
+                <input type="number" id="grasa_corporal" [(ngModel)]="medidaForm.grasa_corporal" name="grasa_corporal"
+                    required />
+            </div>
+
+            <!-- Botones del formulario -->
+            <div class="form-actions">
+                <button type="submit">{{ medidaSeleccionada ? 'Actualizar' : 'Crear' }}</button>
+                <button type="button" (click)="medidaSeleccionada = null; limpiarFormulario()"
+                    *ngIf="medidaSeleccionada">
+                    Cancelar
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Lista de medidas -->
+    <div class="medidas-list">
+        <h3>Medidas Cargadas</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Peso (kg)</th>
+                    <th>Altura (m)</th>
+                    <th>Bíceps (cm)</th>
+                    <th>Pecho (cm)</th>
+                    <th>Hombros (cm)</th>
+                    <th>Cintura (cm)</th>
+                    <th>Glúteos (cm)</th>
+                    <th>Cuádriceps (cm)</th>
+                    <th>Gemelos (cm)</th>
+                    <th>Antebrazo (cm)</th>
+                    <th>Cuello (cm)</th>
+                    <th>Grasa Corporal (%)</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let medida of medidas">
+                    <td>{{ medida.fecha_medicion }}</td>
+                    <td>{{ medida.peso }}</td>
+                    <td>{{ medida.altura }}</td>
+                    <td>{{ medida.biceps }}</td>
+                    <td>{{ medida.pecho }}</td>
+                    <td>{{ medida.hombros }}</td>
+                    <td>{{ medida.cintura }}</td>
+                    <td>{{ medida.gluteos }}</td>
+                    <td>{{ medida.cuadriceps }}</td>
+                    <td>{{ medida.gemelos }}</td>
+                    <td>{{ medida.antebrazo }}</td>
+                    <td>{{ medida.cuello }}</td>
+                    <td>{{ medida.grasa_corporal }}</td>
+                    <td>
+                        <button (click)="seleccionarMedida(medida)">Editar</button>
+                        <button (click)="eliminarMedida(medida.id_proceso)">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

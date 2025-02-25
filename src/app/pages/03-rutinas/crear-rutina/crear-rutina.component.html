@@ -1,8 +1,8 @@
-<div class="container">
-    <h2>Crear Rutina</h2>
-    <form [formGroup]="rutinaForm" (ngSubmit)="guardarRutina()">
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">Crear Rutina</h2>
+    <form [formGroup]="rutinaForm" (ngSubmit)="guardarRutina()" class="p-4 border rounded bg-light">
         <!-- Primera fila: Nombre, atleta y cantidad de días -->
-        <div class="row mb-3">
+        <div class="row mb-4">
             <div class="col-md-4">
                 <app-input-texto label="Nombre de la rutina" formControlName="nombre"></app-input-texto>
             </div>
@@ -15,7 +15,7 @@
         </div>
 
         <!-- Segunda fila: Nivel del atleta, objetivo y fecha de asignación -->
-        <div class="row mb-3">
+        <div class="row mb-4">
             <div class="col-md-4">
                 <app-cbo-niveldificultad formControlName="nivel_atleta"></app-cbo-niveldificultad>
             </div>
@@ -28,7 +28,7 @@
         </div>
 
         <!-- Tercera fila: Descripción de la rutina -->
-        <div class="row mb-3">
+        <div class="row mb-4">
             <div class="col-md-12">
                 <app-input-texto label="Descripción de la rutina" formControlName="descripcion"></app-input-texto>
             </div>
@@ -36,11 +36,11 @@
 
         <!-- Creación de cards de días -->
         <div class="box-card-body">
-            <div *ngFor="let dia of dias.controls; let i = index" class="card mb-3">
+            <div *ngFor="let dia of dias.controls; let i = index" class="card mb-4 shadow-sm">
                 <!-- Cabecera del día -->
-                <div class="card-header">
-                    Día {{ i + 1 }}
-                    <button type="button" class="btn btn-link" (click)="toggleCollapse(i)">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <span>Día {{ i + 1 }}</span>
+                    <button type="button" class="btn btn-light btn-sm" (click)="toggleCollapse(i)">
                         <i class="bx bx-menu"></i>
                         {{ collapsed[i] ? 'Expandir' : 'Colapsar' }}
                     </button>
@@ -48,7 +48,7 @@
                 <!-- Contenido del día -->
                 <div *ngIf="!collapsed[i]" class="card-body">
                     <div *ngFor="let ejercicio of getEjercicios(dia).controls; let j = index"
-                        class="sub-card mb-3 p-3 border">
+                        class="sub-card mb-3 p-3 border rounded">
                         <div class="row">
                             <!-- Combo de Grupo Muscular -->
                             <div class="col-md-4">
@@ -84,13 +84,13 @@
         </div>
 
         <!-- Botones de acción -->
-        <div class="row mt-3">
+        <div class="row mt-4">
             <div class="col-12 d-flex justify-content-end">
-                <p-button icon="pi pi-arrow-left" label="Anterior" styleClass="p-button-rounded p-button-secondary"
+                <p-button icon="pi pi-arrow-left" label="Anterior" styleClass="p-button-rounded p-button-secondary me-2"
                     (onClick)="anterior()"></p-button>
-                <p-button icon="pi pi-check" label="Confirmar" styleClass="p-button-rounded p-button-success ms-2"
+                <p-button icon="pi pi-check" label="Confirmar" styleClass="p-button-rounded p-button-success me-2"
                     (onClick)="guardarRutina()"></p-button>
-                <p-button icon="pi pi-times" label="Cancelar" styleClass="p-button-rounded p-button-danger ms-2"
+                <p-button icon="pi pi-times" label="Cancelar" styleClass="p-button-rounded p-button-danger"
                     (onClick)="cancelar()"></p-button>
             </div>
         </div>
