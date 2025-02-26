@@ -1,0 +1,44 @@
+/* Estilo general de la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* Encabezado de la tabla */
+thead {
+    background-color: #007bff;
+    color: white;
+}
+
+thead th {
+    padding: 12px;
+    text-align: left;
+}
+
+/* Cuerpo de la tabla */
+tbody tr {
+    border-bottom: 1px solid #ddd;
+}
+
+tbody td {
+    padding: 12px;
+}
+
+/* Hover sobre las filas */
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Icono de visualización */
+.icon-view {
+    cursor: pointer;
+    color: #007bff;
+    font-size: 18px;
+    margin-left: 10px;
+}
+
+.icon-view:hover {
+    color: #0056b3;
+}
