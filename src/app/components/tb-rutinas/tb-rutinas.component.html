@@ -6,14 +6,19 @@
                 <th>Fecha Creación</th>
                 <th>Objetivo</th>
                 <th>Nivel</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let rutina of rutinas">
                 <td>{{ rutina.nombre }}</td>
-                <td>{{ rutina.fecha_asignacion }}</td>
+                <td>{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
                 <td>{{ rutina.objetivo }}</td>
                 <td>{{ rutina.nivel_atleta }}</td>
+                <td>
+                    <!-- Icono para ver detalles -->
+                    <span class="icon-view" (click)="verDetallesRutina(rutina)">👁️</span>
+                </td>
             </tr>
         </tbody>
     </table>
