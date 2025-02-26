@@ -1,0 +1,24 @@
+<div *ngIf="rutinas.length > 0; else noData">
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Fecha Creación</th>
+                <th>Objetivo</th>
+                <th>Nivel</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let rutina of rutinas">
+                <td>{{ rutina.nombre }}</td>
+                <td>{{ rutina.fecha_asignacion }}</td>
+                <td>{{ rutina.objetivo }}</td>
+                <td>{{ rutina.nivel_atleta }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<ng-template #noData>
+    <p>No hay rutinas disponibles para este atleta.</p>
+</ng-template>
