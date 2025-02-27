@@ -9,6 +9,7 @@ import { catchError } from 'rxjs';
 })
 export class AtletaService {
   private apiUrlGetAtletas = 'http://localhost:7000/getAtletas'; // URL para obtener todos los atletas
+  private apiUrlGetAtletaByIdPersona = 'http://localhost:7000/getAtletaByIdPersona'; // URL para obtener atletas por ID de entrenador
   private apiUrlGetAtletaById = 'http://localhost:7000/getAtletaById'; // URL para obtener atletas por ID de entrenador
   private apiUrlCrearAtleta = 'http://localhost:7000/crearAtleta'; // URL para crear un atleta
   private apiUrlEditarAtleta = 'http://localhost:7000/editarAtleta'; // URL para editar un atleta
@@ -25,6 +26,12 @@ export class AtletaService {
   // Método para obtener atletas por ID de entrenador
   getAtletasPorEntrenador(idEntrenador: number): Observable<{ atletas: Atleta[] }> {
     return this.http.post<{ atletas: Atleta[] }>(this.apiUrlGetAtletaById, { idEntrenador }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getAtletasPorIdPersona(id_persona: number): Observable<Atleta> {
+    return this.http.post<Atleta>(this.apiUrlGetAtletaByIdPersona, { id_persona }).pipe(
       catchError(this.handleError)
     );
   }

@@ -7,11 +7,12 @@ import { Atleta } from '../../../data/interfaces/atletaInterface';
 import { AuthService } from '../../../service/auth/auth.service';
 import { EntrenadorService } from '../../../service/entrenador.service';
 import { Entrenador } from '../../../data/interfaces/entrenadorInterface';
+import { AtletaService } from '../../../service/atleta.service';
 
 @Component({
   selector: 'app-mis-rutinas',
   standalone: true,
-  imports: [CommonModule, CboAtletaComponent, FormsModule, TbRutinasComponent],
+  imports: [CommonModule, FormsModule, TbRutinasComponent],
   templateUrl: './mis-rutinas.component.html',
   styleUrls: ['./mis-rutinas.component.css']
 })
@@ -19,9 +20,9 @@ export class MisRutinasComponent implements OnInit {
 
 
   idAtletaSeleccionado: number | null = null;
-  id_entrenador: number | null = null;
+  id_atleta: number | null = null;
   id_persona: number | null = null;
-  constructor(private authService: AuthService, private entrenadorService: EntrenadorService) { }
+  constructor(private authService: AuthService, private atletaService: AtletaService) { }
 
 
   ngOnInit(): void {
@@ -30,30 +31,23 @@ export class MisRutinasComponent implements OnInit {
     // Obtener el usuario actual desde el servicio de autenticación
 
     // Usar el ID de la persona para obtener el entrenador correspondiente
-    this.entrenadorService.getEntrenadorById(this.id_persona!).subscribe({
-      next: (entrenador) => {
-        if (entrenador) {
-          this.id_entrenador = entrenador.id_entrenador; // Asignar el ID del entrenador
-          console.log('ID del entrenador:', this.id_entrenador);
+    this.atletaService.getAtletasPorIdPersona(this.id_persona!).subscribe({
+      next: (atleta) => {
+        if (atleta) {
+          console.log( 'arleta completo: ' , atleta);
+          this.id_atleta = atleta.id_atleta; // Asignar el ID del entrenador
+          console.log('ID del atleta:', this.id_atleta);
         } else {
-          console.error('No se encontró ningún entrenador con el ID proporcionado.');
+          console.error('No se encontró ningún atleta con el ID proporcionado.');
         }
       },
       error: (err) => {
-        console.error('Error al obtener el entrenador:', err);
+        console.error('Error al obtener el atleta:', err);
       }
     });
   }
 
 
 
-  onAtletaSeleccionado(value: number | Atleta): void {
-    if (typeof value === 'number') {
-      this.idAtletaSeleccionado = value; // Si es un número, asignarlo directamente
-      console.log( 'atleta seleccionado : ' , this.idAtletaSeleccionado);
-    } else if (value && typeof value === 'object' && 'id_atleta' in value) {
-      this.idAtletaSeleccionado = value.id_atleta; // Si es un objeto Atleta, extraer el ID
-    }
-  }
 
 }
