@@ -1,0 +1,9 @@
+<div *ngIf="rutinaCruda; else noData">
+    <!-- Muestra el componente VisorRutina si se encuentra la rutina -->
+    <app-visor-rutina [rutinaCruda]="rutinaCruda"></app-visor-rutina>
+</div>
+
+<!-- Mensaje de error si no se encuentra la rutina -->
+<ng-template #noData>
+    <p>No se encontró la rutina solicitada.</p>
+</ng-template>
