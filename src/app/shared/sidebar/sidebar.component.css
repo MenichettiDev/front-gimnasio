@@ -183,3 +183,43 @@
   font-size: 20px;
 }
 
+/* Estilo para el botón de Logout en el sidebar */
+.sidebar-logout {
+  margin-top: auto;  /* Coloca el botón al final del sidebar */
+  padding: 15px 0;
+}
+
+.sidebar-logout .btn-logout {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 10px 20px;
+  background-color: transparent;  /* Fondo transparente */
+  color: white;  /* Color blanco para el texto */
+  border: 1px solid #d3d3d3;  /* Borde gris claro */
+  border-radius: 5px;  /* Bordes redondeados */
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+}
+
+/* Efecto hover para el botón de Logout */
+.sidebar-logout .btn-logout:hover {
+  background-color: rgba(255, 255, 255, 0.1);  /* Fondo gris oscuro al pasar el ratón */
+  transform: translateX(5px);  /* Desplazamiento suave al pasar el ratón */
+}
+
+/* Ícono del botón de Logout */
+.sidebar-logout .btn-logout i {
+  margin-right: 10px;  /* Espacio entre el ícono y el texto */
+  font-size: 20px;  /* Tamaño del ícono */
+}
+
+/* Efecto cuando el sidebar está oculto y el botón no se ve */
+.sidebar.hidden .sidebar-logout .btn-logout {
+  opacity: 0;  /* Oculta el botón cuando el sidebar está cerrado */
+  pointer-events: none;  /* Deshabilita la interacción */
+}
