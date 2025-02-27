@@ -5,6 +5,7 @@ export interface plan {
 }
 
 export interface rutinaArmada {
+    id_rutina: number;
     id_creador: number;
     nombre: string;
     cantidad_dias: number;

@@ -1,5 +1,5 @@
 <div>
-    <app-cbo-atleta label="Selecciona un Atleta" [emitOnlyId]="true" (valueChange)="onAtletaSeleccionado($event)"></app-cbo-atleta>
+    <app-cbo-atleta [idEntrenador]="id_entrenador" [emitOnlyId]="true" (valueChange)="onAtletaSeleccionado($event)"></app-cbo-atleta>
 </div>
 
 <div *ngIf="idAtletaSeleccionado">
