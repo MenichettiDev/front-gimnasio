@@ -1,1 +1,7 @@
-<p>coach works!</p>
+<div>
+    <app-cbo-atleta [idEntrenador]="id_entrenador" [emitOnlyId]="true" (valueChange)="onAtletaSeleccionado($event)"></app-cbo-atleta>
+</div>
+
+<div *ngIf="idAtletaSeleccionado">
+    <app-tb-rutinas [idAtleta]="idAtletaSeleccionado"></app-tb-rutinas>
+</div>
