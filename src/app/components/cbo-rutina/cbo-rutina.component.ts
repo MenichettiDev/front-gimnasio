@@ -1,7 +1,7 @@
 import { Component, Input, forwardRef, OnInit } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { RutinasService } from '../../service/rutinas.service';
-import { Rutina } from '../../data/interfaces/tbRutinaInterface';
+import { Rutina } from '../../data/interfaces/rutinaInterface';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -36,24 +36,24 @@ export class CboRutinaComponent implements OnInit, ControlValueAccessor {
     this.obtenerRutinas();
   }
 
-  // Método para obtener las rutinas
+  // Método para obtener las rutinas // no se si me va aa hacer falta este combo
   obtenerRutinas(): void {
-    if (this.id_atleta) {
-      this.rutinaService.getRutinaByIdAtleta(this.id_atleta).subscribe(
-        (data) => (this.rutinas = data),
-        (error) => console.error('Error al obtener rutinas por atleta', error)
-      );
-    } else if (this.id_creador) {
-      this.rutinaService.getRutinaByIdCreador(this.id_creador).subscribe(
-        (data) => (this.rutinas = data),
-        (error) => console.error('Error al obtener rutinas por creador', error)
-      );
-    } else {
-      this.rutinaService.getRutinasFree().subscribe(
-        (data) => (this.rutinas = data),
-        (error) => console.error('Error al obtener rutinas libres', error)
-      );
-    }
+    // if (this.id_atleta) {
+    //   this.rutinaService.getRutinaByIdAtleta(this.id_atleta).subscribe(
+    //     (data) => (this.rutinas = data),
+    //     (error) => console.error('Error al obtener rutinas por atleta', error)
+    //   );
+    // } else if (this.id_creador) {
+    //   this.rutinaService.getRutinaByIdCreador(this.id_creador).subscribe(
+    //     (data) => (this.rutinas = data),
+    //     (error) => console.error('Error al obtener rutinas por creador', error)
+    //   );
+    // } else {
+    //   this.rutinaService.getRutinasFree().subscribe(
+    //     (data) => (this.rutinas = data),
+    //     (error) => console.error('Error al obtener rutinas libres', error)
+    //   );
+    // }
   }
 
   // Maneja cambios en el select
