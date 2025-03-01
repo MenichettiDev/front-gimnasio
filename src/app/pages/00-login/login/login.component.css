@@ -1,195 +1,168 @@
+/* Fondo completo de la pantalla */
+.fullscreen-background {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%; /* Ocupa todo el ancho */
+  height: 100vh; /* Ocupa todo el alto */
+  background: rgba(255, 255, 255, 0.1); /* Transparencia */
+  backdrop-filter: blur(10px); /* Efecto de desenfoque */
+  padding: 20px; /* Espacio interno */
+  box-sizing: border-box; /* Incluye padding en el cálculo del tamaño */
+}
+
 /* Reset básico */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
 /* Configuración del html y body */
 html,
 body {
-    height: 100%;
-    /* Altura completa de la ventana */
-    width: 100%;
-    /* Ancho completo de la ventana */
-    display: flex;
-    /* Usar flexbox para centrar */
-    justify-content: center;
-    /* Centrado horizontal */
-    align-items: center;
-    /* Centrado vertical */
-    background-color: #f0f0f0;
-    /* Fondo claro */
-    overflow: hidden;
-    /* Evitar scroll innecesario */
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  overflow: hidden;
 }
 
-/* Estilo del formulario */
+/* Estilo para el contenedor */
 .container {
-    width: 420px;
-    /* Ancho fijo */
-    background: transparent;
-    /* Fondo transparente */
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    /* Borde semitransparente */
-    backdrop-filter: blur(10px);
-    /* Efecto de desenfoque */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    /* Sombra suave */
-    color: #fff;
-    /* Texto blanco */
-    border-radius: 10px;
-    /* Bordes redondeados */
-    padding: 30px 40px;
-    /* Espaciado interno */
-    display: flex;
-    /* Flexbox para organizar contenido */
-    flex-direction: column;
-    /* Organización vertical */
-    justify-content: center;
-    /* Centrado vertical del contenido */
-    position: absolute;
-    /* Esto asegura que esté centrado en la pantalla */
-    top: 50%;
-    /* Centrado vertical */
-    left: 50%;
-    /* Centrado horizontal */
-    transform: translate(-50%, -50%);
-    /* Ajuste para asegurar que el centro esté perfectamente alineado */
-    opacity: 1;
-    /* Inicialmente visible */
-    animation: fadeInForm 1.7s forwards;
-    /* Animación de entrada */
+  width: 400px; /* Mantener el ancho original */
+  background-color: rgba(43, 1, 75, 0.94);
+  color: #d3d3d3;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  transition: width 0.3s ease, padding 0.3s ease;
+  opacity: 1;
+  animation: fadeInForm 1.7s forwards;
 }
 
-/* Estilo del formulario */
+/* Título dentro del contenedor */
 .container h1 {
-    font-size: 36px;
-    text-align: center;
+  font-size: 36px;
+  text-align: center;
+  color: #ffffff;
 }
 
+/* Estilo de los campos de entrada */
 .form-group {
-    position: relative;
-    width: 100%;
-    height: 50px;
-    margin: 35px 0;
+  position: relative;
+  width: 100%;
+  height: 50px;
+  margin: 35px 0;
 }
 
 .form-group input {
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    border: none;
-    outline: none;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 40px;
-    font-size: 16px;
-    color: #fff;
-    padding: 20px 45px 20px 20px;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 40px;
+  font-size: 16px;
+  color: #d3d3d3; /* Cambiar color de texto a gris claro */
+  padding: 20px 45px 20px 20px;
 }
 
 .form-group i {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 20px;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: #d3d3d3; /* Asegura que el ícono sea visible */
 }
 
-.remember-forgot {
-    display: flex;
-    justify-content: space-between;
-    font-size: 14.5px;
-    margin: -5px 0 5px;
-}
-
+/* Estilo del botón */
 .btn {
-    width: 100%;
-    height: 45px;
-    background: #fff;
-    border: none;
-    outline: none;
-    border-radius: 40px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    font-size: 16px;
-    color: #333;
-    font-weight: 600;
-    margin-top: 10px;
+  width: 100%;
+  height: 45px;
+  background: #ffffff;
+  border: none;
+  border-radius: 40px;
+  color: #333;
+  font-weight: 600;
+  margin-top: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.btn:hover {
+  background-color: rgba(43, 1, 75, 0.2); /* Fondo ligero cuando el mouse está encima */
+  color: #5706b4; /* Color al pasar el ratón */
+}
+
+/* Estilo del enlace de registro */
 .register-link {
-    font-size: 14.5px;
-    text-align: center;
-    margin: 20px 0 15px;
+  font-size: 14.5px;
+  text-align: center;
+  margin: 20px 0 15px;
+  color: #d3d3d3;
 }
 
-.error-message {
-    opacity: 0;
-    animation: fadeIn 0.5s forwards;
-    text-align: center;
-    width: 100%;
-}
-
-@keyframes fadeIn {
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes fadeInForm {
-    to {
-        opacity: 1;
-    }
-}
-
+/* Botón de cerrar (X) */
 .close-btn {
-    background: transparent;
-    border: none;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
-    color: #333;
-    cursor: pointer;
-    z-index: 999;
+  background: transparent;
+  border: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  color: #d3d3d3;  /* Color gris claro para la X */
+  cursor: pointer;
+  z-index: 9999; /* Aseguramos que esté por encima del contenido */
 }
 
 .close-btn:hover {
-    color: red;
+  color: #ff4d4d;  /* Cambio de color en hover para hacerlo más visible */
+}
+
+/* Animación de entrada */
+@keyframes fadeInForm {
+  to {
+      opacity: 1;
+  }
 }
 
 /* Ajustes para pantallas pequeñas */
 @media (max-width: 480px) {
-    .container {
-        width: 90%;
-        padding: 20px;
-    }
+  .container {
+      width: 90%;
+      padding: 20px;
+  }
 
-    .container h1 {
-        font-size: 28px;
-    }
+  .container h1 {
+      font-size: 28px;
+  }
 
-    .form-group input {
-        font-size: 14px;
-        padding: 15px 35px 15px 15px;
-    }
+  .form-group input {
+      font-size: 14px;
+      padding: 15px 35px 15px 15px;
+  }
 
-    .btn {
-        height: 40px;
-        font-size: 14px;
-    }
+  .btn {
+      height: 40px;
+      font-size: 14px;
+  }
 
-    .register-link p {
-        font-size: 13px;
-    }
-
-    .remember-forgot {
-        font-size: 12px;
-    }
-
-    .form-group i {
-        font-size: 18px;
-    }
+  .register-link p {
+      font-size: 13px;
+  }
 }
