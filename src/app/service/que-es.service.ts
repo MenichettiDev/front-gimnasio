@@ -37,6 +37,7 @@ export class QueEsService {
    * @returns Observable<number | null> - El ID del atleta si existe, o null si no es un atleta.
    */
   isAtleta(): Observable<number | null> {
+    this.verificarPersonaLogueada();
     if (!this.idPersona) {
       return of(null); // Retorna null si no hay ID de persona
     }

@@ -1,1 +1,30 @@
-<p>metas works!</p>
+<div>
+    <h2>Metas del Atleta</h2>
+
+    <!-- Formulario para crear una nueva meta -->
+    <form (ngSubmit)="crearMeta()">
+        <input [(ngModel)]="nuevaMeta.descripcion" name="descripcion" placeholder="Descripción" required />
+        <input [(ngModel)]="nuevaMeta.tipo_meta" name="tipo_meta" placeholder="Tipo de meta" required />
+        <input [(ngModel)]="nuevaMeta.valor_objetivo" name="valor_objetivo" type="number" placeholder="Valor objetivo"
+            required />
+        <input [(ngModel)]="nuevaMeta.fecha_establecimiento" name="fecha_establecimiento" type="date" required />
+        <input [(ngModel)]="nuevaMeta.fecha_vencimiento" name="fecha_vencimiento" type="date" required />
+        <button type="submit">Agregar Meta</button>
+    </form>
+
+    <!-- Lista de metas -->
+    <ul>
+        <li *ngFor="let meta of metas">
+            <strong>{{ meta.descripcion }}</strong> ({{ meta.tipo_meta }}, Objetivo: {{ meta.valor_objetivo }})
+            <br />
+            <small>
+                Establecida: {{ meta.fecha_establecimiento }} | Vence: {{ meta.fecha_vencimiento }}
+            </small>
+            <br />
+            Estado:
+            <input type="checkbox" [checked]="meta.estado === 'completada'" (change)="actualizarEstadoMeta(meta)" />
+            {{ meta.estado }}
+            <button (click)="eliminarMeta(meta.id_meta)">Eliminar</button>
+        </li>
+    </ul>
+</div>

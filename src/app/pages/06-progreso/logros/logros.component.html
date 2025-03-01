@@ -1,1 +1,19 @@
-<p>logros works!</p>
+<div>
+    <h2>Logros del Atleta</h2>
+
+    <!-- Formulario para crear un nuevo logro -->
+    <form (ngSubmit)="crearLogro()">
+        <input [(ngModel)]="nuevoLogro.nombre_logro" name="nombre_logro" placeholder="Nombre del logro" required />
+        <input [(ngModel)]="nuevoLogro.descripcion_logro" name="descripcion_logro" placeholder="Descripción" required />
+        <input [(ngModel)]="nuevoLogro.fecha" name="fecha" type="date" required />
+        <button type="submit">Agregar Logro</button>
+    </form>
+
+    <!-- Lista de logros -->
+    <ul>
+        <li *ngFor="let logro of logros">
+            <strong>{{ logro.nombre_logro }}</strong>: {{ logro.descripcion_logro }} ({{ logro.fecha }})
+            <button (click)="eliminarLogro(logro.id_logro)">Eliminar</button>
+        </li>
+    </ul>
+</div>
