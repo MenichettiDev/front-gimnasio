@@ -32,7 +32,7 @@ export class BarrasupComponent implements OnInit {
     // this.router.navigate(['/login']); 
     // window.location.href = '/login'; // Asume que tienes una ruta para login
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/login/login']);
     });
   }
 }

@@ -6,11 +6,9 @@ import { LoginComponent } from './pages/00-login/login/login.component';
 
 export const routes: Routes = [
     // Ruta para el componente Inicio
-    { path: '', loadComponent: () => import('./pages/00-login/home/home.component').then(m => m.HomeComponent) },
+    // { path: '', loadComponent: () => import('./pages/00-login/home/home.component').then(m => m.HomeComponent) },
+    { path: '', loadComponent: () => import('./pages/01-inicio/resumen/resumen.component').then(m => m.ResumenComponent) },
 
-    // Ruta Lazy Loading para todas las páginas dentro de "Rutinas"
-    // { path: 'login', component: LoginComponent },
-    // Ruta Lazy Loading para todas las páginas dentro de "Ejercicios"
     {
         path: 'login',
         loadChildren: () => import('./pages/00-login/login.routes').then(m => m.loginRoutes)
@@ -64,5 +62,5 @@ export const routes: Routes = [
 
 
     // Ruta por defecto
-    { path: '**', redirectTo: 'home' }
+    { path: '**', redirectTo: 'inicio' }
 ];
