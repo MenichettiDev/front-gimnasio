@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs'; // Para manejar estados dinámicos
-import { Entrenador } from '../../data/interfaces/entrenadorInterface';
 
 @Injectable({
   providedIn: 'root',
@@ -15,24 +14,22 @@ export class AuthService {
 
   // Guardar los datos del usuario en localStorage y actualizar el estado
   saveUser(user: any): void {
-    localStorage.setItem(this.USER_KEY, JSON.stringify(user));
-    this.loggedIn.next(true); // Cambiar el estado de login a 'true' cuando el usuario se loguea
+    sessionStorage.setItem(this.USER_KEY, JSON.stringify(user));
+    this.loggedIn.next(true);
   }
-
-  // Obtener los datos del usuario desde localStorage
+  
   getUser(): any | null {
-    const userData = localStorage.getItem(this.USER_KEY);
+    const userData = sessionStorage.getItem(this.USER_KEY);
     return userData ? JSON.parse(userData) : null;
   }
-
-  // Verificar si hay un usuario logueado
+  
   isLoggedIn(): boolean {
-    return !!localStorage.getItem(this.USER_KEY);
+    return !!sessionStorage.getItem(this.USER_KEY);
   }
-
-  // Eliminar los datos del usuario (logout) y actualizar el estado
+  
   logout(): void {
-    localStorage.removeItem(this.USER_KEY);
-    this.loggedIn.next(false); // Cambiar el estado de login a 'false' cuando el usuario se desloguea
+    sessionStorage.removeItem(this.USER_KEY);
+    this.loggedIn.next(false);
+    console.log('Sesión cerrada automáticamente');
   }
 }
