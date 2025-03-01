@@ -10,8 +10,10 @@ export const guardsGuard: CanActivateFn = (route, state) => {
   return authService.loggedIn$.pipe(
     map((isLoggedIn) => {
       if (isLoggedIn) {
+        console.log( 'user logueado ');
         return true; // Permite el acceso si está logueado
       } else {
+        console.log( 'user sin loguear ');
         router.navigate(['/login/home']); // Redirige al login si no está logueado
         return false; // Bloquea el acceso
       }
