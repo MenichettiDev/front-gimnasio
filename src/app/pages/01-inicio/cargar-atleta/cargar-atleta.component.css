@@ -1,7 +1,7 @@
 /* Estilos generales */
 /* Ajustar estilos del contenedor principal */
 .container {
-  max-width: 100%; /* Evitar que el contenedor sea más ancho que la pantalla */
+  max-width: 80%; /* Evitar que el contenedor sea más ancho que la pantalla */
   padding: 0 15px; /* Espaciado lateral controlado */
   margin: 0 auto; /* Centrar contenido */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -14,30 +14,17 @@
   margin-right: 0;
 }
 
-/* Contenedor del encabezado */
-.header-container {
-  background: transparent; /* Sin fondo */
-  border-radius: 15px 15px 0 0; /* Mantener bordes redondeados superiores */
-  padding: 1rem 0; /* Espaciado vertical */
-  position: fixed; /* Fijar el encabezado en la parte superior */
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 10; /* Para asegurarse de que el encabezado esté por encima del resto */
-  margin-left: 140px;
-}
-
-/* Estilo del título */
-.title {
-  font-family: 'Oswald', sans-serif; /* Cambia a la fuente Oswald */
-  font-size: 2rem;
-  font-weight: 700;
-  color: #000001;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.3);
-  margin: 0;
-  margin-top: 60px;
+/* Estilo para el título dentro del formulario */
+.form-title {
+  font-family: 'Oswald', sans-serif; /* Fuente moderna */
+  font-size: 1.5rem; /* Tamaño */
+  font-weight: 700; /* Negrita */
+  color: #ffffff; /* Color blanco para contrastar con el fondo oscuro */
+  text-transform: uppercase; /* Texto en mayúsculas */
+  letter-spacing: 1px; /* Espaciado entre letras */
+  text-align: center; /* Centrado */
+  margin-bottom: 1rem; /* Espaciado inferior */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra suave */
 }
 
 /* Estilos actualizados para el card */
@@ -45,9 +32,9 @@
   border: none;
   border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: rgba(43, 1, 75, 0.74);
-  margin-top: 90px; /* Espaciado superior controlado para que no se solape con el encabezado */
-  overflow: hidden; /* Evitar desbordamientos internos */
+  background-color: rgba(43, 1, 75, 0.94);
+  margin-top: 20px; /* Reducir el margen superior */
+  overflow: hidden;
 }
 
 .card:hover {
@@ -71,17 +58,17 @@
 .card-body {
   padding: 2rem; /* Espaciado interno controlado */
   overflow: auto; /* Permitir desplazamiento solo si es necesario */
-  max-height: calc(100vh - 150px); /* Limitar la altura máxima */
-  overflow-y: auto; /* Desplazamiento vertical si el contenido es muy largo */
 }
 
 /* Estilos para los inputs */
 .form-control {
+  width: 100%; /* Asegura que los inputs ocupen todo el ancho disponible */
+  box-sizing: border-box; /* Incluye padding y border en el cálculo del ancho */
   border: none;
   border-radius: 10px;
   background-color: #f8f8f844;
-  padding: 1rem;
-  font-size: 1rem;
+  padding: 0.8rem;
+  font-size: 0.9rem;
   transition: box-shadow 0.3s ease-in-out;
 }
 
@@ -93,7 +80,7 @@
 
 .form-label {
   font-weight: 500;
-  color: #ffffff;
+  color: #e0e0e0;
 }
 
 /* Botón de envío */
@@ -101,11 +88,12 @@
   background-color: #04df13bb; /* Verde moderno */
   border: none;
   border-radius: 25px; /* Botón completamente redondeado */
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
+  padding: 0.7rem 1.2rem;
+  font-size: 0.9rem;
   font-weight: 0;
-  width: 150px;
+  width: 130px;
   margin-left: auto;
+  margin-top: -30px;
   transition: background-color 0.3s ease-in-out;
 }
 
@@ -120,7 +108,7 @@
 
 /* Espaciado adicional */
 .mb-3 {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 /* Estilo para el componente de selección de gimnasio */

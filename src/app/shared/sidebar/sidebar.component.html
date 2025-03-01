@@ -36,6 +36,13 @@
         </ul>
       </li>
     </ul>
+
+    <!-- Botón de Logout, solo visible cuando el usuario está logueado -->
+    <div *ngIf="isLoggedIn" class="sidebar-logout">
+      <button (click)="logout()" class="btn-logout">
+        <i class="bx bx-log-out"></i> Logout
+      </button>
+    </div>
   </div>
 </div>
 

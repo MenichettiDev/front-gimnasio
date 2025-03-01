@@ -1,7 +1,7 @@
 /* Sidebar con fondo negro semi-transparente */
 .sidebar {
   width: 230px;  /* Ancho más grande del sidebar */
-  background-color: rgba(43, 1, 75, 0.74);  /* Fondo negro con 70% de opacidad */
+  background-color: rgba(43, 1, 75, 0.94);  /* Fondo negro con 70% de opacidad */
   color: #d3d3d3;  /* Gris claro */
   padding: 20px;
   position: fixed;
@@ -183,30 +183,43 @@
   font-size: 20px;
 }
 
-/* Clases agregadas por Franco---para desplazar el sidebar */
-
-/* Sidebar con fondo negro semi-transparente */
-.sidebar {
-  width: 230px; /* Ancho más grande del sidebar */
-  background-color: rgba(43, 1, 75, 0.74); /* Fondo negro con 70% de opacidad */
-  color: #d3d3d3; /* Gris claro */
-  padding: 20px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  z-index: 1000;
-  box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  transition: width 0.3s ease, padding 0.3s ease;
-  overflow-y: auto; /* Permitir desplazamiento vertical */
+/* Estilo para el botón de Logout en el sidebar */
+.sidebar-logout {
+  margin-top: auto;  /* Coloca el botón al final del sidebar */
+  padding: 15px 0;
 }
 
-/* Clase para ocultar el sidebar */
-.sidebar.hidden {
-  width: 0;
-  padding: 0;
-  overflow: hidden;
+.sidebar-logout .btn-logout {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 10px 20px;
+  background-color: transparent;  /* Fondo transparente */
+  color: white;  /* Color blanco para el texto */
+  border: 1px solid #d3d3d3;  /* Borde gris claro */
+  border-radius: 5px;  /* Bordes redondeados */
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+}
+
+/* Efecto hover para el botón de Logout */
+.sidebar-logout .btn-logout:hover {
+  background-color: rgba(255, 255, 255, 0.1);  /* Fondo gris oscuro al pasar el ratón */
+  transform: translateX(5px);  /* Desplazamiento suave al pasar el ratón */
+}
+
+/* Ícono del botón de Logout */
+.sidebar-logout .btn-logout i {
+  margin-right: 10px;  /* Espacio entre el ícono y el texto */
+  font-size: 20px;  /* Tamaño del ícono */
+}
+
+/* Efecto cuando el sidebar está oculto y el botón no se ve */
+.sidebar.hidden .sidebar-logout .btn-logout {
+  opacity: 0;  /* Oculta el botón cuando el sidebar está cerrado */
+  pointer-events: none;  /* Deshabilita la interacción */
 }

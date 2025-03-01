@@ -10,9 +10,8 @@ import { Subscription } from 'rxjs';
   templateUrl: './barrasup.component.html',
   styleUrls: ['./barrasup.component.css']
 })
-export class BarrasupComponent implements OnInit, OnDestroy {
-  isLoggedIn: boolean = false;
-  private loginStatusSubscription: Subscription | null = null; // Inicialización con null
+export class BarrasupComponent implements OnInit {
+  isLoggedIn: boolean = false;  // Este flag se mantiene solo para manejar el Login
 
   constructor(
     private router: Router,
@@ -20,35 +19,13 @@ export class BarrasupComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // Suscribirse al observable loggedIn$ para mantener el estado actualizado
-    this.loginStatusSubscription = this.authService.loggedIn$.subscribe(
+    // Solo nos suscribimos al estado de login para manejar la visibilidad del botón de login
+    this.authService.loggedIn$.subscribe(
       (loggedIn: boolean) => {
         this.isLoggedIn = loggedIn; // Actualiza el estado de login cuando cambia
       }
     );
   }
-
-  ngOnDestroy(): void {
-    // Limpieza de la suscripción al destruir el componente
-    if (this.loginStatusSubscription) {
-      this.loginStatusSubscription.unsubscribe();
-    }
-  }
-
-  // Método para realizar logout
-  logout(): void {
-    this.authService.logout(); // Llama a logout() en el AuthService
-    // console.log('Usuario deslogueado');
-    // if (this.router.url === '/home') {
-    //   window.location.reload();
-    // } else {
-      // this.router.navigate(['/home']);
-      // window.location.href = 'login/home';
-      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-        this.router.navigate(['/home']);
-      });
-    }
-  // }
 
   // Método para redirigir al login
   login(): void {

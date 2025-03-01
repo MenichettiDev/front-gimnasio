@@ -1,13 +1,12 @@
-<!-- Encabezado fijo -->
-<div class="header-container text-center py-4">
-  <h1 class="title mb-0">REGISTRO DE ATLETA</h1>
-</div>
+
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-8">
       <!-- Formulario con transparencia -->
       <div class="card shadow-lg">
         <div class="card-body">
+          <!-- Título dentro del formulario -->
+          <h1 class="form-title text-center mb-4">REGISTRO DE ATLETA</h1>
           <form [formGroup]="atletaForm" (ngSubmit)="onSubmit()">
             <!-- Grupo 1: Nombre, Apellido y Apodo -->
             <div class="row mb-3">
