@@ -1,0 +1,33 @@
+<div class="fullscreen-background">
+  <div class="countdown-container">
+    <h1>¡Próximamente!</h1>
+    <p>Nuestra web estará disponible en:</p>
+    <div class="countdown">
+      <div class="time-box">
+        <div class="flip-card days-flip">
+          <div class="flip-card-front">{{ days }}</div>
+          <div class="flip-card-back">{{ days }}</div>
+        </div>
+        <span class="time-label">Días</span>
+      </div>
+      <div class="time-box">
+        <div class="flip-card hours-flip">
+          <div class="flip-card-front">{{ hours }}</div>
+          <div class="flip-card-back">{{ hours }}</div>
+        </div>
+        <span class="time-label">Horas</span>
+      </div>
+      <div class="time-box">
+        <div class="flip-card minutes-flip">
+          <div class="flip-card-front">{{ minutes }}</div>
+          <div class="flip-card-back">{{ minutes }}</div>
+        </div>
+        <span class="time-label">Minutos</span>
+      </div>
+      <div class="time-box">
+        <div class="no-flip">{{ seconds }}</div>
+        <span class="time-label">Segundos</span>
+      </div>
+    </div>
+  </div>
+</div>

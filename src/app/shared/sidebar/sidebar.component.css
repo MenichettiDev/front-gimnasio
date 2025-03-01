@@ -1,7 +1,7 @@
 /* Sidebar con fondo negro semi-transparente */
 .sidebar {
   width: 230px;  /* Ancho más grande del sidebar */
-  background-color: rgba(43, 1, 75, 0.94);  /* Fondo negro con 70% de opacidad */
+  background-color: rgba(43, 1, 75, 0.94);
   color: #d3d3d3;  /* Gris claro */
   padding: 20px;
   position: fixed;

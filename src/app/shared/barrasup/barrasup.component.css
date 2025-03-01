@@ -10,7 +10,7 @@
 
 /* Barra superior con fondo verde forest y transparencia */
 .top-bar {
-    background-color: #000000;
+    background-color: rgba(43, 1, 75, 0.94);
     /* Color verde forest con 70% de transparencia */
     padding: 10px 20px;
     display: flex;
