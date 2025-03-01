@@ -64,5 +64,5 @@ export const routes: Routes = [
 
 
     // Ruta por defecto
-    { path: '**', redirectTo: 'inicio' }
+    { path: '**', redirectTo: 'home' }
 ];

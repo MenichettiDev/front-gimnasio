@@ -38,18 +38,24 @@ export class BarrasupComponent implements OnInit, OnDestroy {
   // Método para realizar logout
   logout(): void {
     this.authService.logout(); // Llama a logout() en el AuthService
-    console.log('Usuario deslogueado');
-    if (this.router.url === '/home') {
-      window.location.reload();
-    } else {
+    // console.log('Usuario deslogueado');
+    // if (this.router.url === '/home') {
+    //   window.location.reload();
+    // } else {
       // this.router.navigate(['/home']);
-      window.location.href = 'login/home';
+      // window.location.href = 'login/home';
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['/home']);
+      });
     }
-  }
+  // }
 
   // Método para redirigir al login
   login(): void {
-    // this.router.navigate(['/login/login']); 
-    window.location.href = '/login/login'; // Asume que tienes una ruta para login
+    // this.router.navigate(['/login']); 
+    // window.location.href = '/login'; // Asume que tienes una ruta para login
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/login']);
+    });
   }
 }
