@@ -85,7 +85,7 @@
   box-shadow: 0 8px 15px rgba(255, 126, 95, 0.3); /* Sombra sutil */
   text-transform: uppercase;
   letter-spacing: 1px;
-} */
+} 
 
 .btn-refresh:hover {
   background: linear-gradient(135deg, #feb47b, #ff7e5f); /* Invertir gradiente */

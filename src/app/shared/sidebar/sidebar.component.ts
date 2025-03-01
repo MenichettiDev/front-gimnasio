@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { MenuService } from '../../service/menu.service';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../service/auth/auth.service';
@@ -13,10 +13,10 @@ import { Subscription } from 'rxjs';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit, OnDestroy {
   id_acceso: number = 1;  // ID de acceso del usuario
   menus: Menu[] = [];  // Lista de menús cargados
-  isSidebarVisible: boolean = true;  // Controla la visibilidad del sidebar
+  isSidebarVisible: boolean = false;  // Controla la visibilidad del sidebar (inicialmente oculto)
   isLoggedIn: boolean = false;  // Propiedad para el estado de login
   private loginStatusSubscription: Subscription | null = null; // Para suscripción al estado de login
 
@@ -29,10 +29,14 @@ export class SidebarComponent implements OnInit {
     this.loadUserData();  // Cargar datos del usuario al iniciar
     this.getMenus();      // Obtener los menús
 
+    // Inicializar el estado del sidebar basado en el estado de autenticación
+    this.isSidebarVisible = this.authService.isLoggedIn();
+
     // Suscribirse al estado de login
     this.loginStatusSubscription = this.authService.loggedIn$.subscribe(
       (loggedIn: boolean) => {
         this.isLoggedIn = loggedIn;  // Actualizar estado de login
+        this.isSidebarVisible = loggedIn;  // Mostrar/ocultar el sidebar basado en el estado de login
       }
     );
   }
@@ -47,7 +51,6 @@ export class SidebarComponent implements OnInit {
   // Cargar datos del usuario
   loadUserData(): void {
     const user = this.authService.getUser();
-    console.log(user[0].id_acceso, 'usuario..');
     if (user) {
       this.id_acceso = user[0].id_acceso;
     }
@@ -76,16 +79,11 @@ export class SidebarComponent implements OnInit {
     this.authService.logout(); // Llamar al logout() del AuthService para cerrar sesión
     console.log('Usuario deslogueado');
 
-    // Si el usuario está en la página de inicio (/home), recargamos la página
-    if (this.router.url === '/home') {
-      window.location.reload();  // Recarga la página
-    } else {
-      // Si no está en /home, redirigimos a la página login/home
-      window.location.href = 'login/home'; // Redirige a login/home
-    }
+    // Redirigir a la página de login/home
+    this.router.navigate(['/login/home']);
 
-    // Opcional: Ocultar el sidebar después de logout
-    this.isSidebarVisible = false; // Ocultar el sidebar después del logout
+    // Ocultar el sidebar después de logout
+    this.isSidebarVisible = false;
   }
 
   // Redirigir al login

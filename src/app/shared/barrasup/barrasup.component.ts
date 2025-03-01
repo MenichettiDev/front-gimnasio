@@ -29,8 +29,6 @@ export class BarrasupComponent implements OnInit {
 
   // Método para redirigir al login
   login(): void {
-    // this.router.navigate(['/login']); 
-    // window.location.href = '/login'; // Asume que tienes una ruta para login
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate(['/login/login']);
     });
