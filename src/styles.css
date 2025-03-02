@@ -1,29 +1,28 @@
-/* Estilos generales */
+
+/* General */
 html, body {
   margin: 0;
   padding: 0;
-  overflow: hidden; /* Evitar desplazamientos*/
-  height: 100%; /* Asegurar que ocupen toda la altura */
+  height: 100%;
+  overflow-x: hidden; /* Mantener el scroll horizontal deshabilitado */
+  overflow-y: auto; /* Habilitar el scroll vertical solo cuando sea necesario */
 }
 
 body {
-  overflow-x: hidden;
-  overflow-y: auto; /* Solo permitir desplazamiento vertical si es necesario */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-image: url("/images/FONDO_APP.png"); /* Ruta de la imagen de fondo */
+  background-image: url("/images/FONDO_APP.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed; /* Fondo fijo mientras se desplaza */
+  background-attachment: fixed;
 }
 
-/* Asegura que el contenido dentro de app-root ocupe toda la altura */
 app-root {
   height: 100%;
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* Evita el scroll dentro de app-root */
 }
+
 
 /* Encabezado fijo en la parte superior */
 .page-title {
