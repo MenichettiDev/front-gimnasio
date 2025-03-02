@@ -25,7 +25,7 @@ export class CoachComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.id_persona = this.authService.getUser()[0].id_persona;
+    this.id_persona = this.authService.getIdPersona();
     // Obtener el usuario actual desde el servicio de autenticación
 
     // Usar el ID de la persona para obtener el entrenador correspondiente

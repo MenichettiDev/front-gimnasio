@@ -37,8 +37,9 @@ export class PerfilComponent implements OnInit {
 
   cargarUsuarioActual(): void {
     // Obtener el ID del usuario actual desde el servicio de autenticación
-    const idUsuario = this.authService.getUser()[0]?.id_persona;
-    console.log(idUsuario); // Supongamos que este método existe
+    // const idUsuario = this.authService.getUser()[0]?.id_persona;
+    const idUsuario = this.authService.getIdPersona();
+    // console.log(idUsuario); // Supongamos que este método existe
     if (!idUsuario) {
       this.errorMessage = 'No se pudo obtener el usuario actual.';
       this.isLoading = false;
@@ -67,7 +68,8 @@ export class PerfilComponent implements OnInit {
 
   guardarCambios(): void {
     // Obtener el ID del usuario actual
-    const idUsuario = this.authService.getUser()[0]?.id_persona;
+    // const idUsuario = this.authService.getUser()[0]?.id_persona;
+    const idUsuario = this.authService.getIdPersona();
     if (!idUsuario) {
       this.errorMessage = 'No se pudo obtener el usuario actual.';
       return;

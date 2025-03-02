@@ -43,7 +43,9 @@ export class CargarPagoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.id_entrenador = this.authService.getUser()[0].id_entrenador;
+    // this.id_entrenador = this.authService.getUser()[0].id_entrenador;
+    this.id_entrenador = this.authService.getIdEntrenador();
+    // console.log( this.id_entrenador)
   }
 
   // Maneja la selección de un atleta

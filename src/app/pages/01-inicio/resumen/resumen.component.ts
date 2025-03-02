@@ -14,6 +14,7 @@ export class ResumenComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerFraseAleatoria();
+    
   }
 
   obtenerFraseAleatoria() {

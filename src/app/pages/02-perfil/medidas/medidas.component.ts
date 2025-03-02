@@ -42,7 +42,8 @@ export class MedidasComponent implements OnInit {
 
   ngOnInit(): void {
     // Obtener el ID del atleta autenticado
-    this.idAtleta = this.authService.getUser()[0].id_persona;
+    // this.idAtleta = this.authService.getUser()[0].id_persona;
+    this.idAtleta = this.authService.getIdAtleta();
     console.log( this.idAtleta)
     if (this.idAtleta) {
       this.cargarMedidas(); // Cargar las medidas del atleta

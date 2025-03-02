@@ -32,4 +32,32 @@ export class AuthService {
     this.loggedIn.next(false);
     console.log('Sesión cerrada automáticamente');
   }
+
+  // Obtener el ID persona (si existe)
+  getIdPersona(): number | null {
+    const user = this.getUser()[0];
+    return user && user.id_persona ? user.id_persona : null;
+  }
+
+  // Obtener el ID del entrenador (si existe)
+  getIdEntrenador(): number | null {
+    const user = this.getUser()[0];
+    return user && user.id_entrenador ? user.id_entrenador : null;
+  }
+
+  // Obtener el ID del atleta (si existe)
+  getIdAtleta(): number | null {
+    const user = this.getUser()[0];
+    return user && user.id_atleta ? user.id_atleta : null;
+  }
+
+  // Verificar si el usuario es un entrenador
+  isEntrenador(): boolean {
+    return !!this.getIdEntrenador();
+  }
+
+  // Verificar si el usuario es un atleta
+  isAtleta(): boolean {
+    return !!this.getIdAtleta();
+  }
 }

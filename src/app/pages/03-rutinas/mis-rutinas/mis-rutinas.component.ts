@@ -8,7 +8,6 @@ import { AuthService } from '../../../service/auth/auth.service';
 import { EntrenadorService } from '../../../service/entrenador.service';
 import { Entrenador } from '../../../data/interfaces/entrenadorInterface';
 import { AtletaService } from '../../../service/atleta.service';
-import { QueEsService } from '../../../service/que-es.service';
 
 @Component({
   selector: 'app-mis-rutinas',
@@ -25,13 +24,13 @@ export class MisRutinasComponent implements OnInit {
   id_persona: number | null = null;
   test: number | null = null;
   test2: number | null = null;
-  constructor(private authService: AuthService, private atletaService: AtletaService, private is : QueEsService) { }
+  constructor(private authService: AuthService, private atletaService: AtletaService) { }
 
 
   ngOnInit(): void {
 
 
-    this.id_persona = this.authService.getUser()[0].id_persona;
+    this.id_persona = this.authService.getIdPersona();
     // Obtener el usuario actual desde el servicio de autenticación
 
     // Usar el ID de la persona para obtener el entrenador correspondiente
