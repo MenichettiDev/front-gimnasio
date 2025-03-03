@@ -18,18 +18,22 @@ export class LoginService {
 
   login(usuario: string, contrasenia: string) {
     return this.http.post(`${this.apiUrl}/login`, { usuario, contrasenia }).subscribe(
-      (response) => {
+      (response: any) => {
+        console.log('Respuesta del backend:', response); // Log para depuración
+  
+        if (!response) {
+          console.error('La respuesta del backend está vacía');
+          throw new Error('Hubo un problema al intentar iniciar sesión.');
+        }
+  
         this.authService.saveUser(response);
-        // Redirige al usuario a la página de inicio
-        this.router.navigate(['/inicio/resumen']);
+        this.router.navigate(['/inicio/resumen']); // Redirige al usuario
       },
       (error) => {
         console.error('Error de login', error);
         if (error.status === 401) {
-          // Error de credenciales incorrectas
           throw new Error('Credenciales incorrectas.');
         } else {
-          // Error general
           throw new Error('Hubo un problema al intentar iniciar sesión. Por favor, intente nuevamente.');
         }
       }
