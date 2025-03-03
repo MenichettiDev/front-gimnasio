@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from './auth/auth.service';
-import { environment } from '../../enviroments/enviroment'; // Ajusta la ruta según tu estructura
+import { environment } from '../../environments/enviroment'; // Ajusta la ruta según tu estructura
 
 @Injectable({
   providedIn: 'root',
