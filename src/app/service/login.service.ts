@@ -11,7 +11,7 @@ export class LoginService {
   constructor(private http: HttpClient, private authService: AuthService, private router: Router) { }
 
   login(usuario: string, contrasenia: string) {
-    return this.http.post('http://localhost:80/login', { usuario, contrasenia })
+    return this.http.post('http://localhost:7000/login', { usuario, contrasenia })
       .subscribe(
         (response) => {
           this.authService.saveUser(response);
