@@ -2,29 +2,31 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Medida } from '../data/interfaces/tbMedidaInterface'; // Ruta del archivo de la interfaz
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MedidasService {
 
-  private apiUrl = 'http://localhost:7000/medidas'; // URL base del endpoint
+  private apiUrl = environment.apiUrl; // Usa la URL del entorno
+  private apiUrlMedidas = `${this.apiUrl}/medidas`; // URL base del endpoint
 
   constructor(private http: HttpClient) { }
 
   // 1. Obtener todas las medidas
   getMedidas(): Observable<Medida[]> {
-    return this.http.get<Medida[]>(`${this.apiUrl}`);
+    return this.http.get<Medida[]>(`${this.apiUrlMedidas}`);
   }
 
   // 2. Obtener una medida por ID
   getMedidaById(id: number): Observable<Medida> {
-    return this.http.get<Medida>(`${this.apiUrl}/${id}`);
+    return this.http.get<Medida>(`${this.apiUrlMedidas}/${id}`);
   }
 
   // 3. Obtener medidas por ID de atleta
   getMedidasByAtleta(id_atleta: number): Observable<Medida[]> {
-    return this.http.get<Medida[]>(`${this.apiUrl}/atleta/${id_atleta}`);
+    return this.http.get<Medida[]>(`${this.apiUrlMedidas}/atleta/${id_atleta}`);
   }
 
   // 4. Crear una nueva medida
@@ -44,7 +46,7 @@ export class MedidasService {
     cuello: number,
     grasa_corporal: number
   ): Observable<any> {
-    return this.http.post(`${this.apiUrl}`, {
+    return this.http.post(`${this.apiUrlMedidas}`, {
       id_atleta,
       fecha_medicion,
       peso,
@@ -80,7 +82,7 @@ export class MedidasService {
     cuello: number,
     grasa_corporal: number
   ): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, {
+    return this.http.put(`${this.apiUrlMedidas}/${id}`, {
       id_atleta,
       fecha_medicion,
       peso,
@@ -100,6 +102,6 @@ export class MedidasService {
 
   // 6. Eliminar una medida
   eliminarMedida(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+    return this.http.delete(`${this.apiUrlMedidas}/${id}`);
   }
 }

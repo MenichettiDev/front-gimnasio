@@ -3,16 +3,18 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { Atleta } from '../data/interfaces/atletaInterface';
 import { catchError } from 'rxjs';
+import { environment } from '../../environments/environment'; // Importa las variables de entorno
 
 @Injectable({
   providedIn: 'root',
 })
 export class AtletaService {
-  private apiUrlGetAtletas = 'http://localhost:7000/getAtletas'; // URL para obtener todos los atletas
-  private apiUrlGetAtletaByIdPersona = 'http://localhost:7000/getAtletaByIdPersona'; // URL para obtener atletas por ID de entrenador
-  private apiUrlGetAtletaById = 'http://localhost:7000/getAtletaById'; // URL para obtener atletas por ID de entrenador
-  private apiUrlCrearAtleta = 'http://localhost:7000/crearAtleta'; // URL para crear un atleta
-  private apiUrlEditarAtleta = 'http://localhost:7000/editarAtleta'; // URL para editar un atleta
+  private apiUrl = environment.apiUrl; // Usa la URL del entorno
+  private apiUrlGetAtletas = `${this.apiUrl}/getAtletas`; // URL para obtener todos los atletas
+  private apiUrlGetAtletaByIdPersona = `${this.apiUrl}/getAtletaByIdPersona`; // URL para obtener atletas por ID de persona
+  private apiUrlGetAtletaById = `${this.apiUrl}/getAtletaById`; // URL para obtener atletas por ID
+  private apiUrlCrearAtleta = `${this.apiUrl}/crearAtleta`; // URL para crear un atleta
+  private apiUrlEditarAtleta = `${this.apiUrl}/editarAtleta`; // URL para editar un atleta
 
   constructor(private http: HttpClient) { }
 

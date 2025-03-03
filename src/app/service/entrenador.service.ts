@@ -2,14 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Entrenador } from '../data/interfaces/entrenadorInterface';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EntrenadorService {
+  
+    private apiUrl = environment.apiUrl; // Usa la URL del entorno
 
-  private apiUrlGetEntrenadores = 'http://localhost:7000/getEntrenadores'; // URL de tu API para obtener entrenadores
-  private apiUrlGetEntrenadorByIdPersona = 'http://localhost:7000/getEntrenadorByIdPersona'; // URL de tu API para obtener entrenador por ID
+  private apiUrlGetEntrenadores = `${this.apiUrl}/getEntrenadores`; // URL de tu API para obtener entrenadores
+  private apiUrlGetEntrenadorByIdPersona = `${this.apiUrl}/getEntrenadorByIdPersona`; // URL de tu API para obtener entrenador por ID
 
   constructor(private http: HttpClient) { }
 

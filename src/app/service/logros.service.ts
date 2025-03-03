@@ -2,23 +2,26 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Logro } from '../data/interfaces/tbLogroInterface'; // Ruta del archivo de la interfaz
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LogrosService {
-  private apiUrl = 'http://localhost:7000/logros'; // URL base del endpoint
+  
+    private apiUrl = environment.apiUrl; // Usa la URL del entorno
+  private apiUrllogros = `${this.apiUrl}/logros`; // URL base del endpoint
 
   constructor(private http: HttpClient) {}
 
   // 1. Obtener todos los logros
   obtenerLogros(): Observable<Logro[]> {
-    return this.http.get<Logro[]>(`${this.apiUrl}`);
+    return this.http.get<Logro[]>(`${this.apiUrllogros}`);
   }
 
   // 2. Obtener un logro por ID
   obtenerLogroPorId(id: number): Observable<Logro> {
-    return this.http.get<Logro>(`${this.apiUrl}/${id}`);
+    return this.http.get<Logro>(`${this.apiUrllogros}/${id}`);
   }
 
   // 3. Crear un nuevo logro
@@ -28,7 +31,7 @@ export class LogrosService {
     descripcion_logro: string,
     fecha: string
   ): Observable<any> {
-    return this.http.post(`${this.apiUrl}`, {
+    return this.http.post(`${this.apiUrllogros}`, {
       id_atleta,
       nombre_logro,
       descripcion_logro,
@@ -44,7 +47,7 @@ export class LogrosService {
     descripcion_logro: string,
     fecha: string
   ): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, {
+    return this.http.put(`${this.apiUrllogros}/${id}`, {
       id_atleta,
       nombre_logro,
       descripcion_logro,
@@ -54,11 +57,11 @@ export class LogrosService {
 
   // 5. Eliminar un logro
   eliminarLogro(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+    return this.http.delete(`${this.apiUrllogros}/${id}`);
   }
 
   // 6. Listar logros por ID de atleta
   listarLogrosPorIdAtleta(id_atleta: number): Observable<Logro[]> {
-    return this.http.get<Logro[]>(`${this.apiUrl}/atleta/${id_atleta}`);
+    return this.http.get<Logro[]>(`${this.apiUrllogros}/atleta/${id_atleta}`);
   }
 }

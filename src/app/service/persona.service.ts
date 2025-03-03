@@ -2,46 +2,51 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PersonaService {
-  private apiUrl = 'http://localhost:7000/personas'; // Cambia esto por la URL de tu API
+
+  
+    private apiUrl = environment.apiUrl; // Usa la URL del entorno
+
+  private apiUrlPersona = `${this.apiUrl}/personas`; // Cambia esto por la URL de tu API
 
   constructor(private http: HttpClient) {}
 
   // 1. Listar todas las personas
   listarPersonas(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}`).pipe(
+    return this.http.get<any>(`${this.apiUrlPersona}`).pipe(
       catchError(this.handleError)
     );
   }
 
   // 2. Obtener una persona por su ID
   obtenerPersonaPorId(idPersona: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${idPersona}`).pipe(
+    return this.http.get<any>(`${this.apiUrlPersona}/${idPersona}`).pipe(
       catchError(this.handleError)
     );
   }
 
   // 3. Crear una nueva persona
   crearPersona(personaData: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}`, personaData).pipe(
+    return this.http.post<any>(`${this.apiUrlPersona}`, personaData).pipe(
       catchError(this.handleError)
     );
   }
 
   // 4. Editar una persona existente
   editarPersona(idPersona: number, personaData: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${idPersona}`, personaData).pipe(
+    return this.http.put<any>(`${this.apiUrlPersona}/${idPersona}`, personaData).pipe(
       catchError(this.handleError)
     );
   }
 
   // 5. Eliminar una persona por su ID
   eliminarPersona(idPersona: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${idPersona}`).pipe(
+    return this.http.delete<any>(`${this.apiUrlPersona}/${idPersona}`).pipe(
       catchError(this.handleError)
     );
   }

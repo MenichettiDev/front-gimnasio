@@ -2,18 +2,23 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PagoService {
-  private apiUrlGetPagosPorAtleta = 'http://localhost:7000/getPagosPorAtleta'; // URL para obtener pagos por atleta
-  private apiUrlGetPagoPorId = 'http://localhost:7000/getPagoPorId'; // URL para obtener un pago por su ID
-  private apiUrlCreatePago = 'http://localhost:7000/createPago'; // URL para crear un pago
-  private apiUrlUpdatePago = 'http://localhost:7000/updatePago'; // URL para actualizar un pago
-  private apiUrlDeletePago = 'http://localhost:7000/deletePago'; // URL para eliminar un pago
-  private apiUrlGetPagosPorFecha = 'http://localhost:7000/getPagosPorFecha'; // URL para obtener pagos por fecha
-  private apiUrlGetTotalPagosPorAtleta = 'http://localhost:7000/getTotalPagosPorAtleta'; // URL para obtener el total de pagos por atleta
+
+
+  private apiUrl = environment.apiUrl; // Usa la URL del entorno
+
+  private apiUrlGetPagosPorAtleta = `${this.apiUrl}/getPagosPorAtleta`; // URL para obtener pagos por atleta
+  private apiUrlGetPagoPorId = `${this.apiUrl}/getPagoPorId`; // URL para obtener un pago por su ID
+  private apiUrlCreatePago = `${this.apiUrl}/createPago`; // URL para crear un pago
+  private apiUrlUpdatePago = `${this.apiUrl}/updatePago`; // URL para actualizar un pago
+  private apiUrlDeletePago = `${this.apiUrl}/deletePago`; // URL para eliminar un pago
+  private apiUrlGetPagosPorFecha = `${this.apiUrl}/getPagosPorFecha`; // URL para obtener pagos por fecha
+  private apiUrlGetTotalPagosPorAtleta = `${this.apiUrl}/getTotalPagosPorAtleta`; // URL para obtener el total de pagos por atleta
 
   constructor(private http: HttpClient) { }
 

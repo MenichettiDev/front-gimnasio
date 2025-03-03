@@ -2,15 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Gimnasio } from '../data/interfaces/gimnasioInterface'; // Asegúrate de tener esta interfaz
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GimnasioService {
 
-  private apiUrlGetGimnasios = 'http://localhost:7000/getGimnasios'; // URL para obtener todos los gimnasios
-  private apiUrlGetGimnasioByIdEntrenador = 'http://localhost:7000/getGimnasioByIdEntrenador'; // URL para obtener gimnasio por ID de entrenador
-  private apiUrlGetGimnasioByIdAtleta = 'http://localhost:7000/getGimnasioByIdAtleta'; // URL para obtener gimnasio por ID de entrenador
+  private apiUrl = environment.apiUrl; // Usa la URL del entorno
+  private apiUrlGetGimnasios = `${this.apiUrl}/getGimnasios`; // URL para obtener todos los gimnasios
+  private apiUrlGetGimnasioByIdEntrenador = `${this.apiUrl}/getGimnasioByIdEntrenador`; // URL para obtener gimnasio por ID de entrenador
+  private apiUrlGetGimnasioByIdAtleta = `${this.apiUrl}/getGimnasioByIdAtleta`; // URL para obtener gimnasio por ID de entrenador
 
   constructor(private http: HttpClient) { }
 

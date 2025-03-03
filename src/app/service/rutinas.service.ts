@@ -3,19 +3,23 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Rutina } from '../data/interfaces/rutinaInterface'; // Asegúrate de tener la interfaz correcta
 import { plan } from '../data/interfaces/rutinaArmadaInterface';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RutinasService {
 
-  private apiUrlGetRutinaByIdAtleta = 'http://localhost:7000/getRutinaByIdAtleta'; // URL de la API para obtener rutina por ID de atleta
-  private apiUrlGetRutinaByIdCreador = 'http://localhost:7000/getRutinaByIdCreador'; // URL de la API para obtener rutina por ID de creador
-  private apiUrlGetRutinaByIdRutina = 'http://localhost:7000/getRutinaByIdRutina'; // URL de la API para obtener rutina por ID de creador
-  private apiUrlGetRutinasFree = 'http://localhost:7000/getRutinasFree'; // URL de la API para obtener rutinas gratuitas
-  private apiUrlCreateRutina = 'http://localhost:7000/crearRutinaYAsignarAtleta'; 
-  private apiUrlEditarRutina = 'http://localhost:7000/editarRutina'; 
-  private apiUrlEliminarRutina = 'http://localhost:7000/eliminarRutina'; 
+  
+    private apiUrl = environment.apiUrl; // Usa la URL del entorno
+
+  private apiUrlGetRutinaByIdAtleta = `${this.apiUrl}/getRutinaByIdAtleta`; // URL de la API para obtener rutina por ID de atleta
+  private apiUrlGetRutinaByIdCreador = `${this.apiUrl}/getRutinaByIdCreador`; // URL de la API para obtener rutina por ID de creador
+  private apiUrlGetRutinaByIdRutina = `${this.apiUrl}/getRutinaByIdRutina`; // URL de la API para obtener rutina por ID de creador
+  private apiUrlGetRutinasFree = `${this.apiUrl}/getRutinasFree`; // URL de la API para obtener rutinas gratuitas
+  private apiUrlCreateRutina = `${this.apiUrl}/crearRutinaYAsignarAtleta`; 
+  private apiUrlEditarRutina = `${this.apiUrl}/editarRutina`; 
+  private apiUrlEliminarRutina = `${this.apiUrl}/eliminarRutina`; 
 
   constructor(private http: HttpClient) { }
 

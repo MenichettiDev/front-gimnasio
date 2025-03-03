@@ -2,14 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Menu } from '../data/interfaces/menuInterface'; // Ruta a la interfaz 'Menu'
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MenuService {
+  
+    private apiUrl = environment.apiUrl; // Usa la URL del entorno
 
-  private apiUrlGetMenus = 'http://localhost:7000/getMenus'; // URL para obtener todos los menús
-  private apiUrlGetMenusByIdAcceso = 'http://localhost:7000/menusByIdAcceso'; // URL para obtener menús por ID de persona
+  private apiUrlGetMenus = `${this.apiUrl}/getMenus`; // URL para obtener todos los menús
+  private apiUrlGetMenusByIdAcceso = `${this.apiUrl}/menusByIdAcceso`; // URL para obtener menús por ID de persona
 
   constructor(private http: HttpClient) {}
 
