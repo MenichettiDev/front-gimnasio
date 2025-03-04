@@ -26,18 +26,17 @@ export class SidebarComponent implements OnInit, OnDestroy {
   private router = inject(Router);
 
   ngOnInit(): void {
-    this.loadUserData(); // Cargar datos del usuario al iniciar
-    this.getMenus();     // Obtener los menús
+    this.loadUserData();  // Cargar datos del usuario al iniciar
+    this.getMenus();      // Obtener los menús
 
     // Inicializar el estado del sidebar basado en el estado de autenticación
-    this.isLoggedIn = this.authService.isLoggedIn();
-    this.isSidebarVisible = this.isLoggedIn;
+    this.isSidebarVisible = this.authService.isLoggedIn();
 
     // Suscribirse al estado de login
     this.loginStatusSubscription = this.authService.loggedIn$.subscribe(
       (loggedIn: boolean) => {
-        this.isLoggedIn = loggedIn;
-        this.isSidebarVisible = loggedIn; // Sincronizar el estado del sidebar con el login
+        this.isLoggedIn = loggedIn;  // Actualizar estado de login
+        this.isSidebarVisible = loggedIn;  // Mostrar/ocultar el sidebar basado en el estado de login
       }
     );
   }
@@ -79,9 +78,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
   logout(): void {
     this.authService.logout(); // Llamar al logout() del AuthService para cerrar sesión
     console.log('Usuario deslogueado');
-
-    // Limpiar los menús
-    this.menus = [];
 
     // Redirigir a la página de login/home
     this.router.navigate(['/login/home']);

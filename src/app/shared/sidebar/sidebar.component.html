@@ -1,5 +1,5 @@
 <!-- Sidebar -->
-<div *ngIf="isLoggedIn && menus.length > 0">
+<div *ngIf="menus.length > 0">
   <div class="sidebar" [ngClass]="{'hidden': !isSidebarVisible}">
     <!-- Botón para ocultar/mostrar el sidebar -->
     <div class="sidebar-toggle" (click)="toggleSidebar()">
@@ -47,7 +47,7 @@
 </div>
 
 <!-- Botón flotante para mostrar el sidebar cuando está oculto -->
-<div class="floating-sidebar-toggle" *ngIf="!isSidebarVisible && isLoggedIn" (click)="toggleSidebar()">
+<div class="floating-sidebar-toggle" *ngIf="!isSidebarVisible" (click)="toggleSidebar()">
   <i class="bi bi-list"></i> <!-- Ícono de menú hamburguesa -->
 </div>
 
