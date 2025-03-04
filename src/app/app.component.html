@@ -5,8 +5,9 @@
 </div>
 
 <!-- Sidebar condicional -->
-<div *ngIf="shouldShowSidebar()">
-  <app-sidebar></app-sidebar>
+<!-- <div *ngIf="shouldShowSidebar()"> -->
+<div >
+  <app-sidebar *ngIf="isLoggedIn"></app-sidebar>
 </div>
 
 <!-- Contenido principal -->

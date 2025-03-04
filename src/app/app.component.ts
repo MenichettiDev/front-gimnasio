@@ -49,8 +49,8 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-  shouldShowSidebar(): boolean {
-    const currentRoute = this.router.url;
-    return !['login/login', 'login/home'].includes(currentRoute);
-  }
+  // shouldShowSidebar(): boolean {
+  //   const currentRoute = this.router.url;
+  //   return !['login/login', 'login/home'].includes(currentRoute);
+  // }
 }

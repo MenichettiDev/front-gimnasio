@@ -26,6 +26,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   private router = inject(Router);
 
   ngOnInit(): void {
+    this.menus = [];      // Inicializar la lista de menús
     this.loadUserData();  // Cargar datos del usuario al iniciar
     this.getMenus();      // Obtener los menús
 
