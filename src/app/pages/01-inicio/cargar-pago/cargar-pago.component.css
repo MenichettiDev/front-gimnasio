@@ -1,13 +1,135 @@
+/* Estilos generales */
 .container {
-    max-width: 500px;
-    margin: auto;
+  max-width: 1300px; /* Ancho máximo ajustado para pantallas pequeñas */
+  padding: 0 15px; /* Espaciado lateral */
+  margin: 0 auto; /* Centrado */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
 }
 
-h1 {
-    font-size: 2rem;
-    color: #007bff;
+.row {
+  margin-left: 0;
+  margin-right: 0;
 }
 
-button {
-    font-size: 1rem;
+/* Estilo para el título dentro del formulario */
+.form-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-bottom: 1.5rem; /* Aumento del margen inferior para separar mejor el título */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
+
+/* Estilo para campos readonly */
+input[readonly] {
+  background-color: #f8f8f844; /* Color de fondo similar al de los campos editables */
+  color: #333333; /* Color del texto */
+  cursor: not-allowed; /* Cambia el cursor para indicar que no se puede editar */
+  border: none; /* Remueve el borde para que no se vea diferente */
+}
+
+input[readonly]:focus {
+  background-color: #f8f8f844; /* Mantén el mismo color de fondo cuando se haga clic */
+  outline: none; /* Elimina el borde del foco (si es necesario) */
+}
+
+
+/* Estilos actualizados para el card */
+.card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: rgba(43, 1, 75, 0.94);
+  margin-top: 20px;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-header {
+  border-radius: 15px 15px 0 0;
+  background-color: #4CAF50;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.card-body {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Estilos para los inputs */
+.form-control {
+  width: 100%; /* Ocupa todo el ancho disponible */
+  box-sizing: border-box;
+  border: none;
+  border-radius: 10px;
+  background-color: #f8f8f844;
+  padding: 0.8rem;
+  font-size: 0.9rem;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.form-control:focus {
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+  outline: none;
+}
+
+.form-label {
+  font-weight: 500;
+  color: #e0e0e0;
+}
+
+/* Estilo específico para el campo de monto */
+.monto-input {
+  max-width: 100%; /* Ocupa el ancho total del contenedor */
+  width: 100%;
+}
+
+
+/* Botón de envío */
+.btn-primary {
+  background-color: #04df13bb;
+  border: none;
+  border-radius: 25px;
+  padding: 0.7rem 1.2rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  width: auto; /* Ancho automático para mejor alineación */
+  margin-top: 1.5rem; /* Aumento del margen superior para separar del contenido */
+  margin-left: auto; /* Alineación hacia la derecha */
+  margin-right: auto;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+  background-color: #038a0c;
+}
+
+.btn-primary:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Espaciado adicional */
+.mb-3 {
+  margin-bottom: 1rem;
+}
+
+/* Etiquetas de texto */
+label {
+  font-weight: 500;
+  color: #e0e0e0;
+}
+

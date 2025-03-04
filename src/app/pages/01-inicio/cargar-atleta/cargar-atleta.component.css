@@ -1,7 +1,7 @@
 /* Estilos generales */
 /* Ajustar estilos del contenedor principal */
 .container {
-  max-width: 80%; /* Evitar que el contenedor sea más ancho que la pantalla */
+  max-width: 1300px; /* Evitar que el contenedor sea más ancho que la pantalla */
   padding: 0 15px; /* Espaciado lateral controlado */
   margin: 0 auto; /* Centrar contenido */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -125,6 +125,8 @@ app-cbo-gimnasio {
   border-radius: 10px;
   cursor: pointer;
   transition: border-color 0.3s ease-in-out;
+  margin-top: 10px;
+  margin-bottom: -35px;
 }
 
 .image-upload-container:hover {
@@ -164,4 +166,17 @@ app-cbo-gimnasio {
 
 .card:hover {
   transform: translateY(-5px);
+}
+
+
+/* Ajustes de estilo para el botón en pantallas pequeñas */
+@media (max-width: 576px) {
+  .d-grid {
+    justify-content: center; /* Centrar el contenido dentro del grid */
+    margin-top: 20px; /* Añadir un margen superior para separar el botón */
+  }
+
+  .btn-primary {
+    width: 100%; /* Asegurarse que el botón ocupe el 100% del ancho en pantallas pequeñas */
+  }
 }

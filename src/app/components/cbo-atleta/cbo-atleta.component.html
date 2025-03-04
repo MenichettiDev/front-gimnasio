@@ -1,13 +1,15 @@
-
-<div>
-  <label>{{ label }}</label>
+<div class="mb-3 col-12">
+  <label [for]="'atleta-' + label" class="form-label">{{ label }}</label>
   <select
+    [id]="'atleta-' + label"
     [(ngModel)]="selectedAtleta"
-    (ngModelChange)="onValueChange()"
+    class="form-select form-select-lg"
+    aria-label="Selecciona un atleta"
     [disabled]="isDisabled"
+    (ngModelChange)="onValueChange()"
   >
-    <option [ngValue]="null">Seleccione una opción</option>
-    <option *ngFor="let atleta of atletas" [ngValue]="atleta.id_atleta">
+    <option value="" disabled selected>Seleccione una opción</option>
+    <option *ngFor="let atleta of atletas" [value]="atleta.id_atleta">
       {{ atleta.nombre }} {{ atleta.apellido }}
     </option>
   </select>

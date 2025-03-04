@@ -1,7 +1,7 @@
 /* Estilo para el contenedor del componente */
 .main-page {
   width: 100%;
-  height: 100%;
+  height: 100vh; /* Usar 100vh para que ocupe toda la pantalla */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -85,7 +85,7 @@
   box-shadow: 0 8px 15px rgba(255, 126, 95, 0.3); /* Sombra sutil */
   text-transform: uppercase;
   letter-spacing: 1px;
-} 
+}
 
 .btn-refresh:hover {
   background: linear-gradient(135deg, #feb47b, #ff7e5f); /* Invertir gradiente */
@@ -107,4 +107,51 @@
 
 .btn-refresh:hover i {
   transform: rotate(360deg); /* Icono que rota cuando el botón es presionado */
+}
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 768px) {
+  /* Ajustar el contenedor para pantallas más pequeñas */
+  .main-page {
+    padding: 10px; /* Reducir el padding */
+  }
+
+  /* Hacer que el texto ocupe todo el ancho disponible */
+  .text-content {
+    padding: 20px; /* Reducir el padding */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Sombra más suave */
+  }
+
+  /* Reducir el tamaño del título en pantallas pequeñas */
+  .main-title {
+    font-size: 2.5rem; /* Reducir tamaño */
+    margin-bottom: 20px; /* Ajustar el margen */
+  }
+
+  /* Reducir el tamaño de la frase */
+  .random-quote {
+    font-size: 1.3rem; /* Reducir tamaño */
+  }
+
+  /* Reducir el tamaño del botón */
+  .btn-refresh {
+    padding: 12px 30px; /* Reducir padding */
+    font-size: 1.1rem; /* Reducir el tamaño de la fuente */
+  }
+}
+
+@media (max-width: 480px) {
+  /* Ajustes para pantallas aún más pequeñas */
+  .main-title {
+    font-size: 2rem; /* Reducir aún más */
+  }
+
+  .random-quote {
+    font-size: 1.2rem; /* Ajustar el tamaño */
+  }
+
+  .btn-refresh {
+    padding: 10px 25px; /* Reducir el tamaño del botón */
+    font-size: 1rem; /* Reducir aún más el tamaño de la fuente */
+  }
 }

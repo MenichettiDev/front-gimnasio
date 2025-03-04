@@ -1,48 +1,85 @@
 <div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card shadow">
-                <div class="card-header bg-primary text-white">
-                    <h4 class="text-center">Registro de pago de atleta</h4>
-                </div>
-                <div class="card-body">
-                    <form [formGroup]="pagoForm" (ngSubmit)="onSubmit()">
-                        <!-- Atleta -->
-                        <div class="mb-3">
-                            <app-cbo-atleta [emitOnlyId]="false" [idEntrenador]="id_entrenador"
-                                (valueChange)="onAtletaSeleccionado($event)"></app-cbo-atleta>
-                        </div>
-                        <div class="mb-3">
-                            <label> Gimnasio del Atleta: </label><br>
-                            <label> {{ gimnasioAtleta }} </label>
-                        </div>
+  <div class="row justify-content-center">
+    <div class="col-md-4">
+      <!-- Card principal -->
+      <div class="card shadow-lg">
+        <div class="card-body">
+          <!-- Título del formulario -->
+          <h1 class="form-title text-center mb-4">
+            REGISTRO DE PAGO DE ATLETA
+          </h1>
 
-                        <div class="mb-3">
-                            <ng-container *ngIf="id_gimnasio !== null">
-                                <app-cbo-membresia [id_gimnasio]="id_gimnasio"
-                                    (valueChange)="onMembresiaSeleccionada($event)">
-                                </app-cbo-membresia>
-                            </ng-container>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="monto" class="form-label">Monto</label>
-                            <input type="text" id="monto" formControlName="monto" class="form-control"
-                                placeholder="Ingrese el monto">
-                        </div>
-
-
-                        <div class="mb-3">
-                            <app-cbo-forma-pago label="Forma de Pago"
-                                (valueChange)="onFormaPagoChange($event)"></app-cbo-forma-pago>
-                        </div>
-                        <!-- Botón de Envío -->
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-primary">Registrar Pago</button>
-                        </div>
-                    </form>
-                </div>
+          <!-- Formulario -->
+          <form [formGroup]="pagoForm" (ngSubmit)="onSubmit()">
+            <!-- Selector de Atleta -->
+            <div class="mb-3">
+              <app-cbo-atleta
+                [emitOnlyId]="false"
+                [idEntrenador]="id_entrenador"
+                (valueChange)="onAtletaSeleccionado($event)"
+              >
+              </app-cbo-atleta>
             </div>
+
+            <!-- Información del Gimnasio del Atleta -->
+            <div class="mb-3">
+              <label for="gimnasio" class="form-label"
+                >Gimnasio del Atleta:</label
+              >
+              <input
+                type="text"
+                id="gimnasio"
+                class="form-control monto-input"
+                value="{{ gimnasioAtleta }}"
+                readonly
+              />
+            </div>
+
+            <!-- Selector de Membresía -->
+            <div class="mb-3">
+              <ng-container *ngIf="id_gimnasio !== null">
+                <app-cbo-membresia
+                  [id_gimnasio]="id_gimnasio"
+                  (valueChange)="onMembresiaSeleccionada($event)"
+                >
+                </app-cbo-membresia>
+              </ng-container>
+            </div>
+
+            <!-- Campo de Monto -->
+            <div class="mb-3">
+              <label for="monto" class="form-label">Monto</label>
+              <input
+                type="text"
+                id="monto"
+                formControlName="monto"
+                class="form-control monto-input"
+                placeholder="Ingrese el monto"
+              />
+            </div>
+
+            <!-- Selector de Forma de Pago -->
+            <div class="mb-3">
+              <app-cbo-forma-pago
+                label="Forma de Pago"
+                (valueChange)="onFormaPagoChange($event)"
+              >
+              </app-cbo-forma-pago>
+            </div>
+
+            <!-- Botón de Envío -->
+            <div class="d-grid gap-2">
+              <button
+                type="submit"
+                class="btn btn-primary rounded-pill"
+                [disabled]="pagoForm.invalid"
+              >
+                <i class="bi bi-check-circle-fill me-2"></i> Registrar
+              </button>
+            </div>
+          </form>
         </div>
+      </div>
     </div>
+  </div>
 </div>
