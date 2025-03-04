@@ -8,10 +8,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class PersonaService {
-
-  
-    private apiUrl = environment.apiUrl; // Usa la URL del entorno
-
+  private apiUrl = environment.apiUrl; // Usa la URL del entorno
   private apiUrlPersona = `${this.apiUrl}/personas`; // Cambia esto por la URL de tu API
 
   constructor(private http: HttpClient) {}
@@ -37,14 +34,21 @@ export class PersonaService {
     );
   }
 
-  // 4. Editar una persona existente
+  // 4. Editar una persona existente (sin foto)
   editarPersona(idPersona: number, personaData: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrlPersona}/${idPersona}`, personaData).pipe(
       catchError(this.handleError)
     );
   }
 
-  // 5. Eliminar una persona por su ID
+  // 5. Editar una persona con foto
+  editarPersonaConFoto(idPersona: number, formData: FormData): Observable<any> {
+    return this.http.put<any>(`${this.apiUrlPersona}/${idPersona}`, formData).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  // 6. Eliminar una persona por su ID
   eliminarPersona(idPersona: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrlPersona}/${idPersona}`).pipe(
       catchError(this.handleError)

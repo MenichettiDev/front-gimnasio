@@ -1,74 +1,145 @@
 <div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card shadow-sm">
-                <div class="card-body text-center">
-                    <!-- Foto de perfil -->
-                    <div class="mb-4">
-                        <img *ngIf="perfil?.foto_archivo; else defaultPhoto" [src]="perfil.foto_archivo"
-                            alt="Foto de perfil" class="rounded-circle img-thumbnail"
-                            style="width: 150px; height: 150px;" />
-                        <ng-template #defaultPhoto>
-                            <img src="https://via.placeholder.com/150" alt="Foto predeterminada"
-                                class="rounded-circle img-thumbnail" style="width: 150px; height: 150px;" />
-                        </ng-template>
-                    </div>
-
-                    <!-- Formulario de edición -->
-                    <form (ngSubmit)="guardarCambios()" *ngIf="!isLoading && !errorMessage">
-                        <div class="mb-3">
-                            <label for="nombre" class="form-label">Nombre</label>
-                            <input type="text" id="nombre" class="form-control" [(ngModel)]="perfil.nombre"
-                                name="nombre" required />
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="apellido" class="form-label">Apellido</label>
-                            <input type="text" id="apellido" class="form-control" [(ngModel)]="perfil.apellido"
-                                name="apellido" required />
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Correo electrónico</label>
-                            <input type="email" id="email" class="form-control" [(ngModel)]="perfil.email" name="email"
-                                required />
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="celular" class="form-label">Celular</label>
-                            <input type="tel" id="celular" class="form-control" [(ngModel)]="perfil.celular"
-                                name="celular" />
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="direccion" class="form-label">Dirección</label>
-                            <input type="text" id="direccion" class="form-control" [(ngModel)]="perfil.direccion"
-                                name="direccion" />
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="fechaNacimiento" class="form-label">Fecha de nacimiento</label>
-                            <input type="date" id="fechaNacimiento" class="form-control"
-                                [(ngModel)]="perfil.fecha_nacimiento" name="fechaNacimiento" required />
-                        </div>
-
-                        <!-- Botón de guardar -->
-                        <button type="submit" class="btn btn-primary w-100">Guardar cambios</button>
-                    </form>
-
-                    <!-- Mensaje de error -->
-                    <div *ngIf="errorMessage" class="alert alert-danger mt-3">
-                        {{ errorMessage }}
-                    </div>
-
-                    <!-- Indicador de carga -->
-                    <div *ngIf="isLoading" class="text-center mt-3">
-                        <div class="spinner-border text-primary" role="status">
-                            <span class="visually-hidden">Cargando...</span>
-                        </div>
-                    </div>
-                </div>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <!-- Tarjeta principal -->
+      <div class="card shadow-lg">
+        <div class="card-body">
+          <!-- Título dentro del formulario -->
+          <h1 class="form-title text-center mb-4">PERFIL DE USUARIO</h1>
+          <!-- Foto de perfil -->
+          <div class="mb-4 d-flex justify-content-center position-relative">
+            <!-- Foto de perfil o ícono predeterminado -->
+            <div *ngIf="perfil?.foto_archivo; else defaultPhoto">
+              <img
+                [src]="perfil.foto_archivo"
+                alt="Foto de perfil"
+                class="profile-image rounded-circle img-thumbnail border border-3 border-white"
+              />
             </div>
+            <ng-template #defaultPhoto>
+              <div class="default-avatar rounded-circle border border-3 border-white d-flex justify-content-center align-items-center">
+                <i class="fas fa-user fa-3x text-white"></i> <!-- Ícono predeterminado -->
+              </div>
+            </ng-template>
+
+            <!-- Botón para cargar/modificar la foto -->
+            <label class="upload-button position-absolute">
+              <input
+                type="file"
+                accept="image/*"
+                (change)="onFileSelected($event)"
+                class="d-none"
+              />
+              <i class="fas fa-camera fa-lg text-white"></i> <!-- Ícono de cámara -->
+            </label>
+          </div>
+
+          <!-- Formulario de edición -->
+          <form (ngSubmit)="guardarCambios()" *ngIf="!isLoading && !errorMessage">
+            <!-- Grupo 1: Nombre y Apellido -->
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input
+                  type="text"
+                  id="nombre"
+                  class="form-control"
+                  [(ngModel)]="perfil.nombre"
+                  name="nombre"
+                  required
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="apellido" class="form-label">Apellido</label>
+                <input
+                  type="text"
+                  id="apellido"
+                  class="form-control"
+                  [(ngModel)]="perfil.apellido"
+                  name="apellido"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- Grupo 2: Correo electrónico y Celular -->
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="email" class="form-label">Correo electrónico</label>
+                <input
+                  type="email"
+                  id="email"
+                  class="form-control"
+                  [(ngModel)]="perfil.email"
+                  name="email"
+                  required
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="celular" class="form-label">Celular</label>
+                <input
+                  type="tel"
+                  id="celular"
+                  class="form-control"
+                  [(ngModel)]="perfil.celular"
+                  name="celular"
+                />
+              </div>
+            </div>
+
+            <!-- Grupo 3: Dirección y Fecha de nacimiento -->
+            <div class="row mb-3">
+              <div class="col-md-12">
+                <label for="direccion" class="form-label">Dirección</label>
+                <input
+                  type="text"
+                  id="direccion"
+                  class="form-control"
+                  [(ngModel)]="perfil.direccion"
+                  name="direccion"
+                />
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="fechaNacimiento" class="form-label">Fecha de nacimiento</label>
+                <input
+                  type="date"
+                  id="fechaNacimiento"
+                  class="form-control"
+                  [(ngModel)]="perfil.fecha_nacimiento"
+                  name="fechaNacimiento"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- Botón de guardar -->
+            <div class="d-grid gap-2 mt-4 mt-sm-5">
+              <button
+                type="submit"
+                class="btn btn-primary rounded-pill"
+                [disabled]="isLoading"
+              >
+                <i class="bi bi-check-circle-fill me-2"></i>Procesar
+              </button>
+            </div>
+          </form>
+
+          <!-- Mensaje de error -->
+          <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+            {{ errorMessage }}
+          </div>
+
+          <!-- Indicador de carga -->
+          <div *ngIf="isLoading" class="text-center mt-3">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Cargando...</span>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
