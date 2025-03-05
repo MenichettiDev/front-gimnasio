@@ -1,39 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms'; // Importa FormsModule para [(ngModel)]
+import { MedidaFormComponent } from '../../../components/medida-form/medida-form.component'; // Importa el formulario
 import { MedidasService } from '../../../service/medidas.service'; // Servicio de medidas
 import { AuthService } from '../../../service/auth/auth.service'; // Servicio de autenticación
 import { Medida } from '../../../data/interfaces/tbMedidaInterface'; // Interfaz de medidas
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-medidas',
+  standalone: true,
+  imports: [CommonModule, FormsModule, MedidaFormComponent], // Agrega FormsModule aquí
   templateUrl: './medidas.component.html',
   styleUrls: ['./medidas.component.css'],
-  standalone: true,
-  imports: [CommonModule, FormsModule],
 })
-export class MedidasComponent implements OnInit {
-  medidas: Medida[] = []; // Lista de medidas del atleta
-  medidaSeleccionada: Medida | null = null; // Medida seleccionada para editar
+export class MedidasComponent {
+  medidas: Medida[] = []; // Lista completa de medidas del atleta
+  medidasFiltradas: Medida[] = []; // Lista filtrada de medidas (para búsqueda)
+  mostrarFormulario = false; // Controla la visibilidad del formulario
+  medidaSeleccionada: Medida | null = null; // Medida seleccionada para edición
   idAtleta: number | null = null; // ID del atleta autenticado
-  medidaForm: any = {}; // Propiedad intermedia para el formulario
 
-  // Variables para el formulario de creación/edición
-  nuevaMedida = {
-    fecha_medicion: '',
-    peso: 0,
-    altura: 0,
-    biceps: 0,
-    pecho: 0,
-    hombros: 0,
-    cintura: 0,
-    gluteos: 0,
-    cuadriceps: 0,
-    gemelos: 0,
-    antebrazo: 0,
-    cuello: 0,
-    grasa_corporal: 0,
-  };
+  // Variables para la paginación
+  currentPage = 1; // Página actual
+  pageSize = 5; // Número de elementos por página
 
   constructor(
     private medidaService: MedidasService,
@@ -42,12 +31,9 @@ export class MedidasComponent implements OnInit {
 
   ngOnInit(): void {
     // Obtener el ID del atleta autenticado
-    // this.idAtleta = this.authService.getUser()[0].id_persona;
     this.idAtleta = this.authService.getIdAtleta();
-    console.log( this.idAtleta)
     if (this.idAtleta) {
       this.cargarMedidas(); // Cargar las medidas del atleta
-      this.limpiarFormulario(); // Inicializar medidaForm con valores predeterminados
     }
   }
 
@@ -57,6 +43,7 @@ export class MedidasComponent implements OnInit {
       this.medidaService.getMedidasByAtleta(this.idAtleta).subscribe(
         (data: Medida[]) => {
           this.medidas = data;
+          this.medidasFiltradas = [...this.medidas]; // Inicializar lista filtrada
         },
         (error) => {
           console.error('Error al cargar las medidas:', error);
@@ -65,75 +52,106 @@ export class MedidasComponent implements OnInit {
     }
   }
 
-  // Seleccionar una medida para editar
-  seleccionarMedida(medida: Medida): void {
-    this.medidaSeleccionada = { ...medida };
-    this.medidaForm = { ...this.medidaSeleccionada }; // Actualizar medidaForm con la medida seleccionada
+
+  // Obtener las medidas de la página actual
+  get medidasPaginadas(): Medida[] {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    return this.medidasFiltradas.slice(startIndex, endIndex);
   }
 
-  // Crear una nueva medida
-  crearMedida(): void {
-    if (this.idAtleta) {
-      this.medidaService
-        .crearMedida(
-          this.idAtleta,
-          this.medidaForm.fecha_medicion,
-          this.medidaForm.peso,
-          this.medidaForm.altura,
-          this.medidaForm.biceps,
-          this.medidaForm.pecho,
-          this.medidaForm.hombros,
-          this.medidaForm.cintura,
-          this.medidaForm.gluteos,
-          this.medidaForm.cuadriceps,
-          this.medidaForm.gemelos,
-          this.medidaForm.antebrazo,
-          this.medidaForm.cuello,
-          this.medidaForm.grasa_corporal
-        )
-        .subscribe(
-          () => {
-            this.cargarMedidas(); // Recargar la lista de medidas
-            this.limpiarFormulario(); // Limpiar el formulario
-          },
-          (error) => {
-            console.error('Error al crear la medida:', error);
-          }
-        );
+  // Calcular el número total de páginas
+  get totalPages(): number {
+    return Math.ceil(this.medidasFiltradas.length / this.pageSize);
+  }
+
+  // Navegar a la página anterior
+  prevPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
     }
   }
 
-  // Actualizar una medida existente
-  actualizarMedida(): void {
-    if (this.medidaSeleccionada && this.idAtleta) {
+  // Navegar a la página siguiente
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+    }
+  }
+
+  // Abrir el formulario (creación o edición)
+  abrirFormulario(medida?: Medida): void {
+    this.medidaSeleccionada = medida || null; // Pasa la medida si está en modo edición
+    this.mostrarFormulario = true; // Muestra el formulario
+  }
+
+  // Cerrar el formulario
+  cerrarFormulario(): void {
+    this.mostrarFormulario = false; // Oculta el formulario
+    this.medidaSeleccionada = null; // Limpia la medida seleccionada
+  }
+
+  // Manejar el evento de guardar desde el formulario
+  onGuardar(medida: Medida): void {
+    if (this.medidaSeleccionada) {
+      // Modo edición
       this.medidaService
         .actualizarMedida(
           this.medidaSeleccionada.id_medida,
-          this.idAtleta,
-          this.medidaForm.fecha_medicion,
-          this.medidaForm.peso,
-          this.medidaForm.altura,
-          this.medidaForm.biceps,
-          this.medidaForm.pecho,
-          this.medidaForm.hombros,
-          this.medidaForm.cintura,
-          this.medidaForm.gluteos,
-          this.medidaForm.cuadriceps,
-          this.medidaForm.gemelos,
-          this.medidaForm.antebrazo,
-          this.medidaForm.cuello,
-          this.medidaForm.grasa_corporal
+          this.idAtleta!,
+          medida.fecha_medicion,
+          medida.peso,
+          medida.altura,
+          medida.biceps,
+          medida.pecho,
+          medida.hombros,
+          medida.cintura,
+          medida.gluteos,
+          medida.cuadriceps,
+          medida.gemelos,
+          medida.antebrazo,
+          medida.cuello,
+          medida.grasa_corporal
         )
         .subscribe(
           () => {
             this.cargarMedidas(); // Recargar la lista de medidas
-            this.medidaSeleccionada = null; // Limpiar la medida seleccionada
-            this.limpiarFormulario(); // Reiniciar el formulario
+            this.cerrarFormulario(); // Cerrar el formulario
           },
           (error) => {
             console.error('Error al actualizar la medida:', error);
           }
         );
+    } else {
+      // Modo creación
+      if (this.idAtleta) {
+        this.medidaService
+          .crearMedida(
+            this.idAtleta,
+            medida.fecha_medicion,
+            medida.peso,
+            medida.altura,
+            medida.biceps,
+            medida.pecho,
+            medida.hombros,
+            medida.cintura,
+            medida.gluteos,
+            medida.cuadriceps,
+            medida.gemelos,
+            medida.antebrazo,
+            medida.cuello,
+            medida.grasa_corporal
+          )
+          .subscribe(
+            () => {
+              this.cargarMedidas(); // Recargar la lista de medidas
+              this.cerrarFormulario(); // Cerrar el formulario
+            },
+            (error) => {
+              console.error('Error al crear la medida:', error);
+            }
+          );
+      }
     }
   }
 
@@ -147,25 +165,5 @@ export class MedidasComponent implements OnInit {
         console.error('Error al eliminar la medida:', error);
       }
     );
-  }
-
-  // Limpiar el formulario de creación
-  limpiarFormulario(): void {
-    this.nuevaMedida = {
-      fecha_medicion: '',
-      peso: 0,
-      altura: 0,
-      biceps: 0,
-      pecho: 0,
-      hombros: 0,
-      cintura: 0,
-      gluteos: 0,
-      cuadriceps: 0,
-      gemelos: 0,
-      antebrazo: 0,
-      cuello: 0,
-      grasa_corporal: 0,
-    };
-    this.medidaForm = { ...this.nuevaMedida }; // Reiniciar medidaForm con los valores predeterminados
   }
 }
