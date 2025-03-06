@@ -67,17 +67,17 @@ export class PerfilComponent implements OnInit {
   }
 
   // Maneja la selección de archivos
-  onFileSelected(event: any): void {
-    const file = event.target.files[0]; // Obtiene el archivo seleccionado
-    if (file) {
-      this.nuevaFoto = file; // Guarda el archivo para enviarlo al servidor
-      const reader = new FileReader(); // Crea un lector de archivos
-      reader.onload = (e: any) => {
-        this.perfil.foto_archivo = e.target.result; // Actualiza la vista previa
-      };
-      reader.readAsDataURL(file); // Lee el archivo como una URL base64
-    }
-  }
+  // onFileSelected(event: any): void {
+  //   const file = event.target.files[0]; // Obtiene el archivo seleccionado
+  //   if (file) {
+  //     this.nuevaFoto = file; // Guarda el archivo para enviarlo al servidor
+  //     const reader = new FileReader(); // Crea un lector de archivos
+  //     reader.onload = (e: any) => {
+  //       this.perfil.foto_archivo = e.target.result; // Actualiza la vista previa
+  //     };
+  //     reader.readAsDataURL(file); // Lee el archivo como una URL base64
+  //   }
+  // }
 
   guardarCambios(): void {
     // Obtener el ID del usuario actual
@@ -88,21 +88,24 @@ export class PerfilComponent implements OnInit {
     }
 
     // Crear un objeto FormData para enviar la foto junto con los datos del perfil
-    const formData = new FormData();
-    formData.append('nombre', this.perfil.nombre);
-    formData.append('apellido', this.perfil.apellido);
-    formData.append('email', this.perfil.email);
-    formData.append('celular', this.perfil.celular || '');
-    formData.append('direccion', this.perfil.direccion || '');
-    formData.append('fecha_nacimiento', this.perfil.fecha_nacimiento);
+    // const formData = new FormData();
+    // formData.append('nombre', this.perfil.nombre);
+    // formData.append('apellido', this.perfil.apellido);
+    // formData.append('email', this.perfil.email);
+    // formData.append('celular', this.perfil.celular || '');
+    // formData.append('direccion', this.perfil.direccion || '');
+    // formData.append('fecha_nacimiento', this.perfil.fecha_nacimiento);
 
     // Agregar la foto si se seleccionó una nueva
-    if (this.nuevaFoto) {
-      formData.append('foto_archivo', this.nuevaFoto);
-    }
+    // if (this.nuevaFoto) {
+    //   formData.append('foto_archivo', this.nuevaFoto);
+    // }
+
+    // console.log(  'datos form', formData)
+    console.log(  'datos form', this.perfil)
 
     // Actualizar los datos del perfil
-    this.personaService.editarPersonaConFoto(idUsuario, formData).subscribe(
+    this.personaService.editarPersona(idUsuario, this.perfil).subscribe(
       (response) => {
         console.log('Perfil actualizado:', response);
         alert('Los cambios han sido guardados exitosamente.');
