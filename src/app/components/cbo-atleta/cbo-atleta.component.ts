@@ -66,6 +66,10 @@ export class CboAtletaComponent implements ControlValueAccessor {@Input() label:
       return; // No emitir si no hay un atleta seleccionado
     }
   
+
+    this.selectedAtleta = this.selectedAtleta*1; // Convertir a número
+
+
     const valueToEmit = this.emitOnlyId
       ? this.selectedAtleta // Emite solo el ID si emitOnlyId es true
       : this.atletas.find((a) => a.id_atleta === this.selectedAtleta); // Emite el objeto completo si emitOnlyId es false

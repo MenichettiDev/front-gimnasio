@@ -1,0 +1,6 @@
+<app-cbo-atleta (valueChange)="onAtletaSeleccionado($event)" [emitOnlyId]="true">
+</app-cbo-atleta>
+
+<!-- Mostrar el componente <app-visor-medidas> solo si idAtletaSeleccionado no es null -->
+<app-visor-medidas *ngIf="idAtletaSeleccionado !== null" [idAtletaExterno]="idAtletaSeleccionado">
+</app-visor-medidas>
