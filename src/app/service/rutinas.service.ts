@@ -10,18 +10,24 @@ import { environment } from '../../environments/environment';
 })
 export class RutinasService {
 
-  
-    private apiUrl = environment.apiUrl; // Usa la URL del entorno
 
+  private apiUrl = environment.apiUrl; // Usa la URL del entorno
+
+  private apiUrlFiltar = `${this.apiUrl}/getRutinasFiltradas`;
   private apiUrlGetRutinaByIdAtleta = `${this.apiUrl}/getRutinaByIdAtleta`; // URL de la API para obtener rutina por ID de atleta
   private apiUrlGetRutinaByIdCreador = `${this.apiUrl}/getRutinaByIdCreador`; // URL de la API para obtener rutina por ID de creador
   private apiUrlGetRutinaByIdRutina = `${this.apiUrl}/getRutinaByIdRutina`; // URL de la API para obtener rutina por ID de creador
   private apiUrlGetRutinasFree = `${this.apiUrl}/getRutinasFree`; // URL de la API para obtener rutinas gratuitas
-  private apiUrlCreateRutina = `${this.apiUrl}/crearRutinaYAsignarAtleta`; 
-  private apiUrlEditarRutina = `${this.apiUrl}/editarRutina`; 
-  private apiUrlEliminarRutina = `${this.apiUrl}/eliminarRutina`; 
+  private apiUrlCreateRutina = `${this.apiUrl}/crearRutinaYAsignarAtleta`;
+  private apiUrlEditarRutina = `${this.apiUrl}/editarRutina`;
+  private apiUrlEliminarRutina = `${this.apiUrl}/eliminarRutina`;
 
   constructor(private http: HttpClient) { }
+
+  //rutina filtrada
+  filtrada(filtro: any): Observable<any> {
+    return this.http.post(this.apiUrlFiltar, filtro);
+  }
 
   // Método para obtener la rutina por ID de atleta
   getRutinaByIdAtleta(id_atleta: number): Observable<plan[]> {
@@ -44,15 +50,15 @@ export class RutinasService {
   }
 
   // Método para crear rutina
-    createRutina(rutina: any): Observable<any> {
-      return this.http.post<any>(this.apiUrlCreateRutina, rutina);
-    }
+  createRutina(rutina: any): Observable<any> {
+    return this.http.post<any>(this.apiUrlCreateRutina, rutina);
+  }
   // Método para editar rutina
-    editarRutina(rutina: any): Observable<any> {
-      return this.http.post<any>(this.apiUrlEditarRutina, rutina);
-    }
+  editarRutina(rutina: any): Observable<any> {
+    return this.http.post<any>(this.apiUrlEditarRutina, rutina);
+  }
   // Método para eliminar rutina
-    eliminarRutina(id_rutina: number): Observable<number> {
-      return this.http.post<number>(this.apiUrlEliminarRutina, { id_rutina });
-    }
+  eliminarRutina(id_rutina: number): Observable<number> {
+    return this.http.post<number>(this.apiUrlEliminarRutina, { id_rutina });
+  }
 }

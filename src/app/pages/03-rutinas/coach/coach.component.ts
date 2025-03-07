@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CboAtletaComponent } from '../../../components/cbo-atleta/cbo-atleta.component';
 import { FormsModule } from '@angular/forms';
-import { TbRutinasComponent } from '../../../components/tb-rutinas/tb-rutinas.component';
+import { TbRutinasComponent } from '../../../components/Rutinas/tb-rutinas/tb-rutinas.component';
 import { Atleta } from '../../../data/interfaces/atletaInterface';
 import { AuthService } from '../../../service/auth/auth.service';
 import { EntrenadorService } from '../../../service/entrenador.service';

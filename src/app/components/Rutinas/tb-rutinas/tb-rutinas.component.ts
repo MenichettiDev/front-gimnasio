@@ -1,11 +1,11 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { RutinasService } from '../../service/rutinas.service';
-import { plan, ejercicioRutina, ejerciciosPorDia, rutinaArmada } from '../../data/interfaces/rutinaArmadaInterface';
+import { RutinasService } from '../../../service/rutinas.service';
+import { plan, ejercicioRutina, ejerciciosPorDia, rutinaArmada } from '../../../data/interfaces/rutinaArmadaInterface';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalVisorRutinaComponent } from '../../components/Rutinas/modal-visor-rutina/modal-visor-rutina.component';
+import { ModalVisorRutinaComponent } from '../modal-visor-rutina/modal-visor-rutina.component';
 
 @Component({
   selector: 'app-tb-rutinas',
