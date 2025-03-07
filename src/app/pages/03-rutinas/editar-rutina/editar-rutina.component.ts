@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Para usar ngModel y otras directivas comunes
 import { FormsModule } from '@angular/forms';
 import { BuscarRutinaComponent } from "../../../components/Rutinas/buscar-rutina/buscar-rutina.component"; // Para habilitar ngModel en formularios
-import { rutinaArmada } from '../../../data/interfaces/rutinaArmadaInterface';
+import { plan, rutinaArmada } from '../../../data/interfaces/rutinaArmadaInterface';
 import { MostrarRutinasComponent } from "../../../components/Rutinas/mostrar-rutinas/mostrar-rutinas.component";
 
 
@@ -20,7 +20,7 @@ import { MostrarRutinasComponent } from "../../../components/Rutinas/mostrar-rut
 })
 export class EditarRutinaComponent {
 
-    rutinasFiltradas: rutinaArmada[] = [];
+    rutinasFiltradas: plan[] = [];
 
     manejarRutinasEncontradas(rutinas: any[]) {
         console.log('Rutinas recibidas:', rutinas);

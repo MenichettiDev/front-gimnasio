@@ -1,4 +1,4 @@
-<div *ngIf="rutinas.length > 0; else noData">
+<div *ngIf="rutinasArmadas.length > 0; else noData">
     <table>
         <thead>
             <tr>
@@ -10,7 +10,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let rutina of rutinas">
+            <tr *ngFor="let rutina of rutinasArmadas">
                 <td>{{ rutina.nombre }}</td>
                 <td>{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
                 <td>{{ rutina.objetivo }}</td>
