@@ -1,0 +1,24 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  thead {
+    background-color: #f4f4f4;
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  
+  .icon-view {
+    cursor: pointer;
+    color: blue;
+    font-size: 1.2em;
+  }
+  
+  .icon-view:hover {
+    color: darkblue;
+  }
