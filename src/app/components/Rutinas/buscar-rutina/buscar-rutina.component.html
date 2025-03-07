@@ -1,0 +1,50 @@
+
+<div class="container">
+    <h2>Filtrar Rutinas</h2>
+    <form [formGroup]="filtroForm" (ngSubmit)="onSubmit()">
+        <!-- Nombre -->
+        <div class="form-group">
+            <app-input-texto label="Nombre de la rutina" formControlName="nombre"></app-input-texto>
+        </div>
+
+        <!-- Fecha de Creación -->
+        <div class="form-group">
+            <label>Fecha de Creación:</label>
+            <div class="row">
+                <div class="col">
+                    <app-input-fecha label="Fecha desde" formControlName="fechaDesde"></app-input-fecha>
+                </div>
+                <div class="col">
+                    <app-input-fecha label="Fecha hasta" formControlName="fechaHasta"></app-input-fecha>
+                </div>
+            </div>
+        </div>
+
+        <!-- Objetivo -->
+        <div class="form-group">
+            <label for="objetivo">Objetivo:</label>
+            <app-cbo-objetivo formControlName="objetivo"></app-cbo-objetivo>
+        </div>
+
+        <!-- Atleta -->
+        <div class="form-group">
+            <label for="atleta">Atleta:</label>
+            <app-cbo-atleta formControlName="idAtleta" [emitOnlyId]="true"></app-cbo-atleta>
+        </div>
+
+        <!-- Nivel del Atleta -->
+        <div class="form-group">
+            <label for="nivelAtleta">Nivel del Atleta:</label>
+            <app-cbo-niveldificultad formControlName="nivelAtleta"></app-cbo-niveldificultad>
+        </div>
+
+        <!-- Cantidad de Días -->
+        <div class="form-group">
+            <label for="cantidadDias">Cantidad de Días:</label>
+            <app-cbo-dias formControlName="cantidadDias"></app-cbo-dias>
+        </div>
+
+        <!-- Botón de Búsqueda -->
+        <button type="submit" class="btn btn-primary" (click)="onAceptar()">Buscar</button>
+    </form>
+</div>

@@ -9,6 +9,7 @@ export const rutinasRoutes: Routes = [
     { path: 'actual', loadComponent: () => import('./actual/actual.component').then(m => m.ActualComponent) },
     { path: 'coach', loadComponent: () => import('./coach/coach.component').then(m => m.CoachComponent) },
     { path: 'crear-rutina', loadComponent: () => import('./crear-rutina/crear-rutina.component').then(m => m.CrearRutinaComponent) },
+    { path: 'editar-rutina', loadComponent: () => import('./editar-rutina/editar-rutina.component').then(m => m.EditarRutinaComponent) },
     { path: 'especificas', loadComponent: () => import('./especificas/especificas.component').then(m => m.EspecificasComponent) },
     { path: 'favoritas', loadComponent: () => import('./favoritas/favoritas.component').then(m => m.FavoritasComponent) },
     { path: 'historial', loadComponent: () => import('./historial/historial.component').then(m => m.HistorialComponent) },
