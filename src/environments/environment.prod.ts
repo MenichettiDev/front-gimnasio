@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://gymrats.com.ar/api', // URL para producción
+    apiUrl: 'https://localhost:7000/api', // URL para producción
 };
