@@ -19,7 +19,8 @@ import { CommonModule } from '@angular/common';
   ],
 })
 
-export class CboAtletaComponent implements ControlValueAccessor {@Input() label: string = 'Selecciona un Atleta'; // Etiqueta del combo
+export class CboAtletaComponent implements ControlValueAccessor {
+  @Input() label: string = 'Selecciona un Atleta'; // Etiqueta del combo
   @Input() emitOnlyId: boolean = false; // Controla si se emite solo el ID o el objeto completo
   @Input() idEntrenador: number | null = null; // ID del entrenador para filtrar atletas
   @Output() valueChange = new EventEmitter<number | Atleta>(); // Emite el valor seleccionado (ID o objeto completo)
@@ -65,7 +66,7 @@ export class CboAtletaComponent implements ControlValueAccessor {@Input() label:
     if (this.selectedAtleta === null) {
       return; // No emitir si no hay un atleta seleccionado
     }
-  
+
 
     this.selectedAtleta = this.selectedAtleta*1; // Convertir a número
 
@@ -73,7 +74,7 @@ export class CboAtletaComponent implements ControlValueAccessor {@Input() label:
     const valueToEmit = this.emitOnlyId
       ? this.selectedAtleta // Emite solo el ID si emitOnlyId es true
       : this.atletas.find((a) => a.id_atleta === this.selectedAtleta); // Emite el objeto completo si emitOnlyId es false
-  
+
     if (valueToEmit) {
       this.onChange(valueToEmit); // Notifica a Angular sobre el cambio
       this.onTouched(); // Marca el control como "tocado"

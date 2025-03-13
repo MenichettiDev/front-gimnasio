@@ -1,6 +1,27 @@
-<app-cbo-atleta (valueChange)="onAtletaSeleccionado($event)" [emitOnlyId]="true">
-</app-cbo-atleta>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <!-- Formulario con transparencia -->
+      <div class="card shadow-lg">
+        <div class="card-body">
+          <app-cbo-atleta
+            (valueChange)="onAtletaSeleccionado($event)"
+            [emitOnlyId]="true"
+          >
+          </app-cbo-atleta>
 
-<!-- Mostrar el componente <app-visor-medidas> solo si idAtletaSeleccionado no es null -->
-<app-visor-medidas *ngIf="idAtletaSeleccionado !== null" [idAtletaExterno]="idAtletaSeleccionado">
-</app-visor-medidas>
+          <!-- Gimnasio -->
+          <div class="row mb-3">
+            <div class="col-md-12">
+              <app-visor-medidas
+                *ngIf="idAtletaSeleccionado !== null"
+                [idAtletaExterno]="idAtletaSeleccionado"
+              >
+              </app-visor-medidas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
