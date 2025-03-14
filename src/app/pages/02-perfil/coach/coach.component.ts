@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { VisorMedidasComponent } from "../../../components/medidas/visor-medidas/visor-medidas.component";
+import { MedidasVisorComponent } from '../../../components/medidas/medidas-visor/medidas-visor.component';
 import { CboAtletaComponent } from "../../../components/cbo-atleta/cbo-atleta.component";
 import { Atleta } from '../../../data/interfaces/atletaInterface';
 import { CommonModule } from '@angular/common';
@@ -7,7 +7,13 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-coach',
-  imports: [VisorMedidasComponent, CboAtletaComponent, CommonModule, FormsModule],
+  standalone: true,  // Marcamos el componente como Standalone
+  imports: [
+    CboAtletaComponent,  // Importamos el componente hijo
+    MedidasVisorComponent, // Importamos el otro componente hijo
+    CommonModule, // Necesario para usar *ngIf y otras directivas comunes
+    FormsModule, // Si usas formularios
+  ],
   templateUrl: './coach.component.html',
   styleUrl: './coach.component.css'
 })

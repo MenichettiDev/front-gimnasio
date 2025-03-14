@@ -1,6 +1,4 @@
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
+
       <!-- Tarjeta con transparencia -->
       <div class="card shadow-lg">
         <div class="card-body">
@@ -27,7 +25,13 @@
 
           <!-- Lista de medidas -->
           <div class="medidas-list">
-            <table class="table custom-table">
+            <!-- Mensaje si no hay medidas -->
+            <div *ngIf="medidas.length === 0" class="alert alert-warning">
+              <p>No se han cargado medidas para este atleta.</p>
+            </div>
+
+            <!-- Tabla de medidas si existen -->
+            <table *ngIf="medidas.length > 0" class="table custom-table">
               <thead>
                 <tr>
                   <th>Fecha</th>
@@ -69,14 +73,12 @@
                   <td>
                     <button class="btn-icon" (click)="abrirFormulario(medida)">
                       <i class="fas fa-edit"></i>
-                      <!-- Ícono de edición -->
                     </button>
                     <button
                       class="btn-icon btn-delete"
                       (click)="eliminarMedida(medida.id_medida)"
                     >
                       <i class="fas fa-trash-alt"></i>
-                      <!-- Ícono de eliminación -->
                     </button>
                   </td>
                 </tr>
@@ -104,6 +106,3 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>

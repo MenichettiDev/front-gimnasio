@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // Importa FormsModule para [(ngModel)]
 import { MedidaFormComponent } from '../../../components/medidas/medida-form/medida-form.component'; // Importa el formulario
@@ -8,12 +8,12 @@ import { Medida } from '../../../data/interfaces/tbMedidaInterface'; // Interfaz
 
 @Component({
   selector: 'app-medidas-visor',
-  standalone: true,
   imports: [CommonModule, FormsModule, MedidaFormComponent], // Agrega FormsModule aquí
   templateUrl: './medidas-visor.component.html',
   styleUrls: ['./medidas-visor.component.css'],
 })
 export class MedidasVisorComponent {
+  @Input() idAtletaExterno: number | null = null;
   medidas: Medida[] = []; // Lista completa de medidas del atleta
   medidasFiltradas: Medida[] = []; // Lista filtrada de medidas (para búsqueda)
   mostrarFormulario = false; // Controla la visibilidad del formulario
@@ -31,11 +31,30 @@ export class MedidasVisorComponent {
 
   ngOnInit(): void {
     // Obtener el ID del atleta autenticado
-    this.idAtleta = this.authService.getIdAtleta();
+    this.idAtleta = this.idAtletaExterno || this.authService.getIdAtleta();
     if (this.idAtleta) {
       this.cargarMedidas(); // Cargar las medidas del atleta
     }
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // Detectar cambios en el input idAtletaExterno
+    if (changes['idAtletaExterno'] && this.idAtletaExterno !== null) {
+      this.idAtleta = this.idAtletaExterno; // Actualizar el ID del atleta
+
+      // Limpiar las medidas antes de cargarlas
+      this.medidas = [];
+      this.medidasFiltradas = [];
+
+      this.cargarMedidas(); // Recargar las medidas
+    } else {
+      // Limpiar medidas cuando no hay atleta seleccionado
+      this.medidas = [];
+      this.medidasFiltradas = [];
+    }
+}
+
+
 
   // Cargar las medidas del atleta
   cargarMedidas(): void {
@@ -47,8 +66,12 @@ export class MedidasVisorComponent {
         },
         (error) => {
           console.error('Error al cargar las medidas:', error);
+          // También podrías mostrar un modal o mensaje indicando que no se encontraron medidas
         }
       );
+    } else {
+      this.medidas = [];  // Si no hay ID de atleta, limpia las medidas
+      this.medidasFiltradas = [];
     }
   }
 
