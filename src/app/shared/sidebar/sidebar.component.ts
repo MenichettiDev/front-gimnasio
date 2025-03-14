@@ -124,4 +124,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
   toggleSidebar(): void {
     this.isSidebarVisible = !this.isSidebarVisible;
   }
+
+  navigateToHome() {
+    this.router.navigate(['/inicio']);
+  }
 }
