@@ -1,6 +1,6 @@
 /* Sidebar con fondo negro semi-transparente */
 .sidebar {
-  width: 220px;  /* Ancho más grande del sidebar */
+  width: 16.6%;  /* Ancho más grande del sidebar */
   background-color: rgba(43, 1, 75, 0.94);
   color: #d3d3d3;  /* Gris claro */
   padding: 20px;
@@ -81,7 +81,9 @@
 
 /* Sin subrayado en los enlaces */
 .nav-link {
-  font-size: 16px;  /* Tamaño más grande para el texto */
+  font-family: 'Nunito', sans-serif;  /* Aplica la fuente Nunito */
+  padding: 15px 15px;  /* Aumentar el padding para que los ítems sean más grandes */
+  font-size: 20px;  /* Tamaño más grande para el texto */
   color: #ffffff;  /* Gris claro */
   text-decoration: none;
   font-weight: 500;

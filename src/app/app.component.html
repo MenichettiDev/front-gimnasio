@@ -1,21 +1,18 @@
 <!-- Barra superior -->
 <div class="alto">
   <!-- Mostrar el componente 'app-barrasup' solo si el usuario NO está logueado -->
-<app-barrasup *ngIf="!isLoggedIn"></app-barrasup>
+  <app-barrasup *ngIf="!isLoggedIn"></app-barrasup>
 </div>
 
 <!-- Sidebar condicional -->
-<!-- <div *ngIf="shouldShowSidebar()"> -->
-<div >
-  <app-sidebar *ngIf="isLoggedIn"></app-sidebar>
-</div>
+<div class="row">
+  <!-- Sidebar -->
+  <div class="col-2" *ngIf="isLoggedIn">
+    <app-sidebar></app-sidebar>
+  </div>
 
-<!-- Contenido principal -->
-<div class="container-fluid">
-  <div class="row">
-    <!-- Aquí se podrían agregar más elementos como un sidebar si lo deseas -->
-    <div class="col-12">
-      <router-outlet></router-outlet> <!-- Aquí se inyectará el componente de resumen o cualquier otro componente según la ruta -->
-    </div>
+  <!-- Contenido principal -->
+  <div class="col-10">
+    <router-outlet></router-outlet> <!-- Aquí se inyectará el componente de resumen o cualquier otro componente según la ruta -->
   </div>
 </div>
