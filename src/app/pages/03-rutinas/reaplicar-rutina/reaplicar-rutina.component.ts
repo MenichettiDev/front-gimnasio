@@ -5,20 +5,13 @@ import { BuscarRutinaComponent } from "../../../components/Rutinas/buscar-rutina
 import { plan, rutinaArmada } from '../../../data/interfaces/rutinaArmadaInterface';
 import { MostrarRutinasComponent } from "../../../components/Rutinas/mostrar-rutinas/mostrar-rutinas.component";
 
-
-
 @Component({
-    selector: 'app-editar-rutina',
-    standalone: true,
-    templateUrl: './editar-rutina.component.html',
-    styleUrls: ['./editar-rutina.component.css'],
-    imports: [
-    CommonModule, FormsModule,
-    BuscarRutinaComponent,
-    MostrarRutinasComponent
-],
+  selector: 'app-reaplicar-rutina',
+  imports: [BuscarRutinaComponent, MostrarRutinasComponent],
+  templateUrl: './reaplicar-rutina.component.html',
+  styleUrl: './reaplicar-rutina.component.css'
 })
-export class EditarRutinaComponent {
+export class ReaplicarRutinaComponent {
 
     rutinasFiltradas: plan[] = [];
 
