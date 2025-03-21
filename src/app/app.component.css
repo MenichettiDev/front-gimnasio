@@ -1,24 +1,8 @@
-/* Aseguramos que html y body ocupen todo el alto de la ventana */
-html, body {
-  height: 100%;
-  margin: 0;
-  overflow-x: hidden; /* Evita el desbordamiento horizontal */
-}
-
-/* Contenedor principal que agrupa la barra superior y el contenido */
+/* Contenedor principal */
 .container-fluid {
   display: flex;
   flex-direction: column;
   height: 100vh; /* Ocupa el 100% de la altura de la ventana */
-}
-
-/* Barra superior */
-.alto {
-  height: 60px;
-  z-index: 100; /* Asegura que la barra superior esté sobre otros elementos */
-  position: relative; /* Se mantiene en la parte superior */
-  background-color: #f8f9fa; /* Color de fondo opcional para la barra superior */
-  margin: 0; /* Elimina márgenes que podrían generar la barra blanca */
 }
 
 /* Fila que contiene el sidebar y el contenido principal */
@@ -27,57 +11,44 @@ html, body {
   flex: 1;
   height: calc(100vh - 60px); /* Ajusta la altura restante después de la barra superior */
   margin-top: 60px; /* Esto evita el solapamiento con la barra superior */
+  position: relative;
+  overflow: hidden; /* Evita el desbordamiento horizontal */
+  padding: 0 20px; /* Añadir padding controlado para mantener la distancia */
 }
 
-/* Sidebar, de ancho fijo y se mantiene fijo a la izquierda */
+/* Sidebar */
 .col-2 {
-  position: fixed; /* Fija el sidebar a la izquierda */
-  top: 60px; /* Ajusta para que esté debajo de la barra superior */
+  width: 220px; /* Asegura que el sidebar tenga un ancho fijo */
+  position: fixed; /* Fija el sidebar en su lugar */
+  top: 60px; /* Empuja el sidebar debajo de la barra superior */
   bottom: 0;
-  z-index: 90; /* Asegura que el sidebar esté por encima del contenido */
-  height: calc(100vh - 60px); /* Resta la altura de la barra superior */
   background-color: transparent; /* Fondo transparente en el sidebar */
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Sombra para separar el sidebar del contenido */
+  z-index: 90; /* Asegura que el sidebar esté por encima del contenido */
+  height: calc(100vh - 60px); /* Ocupa todo el alto menos la barra superior */
 }
 
-/* Contenido principal (router-outlet) */
+/* Contenido principal */
 .col-10 {
-  margin-left: 16.666%; /* Deja espacio para el sidebar (1/6 de la pantalla) */
+  margin-left: 240px; /* Esto asegura que el contenido comience después del sidebar */
   padding: 20px; /* Espaciado interno */
   overflow-y: auto; /* Permite desplazamiento vertical si el contenido excede la altura */
-  height: calc(100vh - 60px); /* Resta la altura de la barra superior para que el contenido se ajuste */
   z-index: 80; /* Asegura que el contenido esté debajo del sidebar */
   background-color: transparent; /* Fondo transparente para el contenido */
-  margin-bottom: 0; /* Elimina el margen inferior que podría generar un espacio innecesario */
   position: relative;
+  height: calc(100vh - 60px); /* Ajusta el alto */
   box-sizing: border-box; /* Asegura que el padding y el borde se incluyan en el cálculo del tamaño */
+  flex: 1; /* Asegura que el contenido ocupe el espacio restante */
 }
 
-/* Responsivo para pantallas pequeñas: convertir el sidebar en hamburguesa */
-@media (max-width: 768px) {
-  .col-2 {
-      position: absolute; /* El sidebar ya no será fijo en pantallas pequeñas */
-      width: 100%; /* El sidebar ocupará todo el ancho */
-      height: auto; /* El sidebar se adapta a la altura de la pantalla */
-      top: 0; /* El sidebar estará en la parte superior */
-      bottom: auto; /* El sidebar no debe extenderse hasta abajo */
-      display: none; /* Oculta el sidebar */
-  }
+/* Media query para pantallas pequeñas (< 992px) */
+@media (max-width: 991.98px) {
 
-  /* Cuando el sidebar esté visible (hamburguesa), el contenido debe ocupar el 100% del ancho */
   .col-10 {
-      margin-left: 0; /* El contenido ocupará todo el espacio */
-      width: 100%; /* El contenido ocupará todo el ancho disponible */
-      margin-bottom: 0; /* El margen inferior se ajusta */
-  }
-
-  /* Mostrar el sidebar cuando se active el menú hamburguesa */
-  .sidebar-mobile-visible .col-2 {
-      display: block; /* Se mostrará el sidebar cuando la clase 'sidebar-mobile-visible' esté presente */
-  }
-
-  /* Si el sidebar se abre como menú hamburguesa, el contenido no se desplaza por detrás */
-  .sidebar-mobile-visible .col-10 {
-      margin-left: 0; /* El contenido ocupará todo el ancho */
+    margin-left: 0; /* El contenido ocupa todo el ancho */
+    padding: 5px; /* Espaciado interno */
+    height: calc(100vh - 60px); /* Resta la altura del top-bar */
+    margin-top: 30px; /* Deja espacio para el top-bar */
+    overflow-y: auto; /* Permite desplazamiento vertical si el contenido excede la altura */
   }
 }

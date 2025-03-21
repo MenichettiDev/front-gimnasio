@@ -1,32 +1,77 @@
-/* Sidebar con fondo negro semi-transparente */
-.sidebar {
-  width: 16.6%;  /* Ancho más grande del sidebar */
+/* Barra superior para pantallas pequeñas */
+.top-bar {
+  display: none; /* Oculto por defecto */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
   background-color: rgba(43, 1, 75, 0.94);
-  color: #d3d3d3;  /* Gris claro */
-  padding: 20px;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  min-width: 320px; /* Asegurar un ancho mínimo para pantallas pequeñas */
+}
+
+/* Logo pequeño */
+.logo-small img {
+  width: auto; /* Ajustar automáticamente el ancho */
+  height: 40px; /* Altura fija */
+  max-width: 100%; /* Evitar que el logo se desborde */
+}
+
+/* Botón de hamburguesa */
+.hamburger-menu {
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+}
+/* Sidebar */
+.sidebar {
+  width: 240px; /* Ancho fijo */
+  background-color: rgba(43, 1, 75);
+  color: #d3d3d3;
+  padding: 20px; /* Espaciado interno fijo */
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
-  z-index: 1000;  /* Asegura que el sidebar esté por encima de otros componentes */
+  z-index: 1000;
   box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  transition: width 0.3s ease, padding 0.3s ease;
-  height: 100vh; /* Establece la altura del sidebar al 100% de la ventana */
-  overflow-y: auto; /* Habilita el scroll cuando el contenido sobrepasa la altura */
-  overflow-x: hidden;  /* Evita que aparezca scroll horizontal */
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: none; /* Eliminar transiciones innecesarias */
+}
+
+/* Personalización de la barra de desplazamiento */
+.sidebar::-webkit-scrollbar {
+  width: 8px; /* Ancho de la barra de desplazamiento */
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2); /* Color de la pista de desplazamiento */
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: #5706b48c; /* Color de la barra de desplazamiento */
+  border-radius: 10px; /* Bordes redondeados */
 }
 
 /* Clase para el contenido principal, asegurando que no se desplace detrás del sidebar */
 .main-content {
-  margin-left: 220px;  /* Espacio para el sidebar */
-  transition: margin-left 0.3s ease;  /* Transición suave cuando el sidebar se oculta */
-  z-index: 10;  /* Asegura que el contenido principal esté debajo del sidebar */
+  margin-left: 220px; /* Margen fijo en pantallas grandes */
+  transition: none; /* Eliminar transiciones innecesarias */
+  z-index: 10;
   padding: 20px;
-  position: relative;  /* Asegura que el contenido se posicione de forma correcta */
-  max-width: calc(100% - 220px);  /* Limita el ancho máximo al ancho disponible, teniendo en cuenta el sidebar */
+  position: relative;
+  max-width: calc(100% - 220px);
 }
 
 /* Cuando el sidebar está oculto, el contenido principal se ajusta */
@@ -62,16 +107,18 @@
 /* Espacio para la imagen en la parte superior */
 .sidebar-img {
   text-align: center;
-  margin-bottom: 30px;  /* Espacio más grande debajo de la imagen */
+  margin-bottom: 5px;
+  display: block; /* Visible por defecto */
 }
 
+/* Logo grande */
 .sidebar-img img {
-  width: 140px;  /* Ajusta el tamaño de la imagen */
-  height: 140px;  /* Hace la imagen cuadrada */
+  width: 140px; /* Tamaño fijo */
+  height: auto;
   object-fit: contain;
-  margin-bottom: 20px;
-  margin-top: 50px;
-  transition: opacity 0.3s ease;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  transition: none; /* Eliminar transiciones innecesarias */
 }
 
 /* Ocultar la imagen cuando el sidebar está oculto */
@@ -79,20 +126,19 @@
   opacity: 0;
 }
 
-/* Sin subrayado en los enlaces */
+/* Menús principales */
 .nav-link {
-  font-family: 'Nunito', sans-serif;  /* Aplica la fuente Nunito */
-  padding: 15px 15px;  /* Aumentar el padding para que los ítems sean más grandes */
-  font-size: 20px;  /* Tamaño más grande para el texto */
-  color: #ffffff;  /* Gris claro */
+  font-family: 'Nunito', sans-serif;
+  padding: 5px 15px; /* Padding fijo */
+  font-size: 20px; /* Tamaño de fuente fijo */
+  color: #ffffff;
   text-decoration: none;
   font-weight: 500;
-  padding-left: 15px;
-  cursor: pointer;  /* Cambia el cursor a la mano al pasar el ratón */
+  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 10px; /* Espacio entre ícono y texto */
-  transition: background-color 0.3s ease;
+  gap: 10px; /* Espacio fijo entre ícono y texto */
+  transition: none; /* Eliminar transiciones innecesarias */
 }
 
 /* Cambiar color de los enlaces al pasar el ratón */
@@ -102,14 +148,14 @@
   text-decoration: none;
 }
 
-/* Submenú oculto inicialmente */
+/* Submenús */
 .sub-menu {
-  padding-left: 30px;
+  padding-left: 30px; /* Espaciado fijo */
   margin-top: 5px;
   border-radius: 5px;
-  overflow: hidden; /* Para evitar que se desborde el contenido al deslizar */
-  max-height: 0; /* Inicialmente el submenú estará colapsado */
-  transition: max-height 0.3s ease; /* Deslizamiento suave */
+  overflow: hidden;
+  max-height: 0; /* Inicialmente colapsado */
+  transition: max-height 0.3s ease; /* Solo para expandir/colapsar submenús */
 }
 
 /* Cuando el submenú está expandido */
@@ -140,14 +186,13 @@
 
 /* Flecha para los submenús */
 .arrow {
-  width: 8px; /* Hacemos la flecha más pequeña */
+  width: 8px; /* Tamaño fijo */
   height: 8px;
-  border-top: 2px solid #b0b0b0;  /* Color de la flecha */
+  border-top: 2px solid #b0b0b0;
   border-right: 2px solid #b0b0b0;
-  display: inline-block;
-  transform: rotate(45deg);  /* Ángulo de 45 grados para dar la forma de flecha */
-  margin-left: auto;  /* Espacio entre el texto y la flecha */
-  transition: transform 0.3s ease, border-color 0.3s ease;  /* Transición suave */
+  transform: rotate(45deg);
+  margin-left: auto;
+  transition: none; /* Eliminar transiciones innecesarias */
 }
 
 /* Flecha rotada cuando el submenú está expandido */
@@ -256,4 +301,32 @@
 .sidebar.hidden .sidebar-logout .btn-logout {
   opacity: 0;  /* Oculta el botón cuando el sidebar está cerrado */
   pointer-events: none;  /* Deshabilita la interacción */
+}
+
+/* Media query para pantallas pequeñas (< 992px) */
+@media (max-width: 991.98px) {
+  .top-bar {
+    display: flex; /* Mostrar la barra superior */
+  }
+
+  .main-content {
+    margin-left: 0; /* Sin margen en pantallas pequeñas */
+    max-width: 100%;
+  }
+
+  .sidebar {
+    display: none; /* Ocultar el sidebar inicialmente */
+  }
+
+  .sidebar.visible {
+    display: block; /* Mostrar cuando se activa */
+    width: 250px; /* Ancho fijo al expandirse */
+    padding: 20px;
+    top: 60px; /* Dejar espacio para el top-bar */
+    height: calc(100vh - 60px); /* Restar la altura del top-bar */
+  }
+
+  .sidebar-img {
+    display: none; /* Ocultar el logo grande */
+  }
 }
