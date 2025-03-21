@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // Importa FormsModule para [(ngModel)]
-import { MedidaFormComponent } from '../../../components/medida-form/medida-form.component'; // Importa el formulario
+import { MedidasVisorComponent } from '../../../components/medidas/medidas-visor/medidas-visor.component';  // Importación correcta
+import { MedidaFormComponent } from '../../../components/medidas/medida-form/medida-form.component'; // Importa el formulario
 import { MedidasService } from '../../../service/medidas.service'; // Servicio de medidas
 import { AuthService } from '../../../service/auth/auth.service'; // Servicio de autenticación
 import { Medida } from '../../../data/interfaces/tbMedidaInterface'; // Interfaz de medidas
@@ -9,7 +10,7 @@ import { Medida } from '../../../data/interfaces/tbMedidaInterface'; // Interfaz
 @Component({
   selector: 'app-medidas',
   standalone: true,
-  imports: [CommonModule, FormsModule, MedidaFormComponent], // Agrega FormsModule aquí
+  imports: [CommonModule, FormsModule, MedidasVisorComponent, MedidasVisorComponent],  // Agrega MedidasVisorComponent aquí
   templateUrl: './medidas.component.html',
   styleUrls: ['./medidas.component.css'],
 })
@@ -51,7 +52,6 @@ export class MedidasComponent {
       );
     }
   }
-
 
   // Obtener las medidas de la página actual
   get medidasPaginadas(): Medida[] {

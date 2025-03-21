@@ -1,41 +1,54 @@
-html, body {
-    height: 100%;
-    margin: 0;
-    overflow-x: hidden;
-}
-
+/* Contenedor principal */
 .container-fluid {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Ocupa el 100% de la altura de la ventana */
 }
 
-.alto {
-    height: 60px;
-    z-index: 100;
-    position: relative;
-}
-
+/* Fila que contiene el sidebar y el contenido principal */
 .row {
-    display: flex;
-    flex: 1;
-    height: 100%;
+  display: flex;
+  flex: 1;
+  height: calc(100vh - 60px); /* Ajusta la altura restante después de la barra superior */
+  margin-top: 60px; /* Esto evita el solapamiento con la barra superior */
+  position: relative;
+  overflow: hidden; /* Evita el desbordamiento horizontal */
+  padding: 0 20px; /* Añadir padding controlado para mantener la distancia */
 }
 
+/* Sidebar */
 .col-2 {
-    flex: 0 0 16.666%;
-    position: fixed;
-    top: 60px;
-    bottom: 0;
-    z-index: 90;
-    height: calc(100vh - 60px);
+  width: 220px; /* Asegura que el sidebar tenga un ancho fijo */
+  position: fixed; /* Fija el sidebar en su lugar */
+  top: 60px; /* Empuja el sidebar debajo de la barra superior */
+  bottom: 0;
+  background-color: transparent; /* Fondo transparente en el sidebar */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Sombra para separar el sidebar del contenido */
+  z-index: 90; /* Asegura que el sidebar esté por encima del contenido */
+  height: calc(100vh - 60px); /* Ocupa todo el alto menos la barra superior */
 }
 
+/* Contenido principal */
 .col-10 {
-    margin-left: 16.666%;
-    padding: 20px;
-    overflow-y: auto;
-    height: calc(100vh - 60px); 
-    z-index: 80;
-    margin-bottom: 40px; /* Agregado: margen inferior para separar los botones del borde */
+  margin-left: 240px; /* Esto asegura que el contenido comience después del sidebar */
+  padding: 20px; /* Espaciado interno */
+  overflow-y: auto; /* Permite desplazamiento vertical si el contenido excede la altura */
+  z-index: 80; /* Asegura que el contenido esté debajo del sidebar */
+  background-color: transparent; /* Fondo transparente para el contenido */
+  position: relative;
+  height: calc(100vh - 60px); /* Ajusta el alto */
+  box-sizing: border-box; /* Asegura que el padding y el borde se incluyan en el cálculo del tamaño */
+  flex: 1; /* Asegura que el contenido ocupe el espacio restante */
+}
+
+/* Media query para pantallas pequeñas (< 992px) */
+@media (max-width: 991.98px) {
+
+  .col-10 {
+    margin-left: 0; /* El contenido ocupa todo el ancho */
+    padding: 5px; /* Espaciado interno */
+    height: calc(100vh - 60px); /* Resta la altura del top-bar */
+    margin-top: 30px; /* Deja espacio para el top-bar */
+    overflow-y: auto; /* Permite desplazamiento vertical si el contenido excede la altura */
+  }
 }

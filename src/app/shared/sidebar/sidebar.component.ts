@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { Component, OnInit, HostListener, OnDestroy, inject } from '@angular/core';
 import { MenuService } from '../../service/menu.service';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../service/auth/auth.service';
@@ -19,6 +19,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   isSidebarVisible: boolean = false;  // Controla la visibilidad del sidebar (inicialmente oculto)
   isLoggedIn: boolean = false;  // Propiedad para el estado de login
   private loginStatusSubscription: Subscription | null = null; // Para suscripción al estado de login
+  isSmallScreen: boolean = window.innerWidth < 992; // Detectar si la pantalla es pequeña
 
   // Inyección de dependencias
   public menuService = inject(MenuService);
@@ -26,26 +27,46 @@ export class SidebarComponent implements OnInit, OnDestroy {
   private router = inject(Router);
 
   ngOnInit(): void {
-    this.menus = [];      // Inicializar la lista de menús
-    this.loadUserData();  // Cargar datos del usuario al iniciar
-    this.getMenus();      // Obtener los menús
+    this.menus = [];
+    this.loadUserData();
+    this.getMenus();
 
-    // Inicializar el estado del sidebar basado en el estado de autenticación
     this.isSidebarVisible = this.authService.isLoggedIn();
 
-    // Suscribirse al estado de login
     this.loginStatusSubscription = this.authService.loggedIn$.subscribe(
       (loggedIn: boolean) => {
-        this.isLoggedIn = loggedIn;  // Actualizar estado de login
-        this.isSidebarVisible = loggedIn;  // Mostrar/ocultar el sidebar basado en el estado de login
+        this.isLoggedIn = loggedIn;
+        this.isSidebarVisible = loggedIn;
       }
     );
+
+    // Detectar cambios en el tamaño de la pantalla
+    window.addEventListener('resize', this.onResize.bind(this));
   }
 
   ngOnDestroy(): void {
-    // Limpiar la suscripción al destruir el componente
     if (this.loginStatusSubscription) {
       this.loginStatusSubscription.unsubscribe();
+    }
+    window.removeEventListener('resize', this.onResize.bind(this));
+  }
+
+  onResize(): void {
+    const screenWidth = window.innerWidth;
+    console.log(screenWidth); // Log del tamaño de la ventana
+
+    const previousState = this.isSmallScreen;
+
+    // Actualizar solo si el estado cambia
+    this.isSmallScreen = screenWidth < 992;
+
+    // Solo cambiar si realmente cambia el estado
+    if (this.isSmallScreen !== previousState) {
+      if (this.isSmallScreen) {
+        this.isSidebarVisible = false; // Ocultar el sidebar automáticamente en pantallas pequeñas
+      } else {
+        this.isSidebarVisible = true; // Mostrar el sidebar automáticamente en pantallas grandes
+      }
     }
   }
 
@@ -103,17 +124,35 @@ export class SidebarComponent implements OnInit, OnDestroy {
       subMenu.menu_principal === 0 && subMenu.menu_grupo === menu.menu_grupo);
   }
 
-  // Alternar la visibilidad de los submenús
-  toggleSubMenu(menu: Menu): void {
-    // Cerrar todos los menús abiertos antes de abrir el seleccionado
-    this.menus.forEach(m => {
-      if (m !== menu) {
-        m.expanded = false;
-      }
-    });
-    // Alternar estado de expansión del menú seleccionado
-    menu.expanded = !menu.expanded;
+ // Función para cerrar el sidebar automáticamente en pantallas pequeñas
+closeSidebarOnSmallScreens(): void {
+  if (this.isSmallScreen) {
+    this.isSidebarVisible = false; // Ocultar el sidebar
   }
+}
+
+// Alternar la visibilidad de los submenús
+toggleSubMenu(menu: Menu): void {
+  // Cerrar todos los menús abiertos antes de abrir el seleccionado
+  this.menus.forEach(m => {
+    if (m !== menu) {
+      m.expanded = false;
+    }
+  });
+  // Alternar estado de expansión del menú seleccionado
+  menu.expanded = !menu.expanded;
+
+  // NO cerrar el sidebar aquí, ya que este es solo para expandir/cerrar submenús
+}
+
+// Redirigir al hacer clic en un submenú
+navigateToSubMenu(subMenu: Menu): void {
+  if (subMenu.menu_link) {
+    this.router.navigate([subMenu.menu_link]); // Navegar a la ruta del submenú
+    // Cerrar el sidebar automáticamente en pantallas pequeñas
+    this.closeSidebarOnSmallScreens();
+  }
+}
 
   // Verificar si un menú está expandido
   isMenuExpanded(menu: Menu): boolean {
@@ -121,9 +160,21 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   // Alternar la visibilidad del sidebar
-  toggleSidebar(): void {
+toggleSidebar(): void {
+  if (this.isSmallScreen) {
     this.isSidebarVisible = !this.isSidebarVisible;
+
+    // Agregar/remover la clase 'hidden' según la visibilidad
+    const sidebarElement = document.querySelector('.sidebar');
+    if (sidebarElement) {
+      if (!this.isSidebarVisible) {
+        sidebarElement.classList.add('hidden');
+      } else {
+        sidebarElement.classList.remove('hidden');
+      }
+    }
   }
+}
 
   navigateToHome() {
     this.router.navigate(['/inicio']);
