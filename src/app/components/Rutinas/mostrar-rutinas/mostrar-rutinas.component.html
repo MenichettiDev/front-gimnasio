@@ -7,6 +7,8 @@
                 <th>Objetivo</th>
                 <th>Nivel</th>
                 <th>Acciones</th>
+                <!-- Columna de edición condicional -->
+                <th *ngIf="mostrarEdicion">Editar</th>
             </tr>
         </thead>
         <tbody>
@@ -18,6 +20,10 @@
                 <td>
                     <!-- Icono para ver detalles -->
                     <span class="icon-view" (click)="verDetallesRutina(rutina.id_rutina)">👁️</span>
+                </td>
+                <!-- Columna de edición condicional -->
+                <td *ngIf="mostrarEdicion">
+                    <span class="icon-edit" (click)="editarRutina(rutina)">✏️</span>
                 </td>
             </tr>
         </tbody>

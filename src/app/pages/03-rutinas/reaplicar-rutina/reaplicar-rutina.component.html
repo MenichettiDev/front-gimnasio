@@ -2,4 +2,12 @@
     (filtrosAceptados)="manejarFiltrosAceptados($event)">
 </app-buscar-rutina>
 
-<app-mostrar-rutinas [planes]="rutinasFiltradas"></app-mostrar-rutinas>
+<app-mostrar-rutinas [planes]="rutinasFiltradas" [mostrarEdicion]="true"
+    (editarRutinaSeleccionada)="onEditarRutina($event)">
+</app-mostrar-rutinas>
+
+<!-- Mostrar el componente de reaplicar rutina si hay una rutina seleccionada -->
+<div *ngIf="rutinaSeleccionada">
+    <h3>Editar Rutina</h3>
+    <app-editar-rutina [rutinaExistente]="rutinaSeleccionada"></app-editar-rutina>
+</div>

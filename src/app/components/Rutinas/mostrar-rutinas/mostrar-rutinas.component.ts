@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { plan, rutinaArmada } from '../../../data/interfaces/rutinaArmadaInterface'; // Ajusta la ruta según tu estructura
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -12,8 +12,10 @@ import { ModalVisorRutinaComponent } from '../modal-visor-rutina/modal-visor-rut
   templateUrl: './mostrar-rutinas.component.html',
   styleUrls: ['./mostrar-rutinas.component.css']
 })
-export class MostrarRutinasComponent implements OnChanges{
+export class MostrarRutinasComponent implements OnChanges {
   @Input() planes: plan[] = []; // Recibe un array de planes como entrada
+  @Input() mostrarEdicion: boolean = false; // Nuevo input para controlar la columna de edición
+  @Output() editarRutinaSeleccionada = new EventEmitter<rutinaArmada>(); // Emite la rutina seleccionada al padre
   rutinasArmadas: rutinaArmada[] = []; // Array de rutinas armadas extraídas
 
   constructor(private dialog: MatDialog) {}
@@ -28,11 +30,15 @@ export class MostrarRutinasComponent implements OnChanges{
     }
   }
 
-  
   verDetallesRutina(id_rutina: number): void {
     // Abre el modal para ver los detalles de la rutina
     this.dialog.open(ModalVisorRutinaComponent, {
       data: id_rutina,
     });
+  }
+
+  editarRutina(rutina: rutinaArmada): void {
+    // Emite la rutina seleccionada al padre
+    this.editarRutinaSeleccionada.emit(rutina);
   }
 }
