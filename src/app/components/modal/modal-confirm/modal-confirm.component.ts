@@ -9,6 +9,7 @@ import {
 
 @Component({
   selector: 'app-modal-confirm',
+  standalone: true,
   templateUrl: './modal-confirm.component.html',
   styleUrls: ['./modal-confirm.component.css'],
   animations: [
