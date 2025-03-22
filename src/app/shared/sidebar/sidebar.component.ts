@@ -1,6 +1,7 @@
 import { Component, OnInit, HostListener, OnDestroy, inject } from '@angular/core';
 import { MenuService } from '../../service/menu.service';
 import { CommonModule } from '@angular/common';
+import { ModalConfirmComponent } from '../../components/modal/modal-confirm/modal-confirm.component';
 import { AuthService } from '../../service/auth/auth.service';
 import { Router, RouterModule } from '@angular/router';
 import { Menu } from '../../data/interfaces/menuInterface'; // Asegúrate de que la ruta sea correcta
@@ -9,11 +10,12 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, ModalConfirmComponent, RouterModule],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit, OnDestroy {
+  isModalVisible: boolean = false; // Controla la visibilidad del modal
   id_acceso: number = 1;  // ID de acceso del usuario
   menus: Menu[] = [];  // Lista de menús cargados
   isSidebarVisible: boolean = false;  // Controla la visibilidad del sidebar (inicialmente oculto)
@@ -42,6 +44,23 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     // Detectar cambios en el tamaño de la pantalla
     window.addEventListener('resize', this.onResize.bind(this));
+  }
+
+  // Función para mostrar el modal de confirmación
+  confirmLogout(): void {
+    this.isModalVisible = true; // Muestra el modal
+  }
+
+  // Función para manejar la confirmación del logout
+  handleConfirm(): void {
+    this.authService.logout(); // Cierra sesión
+    this.router.navigate(['/login/home']); // Redirige al login
+    this.isModalVisible = false; // Oculta el modal
+  }
+
+  // Función para manejar la cancelación del logout
+  handleCancel(): void {
+    this.isModalVisible = false; // Oculta el modal
   }
 
   ngOnDestroy(): void {

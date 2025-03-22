@@ -45,14 +45,21 @@
   </li>
 </ul>
 
-    <!-- Botón de Logout, solo visible cuando el usuario está logueado -->
-    <div *ngIf="isLoggedIn" class="sidebar-logout">
-      <button (click)="logout()" class="btn-logout">
-        <i class="bx bx-log-out"></i> Logout
-      </button>
-    </div>
-  </div>
+    <!-- Botón de Logout -->
+<div *ngIf="isLoggedIn" class="sidebar-logout">
+  <button (click)="confirmLogout()" class="btn-logout">
+    <i class="bx bx-log-out"></i> Logout
+  </button>
 </div>
+<!-- Modal de confirmación -->
+<app-modal-confirm
+  [visible]="isModalVisible"
+  [title]="'Confirmación'"
+  [message]="'¿Estás seguro de que deseas cerrar sesión?'"
+  (confirm)="handleConfirm()"
+  (cancel)="handleCancel()">
+</app-modal-confirm>
+
 <!-- Contenido principal -->
 <div class="main-content" [ngClass]="{'expanded': !isSidebarVisible}">
   <!-- Aquí va el contenido principal de tu aplicación -->
