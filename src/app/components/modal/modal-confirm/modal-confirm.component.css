@@ -1,0 +1,102 @@
+/* Fondo oscuro semitransparente */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Fondo sólido semitransparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  opacity: 0; /* Comienza invisible */
+  transition: opacity 0.5s ease-in-out; /* Animación de opacidad */
+}
+
+.modal-overlay.visible {
+  opacity: 1; /* Se vuelve visible cuando tiene la clase 'visible' */
+}
+
+/* Contenedor del modal */
+.modal-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  transform-origin: center;
+}
+
+/* Cambio de color del texto */
+.modal-container h2 {
+  color: #333; /* Título en gris oscuro */
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.modal-container p {
+  color: #555; /* Mensaje en gris medio */
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+/* Estilos de los botones */
+.modal-actions button {
+  margin: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease; /* Transición suave para el hover */
+}
+
+.modal-actions button:first-child {
+  background-color: #4caf50; /* Verde para Confirmar */
+  color: white;
+}
+
+.modal-actions button:last-child {
+  background-color: #f44336; /* Rojo para Cancelar */
+  color: white;
+}
+
+/* Efecto hover para los botones */
+.modal-actions button:hover {
+  transform: scale(1.05); /* Aumenta ligeramente el tamaño */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra al pasar el mouse */
+}
+
+.modal-actions button:first-child:hover {
+  background-color: #43a047; /* Verde más oscuro al pasar el mouse */
+}
+
+.modal-actions button:last-child:hover {
+  background-color: #e53935; /* Rojo más oscuro al pasar el mouse */
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 600px) {
+  .modal-container {
+    width: 80%; /* Ocupa todo el ancho de la pantalla */
+    max-width: 100%; /* Elimina el límite de ancho máximo */
+    padding: 15px; /* Reduce el padding para ahorrar espacio */
+    border-radius: 0; /* Quita los bordes redondeados para aprovechar mejor el espacio */
+  }
+
+  .modal-container h2 {
+    font-size: 1.2rem; /* Reduce el tamaño del título */
+  }
+
+  .modal-container p {
+    font-size: 0.9rem; /* Reduce el tamaño del mensaje */
+  }
+
+  .modal-actions button {
+    font-size: 0.9rem; /* Reduce el tamaño del texto de los botones */
+    padding: 8px 16px; /* Reduce el padding de los botones */
+  }
+}

@@ -1,82 +1,84 @@
 <form (ngSubmit)="onSubmit()">
-  <h3>{{ medidaSeleccionada ? 'Editar Medida' : 'Crear Nueva Medida' }}</h3>
+  <h4>{{ medidaSeleccionada ? 'Editar Medida' : 'Crear Nueva Medida' }}</h4>
 
-  <!-- Fecha de Medición -->
-  <div class="form-group">
-    <label for="fecha_medicion">Fecha de Medición:</label>
-    <input type="date" id="fecha_medicion" [(ngModel)]="medidaForm.fecha_medicion" name="fecha_medicion" required />
-  </div>
+  <!-- Contenedor principal del formulario -->
+  <div class="form-grid-container">
+    <!-- Primer fila: 4 inputs -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="fecha_medicion">Fecha de Medición:</label>
+        <input type="date" id="fecha_medicion" [(ngModel)]="medidaForm.fecha_medicion" name="fecha_medicion" required />
+      </div>
 
-  <!-- Peso -->
-  <div class="form-group">
-    <label for="peso">Peso (kg):</label>
-    <input type="number" id="peso" [(ngModel)]="medidaForm.peso" name="peso" required />
-  </div>
+      <div class="form-group">
+        <label for="peso">Peso (kg):</label>
+        <input type="number" id="peso" [(ngModel)]="medidaForm.peso" name="peso" required />
+      </div>
 
-  <!-- Altura -->
-  <div class="form-group">
-    <label for="altura">Altura (m):</label>
-    <input type="number" id="altura" [(ngModel)]="medidaForm.altura" name="altura" required />
-  </div>
+      <div class="form-group">
+        <label for="altura">Altura (m):</label>
+        <input type="number" id="altura" [(ngModel)]="medidaForm.altura" name="altura" required />
+      </div>
 
-  <!-- Bíceps -->
-  <div class="form-group">
-    <label for="biceps">Bíceps (cm):</label>
-    <input type="number" id="biceps" [(ngModel)]="medidaForm.biceps" name="biceps" required />
-  </div>
+      <div class="form-group">
+        <label for="biceps">Bíceps (cm):</label>
+        <input type="number" id="biceps" [(ngModel)]="medidaForm.biceps" name="biceps" required />
+      </div>
+    </div>
 
-  <!-- Pecho -->
-  <div class="form-group">
-    <label for="pecho">Pecho (cm):</label>
-    <input type="number" id="pecho" [(ngModel)]="medidaForm.pecho" name="pecho" required />
-  </div>
+    <!-- Segunda fila: 4 inputs -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="pecho">Pecho (cm):</label>
+        <input type="number" id="pecho" [(ngModel)]="medidaForm.pecho" name="pecho" required />
+      </div>
 
-  <!-- Hombros -->
-  <div class="form-group">
-    <label for="hombros">Hombros (cm):</label>
-    <input type="number" id="hombros" [(ngModel)]="medidaForm.hombros" name="hombros" required />
-  </div>
+      <div class="form-group">
+        <label for="hombros">Hombros (cm):</label>
+        <input type="number" id="hombros" [(ngModel)]="medidaForm.hombros" name="hombros" required />
+      </div>
 
-  <!-- Cintura -->
-  <div class="form-group">
-    <label for="cintura">Cintura (cm):</label>
-    <input type="number" id="cintura" [(ngModel)]="medidaForm.cintura" name="cintura" required />
-  </div>
+      <div class="form-group">
+        <label for="cintura">Cintura (cm):</label>
+        <input type="number" id="cintura" [(ngModel)]="medidaForm.cintura" name="cintura" required />
+      </div>
 
-  <!-- Glúteos -->
-  <div class="form-group">
-    <label for="gluteos">Glúteos (cm):</label>
-    <input type="number" id="gluteos" [(ngModel)]="medidaForm.gluteos" name="gluteos" required />
-  </div>
+      <div class="form-group">
+        <label for="gluteos">Glúteos (cm):</label>
+        <input type="number" id="gluteos" [(ngModel)]="medidaForm.gluteos" name="gluteos" required />
+      </div>
+    </div>
 
-  <!-- Cuádriceps -->
-  <div class="form-group">
-    <label for="cuadriceps">Cuádriceps (cm):</label>
-    <input type="number" id="cuadriceps" [(ngModel)]="medidaForm.cuadriceps" name="cuadriceps" required />
-  </div>
+    <!-- Tercera fila: 4 inputs -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="cuadriceps">Cuádriceps (cm):</label>
+        <input type="number" id="cuadriceps" [(ngModel)]="medidaForm.cuadriceps" name="cuadriceps" required />
+      </div>
 
-  <!-- Gemelos -->
-  <div class="form-group">
-    <label for="gemelos">Gemelos (cm):</label>
-    <input type="number" id="gemelos" [(ngModel)]="medidaForm.gemelos" name="gemelos" required />
-  </div>
+      <div class="form-group">
+        <label for="gemelos">Gemelos (cm):</label>
+        <input type="number" id="gemelos" [(ngModel)]="medidaForm.gemelos" name="gemelos" required />
+      </div>
 
-  <!-- Antebrazo -->
-  <div class="form-group">
-    <label for="antebrazo">Antebrazo (cm):</label>
-    <input type="number" id="antebrazo" [(ngModel)]="medidaForm.antebrazo" name="antebrazo" required />
-  </div>
+      <div class="form-group">
+        <label for="antebrazo">Antebrazo (cm):</label>
+        <input type="number" id="antebrazo" [(ngModel)]="medidaForm.antebrazo" name="antebrazo" required />
+      </div>
 
-  <!-- Cuello -->
-  <div class="form-group">
-    <label for="cuello">Cuello (cm):</label>
-    <input type="number" id="cuello" [(ngModel)]="medidaForm.cuello" name="cuello" required />
-  </div>
+      <div class="form-group">
+        <label for="cuello">Cuello (cm):</label>
+        <input type="number" id="cuello" [(ngModel)]="medidaForm.cuello" name="cuello" required />
+      </div>
+    </div>
 
-  <!-- Grasa Corporal -->
-  <div class="form-group">
-    <label for="grasa_corporal">Grasa Corporal (%):</label>
-    <input type="number" id="grasa_corporal" [(ngModel)]="medidaForm.grasa_corporal" name="grasa_corporal" required />
+    <!-- Última fila: 1 input -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="grasa_corporal">Grasa Corporal (%):</label>
+        <input type="number" id="grasa_corporal" [(ngModel)]="medidaForm.grasa_corporal" name="grasa_corporal" required />
+      </div>
+    </div>
   </div>
 
   <!-- Botones del formulario -->

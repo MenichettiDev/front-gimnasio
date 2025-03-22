@@ -1,55 +1,64 @@
+
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400&display=swap" rel="stylesheet">
+
+<!-- Barra superior para pantallas pequeñas -->
+<div class="top-bar" *ngIf="isSmallScreen">
+  <div class="logo-small">
+    <img src="images/gymrats_v002_W_TOP.png" alt="Logo" (click)="navigateToHome()">
+  </div>
+  <div class="hamburger-menu" (click)="toggleSidebar()">
+    <i class="bi bi-list"></i> <!-- Ícono de menú hamburguesa -->
+  </div>
+</div>
+
 <!-- Sidebar -->
 <div *ngIf="menus.length > 0">
-  <div class="sidebar" [ngClass]="{'hidden': !isSidebarVisible}">
-    <!-- Botón para ocultar/mostrar el sidebar -->
-    <div class="sidebar-toggle" (click)="toggleSidebar()">
-      <i class="toggle-icon" [ngClass]="{'rotate': !isSidebarVisible}"></i>
-    </div>
+  <div class="sidebar" [ngClass]="{'hidden': !isSidebarVisible, 'visible': isSidebarVisible}">
 
     <!-- Espacio para la imagen en la parte superior -->
     <div class="sidebar-img">
       <img src="images/gymrats_v003_W.png" alt="Logo" (click)="navigateToHome()">
     </div>
 
-    <!-- Lista de menús principales -->
-    <ul class="nav flex-column">
-      <!-- Iterar sobre los menús principales -->
-      <li *ngFor="let menu of getMainMenus()" class="nav-item">
-        <!-- Enlace del menú principal -->
-        <a class="nav-link" (click)="toggleSubMenu(menu)" [attr.aria-expanded]="isMenuExpanded(menu)">
-          <i class="{{ menu.menu_icono }}"></i> <!-- Ícono del menú -->
-          <span>{{ menu.menu_descripcion }}</span> <!-- Descripción del menú -->
-          <!-- Flecha para indicar submenú -->
-          <i class="arrow" [ngClass]="{'rotate': isMenuExpanded(menu)}"></i>
-        </a>
+   <!-- Lista de menús principales -->
+<ul class="nav flex-column">
+  <li *ngFor="let menu of getMainMenus()" class="nav-item">
+    <!-- Enlace del menú principal -->
+    <a class="nav-link" (click)="toggleSubMenu(menu)">
+      <i class="{{ menu.menu_icono }}"></i> <!-- Ícono del menú -->
+      <span>{{ menu.menu_descripcion }}</span> <!-- Descripción del menú -->
+      <!-- Flecha para indicar submenú -->
+      <i class="arrow" [ngClass]="{'rotate': isMenuExpanded(menu)}"></i>
+    </a>
 
-        <!-- Submenús (solo si están expandidos) -->
-        <ul [ngClass]="{'sub-menu': true, 'expanded': isMenuExpanded(menu)}">
-          <!-- Iterar sobre los submenús -->
-          <li *ngFor="let subMenu of getSubMenus(menu)" class="nav-item">
-            <!-- Enlace del submenú -->
-            <a class="nav-link" [routerLink]="subMenu.menu_link" routerLinkActive="active">
-              <i class="{{ subMenu.menu_icono }}"></i> <!-- Ícono del submenú -->
-              <span>{{ subMenu.menu_descripcion }}</span> <!-- Descripción del submenú -->
-            </a>
-          </li>
-        </ul>
+    <!-- Submenús (solo si están expandidos) -->
+    <ul [ngClass]="{'sub-menu': true, 'expanded': isMenuExpanded(menu)}">
+      <!-- Iterar sobre los submenús -->
+      <li *ngFor="let subMenu of getSubMenus(menu)" class="nav-item">
+        <!-- Enlace del submenú -->
+        <a class="nav-link" [routerLink]="subMenu.menu_link" routerLinkActive="active" (click)="navigateToSubMenu(subMenu)">
+          <i class="{{ subMenu.menu_icono }}"></i> <!-- Ícono del submenú -->
+          <span>{{ subMenu.menu_descripcion }}</span> <!-- Descripción del submenú -->
+        </a>
       </li>
     </ul>
+  </li>
+</ul>
 
-    <!-- Botón de Logout, solo visible cuando el usuario está logueado -->
-    <div *ngIf="isLoggedIn" class="sidebar-logout">
-      <button (click)="logout()" class="btn-logout">
-        <i class="bx bx-log-out"></i> Logout
-      </button>
-    </div>
-  </div>
+    <!-- Botón de Logout -->
+<div *ngIf="isLoggedIn" class="sidebar-logout">
+  <button (click)="confirmLogout()" class="btn-logout">
+    <i class="bx bx-log-out"></i> Logout
+  </button>
 </div>
-
-<!-- Botón flotante para mostrar el sidebar cuando está oculto -->
-<div class="floating-sidebar-toggle" *ngIf="!isSidebarVisible" (click)="toggleSidebar()">
-  <i class="bi bi-list"></i> <!-- Ícono de menú hamburguesa -->
-</div>
+<!-- Modal de confirmación -->
+<app-modal-confirm
+  [visible]="isModalVisible"
+  [title]="'Confirmación'"
+  [message]="'¿Estás seguro de que deseas cerrar sesión?'"
+  (confirm)="handleConfirm()"
+  (cancel)="handleCancel()">
+</app-modal-confirm>
 
 <!-- Contenido principal -->
 <div class="main-content" [ngClass]="{'expanded': !isSidebarVisible}">

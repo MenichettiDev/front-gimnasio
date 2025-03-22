@@ -1,21 +1,19 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // Importa FormsModule para [(ngModel)]
-import { MedidaFormComponent } from '../../../components/medida-form/medida-form.component'; // Importa el formulario
+import { MedidaFormComponent } from '../../../components/medidas/medida-form/medida-form.component'; // Importa el formulario
 import { MedidasService } from '../../../service/medidas.service'; // Servicio de medidas
 import { AuthService } from '../../../service/auth/auth.service'; // Servicio de autenticación
 import { Medida } from '../../../data/interfaces/tbMedidaInterface'; // Interfaz de medidas
 
 @Component({
-  selector: 'app-visor-medidas',
+  selector: 'app-medidas-visor',
   imports: [CommonModule, FormsModule, MedidaFormComponent], // Agrega FormsModule aquí
-  templateUrl: './visor-medidas.component.html',
-  styleUrl: './visor-medidas.component.css'
+  templateUrl: './medidas-visor.component.html',
+  styleUrls: ['./medidas-visor.component.css'],
 })
-export class VisorMedidasComponent {
-
+export class MedidasVisorComponent {
   @Input() idAtletaExterno: number | null = null;
-
   medidas: Medida[] = []; // Lista completa de medidas del atleta
   medidasFiltradas: Medida[] = []; // Lista filtrada de medidas (para búsqueda)
   mostrarFormulario = false; // Controla la visibilidad del formulario
@@ -29,12 +27,11 @@ export class VisorMedidasComponent {
   constructor(
     private medidaService: MedidasService,
     private authService: AuthService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     // Obtener el ID del atleta autenticado
     this.idAtleta = this.idAtletaExterno || this.authService.getIdAtleta();
-
     if (this.idAtleta) {
       this.cargarMedidas(); // Cargar las medidas del atleta
     }
@@ -44,9 +41,20 @@ export class VisorMedidasComponent {
     // Detectar cambios en el input idAtletaExterno
     if (changes['idAtletaExterno'] && this.idAtletaExterno !== null) {
       this.idAtleta = this.idAtletaExterno; // Actualizar el ID del atleta
+
+      // Limpiar las medidas antes de cargarlas
+      this.medidas = [];
+      this.medidasFiltradas = [];
+
       this.cargarMedidas(); // Recargar las medidas
+    } else {
+      // Limpiar medidas cuando no hay atleta seleccionado
+      this.medidas = [];
+      this.medidasFiltradas = [];
     }
-  }
+}
+
+
 
   // Cargar las medidas del atleta
   cargarMedidas(): void {
@@ -57,9 +65,13 @@ export class VisorMedidasComponent {
           this.medidasFiltradas = [...this.medidas]; // Inicializar lista filtrada
         },
         (error) => {
-          console.error('Error al cargar las medidas:', error); //poner un modal
+          console.error('Error al cargar las medidas:', error);
+          // También podrías mostrar un modal o mensaje indicando que no se encontraron medidas
         }
       );
+    } else {
+      this.medidas = [];  // Si no hay ID de atleta, limpia las medidas
+      this.medidasFiltradas = [];
     }
   }
 

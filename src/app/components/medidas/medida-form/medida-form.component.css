@@ -1,0 +1,98 @@
+/* Contenedor principal del formulario */
+.form-grid-container {
+  display: grid;
+  gap: 1.5rem;
+}
+
+/* Fila de campos */
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columnas */
+  gap: 1rem;
+}
+
+/* Ajuste para pantallas pequeñas */
+@media (max-width: 1024px) {
+  .form-row {
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas en tabletas */
+  }
+}
+
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr; /* 1 columna en móviles */
+  }
+}
+
+/* Grupos de campos */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Etiquetas (labels) */
+label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #ffffffcc;
+}
+
+/* Inputs */
+input[type="date"],
+input[type="number"] {
+  padding: 0.8rem;
+  border: 1px solid #4CAF50;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  transition: border-color 0.3s ease;
+  text-align: right;
+  width: 100%;
+}
+
+input[type="date"]:focus,
+input[type="number"]:focus {
+  border-color: #04df13;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.5);
+}
+
+/* Errores de validación */
+input:invalid {
+  border-color: #f44336;
+}
+
+/* Botones del formulario */
+.form-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+button {
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button[type="submit"] {
+  background-color: #04df13;
+  color: white;
+}
+
+button[type="submit"]:hover {
+  background-color: #03a90c;
+}
+
+button[type="button"] {
+  background-color: #424242;
+  color: white;
+}
+
+button[type="button"]:hover {
+  background-color: #2d2d2d;
+}

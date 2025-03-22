@@ -1,0 +1,12 @@
+@if (visible) {
+  <div class="modal-overlay" [class.visible]="visible">
+    <div class="modal-container" @modalAnimation>
+      <h2>{{ title }}</h2>
+      <p>{{ message }}</p>
+      <div class="modal-actions">
+        <button (click)="onConfirm()">Confirmar</button>
+        <button (click)="onCancel()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+}
