@@ -32,7 +32,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
   styleUrl: './editar-rutina.component.css'
 })
 export class EditarRutinaComponent implements OnInit , OnChanges{
-  @Input() rutinaExistente: any; // Rutina existente que se recibe como entrada
+  @Input() idRutina: number = 0 ; // Rutina existente que se recibe como entrada
+  rutinaSeleccionada: any; // Rutina existente que se recibe como entrada
   rutinaForm: FormGroup = new FormGroup({});
   loading = false;
   collapsed: boolean[] = [];
@@ -46,25 +47,41 @@ export class EditarRutinaComponent implements OnInit , OnChanges{
   ) {}
 
   ngOnInit(): void {
+    
     this.createForm();
-    if (this.rutinaExistente) {
-      this.cargarDatosRutina(this.rutinaExistente);
+    if (this.rutinaSeleccionada !== 0) {
+      this.cargarDatosRutina(this.rutinaSeleccionada);
+    }
+  }
+  
+  ngOnChanges(changes: SimpleChanges): void {
+    // Verifica si la propiedad 'idRutina' ha cambiado
+    if (changes['idRutina'] && changes['idRutina'].currentValue) {
+      this.resetForm(); // Reinicia el formulario antes de cargar nuevos datos
+      this.loading = true; // Activa el spinner
+      this.obtenerRutinaPorId(this.idRutina); // Llama al método para obtener la rutina por ID
     }
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    // Verifica si la propiedad 'rutinaExistente' ha cambiado
-    if (changes['rutinaExistente'] && changes['rutinaExistente'].currentValue) {
-      console.log('Rutina existente actualizada:', this.rutinaExistente);
-      this.resetForm(); // Reinicia el formulario antes de cargar nuevos datos
-      this.cargarDatosRutina(this.rutinaExistente);
-    }
+  obtenerRutinaPorId(id_rutina: number): void {
+    this.rutinaService.getRutinaByIdRutina(id_rutina).subscribe(
+      (rutina: any) => {
+        this.rutinaSeleccionada = rutina; // Asigna los datos de la rutina encontrada
+        console.log('Rutina seleccionada:', this.rutinaSeleccionada);
+        this.cargarDatosRutina(this.rutinaSeleccionada); // Carga los datos en el formulario
+        this.loading = false; // Desactiva el spinner
+      },
+      (error) => {
+        console.error('Error al obtener la rutina:', error);
+        this.loading = false; // Asegúrate de desactivar el spinner en caso de error
+      }
+    );
   }
 
   resetForm(): void {
     this.rutinaForm.reset(); // Limpia el formulario
-    this.dias.clear(); // Limpia los días existentes
-    this.collapsed = []; // Reinicia el estado colapsado
+    // this.dias.clear(); // Limpia los días existentes
+    // this.collapsed = []; // Reinicia el estado colapsado
   }
 
   createForm(): void {
@@ -81,23 +98,51 @@ export class EditarRutinaComponent implements OnInit , OnChanges{
   }
 
   cargarDatosRutina(rutina: any): void {
+    console.log('Datos de la rutina:', rutina);
+  
+    // Validar que 'rutina' y 'rutina.rutina' existan
+    if (!rutina || !rutina.rutina) {
+      console.error('La estructura de la rutina no es válida:', rutina);
+      return;
+    }
+  
+    // Asignar los valores básicos del formulario
     this.rutinaForm.patchValue({
-      nombre: rutina.nombre,
-      cantidad_dias: rutina.cantidad_dias,
-      nivel_atleta: rutina.nivel_atleta,
-      objetivo: rutina.objetivo,
-      descripcion: rutina.descripcion,
-      fecha_asignacion: rutina.fecha_asignacion,
-      id_atleta: rutina.id_atleta
+      nombre: rutina.rutina.nombre,
+      cantidad_dias: rutina.rutina.cantidad_dias,
+      nivel_atleta: rutina.rutina.nivel_atleta,
+      objetivo: rutina.rutina.objetivo,
+      descripcion: rutina.rutina.descripcion,
+      fecha_asignacion: rutina.rutina.fecha_asignacion,
+      id_atleta: rutina.rutina.id_atleta
     });
-
-    this.agregarDias(rutina.cantidad_dias);
-
+  
+    // Agregar los días necesarios al formulario
+    this.agregarDias(rutina.rutina.cantidad_dias);
+  
+    // Validar que 'rutina.dias' exista y tenga elementos
+    if (!rutina.rutina.dias || rutina.rutina.dias.length === 0) {
+      console.warn('No hay días disponibles para cargar.');
+      return;
+    }
+  
+    // Cargar los ejercicios para cada día
     rutina.dias.forEach((dia: any, diaIndex: number) => {
+      if (!dia.ejercicios || dia.ejercicios.length === 0) {
+        console.warn(`No hay ejercicios disponibles para el día ${diaIndex + 1}.`);
+        return;
+      }
+  
+      // Agregar y cargar los ejercicios para este día
       dia.ejercicios.forEach((ejercicio: any) => {
         this.agregarEjercicio(diaIndex);
-        const ejerciciosArray = (this.dias.at(diaIndex).get('ejercicios') as FormArray).at(-1) as FormGroup;
-        ejerciciosArray.patchValue({
+  
+        // Obtener el último ejercicio agregado
+        const ejerciciosArray = (this.dias.at(diaIndex).get('ejercicios') as FormArray);
+        const ultimoEjercicio = ejerciciosArray.at(-1) as FormGroup;
+  
+        // Asignar los valores del ejercicio
+        ultimoEjercicio.patchValue({
           id_grupo_muscular: ejercicio.id_grupo_muscular,
           id_ejercicio: ejercicio.id_ejercicio,
           id_repeticion: ejercicio.id_repeticion

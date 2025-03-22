@@ -56,7 +56,7 @@ export class BuscarRutinaComponent implements OnInit {
 
   onSubmit() {
       // Validar que al menos un campo esté lleno
-      console.log('Filtro:', this.filtroForm.value);
+      // console.log('Filtro:', this.filtroForm.value);
       if (
         !this.filtroForm.value.nombre &&
         !this.filtroForm.value.fechaDesde &&
@@ -77,7 +77,7 @@ export class BuscarRutinaComponent implements OnInit {
       // Llamar al servicio para buscar las rutinas
       this.rutinaService.filtrada(this.filtroForm.value).subscribe(
           (response) => {
-              console.log('Rutinas encontradas:', response);
+              // console.log('Rutinas encontradas:', response);
               this.loading = false;
               // Aquí puedes manejar la respuesta, por ejemplo, mostrar las rutinas en una tabla
               this.rutinasEncontradas.emit(response);
