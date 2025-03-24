@@ -40,7 +40,7 @@ input[readonly]:focus {
 
 
 /* Estilos actualizados para el card */
-.card {
+.card-custom {
   border: none;
   border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -48,9 +48,12 @@ input[readonly]:focus {
   margin-top: 20px;
   overflow: hidden;
   transition: transform 0.3s ease-in-out;
+  width: 80%; /* Establecemos un ancho por defecto */
+  max-width: 600px; /* Establecemos un ancho máximo */
+  margin: 0 auto; /* Centrado automático */
 }
 
-.card:hover {
+.card-custom:hover {
   transform: translateY(-5px);
 }
 
@@ -66,6 +69,26 @@ input[readonly]:focus {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 767px) {
+  .card-custom {
+    width: 90%; /* Ocupa el 90% del ancho en pantallas móviles */
+  }
+
+  /* Ajuste de tamaño de los inputs para pantallas pequeñas */
+  .form-control,
+  .monto-input {
+    font-size: 0.85rem; /* Reduce el tamaño de la fuente en pantallas móviles */
+    padding: 0.7rem;
+  }
+
+  /* Botón de envío más pequeño en pantallas móviles */
+  .btn-primary {
+    font-size: 0.8rem;
+    padding: 0.6rem 1rem;
+  }
 }
 
 /* Estilos para los inputs */
@@ -96,7 +119,6 @@ input[readonly]:focus {
   max-width: 100%; /* Ocupa el ancho total del contenedor */
   width: 100%;
 }
-
 
 /* Botón de envío */
 .btn-primary {
@@ -132,4 +154,3 @@ label {
   font-weight: 500;
   color: #e0e0e0;
 }
-
