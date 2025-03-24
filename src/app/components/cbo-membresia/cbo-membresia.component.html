@@ -14,17 +14,17 @@
     </option>
   </select>
 </div> -->
-<label [for]="'membresia-' + label" class="form-label">{{ label }}</label>
-<select
-  [id]="'membresia-' + label"
-  [(ngModel)]="selectedMembresia"
+<div>
+  <label class="form-label">{{ label }}</label>
+  <select
   class="form-select form-select-lg"
-  aria-label="Selecciona una membresía"
-  [disabled]="isDisabled"
-  (ngModelChange)="onValueChange()"
->
-  <option value="" disabled selected>Seleccione una opción</option>
-  <option *ngFor="let membresia of membresias" [value]="membresia.id_membresia">
-    {{ membresia.nombre }} {{ membresia.precio }}
-  </option>
-</select>
+    [(ngModel)]="selectedMembresia"
+    (ngModelChange)="onValueChange()"
+    [disabled]="isDisabled"
+  >
+    <option [ngValue]="null">Seleccione una opción</option>
+    <option *ngFor="let membresia of membresias" [ngValue]="membresia">
+      {{ membresia.nombre }} {{ membresia.precio }}
+    </option>
+  </select>
+</div>
