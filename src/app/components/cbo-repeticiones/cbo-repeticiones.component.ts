@@ -39,7 +39,7 @@ export class CboRepeticionesComponent implements OnInit, ControlValueAccessor {
     this.repeticionService.getRepeticion().subscribe(
       (data) => {
         this.repeticiones = data; // Asignamos los datos de las repeticiones
-        console.log('Repeticiones obtenidas', this.repeticiones);
+        // console.log('Repeticiones obtenidas', this.repeticiones);
       },
       (error) => {
         console.error('Error al obtener repeticiones', error);

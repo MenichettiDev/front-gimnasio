@@ -7,7 +7,7 @@
 </app-mostrar-rutinas>
 
 <!-- Mostrar el componente de reaplicar rutina si hay una rutina seleccionada -->
-<div *ngIf="rutinaSeleccionada">
+<div *ngIf="formularioHabilitado">
     <h3>Editar Rutina</h3>
-    <app-editar-rutina [idRutina]="rutinaSeleccionada.id_rutina"></app-editar-rutina>
+    <app-editar-rutina [idRutina]="rutinaSeleccionada!.id_rutina"></app-editar-rutina>
 </div>

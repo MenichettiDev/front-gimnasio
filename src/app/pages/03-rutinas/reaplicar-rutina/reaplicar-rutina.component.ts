@@ -16,6 +16,7 @@ export class ReaplicarRutinaComponent {
 
     rutinasFiltradas: plan[] = [];
     rutinaSeleccionada: rutinaArmada | null = null; // Rutina seleccionada para editar
+    formularioHabilitado: boolean = false; // Controla si el formulario está habilitado
 
     manejarRutinasEncontradas(rutinas: any[]) {
         console.log('Rutinas recibidas:', rutinas);
@@ -24,13 +25,14 @@ export class ReaplicarRutinaComponent {
     }
 
     manejarFiltrosAceptados(filtros: any) {
-        console.log('Filtros aceptados:', filtros);
+        // console.log('Filtros aceptados:', filtros);
         // Aquí puedes guardar los filtros o realizar otras acciones
     }
 
     onEditarRutina(rutina: rutinaArmada): void {
         // Almacena la rutina seleccionada
         this.rutinaSeleccionada = rutina;
+        this.formularioHabilitado = true; // Habilitar el formulario
         console.log('Rutina seleccionada para editar:', this.rutinaSeleccionada);
     }
 

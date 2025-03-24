@@ -72,7 +72,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   onResize(): void {
     const screenWidth = window.innerWidth;
-    console.log(screenWidth); // Log del tamaño de la ventana
+    // console.log(screenWidth); // Log del tamaño de la ventana
 
     const previousState = this.isSmallScreen;
 

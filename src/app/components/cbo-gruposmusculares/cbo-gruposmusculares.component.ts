@@ -25,6 +25,7 @@ export class CboGruposmuscularesComponent implements OnInit, ControlValueAccesso
 
   gruposMusculares: GrupoMuscular[] = [];
   musculoSeleccionado: GrupoMuscular | null = null;
+  private datosCargados = false; // Flag para indicar si los datos están cargados
 
   private onChange: (value: number) => void = () => {};
   private onTouched: () => void = () => {};
@@ -42,6 +43,7 @@ export class CboGruposmuscularesComponent implements OnInit, ControlValueAccesso
     this.grupoMuscularService.getGruposMusculares().subscribe(
       (data) => {
         this.gruposMusculares = data;
+        this.datosCargados = true; // Marcar que los datos están cargados
       },
       (error) => {
         console.error('Error al obtener grupos musculares', error);
@@ -59,7 +61,16 @@ export class CboGruposmuscularesComponent implements OnInit, ControlValueAccesso
 
   // Métodos de ControlValueAccessor
   writeValue(value: number): void {
-    this.musculoSeleccionado = this.gruposMusculares.find(m => m.id_grupo_muscular === value) || null;
+    if (this.datosCargados) {
+      // Buscar el grupo muscular correspondiente al valor recibido
+      const musculoEncontrado = this.gruposMusculares.find(m => m.id_grupo_muscular === value);
+      this.musculoSeleccionado = musculoEncontrado || null;
+    } else {
+      // Si los datos aún no están cargados, reintenta después de 100 ms
+      setTimeout(() => {
+        this.writeValue(value);
+      }, 100);
+    }
   }
 
   registerOnChange(fn: (value: number) => void): void {

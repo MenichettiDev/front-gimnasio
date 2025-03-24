@@ -1,8 +1,3 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators, AbstractControl, FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from '../../../service/auth/auth.service';
-import { RutinasService } from '../../../service/rutinas.service';
 import { ConfirmacionService } from '../../../service/confirmacion.service';
 import { CommonModule } from '@angular/common';
 import { InputTextoComponent } from "../../input-texto/input-texto.component";
@@ -17,22 +12,26 @@ import { CboRepeticionesComponent } from "../../cbo-repeticiones/cbo-repeticione
 import { CalendarModule } from 'primeng/calendar';
 import { ButtonModule } from 'primeng/button';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { AuthService } from '../../../service/auth/auth.service';
+import { RutinasService } from '../../../service/rutinas.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-editar-rutina',
+  selector: 'app-test-edicion',
   imports: [FormsModule,
-    CommonModule, ReactiveFormsModule,
-    InputTextoComponent, CboAtletaComponent,
-    CboDiasComponent, CboNiveldificultadComponent,
-    CboObjetivoComponent, InputFechaComponent,
-    CboGruposmuscularesComponent, CboEjercicioComponent
-    , CboRepeticionesComponent, CalendarModule, ButtonModule, ProgressSpinnerModule],
-  templateUrl: './editar-rutina.component.html',
-  styleUrl: './editar-rutina.component.css'
+      CommonModule, ReactiveFormsModule,
+      InputTextoComponent, CboAtletaComponent,
+      CboDiasComponent, CboNiveldificultadComponent,
+      CboObjetivoComponent, InputFechaComponent,
+      CboGruposmuscularesComponent, CboEjercicioComponent
+      , CboRepeticionesComponent, CalendarModule, ButtonModule, ProgressSpinnerModule],
+  templateUrl: './test-edicion.component.html',
+  styleUrl: './test-edicion.component.css'
 })
-export class EditarRutinaComponent implements OnInit, OnChanges {
-  @Input() idRutina: number | null = null ; // Rutina existente que se recibe como entrada
-  
+export class TestEdicionComponent implements OnInit, OnChanges {
+  @Input() idRutina: number = 0; // Rutina existente que se recibe como entrada
   rutinaSeleccionada: any; // Rutina existente que se recibe como entrada
   rutinaForm: FormGroup = new FormGroup({});
   loading = false;
@@ -47,17 +46,17 @@ export class EditarRutinaComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnInit(): void {
-    // console.log(' inicio de editar rutina, creo form');
-    // if (this.rutinaSeleccionada !== 0) {
-      //   this.cargarDatosRutina(this.rutinaSeleccionada);
-      // }
-    }
-    
-    ngOnChanges(changes: SimpleChanges): void {
+    console.log(' inicio de editar rutina');
     this.createForm();
+    // if (this.rutinaSeleccionada !== 0) {
+    //   this.cargarDatosRutina(this.rutinaSeleccionada);
+    // }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
     console.log(' cambios de editar rutina');
     // Verifica si la propiedad 'idRutina' ha cambiado
-    if (changes['idRutina'] && changes['idRutina'].currentValue && this.idRutina) {
+    if (changes['idRutina'] && changes['idRutina'].currentValue) {
       this.resetForm(); // Reinicia el formulario antes de cargar nuevos datos
       this.loading = true; // Activa el spinner
       this.obtenerRutinaPorId(this.idRutina); // Llama al método para obtener la rutina por ID
@@ -88,10 +87,10 @@ export class EditarRutinaComponent implements OnInit, OnChanges {
   createForm(): void {
     this.rutinaForm = this.fb.group({
       nombre: ['', Validators.required],
-      cantidad_dias: ['', Validators.required],
+      cantidad_dias: [1, [Validators.required, Validators.min(1), Validators.max(7)]],
       nivel_atleta: ['', Validators.required],
       objetivo: ['', Validators.required],
-      descripcion: ['', Validators.required],
+      descripcion: ['', [Validators.required, Validators.maxLength(200)]],
       fecha_asignacion: ['', Validators.required],
       id_atleta: ['', Validators.required],
       dias: this.fb.array([])
@@ -116,26 +115,25 @@ export class EditarRutinaComponent implements OnInit, OnChanges {
       fecha_asignacion: rutina.rutina.fecha_asignacion,
       id_atleta: rutina.rutina.id_atleta
     });
-    console.log('Valor de nivel_atleta:', this.rutinaForm.get('nivel_atleta')?.value);
-    
+  
     // Limpiar el FormArray de días antes de agregar nuevos
     this.dias.clear();
-    
+  
     // Agregar los días necesarios al formulario
     for (let i = 0; i < rutina.rutina.cantidad_dias; i++) {
       this.agregarDia();
     }
-    
+  
     // Cargar los ejercicios para cada día
     rutina.ejercicios.forEach((dia: any, diaIndex: number) => {
       if (!dia.ejercicios || dia.ejercicios.length === 0) {
         console.warn(`No hay ejercicios disponibles para el día ${diaIndex + 1}.`);
         return;
       }
-      
+  
       // Obtener el FormArray de ejercicios para este día
       const ejerciciosArray = (this.dias.at(diaIndex).get('ejercicios') as FormArray);
-      
+  
       // Agregar y cargar los ejercicios para este día
       dia.ejercicios.forEach((ejercicio: any) => {
         ejerciciosArray.push(
@@ -146,9 +144,7 @@ export class EditarRutinaComponent implements OnInit, OnChanges {
           })
         );
       });
-      console.log('Estado del FormArray:', ejerciciosArray.value);
     });
-    console.log('Datos del formulario después de cargar:', this.rutinaForm.value);
   }
 
   get dias(): FormArray {
