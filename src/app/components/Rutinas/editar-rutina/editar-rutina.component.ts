@@ -55,7 +55,7 @@ export class EditarRutinaComponent implements OnInit, OnChanges {
     
     ngOnChanges(changes: SimpleChanges): void {
     this.createForm();
-    console.log(' cambios de editar rutina');
+    // console.log(' cambios de editar rutina');
     // Verifica si la propiedad 'idRutina' ha cambiado
     if (changes['idRutina'] && changes['idRutina'].currentValue && this.idRutina) {
       this.resetForm(); // Reinicia el formulario antes de cargar nuevos datos
@@ -68,7 +68,7 @@ export class EditarRutinaComponent implements OnInit, OnChanges {
     this.rutinaService.getRutinaByIdRutina(id_rutina).subscribe(
       (rutina: any) => {
         this.rutinaSeleccionada = rutina; // Asigna los datos de la rutina encontrada
-        console.log('Rutina seleccionada:', this.rutinaSeleccionada);
+        // console.log('Rutina seleccionada:', this.rutinaSeleccionada);
         this.cargarDatosRutina(this.rutinaSeleccionada); // Carga los datos en el formulario
         this.loading = false; // Desactiva el spinner
       },
@@ -99,7 +99,7 @@ export class EditarRutinaComponent implements OnInit, OnChanges {
   }
 
   cargarDatosRutina(rutina: any): void {
-    console.log('Cargar datos de la rutina:', rutina);
+    // console.log('Cargar datos de la rutina:', rutina);
   
     if (!rutina || !rutina.rutina) {
       console.error('La estructura de la rutina no es válida:', rutina);
@@ -223,6 +223,7 @@ export class EditarRutinaComponent implements OnInit, OnChanges {
       })
     };
 
+    console.log('Datos de la rutina a guardar:', rutinaData);
     this.rutinaService.createRutina(rutinaData).subscribe(
       response => {
         this.loading = false;

@@ -23,6 +23,7 @@ export class CboRepeticionesComponent implements OnInit, ControlValueAccessor {
   repeticiones: Repeticion[] = []; // Lista de repeticiones
   selectedRepeticion: Repeticion | null = null; // Valor seleccionado (objeto repeticion)
   isDisabled: boolean = false; // Estado de deshabilitado
+  private datosCargados = false; // Flag para indicar si los datos están cargados
 
   // Funciones de callback registradas por Angular
   private onChange: (value: any) => void = () => {};
@@ -39,7 +40,7 @@ export class CboRepeticionesComponent implements OnInit, ControlValueAccessor {
     this.repeticionService.getRepeticion().subscribe(
       (data) => {
         this.repeticiones = data; // Asignamos los datos de las repeticiones
-        // console.log('Repeticiones obtenidas', this.repeticiones);
+        this.datosCargados = true; // Marcar que los datos están cargados
       },
       (error) => {
         console.error('Error al obtener repeticiones', error);
@@ -56,8 +57,17 @@ onValueChange(): void {
 }
 
   // Métodos de ControlValueAccessor
-  writeValue(value: any): void {
-    this.selectedRepeticion = value || null; // Actualiza el valor interno
+  writeValue(value: number): void {
+    if (this.datosCargados) {
+      // Buscar la repetición correspondiente al valor recibido
+      const repeticionEncontrada = this.repeticiones.find(r => r.id_repeticion === value);
+      this.selectedRepeticion = repeticionEncontrada || null;
+    } else {
+      // Si los datos aún no están cargados, reintenta después de 100 ms
+      setTimeout(() => {
+        this.writeValue(value);
+      }, 100);
+    }
   }
 
   registerOnChange(fn: (value: any) => void): void {
