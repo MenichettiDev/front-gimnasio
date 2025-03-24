@@ -47,10 +47,7 @@ export class EditarRutinaComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnInit(): void {
-    // console.log(' inicio de editar rutina, creo form');
-    // if (this.rutinaSeleccionada !== 0) {
-      //   this.cargarDatosRutina(this.rutinaSeleccionada);
-      // }
+    this.listenToDiasChanges(); // Escuchar cambios en el campo cantidad_dias
     }
     
     ngOnChanges(changes: SimpleChanges): void {
@@ -246,6 +243,36 @@ export class EditarRutinaComponent implements OnInit, OnChanges {
     const day = String(fechaDate.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
   }
+
+  // Método para escuchar cambios en el campo cantidad_dias
+listenToDiasChanges(): void {
+  const cantidadDiasControl = this.rutinaForm.get('cantidad_dias');
+  if (cantidadDiasControl) {
+    cantidadDiasControl.valueChanges.subscribe((nuevaCantidadDias: number) => {
+      this.ajustarDias(nuevaCantidadDias);
+    });
+  }
+}
+
+// Método para ajustar los días según la nueva cantidad
+ajustarDias(nuevaCantidadDias: number): void {
+  const diasActuales = this.dias.length;
+
+  if (nuevaCantidadDias > diasActuales) {
+    // Agregar días adicionales
+    const diasAgregados = nuevaCantidadDias - diasActuales;
+    for (let i = 0; i < diasAgregados; i++) {
+      this.agregarDia();
+    }
+  } else if (nuevaCantidadDias < diasActuales) {
+    // Eliminar días sobrantes
+    const diasEliminados = diasActuales - nuevaCantidadDias;
+    for (let i = 0; i < diasEliminados; i++) {
+      this.dias.removeAt(this.dias.length - 1);
+      this.collapsed.pop(); // También elimina el estado colapsado del día
+    }
+  }
+}
 
   anterior(): void {
     this.router.navigate(['/home']);
