@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
           this.errorMessage = error.message; // Accede al mensaje de error
         } else {
           this.errorMessage = 'Hubo un problema al intentar iniciar sesión. Por favor, intente nuevamente.';
+          console.error('Error inesperado:', error); // Manejo de errores inesperados
         }
       }
     } else {
