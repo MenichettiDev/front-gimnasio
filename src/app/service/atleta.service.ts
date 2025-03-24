@@ -26,8 +26,8 @@ export class AtletaService {
   }
 
   // Método para obtener atletas por ID de entrenador
-  getAtletasPorEntrenador(idEntrenador: number): Observable<{ atletas: Atleta[] }> {
-    return this.http.post<{ atletas: Atleta[] }>(this.apiUrlGetAtletaById, { idEntrenador }).pipe(
+  getAtletasPorEntrenador(id_entrenador: number): Observable<{ atletas: Atleta[] }> {
+    return this.http.post<{ atletas: Atleta[] }>(this.apiUrlGetAtletaById, { id_entrenador }).pipe(
       catchError(this.handleError)
     );
   }
