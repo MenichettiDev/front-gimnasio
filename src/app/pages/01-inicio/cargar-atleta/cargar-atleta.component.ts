@@ -17,7 +17,7 @@ import { Persona } from '../../../data/interfaces/tbPersonaInterface';
 })
 export class CargarAtletaComponent implements OnInit {
   atletaForm!: FormGroup;
-  usuario: Persona | null = null;
+  id_persona: number | null = null;
   isModalVisible: boolean = false; // Controla la visibilidad del modal
 
   constructor(
@@ -28,7 +28,8 @@ export class CargarAtletaComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.usuario = this.authService.getUser(); // Obtenemos el usuario actual
+    this.id_persona = this.authService.getIdPersona(); // Obtenemos el usuario actual
+    console.log('Usuario actual:', this.id_persona);
 
     this.atletaForm = this.fb.group({
       dni: ['', [Validators.required, Validators.minLength(8)]],
@@ -40,7 +41,7 @@ export class CargarAtletaComponent implements OnInit {
       direccion: [''],
       email: ['', [Validators.required, Validators.email]],
       id_gimnasio: [null],
-      foto_archivo: [''],
+      // foto_archivo: [''],
     });
   }
 
@@ -55,14 +56,14 @@ export class CargarAtletaComponent implements OnInit {
 
   // Manejar la confirmación del modal
   handleConfirm(): void {
-    if (!this.usuario || !this.usuario.id_persona) {
+    if (!this.id_persona ) {
       console.error('El ID del usuario no está disponible');
       return;
     }
 
     const atletaData = this.atletaForm.value;
 
-    this.entrenadorService.getEntrenadorById(this.usuario.id_persona).subscribe({
+    this.entrenadorService.getEntrenadorById(this.id_persona).subscribe({
       next: (data) => {
         atletaData.id_entrenador = data.id_entrenador;
 
