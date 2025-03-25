@@ -1,1 +1,27 @@
-<p>estadisticas works!</p>
+<div>
+    <h3>Selecciona las variables a mostrar:</h3>
+    <div *ngFor="let variable of variablesDisponibles">
+      <label>
+        <input
+          type="checkbox"
+          [(ngModel)]="variable.seleccionado"
+          (change)="actualizarGrafico()"
+        />
+        {{ variable.nombre.charAt(0).toUpperCase() + variable.nombre.slice(1) }}
+      </label>
+    </div>
+  </div>
+  
+  <div *ngIf="medidasFiltradas.length > 0; else noData" class="chart-container">
+    <canvas
+      baseChart
+      [datasets]="chartData"
+      [labels]="chartLabels"
+      [options]="chartOptions"
+      [type]="'line'"
+    ></canvas>
+  </div>
+  
+  <ng-template #noData>
+    <p>No hay datos disponibles para mostrar en el gráfico.</p>
+  </ng-template>

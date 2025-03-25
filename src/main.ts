@@ -5,6 +5,10 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { BarrasupComponent } from './app/shared/barrasup/barrasup.component';
 
+// Importa Chart.js y registra las escalas necesarias// esto es para los gráficos
+import { Chart, registerables } from 'chart.js';
+Chart.register(...registerables);
+
 const updatedAppConfig = {
   ...appConfig,
   providers: [
