@@ -1,0 +1,5 @@
+<div *ngIf="isVisible" class="toast" [ngClass]="['toast-' + type, { 'show': isVisible }]">
+  <div class="toast-message">
+    {{ message }}
+  </div>
+</div>
