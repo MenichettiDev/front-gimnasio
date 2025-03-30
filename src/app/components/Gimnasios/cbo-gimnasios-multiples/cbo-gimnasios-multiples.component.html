@@ -1,0 +1,9 @@
+<div class="mb-3 col-12 col-6">
+    <label [for]="'gimnasios-multiples-' + label" class="form-label">{{ label }}</label>
+    <select [id]="'gimnasios-multiples-' + label" [(ngModel)]="selectedGimnasios" class="form-select form-select-lg"
+        aria-label="Selecciona gimnasios" [disabled]="isDisabled" multiple (ngModelChange)="onValueChange()">
+        <option *ngFor="let gimnasio of gimnasios" [value]="gimnasio.id_gimnasio">
+            {{ gimnasio.nombre }}
+        </option>
+    </select>
+</div>

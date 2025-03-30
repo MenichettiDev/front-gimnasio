@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, Observable, throwError  } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { Entrenador } from '../data/interfaces/entrenadorInterface';
 import { environment } from '../../environments/environment';
 
@@ -14,6 +14,8 @@ export class EntrenadorService {
   private apiUrlGetEntrenadores = `${this.apiUrl}/getEntrenadores`; // URL de tu API para obtener entrenadores
   private apiUrlGetEntrenadorByIdPersona = `${this.apiUrl}/getEntrenadorByIdPersona`; // URL de tu API para obtener entrenador por ID
   private apiUrlcrearEntrenador = `${this.apiUrl}/crearEntrenador`; // URL de tu API para crear un entrenador
+  private apiUrlAsignarGimnasios = `${this.apiUrl}/asignar-gimnasio`; // URL para asignar gimnasios a un entrenador
+  private apiUrlGetGimnasiosAsignados = `${this.apiUrl}/get-gimnasios-asignados`; // URL para obtener gimnasios asignados
 
   constructor(private http: HttpClient) { }
 
@@ -29,6 +31,21 @@ export class EntrenadorService {
 
   crearEntrenador(entrenadorData: Entrenador): Observable<any> {
     return this.http.post<any>(this.apiUrlcrearEntrenador, entrenadorData).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  // Método para asignar gimnasios a un entrenador
+  asignarGimnasios(id_entrenador: number, id_gimnasios: number[]): Observable<any> {
+    const requestBody = { id_entrenador, id_gimnasios };
+    return this.http.post<any>(this.apiUrlAsignarGimnasios, requestBody).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  // Método para obtener los gimnasios asignados a un entrenador
+  getGimnasiosAsignados(id_entrenador: number): Observable<number[]> {
+    return this.http.post<number[]>(this.apiUrlGetGimnasiosAsignados, { id_entrenador }).pipe(
       catchError(this.handleError)
     );
   }
