@@ -31,7 +31,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.menus = [];
     this.loadUserData();
-    this.getMenus();
+    // Solo cargar menús si el id_acceso es válido
+    if (this.id_acceso) {
+      this.getMenus();
+    }
 
     this.isSidebarVisible = this.authService.isLoggedIn();
 
@@ -143,35 +146,35 @@ export class SidebarComponent implements OnInit, OnDestroy {
       subMenu.menu_principal === 0 && subMenu.menu_grupo === menu.menu_grupo);
   }
 
- // Función para cerrar el sidebar automáticamente en pantallas pequeñas
-closeSidebarOnSmallScreens(): void {
-  if (this.isSmallScreen) {
-    this.isSidebarVisible = false; // Ocultar el sidebar
-  }
-}
-
-// Alternar la visibilidad de los submenús
-toggleSubMenu(menu: Menu): void {
-  // Cerrar todos los menús abiertos antes de abrir el seleccionado
-  this.menus.forEach(m => {
-    if (m !== menu) {
-      m.expanded = false;
+  // Función para cerrar el sidebar automáticamente en pantallas pequeñas
+  closeSidebarOnSmallScreens(): void {
+    if (this.isSmallScreen) {
+      this.isSidebarVisible = false; // Ocultar el sidebar
     }
-  });
-  // Alternar estado de expansión del menú seleccionado
-  menu.expanded = !menu.expanded;
-
-  // NO cerrar el sidebar aquí, ya que este es solo para expandir/cerrar submenús
-}
-
-// Redirigir al hacer clic en un submenú
-navigateToSubMenu(subMenu: Menu): void {
-  if (subMenu.menu_link) {
-    this.router.navigate([subMenu.menu_link]); // Navegar a la ruta del submenú
-    // Cerrar el sidebar automáticamente en pantallas pequeñas
-    this.closeSidebarOnSmallScreens();
   }
-}
+
+  // Alternar la visibilidad de los submenús
+  toggleSubMenu(menu: Menu): void {
+    // Cerrar todos los menús abiertos antes de abrir el seleccionado
+    this.menus.forEach(m => {
+      if (m !== menu) {
+        m.expanded = false;
+      }
+    });
+    // Alternar estado de expansión del menú seleccionado
+    menu.expanded = !menu.expanded;
+
+    // NO cerrar el sidebar aquí, ya que este es solo para expandir/cerrar submenús
+  }
+
+  // Redirigir al hacer clic en un submenú
+  navigateToSubMenu(subMenu: Menu): void {
+    if (subMenu.menu_link) {
+      this.router.navigate([subMenu.menu_link]); // Navegar a la ruta del submenú
+      // Cerrar el sidebar automáticamente en pantallas pequeñas
+      this.closeSidebarOnSmallScreens();
+    }
+  }
 
   // Verificar si un menú está expandido
   isMenuExpanded(menu: Menu): boolean {
@@ -179,21 +182,21 @@ navigateToSubMenu(subMenu: Menu): void {
   }
 
   // Alternar la visibilidad del sidebar
-toggleSidebar(): void {
-  if (this.isSmallScreen) {
-    this.isSidebarVisible = !this.isSidebarVisible;
+  toggleSidebar(): void {
+    if (this.isSmallScreen) {
+      this.isSidebarVisible = !this.isSidebarVisible;
 
-    // Agregar/remover la clase 'hidden' según la visibilidad
-    const sidebarElement = document.querySelector('.sidebar');
-    if (sidebarElement) {
-      if (!this.isSidebarVisible) {
-        sidebarElement.classList.add('hidden');
-      } else {
-        sidebarElement.classList.remove('hidden');
+      // Agregar/remover la clase 'hidden' según la visibilidad
+      const sidebarElement = document.querySelector('.sidebar');
+      if (sidebarElement) {
+        if (!this.isSidebarVisible) {
+          sidebarElement.classList.add('hidden');
+        } else {
+          sidebarElement.classList.remove('hidden');
+        }
       }
     }
   }
-}
 
   navigateToHome() {
     this.router.navigate(['/inicio']);

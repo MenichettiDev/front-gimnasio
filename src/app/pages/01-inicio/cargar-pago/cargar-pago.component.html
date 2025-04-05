@@ -78,3 +78,12 @@
           </form>
         </div>
       </div>
+
+      <!-- Modal de Confirmación -->
+      <app-modal-confirm
+        [visible]="isModalVisible"
+        [title]="'Confirmación'"
+        [message]="'¿Estás seguro de registrar este pago?'"
+        (confirm)="handleConfirm()"
+        (cancel)="handleCancel()">
+      </app-modal-confirm>
