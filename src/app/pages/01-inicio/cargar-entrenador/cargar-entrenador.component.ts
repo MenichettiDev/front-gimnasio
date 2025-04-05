@@ -62,10 +62,12 @@ export class CargarEntrenadorComponent implements OnInit {
     this.entrenadorService.crearEntrenador(entrenadorData).subscribe({
       next: (response) => {
         console.log('Entrenador creado:', response);
+        alert('Entrenador creado exitosamente!'); // Mensaje de éxito
         this.isModalVisible = false; // Cierra el modal
       },
       error: (err) => {
-        console.error('Error al crear entrenador:', err);
+        // console.error('Error al crear entrenador:', err);
+        alert('Error al crear entrenador: ' + err.error.message); // Mensaje de error
         this.isModalVisible = false; // Cierra el modal en caso de error
       },
     });
