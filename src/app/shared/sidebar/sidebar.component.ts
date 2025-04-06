@@ -96,7 +96,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
   loadUserData(): void {
     const user = this.authService.getUser();
     if (user) {
-      this.id_acceso = user[0].id_acceso;
+      this.id_acceso = user.id_acceso;
+      console.log('ID de acceso:', this.id_acceso); // Log del ID de acceso
     }
   }
 
