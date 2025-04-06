@@ -148,12 +148,14 @@ export class CrearRutComponent implements OnInit {
         response => {
 
           this.loading = false; // Detener el spinner
+          alert('Rutina creada exitosamente!');
           this.confirmacionService.showSuccess('Operación exitosa');
         },
         error => {
           // Si ocurre un error
           this.loading = false; // Detener el spinner
           console.error('Error al crear la rutina', error);
+          alert('Error al crear la rutina. Por favor, inténtelo de nuevo.');
           this.confirmacionService.showError('Error al crear la rutina');
         }
       );
