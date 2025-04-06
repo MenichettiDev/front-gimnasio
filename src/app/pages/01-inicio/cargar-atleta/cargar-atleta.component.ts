@@ -58,6 +58,7 @@ export class CargarAtletaComponent implements OnInit {
   handleConfirm(): void {
     if (!this.id_persona ) {
       console.error('El ID del usuario no está disponible');
+      alert('El ID del usuario no está disponible. Por favor, inténtelo de nuevo.');
       return;
     }
 
@@ -70,17 +71,20 @@ export class CargarAtletaComponent implements OnInit {
         // Crear atleta
         this.atletaService.crearAtleta(atletaData).subscribe({
           next: (response) => {
-            console.log('Atleta creado:', response);
+            // console.log('Atleta creado:', response);
+            alert('Atleta creado exitosamente!');
             this.isModalVisible = false; // Cierra el modal
           },
           error: (err) => {
-            console.error('Error al crear atleta:', err);
+            // console.error('Error al crear atleta:', err);
+            alert('Error al crear atleta. Por favor, inténtelo de nuevo.');
             this.isModalVisible = false; // Cierra el modal en caso de error
           },
         });
       },
       error: (err) => {
-        console.error('Error al obtener el entrenador:', err);
+        // console.error('Error al obtener el entrenador:', err);
+        alert('Error al obtener el entrenador. Por favor, inténtelo de nuevo.');
         this.isModalVisible = false; // Cierra el modal en caso de error
       },
     });

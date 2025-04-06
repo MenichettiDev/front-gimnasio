@@ -35,8 +35,13 @@ export class AuthService {
 
   // Obtener el ID persona (si existe)
   getIdPersona(): number | null {
-    const user = this.getUser()[0];
+    const user = this.getUser();
     return user && user.id_persona ? user.id_persona : null;
+  }
+  // Obtener el id_acceso
+  getIdAcceso(): number | null {
+    const user = this.getUser();
+    return user && user.id_acceso ? user.id_acceso : null;
   }
 
   // Obtener el ID del entrenador (si existe)

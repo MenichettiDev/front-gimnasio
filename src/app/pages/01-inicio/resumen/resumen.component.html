@@ -1,9 +1,31 @@
-<div class="main-page">
-  <div class="text-content">
-      <h1 class="main-title">¡Bienvenido a casa gladiador!</h1>
-      <!-- <button (click)="obtenerFraseAleatoria()" class="btn-refresh">
-          <i class="bx bx-refresh"></i> Nueva frase
-      </button> -->
-      <p class="random-quote">{{ fraseAleatoria?.frase }}</p>
+<div class="main-page" >
+  <div class="text-content" style="background-color: black; text-align: center; max-width: 800px; padding: 2rem; border: 2px solid #ff9500; border-radius: 20px; box-shadow: 0 0 25px #ff9500, 0 0 50px #ff9500 inset;">
+    
+    <h1 class="main-title" style="
+      color: #FFD700;
+      font-size: 2.8rem;
+      font-weight: bold;
+      text-shadow: 0 0 5px #FFD700, 0 0 20px #FFD700;
+      margin-bottom: 1.5rem;
+    ">
+      ¡No cuentes los días, haz que los días cuenten!
+    </h1>
+
+    <!-- <button (click)="obtenerFraseAleatoria()" class="btn-refresh">
+        <i class="bx bx-refresh"></i> Nueva frase
+    </button> -->
+
+    <p class="random-quote" style="
+      color: #FF6600;
+      font-size: 1.5rem;
+      font-style: italic;
+      text-shadow: 0 0 8px #FF6600, 0 0 16px #FF6600;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      padding-top: 1rem;
+    ">
+      {{ fraseAleatoria?.frase }}
+    </p>
+
   </div>
 </div>
+
