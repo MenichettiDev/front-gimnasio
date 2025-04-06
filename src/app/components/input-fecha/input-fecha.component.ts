@@ -6,7 +6,7 @@ import { DatePickerModule } from 'primeng/datepicker';
 @Component({
   selector: 'app-input-fecha',
   templateUrl: './input-fecha.component.html',
-  standalone: true, 
+  standalone: true,
   styleUrls: ['./input-fecha.component.css'],
   imports: [DatePickerModule, CommonModule, FormsModule],
   providers: [

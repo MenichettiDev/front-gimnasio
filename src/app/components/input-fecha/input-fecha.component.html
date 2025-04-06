@@ -1,3 +1,4 @@
+
     <label [for]="'dateInput-' + label" class="form-label">{{ label }}</label>
     <!-- Usando PrimeNG p-calendar -->
     <p-datePicker
@@ -8,5 +9,6 @@
   [attr.aria-label]="label"
   (ngModelChange)="onValueChange($event)"
   [disabled]="isDisabled"
+  class="custom-calendar"
 >
 </p-datePicker>

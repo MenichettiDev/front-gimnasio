@@ -161,6 +161,28 @@ app-cbo-gimnasio {
   background-color: #45a049; /* Verde oscuro */
 }
 
+input[type="date"] {
+  padding: 0.8rem;
+  border: 1px solid #4CAF50;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  transition: border-color 0.3s ease;
+  text-align: right;
+  width: 100%;
+}
+
+input[type="date"]:focus {
+  border-color: #04df13;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.5);
+}
+
+input:invalid {
+  border-color: #f44336;
+}
+
+
 /* Ajustes de estilo para el botón en pantallas pequeñas */
 @media (max-width: 576px) {
   .d-grid {

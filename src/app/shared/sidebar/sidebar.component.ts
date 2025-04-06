@@ -1,4 +1,10 @@
-import { Component, OnInit, HostListener, OnDestroy, inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  HostListener,
+  OnDestroy,
+  inject,
+} from '@angular/core';
 import { MenuService } from '../../service/menu.service';
 import { CommonModule } from '@angular/common';
 import { ModalConfirmComponent } from '../../components/modal/modal-confirm/modal-confirm.component';
@@ -12,14 +18,14 @@ import { Subscription } from 'rxjs';
   standalone: true,
   imports: [CommonModule, ModalConfirmComponent, RouterModule],
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css']
+  styleUrls: ['./sidebar.component.css'],
 })
 export class SidebarComponent implements OnInit, OnDestroy {
   isModalVisible: boolean = false; // Controla la visibilidad del modal
-  id_acceso: number = 1;  // ID de acceso del usuario
-  menus: Menu[] = [];  // Lista de menús cargados
-  isSidebarVisible: boolean = false;  // Controla la visibilidad del sidebar (inicialmente oculto)
-  isLoggedIn: boolean = false;  // Propiedad para el estado de login
+  id_acceso: number = 1; // ID de acceso del usuario
+  menus: Menu[] = []; // Lista de menús cargados
+  isSidebarVisible: boolean = false; // Controla la visibilidad del sidebar (inicialmente oculto)
+  isLoggedIn: boolean = false; // Propiedad para el estado de login
   private loginStatusSubscription: Subscription | null = null; // Para suscripción al estado de login
   isSmallScreen: boolean = window.innerWidth < 992; // Detectar si la pantalla es pequeña
 
@@ -28,6 +34,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   public authService = inject(AuthService);
   private router = inject(Router);
 
+  // Inicializar el componente y cargar los menús
   ngOnInit(): void {
     this.menus = [];
     this.loadUserData();
@@ -36,12 +43,16 @@ export class SidebarComponent implements OnInit, OnDestroy {
       this.getMenus();
     }
 
-    this.isSidebarVisible = this.authService.isLoggedIn();
-
+    // Suscripción al cambio de estado de login
     this.loginStatusSubscription = this.authService.loggedIn$.subscribe(
       (loggedIn: boolean) => {
         this.isLoggedIn = loggedIn;
-        this.isSidebarVisible = loggedIn;
+        // Si estamos logueados y es una pantalla pequeña, aseguramos que el sidebar esté oculto
+        if (loggedIn && this.isSmallScreen) {
+          this.isSidebarVisible = false; // Ocultamos el sidebar en pantallas pequeñas
+        } else {
+          this.isSidebarVisible = loggedIn; // En pantallas grandes, mostramos el sidebar
+        }
       }
     );
 
@@ -108,14 +119,14 @@ export class SidebarComponent implements OnInit, OnDestroy {
         // Asignamos la propiedad `expanded` con valor `false` para cada menú
         this.menus = data.map((menu: Menu) => ({
           ...menu,
-          expanded: false // Inicialmente todos los menús están colapsados
+          expanded: false, // Inicialmente todos los menús están colapsados
         }));
       },
       error: (error) => {
         console.error('Error al obtener los menús:', error);
         // Mostrar un mensaje de error al usuario
         alert('No se pudieron cargar los menús. Inténtelo de nuevo más tarde.');
-      }
+      },
     });
   }
 
@@ -138,13 +149,15 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   // Obtener los menús principales
   getMainMenus(): Menu[] {
-    return this.menus.filter(menu => menu.menu_principal === 1);
+    return this.menus.filter((menu) => menu.menu_principal === 1);
   }
 
   // Obtener los submenús de un menú principal
   getSubMenus(menu: Menu): Menu[] {
-    return this.menus.filter(subMenu =>
-      subMenu.menu_principal === 0 && subMenu.menu_grupo === menu.menu_grupo);
+    return this.menus.filter(
+      (subMenu) =>
+        subMenu.menu_principal === 0 && subMenu.menu_grupo === menu.menu_grupo
+    );
   }
 
   // Función para cerrar el sidebar automáticamente en pantallas pequeñas
@@ -157,7 +170,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   // Alternar la visibilidad de los submenús
   toggleSubMenu(menu: Menu): void {
     // Cerrar todos los menús abiertos antes de abrir el seleccionado
-    this.menus.forEach(m => {
+    this.menus.forEach((m) => {
       if (m !== menu) {
         m.expanded = false;
       }

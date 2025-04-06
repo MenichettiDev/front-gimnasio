@@ -10,7 +10,6 @@ import { CboGruposmuscularesComponent } from '../../../components/cbo-gruposmusc
 import { CboEjercicioComponent } from '../../../components/cbo-ejercicio/cbo-ejercicio.component';
 import { CboRepeticionesComponent } from '../../../components/cbo-repeticiones/cbo-repeticiones.component';
 import { InputTextoComponent } from '../../../components/input-texto/input-texto.component';
-import { InputFechaComponent } from '../../../components/input-fecha/input-fecha.component';
 import { CboDiasComponent } from '../../../components/cbo-dias/cbo-dias.component';
 import { CboNiveldificultadComponent } from '../../../components/cbo-niveldificultad/cbo-niveldificultad.component';
 import { CboObjetivoComponent } from '../../../components/cbo-objetivo/cbo-objetivo.component';
@@ -29,7 +28,6 @@ import { CalendarModule } from 'primeng/calendar';
     CboEjercicioComponent,
     CboRepeticionesComponent,
     InputTextoComponent,
-    InputFechaComponent,
     CboDiasComponent,
     CboNiveldificultadComponent,
     CboObjetivoComponent,
@@ -165,7 +163,7 @@ export class CrearRutComponent implements OnInit {
 
       // Navegar a la página de inicio
       this.router.navigate(['/home']);
-    
+
   }
 
 

@@ -52,15 +52,16 @@
         </div>
         <div class="col-md-6">
           <!-- Grupo: Fecha de Asignación -->
-          <label
-            for="fecha_asignacion"
-            class="form-label d-flex align-items-center"
-          >
+          <label for="fecha_asignacion" class="form-label d-flex align-items-center">
             <i class="fas fa-calendar-alt me-2"></i>
             Fecha de Asignación
           </label>
-          <app-input-fecha label="" formControlName="fecha_asignacion"></app-input-fecha>
+          <div class="form-group">
+            <input type="date" id="fecha_asignacion" [(ngModel)]="rutinaForm.value.fecha_asignacion" name="fecha_asignacion" required />
+          </div>
         </div>
+
+
       </div>
 
       <!-- Fila 4: Descripción de la rutina -->

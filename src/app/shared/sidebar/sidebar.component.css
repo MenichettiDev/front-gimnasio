@@ -34,7 +34,6 @@
   cursor: pointer;
 }
 
-
 /* ==========================================================
    Sidebar (Barra Lateral)
    ========================================================== */
@@ -85,8 +84,8 @@
 
 /* Cuando el sidebar está oculto, el contenido principal se ajusta */
 .sidebar.hidden + .main-content {
-  margin-left: 0;  /* El contenido principal se mueve al lado de la ventana cuando el sidebar está oculto */
-  max-width: 100%;  /* El contenido ocupa todo el ancho de la pantalla cuando el sidebar está oculto */
+  margin-left: 0; /* El contenido principal se mueve al lado de la ventana cuando el sidebar está oculto */
+  max-width: 100%; /* El contenido ocupa todo el ancho de la pantalla cuando el sidebar está oculto */
 }
 
 /* ==========================================================
@@ -130,7 +129,7 @@
    ========================================================== */
 
 .nav-link {
-  font-family: 'Roboto', sans-serif; /* Aplica Roboto a los enlaces */
+  font-family: "Roboto", sans-serif; /* Aplica Roboto a los enlaces */
   padding: 5px 15px; /* Padding fijo */
   font-size: 18px; /* Tamaño de fuente fijo */
   color: #ffffff;
@@ -147,7 +146,7 @@
 /* Cambiar color de los enlaces al pasar el ratón */
 .nav-link:hover {
   color: #ffffff;
-  background-color: rgba(179,0,137,0.5);  /* Fondo azul claro en hover */
+  background-color: rgba(179, 0, 137, 0.5); /* Fondo azul claro en hover */
   text-decoration: none;
 }
 
@@ -171,24 +170,24 @@
 
 /* Eliminar las bolitas (marcadores) en los submenús */
 .sub-menu ul {
-  list-style-type: none;  /* Asegura que no haya marcadores o bolitas */
-  padding-left: 0;   /* Elimina el sangrado izquierdo de la lista */
-  margin-left: 0;    /* Elimina el margen izquierdo */
+  list-style-type: none; /* Asegura que no haya marcadores o bolitas */
+  padding-left: 0; /* Elimina el sangrado izquierdo de la lista */
+  margin-left: 0; /* Elimina el margen izquierdo */
 }
 
 /* Asegúrate de que los submenús también no tengan marcador */
 .sub-menu .nav-item {
-  list-style-type: none;  /* Elimina las bolitas de los submenús */
-  padding: 5px 0;  /* Reducir el espacio entre las líneas de los submenús */
-  margin: 0;  /* Eliminar márgenes innecesarios */
+  list-style-type: none; /* Elimina las bolitas de los submenús */
+  padding: 5px 0; /* Reducir el espacio entre las líneas de los submenús */
+  margin: 0; /* Eliminar márgenes innecesarios */
   line-height: 1.4; /* Ajustar la altura de línea para que el espacio entre las líneas sea más pequeño */
 }
 
 /* Asegúrate de que los enlaces no tengan márgenes o padding innecesarios */
 .sub-menu .nav-link {
-  padding: 0px 15px;  /* Ajusta el padding de los enlaces del submenú */
-  margin: 0;  /* Eliminar márgenes adicionales */
-  font-size: 16px;  /* Ajusta el tamaño de fuente de los enlaces del submenú */
+  padding: 0px 15px; /* Ajusta el padding de los enlaces del submenú */
+  margin: 0; /* Eliminar márgenes adicionales */
+  font-size: 16px; /* Ajusta el tamaño de fuente de los enlaces del submenú */
 }
 
 /* ==========================================================
@@ -207,9 +206,9 @@
 
 /* Flecha rotada cuando el submenú está expandido */
 .arrow.rotate {
-  transform: rotate(135deg);  /* Cambia el ángulo cuando está expandido */
-  border-top-color: #4c5b6b;  /* Color de la flecha cuando se expande */
-  border-right-color: #4c5b6b;  /* Color de la flecha cuando se expande */
+  transform: rotate(135deg); /* Cambia el ángulo cuando está expandido */
+  border-top-color: #4c5b6b; /* Color de la flecha cuando se expande */
+  border-right-color: #4c5b6b; /* Color de la flecha cuando se expande */
 }
 
 /* ==========================================================
@@ -283,7 +282,7 @@
    ========================================================== */
 
 .sidebar-logout {
-  margin-top: auto;  /* Coloca el botón al final del sidebar */
+  margin-top: auto; /* Coloca el botón al final del sidebar */
   padding: 15px 0;
 }
 
@@ -293,10 +292,10 @@
   justify-content: flex-start;
   width: 100%;
   padding: 10px 20px;
-  background-color: transparent;  /* Fondo transparente */
-  color: white;  /* Color blanco para el texto */
-  border: 1px solid #d3d3d3;  /* Borde gris claro */
-  border-radius: 5px;  /* Bordes redondeados */
+  background-color: transparent; /* Fondo transparente */
+  color: white; /* Color blanco para el texto */
+  border: 1px solid #d3d3d3; /* Borde gris claro */
+  border-radius: 5px; /* Bordes redondeados */
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
@@ -306,20 +305,25 @@
 
 /* Efecto hover para el botón de Logout */
 .sidebar-logout .btn-logout:hover {
-  background-color: rgba(255, 255, 255, 0.1);  /* Fondo gris oscuro al pasar el ratón */
-  transform: translateX(5px);  /* Desplazamiento suave al pasar el ratón */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ); /* Fondo gris oscuro al pasar el ratón */
+  transform: translateX(5px); /* Desplazamiento suave al pasar el ratón */
 }
 
 /* Ícono del botón de Logout */
 .sidebar-logout .btn-logout i {
-  margin-right: 10px;  /* Espacio entre el ícono y el texto */
-  font-size: 20px;  /* Tamaño del ícono */
+  margin-right: 10px; /* Espacio entre el ícono y el texto */
+  font-size: 20px; /* Tamaño del ícono */
 }
 
 /* Efecto cuando el sidebar está oculto y el botón no se ve */
 .sidebar.hidden .sidebar-logout .btn-logout {
-  opacity: 0;  /* Oculta el botón cuando el sidebar está cerrado */
-  pointer-events: none;  /* Deshabilita la interacción */
+  opacity: 0; /* Oculta el botón cuando el sidebar está cerrado */
+  pointer-events: none; /* Deshabilita la interacción */
 }
 
 /* ==========================================================
@@ -327,15 +331,18 @@
    ========================================================== */
 
 @media (max-width: 991.98px) {
+  /* Barra superior (Top-Bar) */
   .top-bar {
     display: flex; /* Mostrar la barra superior */
   }
 
+  /* Contenido principal */
   .main-content {
     margin-left: 0; /* Sin margen en pantallas pequeñas */
     max-width: 100%;
   }
 
+  /* Sidebar */
   .sidebar {
     display: none; /* Ocultar el sidebar inicialmente */
   }
@@ -349,7 +356,66 @@
     display: none; /* Asegurar que el sidebar esté oculto */
   }
 
+  /* Botón de toggle (hamburguesa) */
   .sidebar-toggle {
     display: block; /* Mostrar el botón de toggle */
   }
+
+  .sidebar-img img {
+    width: 80px; /* Puedes ajustar el tamaño del logo si es necesario */
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 0px; /* Espacio debajo del logo */
+    margin-top: 100px; /* Subir un poco el logo */
+  }
+
+  /* Ajuste de los menús */
+  .nav {
+    margin-top: 40px; /* Baja los menús para que no estén pegados al logo */
+  }
+
+  /* Ajuste del botón de logout */
+  .sidebar-logout {
+    margin-top: auto; /* Mueve el logout hacia el final */
+    padding: 15px 0;
+    position: absolute; /* Colócalo al fondo del sidebar */
+    bottom: 20px; /* Ajusta para bajarlo un poco */
+    width: 100%;
+  }
+
+  /* Estilo del botón de logout */
+  .sidebar-logout .btn-logout {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 80%; /* Asegura que el botón ocupe el 80% del ancho del sidebar */
+    padding: 10px 20px;
+    background-color: transparent;
+    color: white;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+  }
+
+  /* Efecto hover para el botón de Logout */
+  .sidebar-logout .btn-logout:hover {
+    background-color: rgba(
+      255,
+      255,
+      255,
+      0.1
+    ); /* Fondo gris oscuro al pasar el ratón */
+    transform: translateX(5px); /* Desplazamiento suave al pasar el ratón */
+  }
+
+  /* Ícono del botón de Logout */
+  .sidebar-logout .btn-logout i {
+    margin-right: 10px; /* Espacio entre el ícono y el texto */
+    font-size: 20px; /* Tamaño del ícono */
+  }
+
 }
