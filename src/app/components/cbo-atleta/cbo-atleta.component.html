@@ -6,7 +6,7 @@
     aria-label="Selecciona un atleta"
     [disabled]="isDisabled"
     (ngModelChange)="onValueChange()">
-    <option value="" disabled selected>Seleccione una opción</option>
+    <option value="" disabled selected>Selecciona un Atleta</option>
     <option *ngFor="let atleta of atletas" [value]="atleta.id_atleta">
       {{ atleta.nombre }} {{ atleta.apellido }}
     </option>

@@ -1,45 +1,67 @@
-<div class="container">
-    <h2>Mi Rutina de Ejercicios</h2>
+<!-- Formulario -->
+<div class="card shadow-lg">
+  <div class="card-body">
+    <h1 class="form-title text-center mb-4"><i class="fas fa-dumbbell"></i> MI RUTINA DE EJERCICIOS</h1>
     <!-- Detalles de la Rutina -->
     <div class="card mb-4">
-        <div class="card-body">
-            <h2 class="card-title">{{ rutinaSeleccionada.nombre }}</h2>
-            <p class="card-text"><strong>Objetivo:</strong> {{ rutinaSeleccionada.objetivo }}</p>
-            <p class="card-text"><strong>Descripción:</strong> {{ rutinaSeleccionada.descripcion }}</p>
-            <p class="card-text"><strong>Fecha de Asignación:</strong> {{ rutinaSeleccionada.fecha_asignacion | date }}
-            </p>
-        </div>
+      <div class="card-date">
+        <h2 class="card-title">{{ rutinaSeleccionada.nombre }}</h2>
+        <p class="card-text">
+          <strong><i class="fas fa-bullseye"></i> Objetivo:</strong> {{ rutinaSeleccionada.objetivo }}
+        </p>
+        <p class="card-text">
+          <strong><i class="fas fa-info-circle"></i> Descripción:</strong> {{ rutinaSeleccionada.descripcion }}
+        </p>
+        <p class="card-text">
+          <strong><i class="fas fa-calendar-alt"></i> Fecha de Asignación:</strong> {{ rutinaSeleccionada.fecha_asignacion | date }}
+        </p>
+      </div>
     </div>
     <!-- Card por Día -->
     <div *ngFor="let dia of rutina; let i = index" class="card mb-3">
-        <div class="card-header" (click)="toggleDia(i)">
-            <h3 class="mb-0">Día {{ dia.dia }} - {{ obtenerNombresGruposMusculares(dia.ejercicios).join(', ') }}</h3>
-        </div>
-        <div class="card-body" [ngClass]="{'d-none': !dia.expandido}">
-            <!-- Card por Grupo Muscular -->
-            <div *ngFor="let grupoMuscular of obtenerGruposMusculares(dia.ejercicios); let j = index" class="card mb-3">
-                <div class="card-header" (click)="toggleGrupoMuscular(i, j)">
-                    <h4 class="mb-0">{{ detallesGruposMusculares[grupoMuscular]?.nombre || '---' }}</h4>
-                </div>
-                <div class="card-body" [ngClass]="{'d-none': !dia.gruposMusculares[j].expandido}">
-                    <!-- Card por Ejercicio -->
-                    <div *ngFor="let ejercicio of obtenerEjerciciosPorGrupoMuscular(dia.ejercicios, grupoMuscular); let k = index"
-                        class="card mb-3">
-                        <div class="card-body">
-                            <h5>{{ ejercicio.nombre_ejercicio }}</h5>
-                            <p>{{ ejercicio.descripcion_ejercicio }}</p>
-                            <p>Repeticiones: {{ ejercicio.frecuencia_repeticion }}</p>
-                            <input type="checkbox" [(ngModel)]="ejercicio.completado" (change)="calcularProgreso(i)" />
-                            <label>Completado</label>
-                        </div>
-                    </div>
-                </div>
+      <div class="card-header" (click)="toggleDia(i)">
+        <h3 class="mb-0">
+          <i class="fas fa-calendar-day"></i> Día {{ dia.dia }} -
+          {{ obtenerNombresGruposMusculares(dia.ejercicios).join(", ") }}
+        </h3>
+      </div>
+      <div class="card-date" [ngClass]="{ 'd-none': !dia.expandido }">
+        <!-- Card por Grupo Muscular -->
+        <div
+          *ngFor="let grupoMuscular of obtenerGruposMusculares(dia.ejercicios); let j = index"
+          class="card mb-3"
+        >
+          <div class="card-header" (click)="toggleGrupoMuscular(i, j)">
+            <h4 class="mb-0">
+              <i class="fas fa-muscle"></i> {{ detallesGruposMusculares[grupoMuscular]?.nombre || "---" }}
+            </h4>
+          </div>
+          <div class="card-body" [ngClass]="{ 'd-none': !dia.gruposMusculares[j].expandido }">
+            <!-- Card por Ejercicio -->
+            <div
+              *ngFor="let ejercicio of obtenerEjerciciosPorGrupoMuscular(dia.ejercicios, grupoMuscular); let k = index"
+              class="card mb-3"
+            >
+              <div class="card-body">
+                <h5><i class="fas fa-dumbbell"></i> {{ ejercicio.nombre_ejercicio }}</h5>
+                <p>{{ ejercicio.descripcion_ejercicio }}</p>
+                <p><i class="fas fa-redo"></i> Repeticiones: {{ ejercicio.frecuencia_repeticion }}</p>
+                <input
+                  type="checkbox"
+                  [(ngModel)]="ejercicio.completado"
+                  (change)="calcularProgreso(i)"
+                />
+                <label><i class="fas fa-check-circle"></i> Completado</label>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-    <hr>
+    <hr />
     <div class="progreso-general">
-        <h4>Progreso Semanal</h4>
-        <p>{{ progresoGeneral }}%</p>
+      <h4><i class="fas fa-chart-line"></i> Progreso Semanal</h4>
+      <p>{{ progresoGeneral }}%</p>
     </div>
+  </div>
 </div>

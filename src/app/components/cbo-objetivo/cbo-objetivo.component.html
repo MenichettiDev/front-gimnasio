@@ -1,5 +1,4 @@
-<div class="mb-3 col-4">
-    <label [for]="'objetivo-' + label" class="form-label fs-5">{{ label }}</label>
+    <label [for]="'objetivo-' + label" class="form-label">{{ label }}</label>
     <select
       [id]="'objetivo-' + label"
       [(ngModel)]="selectedObjetivo"
@@ -13,4 +12,3 @@
         {{ objetivo.nombre }}
       </option>
     </select>
-  </div>

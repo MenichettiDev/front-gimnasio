@@ -36,8 +36,10 @@ export class CboAtletaComponent implements ControlValueAccessor {
   constructor(private atletaService: AtletaService) {}
 
   ngOnInit(): void {
+    this.selectedAtleta = null;  // Valor predeterminado
     this.obtenerAtletas();
   }
+
 
   // Método para obtener los atletas
   obtenerAtletas(): void {

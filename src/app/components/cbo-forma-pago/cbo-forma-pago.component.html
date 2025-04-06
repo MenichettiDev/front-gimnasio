@@ -1,19 +1,27 @@
 <div class="mb-3 col-12">
-  <label [for]="'forma-pago-' + label" class="form-label">{{ label }}</label>
-  <select
-    [id]="'forma-pago-' + label"
-    [(ngModel)]="selectedFormaPago"
-    (change)="onValueChange()"
-    class="form-select form-select-lg"
-    aria-label="Selecciona una forma de pago"
-    [disabled]="isDisabled"
-    placeholder="Selecciona una forma de pago"
-  >
-    <!-- Opción por defecto -->
-    <option value="" disabled selected>Selecciona una forma de pago</option>
-    <!-- Opciones dinámicas -->
-    <option *ngFor="let formaPago of formasPago" [ngValue]="formaPago">
-      {{ formaPago.nombre }}
-    </option>
-  </select>
+  <label [for]="'forma-pago-' + label" class="form-label">
+    <i class="fas fa-credit-card"></i> {{ label }}
+  </label>
+
+  <div class="custom-select-wrapper">
+    <select
+      [id]="'forma-pago-' + label"
+      [(ngModel)]="selectedFormaPago"
+      (change)="onValueChange()"
+      class="form-select form-select-lg"
+      aria-label="Selecciona una forma de pago"
+      [disabled]="isDisabled"
+      placeholder="Selecciona una forma de pago"
+    >
+      <!-- Opción por defecto -->
+      <option value="" disabled selected>
+        <i class="fas fa-credit-card"></i> Selecciona una forma de pago
+      </option>
+
+      <!-- Opciones dinámicas -->
+      <option *ngFor="let formaPago of formasPago" [ngValue]="formaPago">
+        {{ formaPago.nombre }}
+      </option>
+    </select>
+  </div>
 </div>

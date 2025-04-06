@@ -1,74 +1,83 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+/* ==========================================================
+   Importación de la fuente 'Poppins' desde Google Fonts
+   ========================================================== */
+   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
-/* Estilos globales */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
+   /* ==========================================================
+      Estilos globales
+      ========================================================== */
 
-/* Barra superior con fondo verde forest y transparencia */
-.top-bar {
-    background-color: rgba(43, 1, 75, 0.94);
-    /* Color verde forest con 70% de transparencia */
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    /* Para alinear el contenido a ambos lados */
-    align-items: center;
-    position: fixed;
-    /* Barra fija en la parte superior */
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    /* Asegura que la barra esté encima de otros elementos */
-    color: white;
-    /* Color blanco para texto e íconos */
-    height: 50px;
-    /* Ajustar altura de la barra */
-}
+   /* Aplicando márgenes, rellenos y configuración de la caja para todos los elementos */
+   * {
+       margin: 0;
+       padding: 0;
+       box-sizing: border-box;
+       font-family: 'Poppins', sans-serif; /* Fuente global 'Poppins' */
+   }
 
-/* Alineación del botón de login a la derecha */
-.top-bar .btn-login {
-    background: transparent;
-    border: none;
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    transition: background 0.3s ease;
-    justify-content: center;
-    /* Asegura que el contenido esté centrado en el botón */
-    margin-left: 40px;
-}
+   /* ==========================================================
+      Barra Superior (Top-Bar)
+      ========================================================== */
 
-/* Efecto al pasar el ratón por encima */
-.btn-login:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
-}
+   /* Estilos de la barra superior */
+   .top-bar {
+       background-color: rgba(71, 0, 99, 0.94); /* Fondo verde forest con transparencia */
+       padding: 10px 20px; /* Relleno para la barra */
+       display: flex; /* Usamos flexbox para alinear el contenido */
+       justify-content: space-between; /* Espacio entre los elementos (a la izquierda y a la derecha) */
+       align-items: center; /* Alineación vertical de los elementos */
+       position: fixed; /* Fija la barra en la parte superior de la pantalla */
+       top: 0; /* Posiciona la barra en la parte superior */
+       left: 0; /* Posiciona la barra en el lado izquierdo */
+       width: 100%; /* Ocupa el ancho completo de la pantalla */
+       z-index: 1000; /* Asegura que la barra esté encima de otros elementos */
+       color: white; /* Texto e íconos en color blanco */
+       height: 50px; /* Ajusta la altura de la barra */
+   }
 
+   /* ==========================================================
+      Estilos del Botón de Login
+      ========================================================== */
 
-/* Contenedor de los iconos de redes sociales */
-.social-icons {
-    display: flex;
-    gap: 20px;
-    /* Espacio entre los iconos */
-    margin-left: auto;
-}
+   /* Botón de login alineado a la derecha */
+   .top-bar .btn-login {
+       background: transparent; /* Fondo transparente */
+       border: none; /* Elimina el borde */
+       color: white; /* Color del texto e íconos en blanco */
+       font-size: 20px; /* Tamaño de la fuente */
+       cursor: pointer; /* Cambia el cursor a pointer para indicar que es clickeable */
+       display: flex; /* Utiliza flexbox para centrar el contenido */
+       align-items: center; /* Alineación vertical */
+       transition: background 0.3s ease; /* Transición suave para el color de fondo */
+       justify-content: center; /* Centra el contenido en el botón */
+       margin-left: 40px; /* Espacio a la izquierda del botón */
+   }
 
-.social-icons a {
-    color: white;
-    font-size: 25px;
-    text-decoration: none;
-}
+   /* Efecto al pasar el ratón por encima del botón */
+   .btn-login:hover {
+       background-color: rgba(255, 255, 255, 0.1); /* Fondo blanco suave al pasar el ratón */
+       border-radius: 5px; /* Bordes redondeados para el botón */
+   }
 
-.social-icons a:hover {
-    color: #ddd;
-    /* Efecto de hover en los íconos */
-}
+   /* ==========================================================
+      Contenedor de Iconos de Redes Sociales
+      ========================================================== */
 
+   /* Estilos del contenedor de iconos de redes sociales */
+   .social-icons {
+       display: flex; /* Usamos flexbox para alinear los iconos */
+       gap: 20px; /* Espacio entre los iconos */
+       margin-left: auto; /* Empuja los iconos hacia la derecha */
+   }
 
+   /* Estilos de cada enlace de los iconos */
+   .social-icons a {
+       color: white; /* Color blanco para los iconos */
+       font-size: 25px; /* Tamaño de los iconos */
+       text-decoration: none; /* Elimina el subrayado de los enlaces */
+   }
+
+   /* Efecto al pasar el ratón sobre los iconos */
+   .social-icons a:hover {
+       color: #ddd; /* Cambia el color de los iconos al pasar el ratón */
+   }

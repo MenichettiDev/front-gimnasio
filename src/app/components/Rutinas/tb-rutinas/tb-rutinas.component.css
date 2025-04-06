@@ -1,44 +1,134 @@
-/* Estilo general de la tabla */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    font-family: Arial, sans-serif;
+/* Estilo de la tabla */
+.table.custom-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 1.5rem;
+  background-color: transparent;
+  table-layout: auto;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Estilo para el título dentro del formulario */
+.form-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.8rem; /* Título más grande */
+  font-weight: 700;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-bottom: 1.5rem; /* Más espacio debajo del título */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilos actualizados para el card */
+.card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  background-color: rgba(71, 0, 99, 0.94); /* Violeta oscuro */
+  margin-top: 20px;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
 }
 
 /* Encabezado de la tabla */
-thead {
-    background-color: #007bff;
-    color: white;
+.custom-table thead {
+  background: linear-gradient(90deg, #e0811a, #ffde04);
+  text-transform: uppercase;
+  font-size: 0.6rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-thead th {
-    padding: 12px;
-    text-align: left;
+/* Celdas del encabezado */
+.custom-table thead th {
+  padding: 0.3rem;
+  text-align: center;
+  white-space: normal;
+  word-wrap: break-word;
+  background: none;
+}
+
+/* Redondear solo las esquinas externas */
+.custom-table thead th:first-child {
+  border-top-left-radius: 10px;
+}
+
+.custom-table thead th:last-child {
+  border-top-right-radius: 10px;
 }
 
 /* Cuerpo de la tabla */
-tbody tr {
-    border-bottom: 1px solid #ddd;
+.custom-table tbody tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background-color 0.3s ease;
 }
 
-tbody td {
-    padding: 12px;
+.custom-table tbody td {
+  padding: 0.8rem;
+  text-align: center;
+  color: #e0e0e0;
+  font-size: 0.9rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* Hover sobre las filas */
-tbody tr:hover {
-    background-color: #f1f1f1;
+/* Resaltado de fila seleccionada */
+.selected-row {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border-left: 3px solid #4CAF50;
 }
 
-/* Icono de visualización */
+/* Estilo para los iconos */
 .icon-view {
-    cursor: pointer;
-    color: #007bff;
-    font-size: 18px;
-    margin-left: 10px;
+  cursor: pointer;
+  color: #ffffff; /* Cambié el color del icono a blanco */
+  font-size: 1.5rem;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .icon-view:hover {
-    color: #0056b3;
+  transform: scale(1.2);
+  color: #ffffff; /* Mantiene el color blanco al hacer hover */
+}
+
+/* Cambié el color de la palabra "Ver" */
+.icon-view span {
+  color: #ffffff; /* Texto blanco */
+  font-weight: bold;
+}
+
+/* Estilo para el mensaje de no datos */
+.alert {
+  background-color: #ffdd57;
+  color: #000;
+  border-radius: 8px;
+}
+
+.alert p {
+  margin-bottom: 0;
+}
+
+.alert .fs-2 {
+  font-size: 1.5rem;
+}
+
+/* Botones e iconos de acción */
+.btn-icon {
+  background: none;
+  border: none;
+  color: #4CAF50;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+  margin: 0 0.3rem;
+}
+
+.btn-icon:hover {
+  transform: scale(1.2);
+  color: #038a0c;
 }
