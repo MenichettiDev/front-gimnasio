@@ -1,16 +1,14 @@
-<div class="mb-3 col-4">
-    <label [for]="'dificultad-' + label" class="form-label fs-5">{{ label }}</label>
+    <label [for]="'dificultad-' + label" class="form-label">{{ label }}</label>
     <select
       [id]="'dificultad-' + label"
       [(ngModel)]="selectedDificultad"
-      (ngModelChange)="onValueChange()"
       class="form-select form-select-lg"
       aria-label="Selecciona una dificultad"
       [disabled]="isDisabled"
-    >
+      (ngModelChange)="onValueChange()"
+      aria-label="Selecciona una dificultad">
       <option value="" disabled selected>Selecciona una dificultad</option>
       <option *ngFor="let dificultad of dificultades" [ngValue]="dificultad.id_dificultad">
         {{ dificultad.nombre }}
       </option>
     </select>
-  </div>

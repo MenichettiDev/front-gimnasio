@@ -1,0 +1,191 @@
+/* Estilos Generales */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #121212; /* Fondo oscuro */
+  color: #e0e0e0; /* Texto claro */
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1300px; /* Evitar que el contenedor sea más ancho que la pantalla */
+  padding: 0 15px; /* Espaciado lateral controlado */
+  margin: 0 auto; /* Centrar contenido */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+}
+
+/* Estilo para el título dentro del formulario */
+.form-title {
+  font-family: "Oswald", sans-serif; /* Fuente moderna */
+  font-size: 1.5rem; /* Tamaño */
+  font-weight: 700; /* Negrita */
+  color: #ffffff; /* Color blanco para contrastar con el fondo oscuro */
+  text-transform: uppercase; /* Texto en mayúsculas */
+  letter-spacing: 1px; /* Espaciado entre letras */
+  text-align: center; /* Centrado */
+  margin-bottom: 1rem; /* Espaciado inferior */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra suave */
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #444;
+  margin: 2rem 0;
+}
+
+/* Encabezado General */
+h2 {
+  font-family: "Roboto", sans-serif; /* Fuente moderna y legible */
+  font-size: 1.8rem; /* Tamaño ligeramente menor al encabezado principal */
+  font-weight: 500; /* Peso medio para un aspecto más suave */
+  color: #ffffff; /* Texto blanco */
+  text-transform: capitalize; /* Primera letra en mayúscula */
+  letter-spacing: 0.5px; /* Espaciado entre letras reducido */
+  text-align: center;
+  margin-bottom: 1rem; /* Espaciado inferior ajustado */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); /* Sombra suave para resaltar */
+}
+
+/* Estilos actualizados para el card */
+.card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: rgba(71, 0, 99, 0.94);
+  margin-top: 20px; /* Reducir el margen superior */
+  overflow: hidden;
+}
+
+/* Detalles de la Rutina */
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #e0e0e0;
+  margin-bottom: 0.5rem;
+}
+
+.card-text strong {
+  color: #ffffff;
+}
+
+/* Card por Día */
+.card-header {
+  background-color: #4caf50; /* Verde moderno */
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  padding: 1rem;
+}
+
+.card-header:hover {
+  background-color: #45a049; /* Verde oscuro */
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+
+/* Card por Grupo Muscular */
+.card-header {
+  background: linear-gradient(90deg, #e0811a, #ffde04); /* Gradiente horizontal continuo */
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.card-header:hover {
+  background-color: #038a0c; /* Verde oscuro */
+}
+
+.card-header h4 {
+  margin: 0;
+  font-size: 1rem;
+  text-transform: capitalize;
+}
+
+.card-date {
+  background-color: rgba(255, 255, 255, 0.1); /* Fondo con transparencia */
+  padding: 1rem;
+  border-radius: 8px;  /* Bordes redondeados */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+  transition: background-color 0.3s ease, opacity 0.3s ease-in-out; /* Transiciones para opacidad y color de fondo */
+  max-height: 1000px; /* Altura máxima suficiente para el expandir/collapse */
+  overflow: hidden; /* Ocultar contenido excedente */
+  opacity: 1;  /* Asegura que la tarjeta es opaca por defecto */
+}
+
+h5 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  font-size: 0.9rem;
+  color: #e0e0e0;
+  margin-bottom: 0.5rem;
+}
+
+input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+
+label {
+  font-size: 0.9rem;
+  color: #ffffff;
+}
+
+/* Progreso Semanal */
+.progreso-general {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.progreso-general h4 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.progreso-general p {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #4caf50;
+  margin: 0;
+}
+
+.d-none {
+  max-height: 0;
+  opacity: 0;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .card-header h3,
+  .card-header h4 {
+    font-size: 1rem;
+  }
+
+  .progreso-general h4 {
+    font-size: 1.2rem;
+  }
+
+  .progreso-general p {
+    font-size: 1.5rem;
+  }
+}

@@ -1,108 +1,110 @@
+<!-- Tarjeta con transparencia -->
+<div class="card shadow-lg">
+  <div class="card-body">
+    <!-- Título dentro del formulario -->
+    <h1 class="form-title text-center mb-4"><i class="fas fa-ruler-combined"></i> MEDIDAS DEL ATLETA</h1>
 
-      <!-- Tarjeta con transparencia -->
-      <div class="card shadow-lg">
-        <div class="card-body">
-          <!-- Título dentro del formulario -->
-          <h1 class="form-title text-center mb-4">MEDIDAS DEL ATLETA</h1>
+    <!-- Botón para crear nueva medida -->
+    <button
+      *ngIf="!mostrarFormulario"
+      class="btn btn-primary rounded-pill"
+      (click)="abrirFormulario()"
+    >
+      <i class="bi bi-plus-square me-2"></i> Nueva
+    </button>
 
-          <!-- Botón para crear nueva medida -->
-          <button
-            *ngIf="!mostrarFormulario"
-            class="btn btn-primary rounded-pill"
-            (click)="abrirFormulario()"
+    <!-- Formulario de creación/edición -->
+    <div *ngIf="mostrarFormulario">
+      <app-medida-form
+        [medidaSeleccionada]="medidaSeleccionada"
+        (guardar)="onGuardar($event)"
+        (cancelar)="cerrarFormulario()"
+      ></app-medida-form>
+    </div>
+
+    <!-- Lista de medidas -->
+    <div class="medidas-list">
+      <!-- Mensaje si no hay medidas -->
+<div *ngIf="medidas.length === 0" class="alert alert-warning d-flex align-items-center p-4">
+  <!-- Icono de advertencia -->
+  <i class="bi bi-exclamation-circle-fill me-3 fs-2 text-warning"></i>
+  <p class="mb-0">No se han cargado medidas para este atleta.</p>
+</div>
+
+
+      <!-- Tabla de medidas si existen -->
+      <table *ngIf="medidas.length > 0" class="table custom-table">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Peso (kg)</th>
+            <th>Altura (m)</th>
+            <th>Bíceps (cm)</th>
+            <th>Pecho (cm)</th>
+            <th>Hombros (cm)</th>
+            <th>Cintura (cm)</th>
+            <th>Glúteos (cm)</th>
+            <th>Cuádriceps (cm)</th>
+            <th>Gemelos (cm)</th>
+            <th>Antebrazo (cm)</th>
+            <th>Cuello (cm)</th>
+            <th>Grasa Corporal (%)</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let medida of medidasPaginadas"
+            [class.selected-row]="
+              medidaSeleccionada?.id_medida === medida.id_medida
+            "
           >
-            <i class="bi bi-plus-square me-2"></i> Nueva
-          </button>
+            <td>{{ medida.fecha_medicion | date : "dd-MM-yy" }}</td>
+            <td>{{ medida.peso }}</td>
+            <td>{{ medida.altura }}</td>
+            <td>{{ medida.biceps }}</td>
+            <td>{{ medida.pecho }}</td>
+            <td>{{ medida.hombros }}</td>
+            <td>{{ medida.cintura }}</td>
+            <td>{{ medida.gluteos }}</td>
+            <td>{{ medida.cuadriceps }}</td>
+            <td>{{ medida.gemelos }}</td>
+            <td>{{ medida.antebrazo }}</td>
+            <td>{{ medida.cuello }}</td>
+            <td>{{ medida.grasa_corporal }}</td>
+            <td>
+              <button class="btn-icon" (click)="abrirFormulario(medida)">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button
+                class="btn-icon btn-delete"
+                (click)="eliminarMedida(medida.id_medida)"
+              >
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-          <!-- Formulario de creación/edición -->
-          <div *ngIf="mostrarFormulario">
-            <app-medida-form
-              [medidaSeleccionada]="medidaSeleccionada"
-              (guardar)="onGuardar($event)"
-              (cancelar)="cerrarFormulario()"
-            ></app-medida-form>
-          </div>
-
-          <!-- Lista de medidas -->
-          <div class="medidas-list">
-            <!-- Mensaje si no hay medidas -->
-            <div *ngIf="medidas.length === 0" class="alert alert-warning">
-              <p>No se han cargado medidas para este atleta.</p>
-            </div>
-
-            <!-- Tabla de medidas si existen -->
-            <table *ngIf="medidas.length > 0" class="table custom-table">
-              <thead>
-                <tr>
-                  <th>Fecha</th>
-                  <th>Peso (kg)</th>
-                  <th>Altura (m)</th>
-                  <th>Bíceps (cm)</th>
-                  <th>Pecho (cm)</th>
-                  <th>Hombros (cm)</th>
-                  <th>Cintura (cm)</th>
-                  <th>Glúteos (cm)</th>
-                  <th>Cuádriceps (cm)</th>
-                  <th>Gemelos (cm)</th>
-                  <th>Antebrazo (cm)</th>
-                  <th>Cuello (cm)</th>
-                  <th>Grasa Corporal (%)</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr
-                  *ngFor="let medida of medidasPaginadas"
-                  [class.selected-row]="
-                    medidaSeleccionada?.id_medida === medida.id_medida
-                  "
-                >
-                  <td>{{ medida.fecha_medicion | date : "dd-MM-yy" }}</td>
-                  <td>{{ medida.peso }}</td>
-                  <td>{{ medida.altura }}</td>
-                  <td>{{ medida.biceps }}</td>
-                  <td>{{ medida.pecho }}</td>
-                  <td>{{ medida.hombros }}</td>
-                  <td>{{ medida.cintura }}</td>
-                  <td>{{ medida.gluteos }}</td>
-                  <td>{{ medida.cuadriceps }}</td>
-                  <td>{{ medida.gemelos }}</td>
-                  <td>{{ medida.antebrazo }}</td>
-                  <td>{{ medida.cuello }}</td>
-                  <td>{{ medida.grasa_corporal }}</td>
-                  <td>
-                    <button class="btn-icon" (click)="abrirFormulario(medida)">
-                      <i class="fas fa-edit"></i>
-                    </button>
-                    <button
-                      class="btn-icon btn-delete"
-                      (click)="eliminarMedida(medida.id_medida)"
-                    >
-                      <i class="fas fa-trash-alt"></i>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <!-- Paginación -->
-          <div class="pagination" *ngIf="totalPages > 1">
-            <button
-              (click)="prevPage()"
-              [disabled]="currentPage === 1"
-              *ngIf="currentPage > 1"
-            >
-              Anterior
-            </button>
-            <span>Página {{ currentPage }} de {{ totalPages }}</span>
-            <button
-              (click)="nextPage()"
-              [disabled]="currentPage === totalPages"
-              *ngIf="currentPage < totalPages"
-            >
-              Siguiente
-            </button>
-          </div>
-        </div>
-      </div>
+    <!-- Paginación -->
+    <div class="pagination" *ngIf="totalPages > 1">
+      <button
+        (click)="prevPage()"
+        [disabled]="currentPage === 1"
+        *ngIf="currentPage > 1"
+      >
+        <i class="fas fa-arrow-left"></i> Anterior
+      </button>
+      <span><i class="fas fa-hashtag"></i> Página {{ currentPage }} de {{ totalPages }}</span>
+      <button
+        (click)="nextPage()"
+        [disabled]="currentPage === totalPages"
+        *ngIf="currentPage < totalPages"
+      >
+        Siguiente <i class="fas fa-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+</div>

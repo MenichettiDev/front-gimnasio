@@ -52,7 +52,7 @@ export class VisorRutinaComponent implements OnInit, OnChanges {
       descripcion: rutina.rutina.descripcion,
       fecha_asignacion: rutina.rutina.fecha_asignacion,
     };
-  
+
     this.rutina = await Promise.all(rutina.ejercicios.map(async (dia) => {
       const ejerciciosMapeados = await Promise.all(dia.ejercicios.map(async (ejercicio) => {
         // Obtener detalles del ejercicio, grupo muscular y repetición
@@ -74,7 +74,7 @@ export class VisorRutinaComponent implements OnInit, OnChanges {
             .then(data => data || { frecuencia: '---', nombre: '---' }) // Valor predeterminado si es undefined
             .catch(() => ({ frecuencia: '---', nombre: '---' })), // Valor predeterminado si hay error
         ]);
-  
+
         return {
           ...ejercicio,
           nombre_ejercicio: ejercicioDetalle.nombre,
@@ -85,7 +85,7 @@ export class VisorRutinaComponent implements OnInit, OnChanges {
           completado: false, // Inicializamos todos los ejercicios como no completados
         };
       }));
-  
+
       return {
         dia: dia.dia, // Número del día
         ejercicios: ejerciciosMapeados,

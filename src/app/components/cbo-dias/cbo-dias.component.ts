@@ -16,7 +16,7 @@ import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/f
   ],
 })
 export class CboDiasComponent implements ControlValueAccessor {
-  @Input() label: string = "Selecciona la cantidad de días a entrenar"; // Para el label del combo
+  @Input() label: string = "Selecciona la cantidad de días"; // Para el label del combo
   diasDeEntrenamiento = [1, 2, 3, 4, 5, 6, 7]; // Número de días de entrenamiento
   diasSeleccionados: number | null = null; // Valor seleccionado (número de días)
   isDisabled: boolean = false; // Estado de deshabilitado

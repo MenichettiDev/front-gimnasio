@@ -1,5 +1,4 @@
-<div class="mb-3 col-4">
-    <label [for]="'txtInput-' + label" class="form-label fs-5">{{ label }}</label>
+    <label [for]="'txtInput-' + label" class="form-label">{{ label }}</label>
     <input
       [id]="'txtInput-' + label"
       type="text"
@@ -10,4 +9,3 @@
       [disabled]="isDisabled"
       (ngModelChange)="onValueChange()"
     />
-  </div>

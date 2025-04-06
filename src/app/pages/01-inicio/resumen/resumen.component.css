@@ -89,7 +89,6 @@
 
 .btn-refresh:hover {
   background: linear-gradient(135deg, #feb47b, #ff7e5f); /* Invertir gradiente */
-  transform: translateY(-5px);
   box-shadow: 0 12px 20px rgba(255, 126, 95, 0.5); /* Efecto hover más pronunciado */
 }
 

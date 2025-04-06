@@ -43,15 +43,12 @@
   border: none;
   border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: rgba(43, 1, 75, 0.94);
+  background-color: rgba(71, 0, 99, 0.94);
   margin-top: 20px;
   overflow: hidden;
   transition: transform 0.3s ease-in-out;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-}
 
 .card-body {
   display: flex;

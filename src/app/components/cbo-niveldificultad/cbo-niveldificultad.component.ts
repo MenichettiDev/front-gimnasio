@@ -6,6 +6,7 @@ import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/f
   selector: 'app-cbo-niveldificultad',
   templateUrl: './cbo-niveldificultad.component.html',
   styleUrls: ['./cbo-niveldificultad.component.css'],
+  standalone: true,
   imports:[ CommonModule, FormsModule],
   providers: [
     {
@@ -16,7 +17,7 @@ import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/f
   ],
 })
 export class CboNiveldificultadComponent implements ControlValueAccessor {
-  @Input() label: string = "Selecciona el nivel del atleta"; // Para el label del combo
+  @Input() label: string = 'Nivel de Dificultad'; // Para el label del combo
 
   // Arreglo con datos hard de dificultades
   dificultades = [
