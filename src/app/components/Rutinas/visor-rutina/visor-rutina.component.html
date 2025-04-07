@@ -45,13 +45,14 @@
               <div class="card-body">
                 <h5><i class="fas fa-dumbbell"></i> {{ ejercicio.nombre_ejercicio }}</h5>
                 <p>{{ ejercicio.descripcion_ejercicio }}</p>
-                <p><i class="fas fa-redo"></i> Repeticiones: {{ ejercicio.frecuencia_repeticion }}</p>
-                <input
+                <p><i class="fas fa-redo"></i> Repeticiones: {{ ejercicio.repeticion_frecuencia}}</p>
+                <p> Detalle: {{  ejercicio.repeticion_nombre }}</p>
+                <!-- <input
                   type="checkbox"
                   [(ngModel)]="ejercicio.completado"
                   (change)="calcularProgreso(i)"
-                />
-                <label><i class="fas fa-check-circle"></i> Completado</label>
+                /> -->
+                <!-- <label><i class="fas fa-check-circle"></i> Completado</label> -->
               </div>
             </div>
           </div>
@@ -59,9 +60,9 @@
       </div>
     </div>
     <hr />
-    <div class="progreso-general">
+    <!-- <div class="progreso-general">
       <h4><i class="fas fa-chart-line"></i> Progreso Semanal</h4>
       <p>{{ progresoGeneral }}%</p>
-    </div>
+    </div> -->
   </div>
 </div>
