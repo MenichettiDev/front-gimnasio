@@ -183,6 +183,7 @@ export class CrearRutComponent implements OnInit {
     Object.keys(this.rutinaForm.controls).forEach((controlName) => {
       const control = this.rutinaForm.get(controlName);
       if (control?.invalid) {
+        // console.log('datos del form' + this.rutinaForm.value);
         console.warn(`Campo inválido: ${controlName}`, control.errors);
       }
       control?.markAsTouched();
