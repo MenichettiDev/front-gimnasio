@@ -25,12 +25,14 @@ export class CargarAtletaComponent implements OnInit {
     private authService: AuthService,
     private entrenadorService: EntrenadorService,
     private atletaService: AtletaService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.id_persona = this.authService.getIdPersona(); // Obtenemos el usuario actual
     // console.log('Usuario actual:', this.id_persona);
 
+
+    //TODO: mejorar los errores de validación y mensajes
     this.atletaForm = this.fb.group({
       dni: ['', [Validators.required, Validators.minLength(8)]],
       nombre: ['', Validators.required],
@@ -56,36 +58,40 @@ export class CargarAtletaComponent implements OnInit {
 
   // Manejar la confirmación del modal
   handleConfirm(): void {
-    if (!this.id_persona ) {
+    if (!this.id_persona) {
       console.error('El ID del usuario no está disponible');
       alert('El ID del usuario no está disponible. Por favor, inténtelo de nuevo.');
       return;
     }
 
-    const atletaData = this.atletaForm.value;
+    const atletaData = { ...this.atletaForm.value };
 
     this.entrenadorService.getEntrenadorById(this.id_persona).subscribe({
       next: (data) => {
         atletaData.id_entrenador = data.id_entrenador;
-
-        // Crear atleta
-        this.atletaService.crearAtleta(atletaData).subscribe({
-          next: (response) => {
-            // console.log('Atleta creado:', response);
-            alert('Atleta creado exitosamente!');
-            this.isModalVisible = false; // Cierra el modal
-          },
-          error: (err) => {
-            // console.error('Error al crear atleta:', err);
-            alert('Error al crear atleta. Por favor, inténtelo de nuevo.');
-            this.isModalVisible = false; // Cierra el modal en caso de error
-          },
-        });
+        this.crearAtletaConMensaje(atletaData);
       },
       error: (err) => {
-        // console.error('Error al obtener el entrenador:', err);
-        alert('Error al obtener el entrenador. Por favor, inténtelo de nuevo.');
-        this.isModalVisible = false; // Cierra el modal en caso de error
+        if (err.status === 404) {
+          // No hay entrenador, guardar atleta sin id_entrenador
+          this.crearAtletaConMensaje(atletaData);
+        } else {
+          alert('Error al obtener el entrenador. Por favor, inténtelo de nuevo.');
+          this.isModalVisible = false;
+        }
+      },
+    });
+  }
+
+  private crearAtletaConMensaje(atletaData: any): void {
+    this.atletaService.crearAtleta(atletaData).subscribe({
+      next: (response) => {
+        alert('Atleta creado exitosamente!');
+        this.isModalVisible = false;
+      },
+      error: (err) => {
+        alert('Error al crear atleta. Por favor, inténtelo de nuevo.');
+        this.isModalVisible = false;
       },
     });
   }
