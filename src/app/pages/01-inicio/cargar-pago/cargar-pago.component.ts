@@ -14,6 +14,8 @@ import { GimnasioService } from '../../../service/gimnasio.service';
 import { CboFormasPagoComponent } from "../../../components/cbo-forma-pago/cbo-forma-pago.component";
 import { PagoService } from '../../../service/pago.service';
 import { ModalConfirmComponent } from '../../../components/modal/modal-confirm/modal-confirm.component';
+import { Input, OnChanges, SimpleChanges } from '@angular/core';
+
 
 @Component({
   selector: 'app-cargar-pago',
@@ -22,6 +24,12 @@ import { ModalConfirmComponent } from '../../../components/modal/modal-confirm/m
   styleUrl: './cargar-pago.component.css'
 })
 export class CargarPagoComponent implements OnInit {
+  @Input() id!: number;
+  @Input() tipo!: 'atleta' | 'entrenador' | 'gimnasio';
+
+  montoFijo: number = 0;
+  conceptoFijo: string = '';
+
   id_entrenador: number | null = null;
   id_gimnasio: number | null = null;
   isModalVisible: boolean = false; // Controla la visibilidad del modal
@@ -33,46 +41,63 @@ export class CargarPagoComponent implements OnInit {
     private authService: AuthService,
     private gimnasioService: GimnasioService,
     private membresiaService: MembresiaService,
-    private pagoService : PagoService
+    private pagoService: PagoService
   ) {
     this.pagoForm = this.fb.group({
-      id_atleta: [null, Validators.required],
-      id_gimnasio: [null, Validators.required],
-      id_membresia: [null, Validators.required],
-      monto: [null, Validators.required],
+      id_atleta: [null],
+      id_entrenador: [null],
+      id_gimnasio: [null],
+      id_membresia: [null],
+      monto: [{ value: null, disabled: true }, Validators.required],
+      concepto: [{ value: null, disabled: true }, Validators.required],
       id_forma_pago: [null, Validators.required],
     });
   }
 
   ngOnInit(): void {
-    // Obtener el id del entrenador al cargar el componente
-    this.id_entrenador = this.authService.getIdEntrenador();
+    this.setConceptoYMonto();
+    this.setFormValues();
   }
 
-  // Maneja la selección de un atleta
-  onAtletaSeleccionado(value: number | any): void {
-    const idAtleta = typeof value === 'number' ? value : value.id_atleta;
-
-    this.gimnasioService.getGimnasioByIdAtleta(idAtleta).subscribe(
-      (gimnasio) => {
-        this.gimnasioAtleta = gimnasio.nombre; // Almacena el nombre del gimnasio
-        this.id_gimnasio = gimnasio.id_gimnasio; // Almacena el ID del gimnasio
-        this.pagoForm.get('id_gimnasio')?.setValue(gimnasio.id_gimnasio); // Actualiza el formulario
-        this.pagoForm.get('id_atleta')?.setValue(idAtleta); // Actualiza el control 'atleta'
-      },
-      (error) => {
-        console.error('Error al obtener el gimnasio del atleta:', error);
-      }
-    );
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['id'] || changes['tipo']) {
+      this.setConceptoYMonto();
+      this.setFormValues();
+    }
   }
 
-  // Maneja la selección de una membresía
-  onMembresiaSeleccionada(membresia: any): void {
-    this.pagoForm.get('id_membresia')?.setValue(membresia.id_membresia); // Actualiza el formulario
+  setConceptoYMonto(): void {
+    switch (this.tipo) {
+      case 'atleta':
+        this.montoFijo = 500;
+        this.conceptoFijo = 'Pago de atleta';
+        break;
+      case 'entrenador':
+        this.montoFijo = 2000;
+        this.conceptoFijo = 'Pago de entrenador';
+        break;
+      case 'gimnasio':
+        this.montoFijo = 10000;
+        this.conceptoFijo = 'Pago de gimnasio';
+        break;
+      default:
+        this.montoFijo = 0;
+        this.conceptoFijo = '';
+    }
   }
 
-   // Maneja el cambio de forma de pago
-   onFormaPagoChange(idFormaPago: number): void {
+  setFormValues(): void {
+    this.pagoForm.patchValue({
+      monto: this.montoFijo,
+      concepto: this.conceptoFijo,
+      id_atleta: this.tipo === 'atleta' ? this.id : null,
+      id_entrenador: this.tipo === 'entrenador' ? this.id : null,
+      id_gimnasio: this.tipo === 'gimnasio' ? this.id : null,
+    });
+  }
+
+  // Maneja el cambio de forma de pago
+  onFormaPagoChange(idFormaPago: number): void {
     console.log('Forma de pago seleccionada:', idFormaPago);
     this.pagoForm.get('id_forma_pago')?.setValue(idFormaPago); // Actualiza el control 'forma_pago'
   }
