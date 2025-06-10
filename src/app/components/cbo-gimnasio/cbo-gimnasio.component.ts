@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-cbo-gimnasio',
   templateUrl: './cbo-gimnasio.component.html',
   styleUrls: ['./cbo-gimnasio.component.css'],
-  imports:[ CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -27,13 +27,13 @@ export class CboGimnasioComponent implements OnInit, ControlValueAccessor {
   isDisabled: boolean = false; // Estado deshabilitado
 
   // Funciones de callback registradas por Angular
-  private onChange: (value: any) => void = () => {};
-  private onTouched: () => void = () => {};
+  private onChange: (value: any) => void = () => { };
+  private onTouched: () => void = () => { };
 
   constructor(private gimnasioService: GimnasioService,
     private sharedGimnasioService: SharedGimnasioService
   ) { };
-  
+
 
   ngOnInit(): void {
     this.obtenerGimnasios();

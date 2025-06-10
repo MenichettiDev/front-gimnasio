@@ -1,9 +1,17 @@
 <div class="mb-3 col-12 col-6">
-    <label [for]="'gimnasios-multiples-' + label" class="form-label">{{ label }}</label>
-    <select [id]="'gimnasios-multiples-' + label" [(ngModel)]="selectedGimnasios" class="form-select form-select-lg"
-        aria-label="Selecciona gimnasios" [disabled]="isDisabled" multiple (ngModelChange)="onValueChange()">
-        <option *ngFor="let gimnasio of gimnasios" [value]="gimnasio.id_gimnasio">
+    <label class="form-label">{{ label }}</label>
+    <div class="form-check" *ngFor="let gimnasio of gimnasios">
+        <input class="form-check-input" type="checkbox" [id]="'gimnasio-' + gimnasio.id_gimnasio"
+            [value]="gimnasio.id_gimnasio" [checked]="selectedGimnasios.includes(gimnasio.id_gimnasio)"
+            (change)="toggleGimnasio(gimnasio.id_gimnasio)" [disabled]="isDisabled" />
+        <label class="form-check-label" [for]="'gimnasio-' + gimnasio.id_gimnasio">
             {{ gimnasio.nombre }}
-        </option>
-    </select>
+        </label>
+    </div>
+    <!-- Mostrar seleccionados como chips -->
+    <div class="mt-2" *ngIf="selectedGimnasios.length > 0">
+        <span *ngFor="let id of selectedGimnasios" class="badge rounded-pill bg-primary me-2">
+            {{ getGimnasioNombre(id) }}
+        </span>
+    </div>
 </div>

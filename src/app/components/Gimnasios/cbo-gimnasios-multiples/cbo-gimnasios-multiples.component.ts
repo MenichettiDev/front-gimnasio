@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-cbo-gimnasios-multiples',
   templateUrl: './cbo-gimnasios-multiples.component.html',
   styleUrls: ['./cbo-gimnasios-multiples.component.css'],
-  imports: [ CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -22,14 +22,14 @@ export class CboGimnasiosMultiplesComponent implements OnInit, ControlValueAcces
   @Input() emitOnlyIds: boolean = false; // Controla si se emiten solo los IDs o los objetos completos
   @Output() valueChange = new EventEmitter<number[]>();
   gimnasios: Gimnasio[] = []; // Lista de gimnasios
-  selectedGimnasios: number[] = []; // Valores seleccionados (IDs de los gimnasios)
-  isDisabled: boolean = false; // Estado deshabilitado
+  @Input() selectedGimnasios: number[] = []; // Valores seleccionados (IDs de los gimnasios)
+  @Input() isDisabled: boolean = false; // Estado deshabilitado
 
   // Funciones de callback registradas por Angular
-  private onChange: (value: any) => void = () => {};
-  private onTouched: () => void = () => {};
+  private onChange: (value: any) => void = () => { };
+  private onTouched: () => void = () => { };
 
-  constructor(private gimnasioService: GimnasioService) {}
+  constructor(private gimnasioService: GimnasioService) { }
 
   ngOnInit(): void {
     this.obtenerGimnasios();
@@ -49,13 +49,15 @@ export class CboGimnasiosMultiplesComponent implements OnInit, ControlValueAcces
 
   // Maneja cambios en la selección
   onValueChange(): void {
+    // Convierte los valores seleccionados a número
+    this.selectedGimnasios = (this.selectedGimnasios || []).map((v: any) => +v);
     const valueToEmit = this.emitOnlyIds
-      ? this.selectedGimnasios // Emite solo los IDs si emitOnlyIds es true
-      : this.gimnasios.filter((g) => this.selectedGimnasios.includes(g.id_gimnasio)); // Emite los objetos completos si emitOnlyIds es false
+      ? this.selectedGimnasios
+      : this.gimnasios.filter((g) => this.selectedGimnasios.includes(g.id_gimnasio));
 
-    this.onChange(valueToEmit); // Notifica a Angular sobre el cambio
-    this.onTouched(); // Marca el control como "tocado"
-    this.valueChange.emit(this.selectedGimnasios); // Emite el evento
+    this.onChange(valueToEmit);
+    this.onTouched();
+    this.valueChange.emit(this.selectedGimnasios);
   }
 
   // Métodos de ControlValueAccessor
@@ -67,6 +69,21 @@ export class CboGimnasiosMultiplesComponent implements OnInit, ControlValueAcces
         ? value.map((g: Gimnasio) => g.id_gimnasio)
         : []; // Convierte los objetos en IDs
     }
+  }
+
+  toggleGimnasio(id: number): void {
+    const idx = this.selectedGimnasios.indexOf(id);
+    if (idx === -1) {
+      this.selectedGimnasios.push(id);
+    } else {
+      this.selectedGimnasios.splice(idx, 1);
+    }
+    this.onValueChange();
+  }
+
+  getGimnasioNombre(id: number): string {
+    const gimnasio = this.gimnasios.find(g => g.id_gimnasio === id);
+    return gimnasio ? gimnasio.nombre : '';
   }
 
   registerOnChange(fn: (value: any) => void): void {

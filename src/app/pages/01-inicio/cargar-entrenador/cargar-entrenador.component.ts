@@ -4,30 +4,30 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { ModalConfirmComponent } from '../../../components/modal/modal-confirm/modal-confirm.component';
 import { AuthService } from '../../../service/auth/auth.service';
 import { EntrenadorService } from '../../../service/entrenador.service';
+import { CboGimnasioComponent } from "../../../components/cbo-gimnasio/cbo-gimnasio.component";
+import { GimnasioService } from '../../../service/gimnasio.service';
+import { CboGimnasiosMultiplesComponent } from "../../../components/Gimnasios/cbo-gimnasios-multiples/cbo-gimnasios-multiples.component";
 
 @Component({
   selector: 'app-cargar-entrenador',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, ModalConfirmComponent],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, ModalConfirmComponent, CboGimnasioComponent, CboGimnasiosMultiplesComponent],
   templateUrl: './cargar-entrenador.component.html',
   styleUrls: ['./cargar-entrenador.component.css']
 })
 export class CargarEntrenadorComponent implements OnInit {
-  entrenadorForm!: FormGroup;
+  frmData!: FormGroup;
   id_persona: number | null = null;
   isModalVisible: boolean = false; // Controla la visibilidad del modal
+  gimnasios: any[] = [];
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private entrenadorService: EntrenadorService
-  ) {}
-
-  ngOnInit(): void {
-    this.id_persona = this.authService.getIdPersona(); // Obtenemos el usuario actual
-    // console.log('Usuario actual:', this.id_persona);
-
-    this.entrenadorForm = this.fb.group({
+    private entrenadorService: EntrenadorService,
+    private gimnasioService: GimnasioService
+  ) {
+    this.frmData = this.fb.group({
       dni: ['', [Validators.required, Validators.minLength(8)]],
       nombre: ['', Validators.required],
       apodo: [''],
@@ -36,13 +36,29 @@ export class CargarEntrenadorComponent implements OnInit {
       celular: [''],
       direccion: [''],
       email: ['', [Validators.required, Validators.email]],
-      fecha_ingreso: ['', Validators.required], // Fecha de ingreso específica para entrenadores
+      fecha_ingreso: ['', Validators.required],
+      gimnasios: [[]],
     });
+  }
+
+  ngOnInit(): void {
+    this.id_persona = this.authService.getIdPersona(); // Obtenemos el usuario actual
+    // console.log('Usuario actual:', this.id_persona);
+
+
+
+
+
+    this.gimnasioService.getGimnasios().subscribe(data => {
+      this.gimnasios = data;
+    });
+
+
   }
 
   // Mostrar el modal de confirmación
   openModal(): void {
-    if (this.entrenadorForm.valid) {
+    if (this.frmData.valid) {
       this.isModalVisible = true; // Muestra el modal si el formulario es válido
     } else {
       console.error('El formulario no es válido');
@@ -56,7 +72,7 @@ export class CargarEntrenadorComponent implements OnInit {
       return;
     }
 
-    const entrenadorData = this.entrenadorForm.value;
+    const entrenadorData = this.frmData.value;
 
     // Crear entrenador
     this.entrenadorService.crearEntrenador(entrenadorData).subscribe({
