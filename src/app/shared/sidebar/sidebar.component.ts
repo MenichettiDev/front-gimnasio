@@ -1,17 +1,22 @@
-import {
-  Component,
-  OnInit,
-  HostListener,
-  OnDestroy,
-  inject,
-} from '@angular/core';
-import { MenuService } from '../../service/menu.service';
+import { Component, OnInit, OnDestroy, inject, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ModalConfirmComponent } from '../../components/modal/modal-confirm/modal-confirm.component';
-import { AuthService } from '../../service/auth/auth.service';
 import { Router, RouterModule } from '@angular/router';
-import { Menu } from '../../data/interfaces/menuInterface'; // Asegúrate de que la ruta sea correcta
+import { AuthService } from '../../service/auth/auth.service';
+import { ModalConfirmComponent } from '../../components/modal/modal-confirm/modal-confirm.component';
 import { Subscription } from 'rxjs';
+
+interface MenuItem {
+  id: number;
+  descripcion: string;
+  icono: string;
+  link: string;
+  grupo: string;
+  principal: boolean;
+  orden: number;
+  estado: boolean;
+  expanded?: boolean;
+  requiredAccess: number[];
+}
 
 @Component({
   selector: 'app-sidebar',
@@ -21,196 +26,164 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./sidebar.component.css'],
 })
 export class SidebarComponent implements OnInit, OnDestroy {
-  isModalVisible: boolean = false; // Controla la visibilidad del modal
-  id_acceso: number = 1; // ID de acceso del usuario
-  menus: Menu[] = []; // Lista de menús cargados
-  isSidebarVisible: boolean = false; // Controla la visibilidad del sidebar (inicialmente oculto)
-  isLoggedIn: boolean = false; // Propiedad para el estado de login
-  private loginStatusSubscription: Subscription | null = null; // Para suscripción al estado de login
-  isSmallScreen: boolean = window.innerWidth < 992; // Detectar si la pantalla es pequeña
-  perfil: string = ''; // Perfil del usuario, se puede usar para mostrar información adicional
+  // Estados del componente
+  isModalVisible = false;
+  isSidebarVisible = false;
+  isLoggedIn = false;
+  id_acceso = 1;
+  isSmallScreen = window.innerWidth < 992;
 
-  // Inyección de dependencias
-  public menuService = inject(MenuService);
-  public authService = inject(AuthService);
+  private subscription = new Subscription();
+
+  // Menú hardcodeado basado en tu estructura
+  private readonly allMenuItems: MenuItem[] = [
+    // GM01 - Inicio
+    { id: 1, descripcion: 'Inicio', icono: 'bi bi-house', link: '/inicio', grupo: 'GM01', principal: true, orden: 1, estado: true, requiredAccess: [1, 2, 3, 4] },
+    { id: 2, descripcion: 'Resumen', icono: '', link: '/inicio/resumen', grupo: 'GM01', principal: false, orden: 1, estado: false, requiredAccess: [1, 2, 3, 4] },
+    { id: 3, descripcion: 'Noticias', icono: '', link: '/inicio/noticias', grupo: 'GM01', principal: false, orden: 2, estado: true, requiredAccess: [1, 2, 3, 4] },
+    { id: 4, descripcion: 'Cargar Atleta', icono: '', link: '/inicio/cargar-atleta', grupo: 'GM01', principal: false, orden: 3, estado: true, requiredAccess: [1, 2] },
+    { id: 5, descripcion: 'Cargar pago', icono: '', link: '/inicio/cargar-pago', grupo: 'GM01', principal: false, orden: 4, estado: true, requiredAccess: [1, 4] },
+    { id: 6, descripcion: 'Cargar Entrenador', icono: '', link: '/inicio/cargar-entrenador', grupo: 'GM01', principal: false, orden: 5, estado: true, requiredAccess: [1, 4] },
+
+    // GM02 - Mi Perfil
+    { id: 11, descripcion: 'Mi Perfil', icono: 'bi bi-file-person', link: '/perfil', grupo: 'GM02', principal: true, orden: 2, estado: true, requiredAccess: [1, 2, 3, 4] },
+    { id: 12, descripcion: 'Perfil', icono: '', link: '/perfil/perfil', grupo: 'GM02', principal: false, orden: 1, estado: true, requiredAccess: [1, 2, 3, 4] },
+    { id: 13, descripcion: 'Medidas', icono: '', link: '/perfil/cargar-medidas', grupo: 'GM02', principal: false, orden: 2, estado: true, requiredAccess: [2, 3] },
+    { id: 14, descripcion: 'Historial rutinas', icono: '', link: '/perfil/historial', grupo: 'GM02', principal: false, orden: 3, estado: false, requiredAccess: [2, 3] },
+    { id: 15, descripcion: 'Estadisticas Coach', icono: '', link: '/perfil/coach', grupo: 'GM02', principal: false, orden: 4, estado: true, requiredAccess: [2] },
+
+    // GM03 - Rutinas
+    { id: 21, descripcion: 'Rutinas', icono: 'bx bx-book-bookmark', link: '/', grupo: 'GM03', principal: true, orden: 3, estado: true, requiredAccess: [1, 2, 3] },
+    { id: 22, descripcion: 'Actual', icono: '', link: '/rutinas/actual', grupo: 'GM03', principal: false, orden: 1, estado: true, requiredAccess: [2, 3] },
+    { id: 23, descripcion: 'Mis rutinas', icono: '', link: '/rutinas/mis-rutinas', grupo: 'GM03', principal: false, orden: 2, estado: true, requiredAccess: [2, 3] },
+    { id: 24, descripcion: 'Recomendadas', icono: '', link: '/rutinas/recomendadas', grupo: 'GM03', principal: false, orden: 3, estado: false, requiredAccess: [2, 3] },
+    { id: 25, descripcion: 'Populares', icono: '', link: '/rutinas/populares', grupo: 'GM03', principal: false, orden: 4, estado: false, requiredAccess: [2, 3] },
+    { id: 26, descripcion: 'Especificas', icono: '', link: '/rutinas/especificas', grupo: 'GM03', principal: false, orden: 5, estado: false, requiredAccess: [2, 3] },
+    { id: 27, descripcion: 'Favoritas', icono: '', link: '/rutinas/favoritas', grupo: 'GM03', principal: false, orden: 6, estado: false, requiredAccess: [2, 3] },
+    { id: 28, descripcion: 'Historial', icono: '', link: '/rutinas/historial', grupo: 'GM03', principal: false, orden: 7, estado: false, requiredAccess: [2, 3] },
+    { id: 29, descripcion: 'Crear rutina', icono: '', link: '/rutinas/crear-rutina', grupo: 'GM03', principal: false, orden: 8, estado: true, requiredAccess: [1, 2] },
+    { id: 30, descripcion: 'Reaplicar rutina', icono: '', link: '/rutinas/reaplicar-rutina', grupo: 'GM03', principal: false, orden: 9, estado: true, requiredAccess: [1, 2] },
+
+    // GM04 - Ejercicios
+    { id: 32, descripcion: 'Ejercicios', icono: 'bx bx-dumbbell', link: '/ejercicios', grupo: 'GM04', principal: true, orden: 4, estado: true, requiredAccess: [1, 2, 3] },
+    { id: 33, descripcion: 'Buscar', icono: '', link: '/ejercicios/buscar', grupo: 'GM04', principal: false, orden: 1, estado: true, requiredAccess: [1, 2, 3] },
+    { id: 34, descripcion: 'Cargar nuevo', icono: '', link: '/ejercicios/cargar-nuevo', grupo: 'GM04', principal: false, orden: 2, estado: true, requiredAccess: [1, 2] },
+    { id: 36, descripcion: 'Editar Ejercicio', icono: '', link: '/ejercicios/editar-ejercicio', grupo: 'GM04', principal: false, orden: 3, estado: true, requiredAccess: [1, 2] },
+    { id: 37, descripcion: 'Repeticiones', icono: '', link: '/ejercicios/crear-repeticion', grupo: 'GM04', principal: false, orden: 4, estado: true, requiredAccess: [1, 2] },
+
+    // GM05 - Asistencia
+    { id: 42, descripcion: 'Asistencia', icono: 'bx bxs-hand', link: '/asistencia', grupo: 'GM05', principal: true, orden: 5, estado: false, requiredAccess: [1, 2, 3, 4] },
+    { id: 43, descripcion: 'Asistencia', icono: '', link: '/asistencia/asistencia', grupo: 'GM05', principal: false, orden: 1, estado: true, requiredAccess: [1, 2, 3, 4] },
+    { id: 44, descripcion: 'Historial asistencia', icono: '', link: '/asistencia/historial', grupo: 'GM05', principal: false, orden: 2, estado: true, requiredAccess: [1, 2, 3, 4] },
+    { id: 45, descripcion: 'Coach', icono: '', link: '/asistencia/coach', grupo: 'GM05', principal: false, orden: 3, estado: true, requiredAccess: [1, 2] },
+
+    // GM06 - Progreso
+    { id: 52, descripcion: 'Progreso', icono: 'bi bi-percent', link: '/progreso', grupo: 'GM06', principal: true, orden: 6, estado: true, requiredAccess: [1, 2, 3] },
+    { id: 53, descripcion: 'Estadisticas', icono: '', link: '/progreso/estadistica', grupo: 'GM06', principal: false, orden: 1, estado: true, requiredAccess: [1, 2, 3] },
+    { id: 54, descripcion: 'Logros', icono: '', link: '/progreso/logros', grupo: 'GM06', principal: false, orden: 2, estado: true, requiredAccess: [2, 3] },
+    { id: 55, descripcion: 'Metas', icono: '', link: '/progreso/metas', grupo: 'GM06', principal: false, orden: 3, estado: true, requiredAccess: [2, 3] },
+
+    // GM07 - Comunidad
+    { id: 62, descripcion: 'Comunidad', icono: 'bi bi-people-fill', link: '/comunidad', grupo: 'GM07', principal: true, orden: 7, estado: true, requiredAccess: [1, 2, 3] },
+    { id: 63, descripcion: 'Grupos', icono: '', link: '/comunidad/grupos', grupo: 'GM07', principal: false, orden: 1, estado: true, requiredAccess: [1, 2, 3] },
+    { id: 64, descripcion: 'Articulos', icono: '', link: '/comunidad/articulos', grupo: 'GM07', principal: false, orden: 2, estado: true, requiredAccess: [1, 2, 3] },
+
+    // GM08 - Configuracion
+    { id: 72, descripcion: 'Configuracion', icono: 'bi bi-gear', link: '/configuracion', grupo: 'GM08', principal: true, orden: 8, estado: true, requiredAccess: [1, 2, 3, 4] },
+    { id: 73, descripcion: 'Editar perfil', icono: '', link: '/configuracion/editar-perfil', grupo: 'GM08', principal: false, orden: 1, estado: true, requiredAccess: [1, 2, 3, 4] },
+
+    // GM09 - Ayuda
+    { id: 81, descripcion: 'Ayuda', icono: 'bi bi-info-circle', link: '/ayuda', grupo: 'GM09', principal: true, orden: 9, estado: true, requiredAccess: [1, 2, 3, 4] },
+    { id: 82, descripcion: 'Preguntas frecuentes', icono: '', link: '/ayuda/faq', grupo: 'GM09', principal: false, orden: 1, estado: true, requiredAccess: [1, 2, 3, 4] },
+    { id: 83, descripcion: 'Contacto', icono: '', link: '/ayuda/contacto', grupo: 'GM09', principal: false, orden: 2, estado: true, requiredAccess: [1, 2, 3, 4] },
+  ];
+
+  // Servicios inyectados
+  private authService = inject(AuthService);
   private router = inject(Router);
 
-  // Inicializar el componente y cargar los menús
-  ngOnInit(): void {
-    this.menus = [];
-    this.loadUserData();
-    // Solo cargar menús si el id_acceso es válido
-    if (this.id_acceso) {
-      this.getMenus();
-    }
-
-    // Suscripción al cambio de estado de login
-    this.loginStatusSubscription = this.authService.loggedIn$.subscribe(
-      (loggedIn: boolean) => {
-        this.isLoggedIn = loggedIn;
-        // Si estamos logueados y es una pantalla pequeña, aseguramos que el sidebar esté oculto
-        if (loggedIn && this.isSmallScreen) {
-          this.isSidebarVisible = false; // Ocultamos el sidebar en pantallas pequeñas
-        } else {
-          this.isSidebarVisible = loggedIn; // En pantallas grandes, mostramos el sidebar
-        }
-      }
-    );
-
-    // Detectar cambios en el tamaño de la pantalla
-    window.addEventListener('resize', this.onResize.bind(this));
-  }
-
-  // Función para mostrar el modal de confirmación
-  confirmLogout(): void {
-    this.isModalVisible = true; // Muestra el modal
-  }
-
-  // Función para manejar la confirmación del logout
-  handleConfirm(): void {
-    this.authService.logout(); // Cierra sesión
-    this.router.navigate(['/login/home']); // Redirige al login
-    this.isModalVisible = false; // Oculta el modal
-  }
-
-  // Función para manejar la cancelación del logout
-  handleCancel(): void {
-    this.isModalVisible = false; // Oculta el modal
-  }
-
-  ngOnDestroy(): void {
-    if (this.loginStatusSubscription) {
-      this.loginStatusSubscription.unsubscribe();
-    }
-    window.removeEventListener('resize', this.onResize.bind(this));
-  }
-
-  onResize(): void {
-    const screenWidth = window.innerWidth;
-    // console.log(screenWidth); // Log del tamaño de la ventana
-
+  @HostListener('window:resize')
+  onResize() {
     const previousState = this.isSmallScreen;
+    this.isSmallScreen = window.innerWidth < 992;
 
-    // Actualizar solo si el estado cambia
-    this.isSmallScreen = screenWidth < 992;
-
-    // Solo cambiar si realmente cambia el estado
     if (this.isSmallScreen !== previousState) {
       if (this.isSmallScreen) {
-        this.isSidebarVisible = false; // Ocultar el sidebar automáticamente en pantallas pequeñas
+        this.isSidebarVisible = false;
       } else {
-        this.isSidebarVisible = true; // Mostrar el sidebar automáticamente en pantallas grandes
+        this.isSidebarVisible = this.isLoggedIn;
       }
     }
   }
 
-  // Cargar datos del usuario
-  loadUserData(): void {
-    const user = this.authService.getUser();
-    if (user) {
-      // console.log('Datos del usuario:', user); // Log de los datos del usuario
-      this.id_acceso = user.id_acceso;
-      // console.log('ID de acceso:', this.id_acceso); // Log del ID de acceso
-    }
-  }
+  ngOnInit() {
+    this.loadUserData();
+    this.subscription.add(
+      this.authService.loggedIn$.subscribe(isLoggedIn => {
+        this.isLoggedIn = isLoggedIn;
+        this.isSidebarVisible = isLoggedIn && !this.isSmallScreen;
 
-  // Obtener los menús desde el servicio
-  getMenus(): void {
-    this.menuService.getMenusByIdAcceso(this.id_acceso).subscribe({
-      next: (data) => {
-        // Asignamos la propiedad `expanded` con valor `false` para cada menú
-        this.menus = data.map((menu: Menu) => ({
-          ...menu,
-          expanded: false, // Inicialmente todos los menús están colapsados
-        }));
-      },
-      error: (error) => {
-        console.error('Error al obtener los menús:', error);
-        // Mostrar un mensaje de error al usuario
-        alert('No se pudieron cargar los menús. Inténtelo de nuevo más tarde.');
-      },
-    });
-  }
-
-  // Cerrar sesión desde el sidebar
-  logout(): void {
-    this.authService.logout(); // Llamar al logout() del AuthService para cerrar sesión
-    console.log('Usuario deslogueado');
-
-    // Redirigir a la página de login/home
-    this.router.navigate(['/login/home']);
-
-    // Ocultar el sidebar después de logout
-    this.isSidebarVisible = false;
-  }
-
-  // Redirigir al login
-  login(): void {
-    this.router.navigate(['/login']);
-  }
-
-  // Obtener los menús principales
-  getMainMenus(): Menu[] {
-    return this.menus.filter((menu) => menu.menu_principal === 1);
-  }
-
-  // Obtener los submenús de un menú principal
-  getSubMenus(menu: Menu): Menu[] {
-    return this.menus.filter(
-      (subMenu) =>
-        subMenu.menu_principal === 0 && subMenu.menu_grupo === menu.menu_grupo
+        if (isLoggedIn) {
+          this.loadUserData();
+        }
+      })
     );
   }
 
-  // Función para cerrar el sidebar automáticamente en pantallas pequeñas
-  closeSidebarOnSmallScreens(): void {
-    if (this.isSmallScreen) {
-      this.isSidebarVisible = false; // Ocultar el sidebar
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  private loadUserData() {
+    const user = this.authService.getUser();
+    if (user) {
+      this.id_acceso = user.id_acceso;
     }
   }
 
-  // Alternar la visibilidad de los submenús
-  toggleSubMenu(menu: Menu): void {
-    // Cerrar todos los menús abiertos antes de abrir el seleccionado
-    this.menus.forEach((m) => {
-      if (m !== menu) {
-        m.expanded = false;
-      }
+  // Getters para el menú filtrado
+  get visibleMenuItems(): MenuItem[] {
+    return this.allMenuItems.filter(item =>
+      item.principal &&
+      item.estado &&
+      item.requiredAccess.includes(this.id_acceso)
+    ).sort((a, b) => a.orden - b.orden);
+  }
+
+  // Métodos para el manejo del menú
+  getSubMenus(menu: MenuItem): MenuItem[] {
+    return this.allMenuItems.filter(item =>
+      !item.principal &&
+      item.grupo === menu.grupo &&
+      item.estado &&
+      item.requiredAccess.includes(this.id_acceso)
+    ).sort((a, b) => a.orden - b.orden);
+  }
+
+  toggleSubMenu(menu: MenuItem) {
+    // Cerrar otros menús
+    this.visibleMenuItems.forEach(m => {
+      if (m !== menu) m.expanded = false;
     });
-    // Alternar estado de expansión del menú seleccionado
     menu.expanded = !menu.expanded;
-
-    // NO cerrar el sidebar aquí, ya que este es solo para expandir/cerrar submenús
   }
 
-  // Redirigir al hacer clic en un submenú
-  navigateToSubMenu(subMenu: Menu): void {
-    if (subMenu.menu_link) {
-      this.router.navigate([subMenu.menu_link]); // Navegar a la ruta del submenú
-      // Cerrar el sidebar automáticamente en pantallas pequeñas
-      this.closeSidebarOnSmallScreens();
+  navigateToSubMenu(subMenu: MenuItem) {
+    if (subMenu.link && subMenu.link !== '/') {
+      this.router.navigate([subMenu.link]);
+      if (this.isSmallScreen) {
+        this.isSidebarVisible = false;
+      }
     }
   }
 
-  // Verificar si un menú está expandido
-  isMenuExpanded(menu: Menu): boolean {
-    return !!menu.expanded; // Convierte `undefined` a `false`
+  isMenuExpanded(menu: MenuItem): boolean {
+    return !!menu.expanded;
   }
 
-  // Alternar la visibilidad del sidebar
-  toggleSidebar(): void {
+  toggleSidebar() {
     if (this.isSmallScreen) {
       this.isSidebarVisible = !this.isSidebarVisible;
-
-      // Agregar/remover la clase 'hidden' según la visibilidad
-      const sidebarElement = document.querySelector('.sidebar');
-      if (sidebarElement) {
-        if (!this.isSidebarVisible) {
-          sidebarElement.classList.add('hidden');
-        } else {
-          sidebarElement.classList.remove('hidden');
-        }
-      }
     }
   }
 
@@ -218,36 +191,49 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.router.navigate(['/inicio']);
   }
 
-  // Obtener el nombre del perfil basado en el id_acceso
+  // Métodos del perfil
   getPerfilName(): string {
-    switch (this.id_acceso) {
-      case 1: return 'Admin';
-      case 2: return 'Entrenador';
-      case 3: return 'Atleta';
-      case 4: return 'Gimnasio';
-      default: return 'Usuario';
-    }
+    const profiles: { [key: number]: string } = {
+      1: 'Admin',
+      2: 'Entrenador',
+      3: 'Atleta',
+      4: 'Gimnasio'
+    };
+    return profiles[this.id_acceso] || 'Usuario';
   }
 
-  // Obtener el ícono del perfil basado en el id_acceso
   getPerfilIcon(): string {
-    switch (this.id_acceso) {
-      case 1: return 'bx bx-crown'; // Admin
-      case 2: return 'bx bx-dumbbell'; // Entrenador
-      case 3: return 'bx bx-run'; // Atleta
-      case 4: return 'bx bx-building'; // Gimnasio
-      default: return 'bx bx-user';
-    }
+    const icons: { [key: number]: string } = {
+      1: 'bx bx-crown',
+      2: 'bx bx-dumbbell',
+      3: 'bx bx-run',
+      4: 'bx bx-building'
+    };
+    return icons[this.id_acceso] || 'bx bx-user';
   }
 
-  // Obtener la clase CSS del perfil basado en el id_acceso
   getPerfilClass(): string {
-    switch (this.id_acceso) {
-      case 1: return 'perfil-admin';
-      case 2: return 'perfil-entrenador';
-      case 3: return 'perfil-atleta';
-      case 4: return 'perfil-gimnasio';
-      default: return 'perfil-default';
-    }
+    const classes: { [key: number]: string } = {
+      1: 'perfil-admin',
+      2: 'perfil-entrenador',
+      3: 'perfil-atleta',
+      4: 'perfil-gimnasio'
+    };
+    return classes[this.id_acceso] || 'perfil-default';
+  }
+
+  // Métodos del modal de logout
+  confirmLogout() {
+    this.isModalVisible = true;
+  }
+
+  handleConfirm() {
+    this.authService.logout();
+    this.router.navigate(['/login/home']);
+    this.isModalVisible = false;
+  }
+
+  handleCancel() {
+    this.isModalVisible = false;
   }
 }
