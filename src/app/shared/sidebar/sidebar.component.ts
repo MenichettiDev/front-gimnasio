@@ -28,6 +28,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   isLoggedIn: boolean = false; // Propiedad para el estado de login
   private loginStatusSubscription: Subscription | null = null; // Para suscripción al estado de login
   isSmallScreen: boolean = window.innerWidth < 992; // Detectar si la pantalla es pequeña
+  perfil: string = ''; // Perfil del usuario, se puede usar para mostrar información adicional
 
   // Inyección de dependencias
   public menuService = inject(MenuService);
@@ -107,8 +108,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
   loadUserData(): void {
     const user = this.authService.getUser();
     if (user) {
+      // console.log('Datos del usuario:', user); // Log de los datos del usuario
       this.id_acceso = user.id_acceso;
-      console.log('ID de acceso:', this.id_acceso); // Log del ID de acceso
+      // console.log('ID de acceso:', this.id_acceso); // Log del ID de acceso
     }
   }
 
@@ -214,5 +216,38 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   navigateToHome() {
     this.router.navigate(['/inicio']);
+  }
+
+  // Obtener el nombre del perfil basado en el id_acceso
+  getPerfilName(): string {
+    switch (this.id_acceso) {
+      case 1: return 'Admin';
+      case 2: return 'Entrenador';
+      case 3: return 'Atleta';
+      case 4: return 'Gimnasio';
+      default: return 'Usuario';
+    }
+  }
+
+  // Obtener el ícono del perfil basado en el id_acceso
+  getPerfilIcon(): string {
+    switch (this.id_acceso) {
+      case 1: return 'bx bx-crown'; // Admin
+      case 2: return 'bx bx-dumbbell'; // Entrenador
+      case 3: return 'bx bx-run'; // Atleta
+      case 4: return 'bx bx-building'; // Gimnasio
+      default: return 'bx bx-user';
+    }
+  }
+
+  // Obtener la clase CSS del perfil basado en el id_acceso
+  getPerfilClass(): string {
+    switch (this.id_acceso) {
+      case 1: return 'perfil-admin';
+      case 2: return 'perfil-entrenador';
+      case 3: return 'perfil-atleta';
+      case 4: return 'perfil-gimnasio';
+      default: return 'perfil-default';
+    }
   }
 }

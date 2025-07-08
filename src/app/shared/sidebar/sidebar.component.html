@@ -1,4 +1,3 @@
-
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400&display=swap" rel="stylesheet">
 
 <!-- Barra superior para pantallas pequeñas -->
@@ -20,47 +19,52 @@
       <img src="images/gymrats_v003_W.png" alt="Logo" (click)="navigateToHome()">
     </div>
 
-   <!-- Lista de menús principales -->
-<ul class="nav flex-column">
-  <li *ngFor="let menu of getMainMenus()" class="nav-item">
-    <!-- Enlace del menú principal -->
-    <a class="nav-link" (click)="toggleSubMenu(menu)">
-      <i class="{{ menu.menu_icono }}"></i> <!-- Ícono del menú -->
-      <span>{{ menu.menu_descripcion }}</span> <!-- Descripción del menú -->
-      <!-- Flecha para indicar submenú -->
-      <i class="arrow" [ngClass]="{'rotate': isMenuExpanded(menu)}"></i>
-    </a>
+    <!-- Perfil del usuario -->
+    <div *ngIf="isLoggedIn" class="user-profile" [ngClass]="getPerfilClass()">
+      <div class="profile-content">
+        <i [class]="getPerfilIcon()"></i>
+        <span class="profile-text">{{ getPerfilName() }}</span>
+      </div>
+    </div>
 
-    <!-- Submenús (solo si están expandidos) -->
-    <ul [ngClass]="{'sub-menu': true, 'expanded': isMenuExpanded(menu)}">
-      <!-- Iterar sobre los submenús -->
-      <li *ngFor="let subMenu of getSubMenus(menu)" class="nav-item">
-        <!-- Enlace del submenú -->
-        <a class="nav-link" [routerLink]="subMenu.menu_link" routerLinkActive="active" (click)="navigateToSubMenu(subMenu)">
-          <i class="{{ subMenu.menu_icono }}"></i> <!-- Ícono del submenú -->
-          <span>{{ subMenu.menu_descripcion }}</span> <!-- Descripción del submenú -->
+    <!-- Lista de menús principales -->
+    <ul class="nav flex-column">
+      <li *ngFor="let menu of getMainMenus()" class="nav-item">
+        <!-- Enlace del menú principal -->
+        <a class="nav-link" (click)="toggleSubMenu(menu)">
+          <i class="{{ menu.menu_icono }}"></i> <!-- Ícono del menú -->
+          <span>{{ menu.menu_descripcion }}</span> <!-- Descripción del menú -->
+          <!-- Flecha para indicar submenú -->
+          <i class="arrow" [ngClass]="{'rotate': isMenuExpanded(menu)}"></i>
         </a>
+
+        <!-- Submenús (solo si están expandidos) -->
+        <ul [ngClass]="{'sub-menu': true, 'expanded': isMenuExpanded(menu)}">
+          <!-- Iterar sobre los submenús -->
+          <li *ngFor="let subMenu of getSubMenus(menu)" class="nav-item">
+            <!-- Enlace del submenú -->
+            <a class="nav-link" [routerLink]="subMenu.menu_link" routerLinkActive="active"
+              (click)="navigateToSubMenu(subMenu)">
+              <i class="{{ subMenu.menu_icono }}"></i> <!-- Ícono del submenú -->
+              <span>{{ subMenu.menu_descripcion }}</span> <!-- Descripción del submenú -->
+            </a>
+          </li>
+        </ul>
       </li>
     </ul>
-  </li>
-</ul>
 
     <!-- Botón de Logout -->
-<div *ngIf="isLoggedIn" class="sidebar-logout">
-  <button (click)="confirmLogout()" class="btn-logout">
-    <i class="bx bx-log-out"></i> Logout
-  </button>
-</div>
-<!-- Modal de confirmación -->
-<app-modal-confirm
-  [visible]="isModalVisible"
-  [title]="'Confirmación'"
-  [message]="'¿Estás seguro de que deseas cerrar sesión?'"
-  (confirm)="handleConfirm()"
-  (cancel)="handleCancel()">
-</app-modal-confirm>
+    <div *ngIf="isLoggedIn" class="sidebar-logout">
+      <button (click)="confirmLogout()" class="btn-logout">
+        <i class="bx bx-log-out"></i> Logout
+      </button>
+    </div>
+    <!-- Modal de confirmación -->
+    <app-modal-confirm [visible]="isModalVisible" [title]="'Confirmación'"
+      [message]="'¿Estás seguro de que deseas cerrar sesión?'" (confirm)="handleConfirm()" (cancel)="handleCancel()">
+    </app-modal-confirm>
 
-<!-- Contenido principal -->
-<div class="main-content" [ngClass]="{'expanded': !isSidebarVisible}">
-  <!-- Aquí va el contenido principal de tu aplicación -->
-</div>
+    <!-- Contenido principal -->
+    <div class="main-content" [ngClass]="{'expanded': !isSidebarVisible}">
+      <!-- Aquí va el contenido principal de tu aplicación -->
+    </div>

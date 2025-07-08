@@ -3,27 +3,23 @@
   <div class="card-body">
     <!-- Título del formulario -->
     <h1 class="form-title text-center mb-4">
-      REGISTRO DE PAGO DE ATLETA
+      REGISTRO DE PAGO
     </h1>
 
     <!-- Formulario -->
-    <form [formGroup]="pagoForm" (ngSubmit)="onSubmit()">
-
-
-
+    <form [formGroup]="frmData" (ngSubmit)="onSubmit()">
 
       <!-- Campo de Monto -->
       <div class="mb-3">
         <label for="monto" class="form-label">Monto</label>
-        <input type="text" id="monto" formControlName="monto" class="form-control monto-input" [readonly]="true"
-          [value]="montoFijo" />
+        <input type="text" id="monto" formControlName="monto" class="form-control monto-input" [readonly]="true" />
       </div>
 
       <!-- Campo de concepto -->
       <div class="mb-3">
         <label for="concepto" class="form-label">Concepto</label>
         <input type="text" id="concepto" formControlName="concepto" class="form-control concepto-input"
-          [readonly]="true" [value]="conceptoFijo" />
+          [readonly]="true" />
       </div>
 
       <!-- Selector de Forma de Pago -->
@@ -34,7 +30,7 @@
 
       <!-- Botón de Envío -->
       <div class="d-grid gap-2">
-        <button type="submit" class="btn btn-primary rounded-pill" [disabled]="pagoForm.invalid">
+        <button type="submit" class="btn btn-primary rounded-pill" [disabled]="frmData.invalid">
           <i class="bi bi-check-circle-fill me-2"></i> Registrar
         </button>
       </div>

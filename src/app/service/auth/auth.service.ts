@@ -46,13 +46,13 @@ export class AuthService {
 
   // Obtener el ID del entrenador (si existe)
   getIdEntrenador(): number | null {
-    const user = this.getUser()[0];
+    const user = this.getUser();
     return user && user.id_entrenador ? user.id_entrenador : null;
   }
 
   // Obtener el ID del atleta (si existe)
   getIdAtleta(): number | null {
-    const user = this.getUser()[0];
+    const user = this.getUser();
     return user && user.id_atleta ? user.id_atleta : null;
   }
 

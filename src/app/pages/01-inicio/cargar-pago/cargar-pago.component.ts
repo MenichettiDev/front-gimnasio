@@ -34,7 +34,7 @@ export class CargarPagoComponent implements OnInit {
   id_gimnasio: number | null = null;
   isModalVisible: boolean = false; // Controla la visibilidad del modal
   gimnasioAtleta: string | null = null;
-  pagoForm: FormGroup;
+  frmData: FormGroup;
 
   constructor(
     private fb: FormBuilder,
@@ -43,11 +43,11 @@ export class CargarPagoComponent implements OnInit {
     private membresiaService: MembresiaService,
     private pagoService: PagoService
   ) {
-    this.pagoForm = this.fb.group({
+    this.frmData = this.fb.group({
       id_atleta: [null],
       id_entrenador: [null],
       id_gimnasio: [null],
-      id_membresia: [null],
+      id: [null],
       monto: [{ value: null, disabled: true }, Validators.required],
       concepto: [{ value: null, disabled: true }, Validators.required],
       id_forma_pago: [null, Validators.required],
@@ -56,38 +56,43 @@ export class CargarPagoComponent implements OnInit {
 
   ngOnInit(): void {
     this.setConceptoYMonto();
-    this.setFormValues();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['id'] || changes['tipo']) {
-      this.setConceptoYMonto();
-      this.setFormValues();
-    }
-  }
 
   setConceptoYMonto(): void {
-    switch (this.tipo) {
-      case 'atleta':
-        this.montoFijo = 500;
-        this.conceptoFijo = 'Pago de atleta';
-        break;
-      case 'entrenador':
-        this.montoFijo = 2000;
-        this.conceptoFijo = 'Pago de entrenador';
-        break;
-      case 'gimnasio':
-        this.montoFijo = 10000;
-        this.conceptoFijo = 'Pago de gimnasio';
-        break;
-      default:
-        this.montoFijo = 0;
-        this.conceptoFijo = '';
+
+    console.log('Usuario:', this.authService.getUser());
+    console.log('isGimnasio:', this.authService.isGimnasio());
+    console.log('isEntrenador:', this.authService.isEntrenador());
+    console.log('isAtleta:', this.authService.isAtleta());
+
+    if (this.authService.isGimnasio()) {
+      this.montoFijo = 20000;
+      this.conceptoFijo = 'Pago membresía gimnasio';
+      this.id = this.authService.getUser()?.id_gimnasio || null;
+    } else if (this.authService.isEntrenador()) {
+      this.montoFijo = 2000;
+      this.conceptoFijo = 'Pago de entrenador';
+      this.id = this.authService.getUser()?.id_entrenador || null;
+    } else if (this.authService.isAtleta()) {
+      this.montoFijo = 500;
+      this.conceptoFijo = 'Pago de atleta';
+      this.id = this.authService.getUser()?.id_entrenador || null; // Asigna el ID del entrenador del atleta
+    } else {
+      this.montoFijo = 0;
+      this.conceptoFijo = '';
     }
+
+    // Actualiza los valores del formulario
+    this.frmData.patchValue({
+      monto: this.montoFijo,
+      concepto: this.conceptoFijo,
+      id: this.id,
+    });
   }
 
   setFormValues(): void {
-    this.pagoForm.patchValue({
+    this.frmData.patchValue({
       monto: this.montoFijo,
       concepto: this.conceptoFijo,
       id_atleta: this.tipo === 'atleta' ? this.id : null,
@@ -99,12 +104,12 @@ export class CargarPagoComponent implements OnInit {
   // Maneja el cambio de forma de pago
   onFormaPagoChange(idFormaPago: number): void {
     console.log('Forma de pago seleccionada:', idFormaPago);
-    this.pagoForm.get('id_forma_pago')?.setValue(idFormaPago); // Actualiza el control 'forma_pago'
+    this.frmData.get('id_forma_pago')?.setValue(idFormaPago); // Actualiza el control 'forma_pago'
   }
 
   // Enviar el formulario
   onSubmit(): void {
-    if (this.pagoForm.invalid) {
+    if (this.frmData.invalid) {
       console.warn('El formulario es inválido.');
       return;
     }
@@ -115,7 +120,7 @@ export class CargarPagoComponent implements OnInit {
 
   // Mostrar el modal de confirmación
   openModal(): void {
-    if (this.pagoForm.valid) {
+    if (this.frmData.valid) {
       this.isModalVisible = true; // Muestra el modal si el formulario es válido
     } else {
       console.error('El formulario no es válido');
@@ -124,20 +129,19 @@ export class CargarPagoComponent implements OnInit {
 
   // Manejar la confirmación del modal
   handleConfirm(): void {
-    if (!this.id_entrenador) {
-      console.error('El ID del entrenador no está disponible');
+    if (!this.id) {
+      console.error('El ID no está disponible');
       return;
     }
 
-    const formData = this.pagoForm.value;
-    formData.fecha_pago = this.getFechaActual(); // Asignar fecha actual
+    const formData = this.frmData.value;
 
     // Crear el pago
     this.pagoService.createPago(formData).subscribe({
       next: (response) => {
         console.log('Pago creado exitosamente:', response);
         alert('Pago registrado correctamente'); // Mensaje de éxito
-        this.pagoForm.reset(); // Limpia el formulario después del envío
+        this.frmData.reset(); // Limpia el formulario después del envío
         this.isModalVisible = false; // Cierra el modal después de procesar el pago
       },
       error: (error) => {

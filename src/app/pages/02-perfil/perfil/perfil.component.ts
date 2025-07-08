@@ -12,32 +12,40 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './perfil.component.css'
 })
 export class PerfilComponent implements OnInit {
-  usuarioActual: any = {}; // Datos del usuario actual
-  perfil: any = {}; // Datos del perfil cargado
-  isLoading: boolean = true; // Indicador de carga
-  errorMessage: string = ''; // Mensaje de error
-  nuevaFoto: File | null = null; // Almacena la nueva foto seleccionada
+  usuarioActual: any = {};
+  perfil: any = {};
+  isLoading: boolean = true;
+  errorMessage: string = '';
+  nuevaFoto: File | null = null;
+  perfilesUsuario: string[] = [];
 
   constructor(
     private authService: AuthService,
     private personaService: PersonaService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.cargarUsuarioActual();
+    this.detectarPerfilesUsuario();
   }
 
-  // Método para formatear la fecha
+  detectarPerfilesUsuario(): void {
+    this.perfilesUsuario = [];
+    if (this.authService.isEntrenador()) this.perfilesUsuario.push('Entrenador');
+    if (this.authService.isAtleta()) this.perfilesUsuario.push('Atleta');
+    if (this.authService.isGimnasio()) this.perfilesUsuario.push('Gimnasio');
+    if (this.perfilesUsuario.length === 0) this.perfilesUsuario.push('Usuario');
+  }
+
   formatearFecha(fecha: string | Date): string {
     const date = new Date(fecha);
     const year = date.getFullYear();
-    const month = ('0' + (date.getMonth() + 1)).slice(-2); // Asegura dos dígitos para el mes
-    const day = ('0' + date.getDate()).slice(-2); // Asegura dos dígitos para el día
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
     return `${year}-${month}-${day}`;
   }
 
   cargarUsuarioActual(): void {
-    // Obtener el ID del usuario actual desde el servicio de autenticación
     const idUsuario = this.authService.getIdPersona();
     if (!idUsuario) {
       this.errorMessage = 'No se pudo obtener el usuario actual.';
@@ -45,17 +53,12 @@ export class PerfilComponent implements OnInit {
       return;
     }
 
-
-    // Cargar los datos del perfil del usuario
     this.personaService.obtenerPersonaPorId(idUsuario).subscribe(
       (data) => {
-        this.perfil = data; // Asignar los datos del perfil
-
-        // Formatear la fecha de nacimiento para el input type="date"
+        this.perfil = data;
         if (this.perfil.fecha_nacimiento) {
           this.perfil.fecha_nacimiento = this.formatearFecha(this.perfil.fecha_nacimiento);
         }
-
         this.isLoading = false;
       },
       (error) => {
@@ -66,28 +69,26 @@ export class PerfilComponent implements OnInit {
     );
   }
 
-  // Maneja la selección de archivos
   // onFileSelected(event: any): void {
-  //   const file = event.target.files[0]; // Obtiene el archivo seleccionado
+  //   const file = event.target.files[0];
   //   if (file) {
-  //     this.nuevaFoto = file; // Guarda el archivo para enviarlo al servidor
-  //     const reader = new FileReader(); // Crea un lector de archivos
+  //     this.nuevaFoto = file;
+  //     const reader = new FileReader();
   //     reader.onload = (e: any) => {
-  //       this.perfil.foto_archivo = e.target.result; // Actualiza la vista previa
+  //       this.perfil.foto_archivo = e.target.result;
   //     };
-  //     reader.readAsDataURL(file); // Lee el archivo como una URL base64
+  //     reader.readAsDataURL(file);
   //   }
   // }
 
   guardarCambios(): void {
-    // Obtener el ID del usuario actual
     const idUsuario = this.authService.getIdPersona();
     if (!idUsuario) {
       this.errorMessage = 'No se pudo obtener el usuario actual.';
       return;
     }
 
-    // Crear un objeto FormData para enviar la foto junto con los datos del perfil
+    // Si necesitas enviar la foto, descomenta y ajusta el siguiente bloque:
     // const formData = new FormData();
     // formData.append('nombre', this.perfil.nombre);
     // formData.append('apellido', this.perfil.apellido);
@@ -95,16 +96,10 @@ export class PerfilComponent implements OnInit {
     // formData.append('celular', this.perfil.celular || '');
     // formData.append('direccion', this.perfil.direccion || '');
     // formData.append('fecha_nacimiento', this.perfil.fecha_nacimiento);
-
-    // Agregar la foto si se seleccionó una nueva
     // if (this.nuevaFoto) {
     //   formData.append('foto_archivo', this.nuevaFoto);
     // }
 
-    // console.log(  'datos form', formData)
-    console.log(  'datos form', this.perfil)
-
-    // Actualizar los datos del perfil
     this.personaService.editarPersona(idUsuario, this.perfil).subscribe(
       (response) => {
         console.log('Perfil actualizado:', response);

@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     if (this.loginForm.valid) {
       const { usuario, contrasenia } = this.loginForm.value;
-  
+
       this.loginService.login(usuario, contrasenia).subscribe({
         next: (response: any) => {
           // Verifica si el backend indica éxito
@@ -47,30 +47,30 @@ export class LoginComponent implements OnInit {
             alert(this.errorMessage); // Alerta visible
             return;
           }
-  
+
           // Guarda el usuario
-          this.authService.saveUser(response.usuario);
-          // console.log('Usuario guardado:', this.authService.getUser());
-  
+          console.log('Usuario guardado:', response.usuario[0]);
+          this.authService.saveUser(response.usuario[0]);
+
           // Verifica que el usuario se haya guardado correctamente
           if (!this.authService.isLoggedIn) {
             this.errorMessage = 'Error al guardar los datos del usuario.';
             alert(this.errorMessage);
             return;
           }
-  
+
           // Todo bien, redirige
           this.router.navigate(['/inicio/resumen']);
         },
         error: (error) => {
           console.error('Error al iniciar sesión:', error);
-  
+
           if (error.status === 401) {
             this.errorMessage = 'Credenciales incorrectas.';
           } else {
             this.errorMessage = 'Hubo un problema al intentar iniciar sesión. Por favor, intente nuevamente.';
           }
-  
+
           alert(this.errorMessage); // Alerta visible
         }
       });
@@ -82,12 +82,12 @@ export class LoginComponent implements OnInit {
           control.markAsTouched();
         }
       });
-  
+
       this.errorMessage = 'Por favor, complete todos los campos correctamente.';
       alert(this.errorMessage); // Alerta para formularios incompletos
     }
   }
-  
+
 
   isFieldInvalid(field: string): boolean {
     const control = this.loginForm.get(field);

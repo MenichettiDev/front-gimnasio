@@ -6,18 +6,26 @@
       <i class="bi bi-person-circle me-2"></i> PERFIL DE USUARIO
     </h1>
 
+    <!-- Tipos de perfil del usuario -->
+    <div class="mb-4 text-center">
+      <span class="badge rounded-pill bg-info text-dark fs-6 me-2" *ngFor="let perfil of perfilesUsuario">
+        <i class="bi bi-person-badge me-1"></i> {{ perfil }}
+      </span>
+      <div class="small text-muted mt-2">
+        {{ perfilesUsuario.length > 1 ? 'Tienes varios perfiles en el sistema.' : 'Este es tu perfil actual.' }}
+      </div>
+    </div>
+
     <!-- Foto de perfil -->
     <div class="mb-4 d-flex justify-content-center position-relative">
       <!-- Foto de perfil o ícono predeterminado -->
       <div *ngIf="perfil?.foto_archivo; else defaultPhoto">
-        <img
-          [src]="perfil.foto_archivo"
-          alt="Foto de perfil"
-          class="profile-image rounded-circle img-thumbnail border border-3 border-white"
-        />
+        <img [src]="perfil.foto_archivo" alt="Foto de perfil"
+          class="profile-image rounded-circle img-thumbnail border border-3 border-white" />
       </div>
       <ng-template #defaultPhoto>
-        <div class="default-avatar rounded-circle border border-3 border-white d-flex justify-content-center align-items-center">
+        <div
+          class="default-avatar rounded-circle border border-3 border-white d-flex justify-content-center align-items-center">
           <i class="bi bi-person-fill text-white"></i> <!-- Ícono predeterminado -->
         </div>
       </ng-template>
@@ -43,27 +51,14 @@
           <label for="nombre" class="form-label">
             <i class="bi bi-person-fill me-2"></i> Nombre
           </label>
-          <input
-            type="text"
-            id="nombre"
-            class="form-control"
-            [(ngModel)]="perfil.nombre"
-            name="nombre"
-            required
-          />
+          <input type="text" id="nombre" class="form-control" [(ngModel)]="perfil.nombre" name="nombre" required />
         </div>
         <div class="col-md-6">
           <label for="apellido" class="form-label">
             <i class="bi bi-person-fill me-2"></i> Apellido
           </label>
-          <input
-            type="text"
-            id="apellido"
-            class="form-control"
-            [(ngModel)]="perfil.apellido"
-            name="apellido"
-            required
-          />
+          <input type="text" id="apellido" class="form-control" [(ngModel)]="perfil.apellido" name="apellido"
+            required />
         </div>
       </div>
 
@@ -73,26 +68,13 @@
           <label for="email" class="form-label">
             <i class="bi bi-envelope-fill me-2"></i> Correo electrónico
           </label>
-          <input
-            type="email"
-            id="email"
-            class="form-control"
-            [(ngModel)]="perfil.email"
-            name="email"
-            required
-          />
+          <input type="email" id="email" class="form-control" [(ngModel)]="perfil.email" name="email" required />
         </div>
         <div class="col-md-6">
           <label for="celular" class="form-label">
             <i class="bi bi-telephone-fill me-2"></i> Celular
           </label>
-          <input
-            type="tel"
-            id="celular"
-            class="form-control"
-            [(ngModel)]="perfil.celular"
-            name="celular"
-          />
+          <input type="tel" id="celular" class="form-control" [(ngModel)]="perfil.celular" name="celular" />
         </div>
       </div>
 
@@ -102,13 +84,7 @@
           <label for="direccion" class="form-label">
             <i class="bi bi-house-door-fill me-2"></i> Dirección
           </label>
-          <input
-            type="text"
-            id="direccion"
-            class="form-control"
-            [(ngModel)]="perfil.direccion"
-            name="direccion"
-          />
+          <input type="text" id="direccion" class="form-control" [(ngModel)]="perfil.direccion" name="direccion" />
         </div>
       </div>
 
@@ -117,24 +93,14 @@
           <label for="fechaNacimiento" class="form-label">
             <i class="bi bi-calendar-date me-2"></i> Fecha de nacimiento
           </label>
-          <input
-            type="date"
-            id="fechaNacimiento"
-            class="form-control"
-            [(ngModel)]="perfil.fecha_nacimiento"
-            name="fechaNacimiento"
-            required
-          />
+          <input type="date" id="fechaNacimiento" class="form-control" [(ngModel)]="perfil.fecha_nacimiento"
+            name="fechaNacimiento" required />
         </div>
       </div>
 
       <!-- Botón de guardar -->
       <div class="d-grid gap-2 mt-4 mt-sm-5">
-        <button
-          type="submit"
-          class="btn btn-primary rounded-pill"
-          [disabled]="isLoading"
-        >
+        <button type="submit" class="btn btn-primary rounded-pill" [disabled]="isLoading">
           <i class="bi bi-check-circle-fill me-2"></i>Procesar
         </button>
       </div>
