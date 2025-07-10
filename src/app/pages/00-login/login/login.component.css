@@ -5,9 +5,12 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.1); /* Transparencia */
-  backdrop-filter: blur(10px); /* Efecto de desenfoque */
-  z-index: 0; /* Aseguramos que el fondo quede detrás del contenido */
+  background: linear-gradient(135deg, rgba(43, 1, 75, 0.8), rgba(71, 0, 99, 0.9));
+  backdrop-filter: blur(15px);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Reset básico */
@@ -21,58 +24,87 @@
 /* Configuración del html y body */
 html,
 body {
-  height: 100%; /* Asegura que ocupe toda la pantalla */
+  height: 100%;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f0f0f0;
-  overflow: hidden; /* Elimina el scroll */
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  overflow: hidden;
 }
 
 /* Estilo para el contenedor */
 .container {
-  width: 400px; /* Mantener el ancho original */
-  background-color: rgba(71, 0, 99, 0.94);
+  width: 420px;
+  background: rgba(43, 1, 75, 0.95);
   color: #d3d3d3;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5);
+  padding: 40px 30px;
+  border-radius: 20px;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  position: relative;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: fadeInForm 1.2s ease-out forwards;
+  transform: translateY(0);
+}
+
+.container::before {
+  content: '';
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  opacity: 1;
-  animation: fadeInForm 1.7s forwards;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+  border-radius: 20px;
+  pointer-events: none;
 }
 
 /* Título dentro del contenedor */
 .container h1 {
-  font-size: 36px;
+  font-size: 32px;
   text-align: center;
   color: #ffffff;
+  margin-bottom: 30px;
+  font-weight: 700;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  letter-spacing: 1px;
 }
 
 /* Estilo de los campos de entrada */
 .form-group {
   position: relative;
   width: 100%;
-  height: 50px;
-  margin: 35px 0;
+  height: 55px;
+  margin: 25px 0;
 }
 
 .form-group input {
   width: 100%;
   height: 100%;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.1);
   border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 40px;
+  border-radius: 25px;
   font-size: 16px;
-  color: #d3d3d3; /* Cambiar color de texto a gris claro */
-  padding: 20px 45px 20px 20px;
+  color: #ffffff;
+  padding: 20px 50px 20px 20px;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.form-group input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 400;
+}
+
+.form-group input:focus {
+  border-color: #45B7D1;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 20px rgba(69, 183, 209, 0.3);
+  transform: translateY(-2px);
+}
+
+.form-group input:valid {
+  border-color: #4CAF50;
 }
 
 .form-group i {
@@ -81,34 +113,126 @@ body {
   top: 50%;
   transform: translateY(-50%);
   font-size: 20px;
-  color: #d3d3d3; /* Asegura que el ícono sea visible */
+  color: rgba(255, 255, 255, 0.6);
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus+i {
+  color: #45B7D1;
+}
+
+/* Recordar y olvidar contraseña */
+.remember-forgot {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin: 20px 0 25px;
+}
+
+.remember-forgot label {
+  display: flex;
+  align-items: center;
+  color: #d3d3d3;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.remember-forgot label:hover {
+  color: #ffffff;
+}
+
+.remember-forgot input[type="checkbox"] {
+  margin-right: 8px;
+  width: 16px;
+  height: 16px;
+  accent-color: #45B7D1;
+}
+
+.remember-forgot a {
+  color: #45B7D1;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.remember-forgot a:hover {
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(69, 183, 209, 0.5);
+}
+
+/* Mensajes de error */
+.error-message {
+  color: #ff6b6b;
+  font-size: 12px;
+  margin-top: 5px;
+  margin-left: 10px;
+  opacity: 0;
+  animation: errorFadeIn 0.3s ease forwards;
+}
+
+@keyframes errorFadeIn {
+  to {
+    opacity: 1;
+  }
 }
 
 /* Estilo del botón */
 .btn {
   width: 100%;
-  height: 45px;
-  background: #ffffff;
+  height: 50px;
+  background: linear-gradient(135deg, #45B7D1, #4CAF50);
   border: none;
-  border-radius: 40px;
-  color: #333;
+  border-radius: 25px;
+  color: #ffffff;
   font-weight: 600;
-  margin-top: 10px;
+  font-size: 16px;
+  margin-top: 15px;
   cursor: pointer;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(69, 183, 209, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.btn:hover {
-  background-color: rgba(43, 1, 75, 0.2); /* Fondo ligero cuando el mouse está encima */
-  color: #5706b4; /* Color al pasar el ratón */
+.btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #4CAF50, #45B7D1);
+  box-shadow: 0 8px 25px rgba(69, 183, 209, 0.6);
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn:disabled {
+  background: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.5);
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
 
 /* Estilo del enlace de registro */
 .register-link {
-  font-size: 14.5px;
+  font-size: 14px;
   text-align: center;
-  margin: 20px 0 15px;
+  margin: 25px 0 15px;
   color: #d3d3d3;
+}
+
+.register-link p {
+  margin: 0;
+}
+
+.register-link a {
+  color: #45B7D1;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.register-link a:hover {
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(69, 183, 209, 0.5);
 }
 
 /* Botón de cerrar (X) */
@@ -116,47 +240,133 @@ body {
   background: transparent;
   border: none;
   position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 24px;
-  color: #d3d3d3;  /* Color gris claro para la X */
+  top: 15px;
+  right: 15px;
+  font-size: 28px;
+  color: rgba(255, 255, 255, 0.7);
   cursor: pointer;
-  z-index: 9999; /* Aseguramos que esté por encima del contenido */
+  z-index: 9999;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
 }
 
 .close-btn:hover {
-  color: #ff4d4d;  /* Cambio de color en hover para hacerlo más visible */
+  color: #ff6b6b;
+  background: rgba(255, 255, 255, 0.1);
+  transform: rotate(90deg);
 }
 
 /* Animación de entrada */
 @keyframes fadeInForm {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+
   to {
     opacity: 1;
+    transform: translateY(0) scale(1);
   }
+}
+
+/* Efectos de micro-interacciones */
+.container:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 25px 50px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.15);
 }
 
 /* Ajustes para pantallas pequeñas */
 @media (max-width: 480px) {
   .container {
-      width: 90%;
-      padding: 20px;
+    width: 90%;
+    padding: 30px 20px;
+    margin: 20px;
   }
 
   .container h1 {
-      font-size: 28px;
+    font-size: 28px;
+    margin-bottom: 25px;
+  }
+
+  .form-group {
+    height: 50px;
+    margin: 20px 0;
   }
 
   .form-group input {
-      font-size: 14px;
-      padding: 15px 35px 15px 15px;
+    font-size: 14px;
+    padding: 15px 40px 15px 15px;
+  }
+
+  .form-group i {
+    right: 15px;
+    font-size: 18px;
   }
 
   .btn {
-      height: 40px;
-      font-size: 14px;
+    height: 45px;
+    font-size: 14px;
   }
 
-  .register-link p {
-      font-size: 13px;
+  .register-link {
+    font-size: 13px;
   }
+
+  .remember-forgot {
+    font-size: 12px;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    width: 95%;
+    padding: 25px 15px;
+  }
+
+  .container h1 {
+    font-size: 24px;
+  }
+
+  .form-group {
+    height: 45px;
+    margin: 15px 0;
+  }
+
+  .form-group input {
+    font-size: 13px;
+    padding: 12px 35px 12px 12px;
+  }
+
+  .btn {
+    height: 40px;
+    font-size: 13px;
+  }
+}
+
+/* Animación de pulso para el botón cuando está habilitado */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 5px 15px rgba(69, 183, 209, 0.4);
+  }
+
+  50% {
+    box-shadow: 0 5px 15px rgba(69, 183, 209, 0.6);
+  }
+
+  100% {
+    box-shadow: 0 5px 15px rgba(69, 183, 209, 0.4);
+  }
+}
+
+.btn:not(:disabled) {
+  animation: pulse 2s infinite;
 }

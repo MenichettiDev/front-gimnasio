@@ -6,5 +6,4 @@ export const loginRoutes: Routes = [
     { path: '', loadComponent: () => import('./home/home.component').then(m => m.HomeComponent) },
     { path: 'home', loadComponent: () => import('./home/home.component').then(m => m.HomeComponent) },
     { path: 'login', loadComponent: () => import('./login/login.component').then(m => m.LoginComponent) },
-    { path: 'register', loadComponent: () => import('./registro-usuario/registro-usuario.component').then(m => m.RegistroUsuarioComponent) }
 ];
