@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
           this.authService.saveUser(response.usuario[0]);
 
           // Verifica que el usuario se haya guardado correctamente
-          if (!this.authService.isLoggedIn) {
+          if (!this.authService.isLoggedIn()) {  // ✅ CORRECTO: isLoggedIn() es un método
             this.errorMessage = 'Error al guardar los datos del usuario.';
             alert(this.errorMessage);
             return;

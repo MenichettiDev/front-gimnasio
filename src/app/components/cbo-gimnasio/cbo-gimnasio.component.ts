@@ -21,6 +21,7 @@ import { CommonModule } from '@angular/common';
 export class CboGimnasioComponent implements OnInit, ControlValueAccessor {
   @Input() label: string = 'Selecciona un Gimnasio'; // Etiqueta del combo
   @Input() emitOnlyId: boolean = false; // Controla si se emite solo el ID o el objeto completo
+  @Input() placeholder: string = 'Selecciona un gimnasio';
   @Output() valueChange = new EventEmitter<number>();
   gimnasios: Gimnasio[] = []; // Lista de gimnasios
   selectedGimnasio: number | null = null; // Valor seleccionado (ID del gimnasio)

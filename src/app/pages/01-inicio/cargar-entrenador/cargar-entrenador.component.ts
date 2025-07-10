@@ -11,7 +11,7 @@ import { CboGimnasiosMultiplesComponent } from "../../../components/Gimnasios/cb
 @Component({
   selector: 'app-cargar-entrenador',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, ModalConfirmComponent, CboGimnasioComponent, CboGimnasiosMultiplesComponent],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, ModalConfirmComponent, CboGimnasiosMultiplesComponent],
   templateUrl: './cargar-entrenador.component.html',
   styleUrls: ['./cargar-entrenador.component.css']
 })

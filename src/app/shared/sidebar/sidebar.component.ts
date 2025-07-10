@@ -32,6 +32,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   isLoggedIn = false;
   id_acceso = 1;
   isSmallScreen = window.innerWidth < 992;
+  isPerfilModalVisible = false;
 
   private subscription = new Subscription();
 
@@ -235,5 +236,24 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   handleCancel() {
     this.isModalVisible = false;
+  }
+
+  onPerfilSelected(perfilId: number) {
+    this.isPerfilModalVisible = false;
+
+    // Dirigir al formulario correspondiente
+    switch (perfilId) {
+      case 2: // Entrenador
+        this.router.navigate(['/registro-entrenador']);
+        break;
+      case 3: // Atleta
+        this.router.navigate(['/registro-atleta']);
+        break;
+      case 4: // Gimnasio
+        this.router.navigate(['/registro-gimnasio']);
+        break;
+      default:
+        console.error('Perfil no válido');
+    }
   }
 }

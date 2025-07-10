@@ -1,0 +1,210 @@
+<div class="container">
+    <div class="card shadow-lg">
+        <div class="card-body">
+            <h1 class="form-title text-center mb-4">
+                <i class="bx bx-building"></i> REGISTRO DE GIMNASIO
+            </h1>
+
+            <form [formGroup]="gimnasioForm">
+                <!-- Datos del Representante Legal -->
+                <div class="section-header">
+                    <h3><i class="bi bi-person-badge"></i> Datos del Representante Legal</h3>
+                </div>
+
+                <!-- Grupo 1: Nombre, Apellido y DNI -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="nombre" class="form-label">Nombre *</label>
+                        <input type="text" id="nombre" formControlName="nombre" class="form-control"
+                            [class.is-invalid]="isFieldInvalid('nombre')"
+                            placeholder="Nombre del representante legal" />
+                        <div class="invalid-feedback">{{ getFieldError('nombre') }}</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="apellido" class="form-label">Apellido *</label>
+                        <input type="text" id="apellido" formControlName="apellido" class="form-control"
+                            [class.is-invalid]="isFieldInvalid('apellido')"
+                            placeholder="Apellido del representante legal" />
+                        <div class="invalid-feedback">{{ getFieldError('apellido') }}</div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="dni" class="form-label">DNI *</label>
+                        <input type="text" id="dni" formControlName="dni" class="form-control"
+                            [class.is-invalid]="isFieldInvalid('dni')" placeholder="DNI del representante legal" />
+                        <div class="invalid-feedback">{{ getFieldError('dni') }}</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento *</label>
+                        <input type="date" id="fecha_nacimiento" formControlName="fecha_nacimiento" class="form-control"
+                            [class.is-invalid]="isFieldInvalid('fecha_nacimiento')" />
+                        <div class="invalid-feedback">{{ getFieldError('fecha_nacimiento') }}</div>
+                    </div>
+                </div>
+
+                <!-- Contacto del Representante -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="celular" class="form-label">Celular *</label>
+                        <input type="text" id="celular" formControlName="celular" class="form-control"
+                            [class.is-invalid]="isFieldInvalid('celular')" placeholder="Celular del representante" />
+                        <div class="invalid-feedback">{{ getFieldError('celular') }}</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email" class="form-label">Email Personal *</label>
+                        <input type="email" id="email" formControlName="email" class="form-control"
+                            [class.is-invalid]="isFieldInvalid('email')" placeholder="Email del representante" />
+                        <div class="invalid-feedback">{{ getFieldError('email') }}</div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label for="direccion" class="form-label">Dirección Personal</label>
+                        <input type="text" id="direccion" formControlName="direccion" class="form-control"
+                            placeholder="Dirección del representante (opcional)" />
+                    </div>
+                </div>
+
+                <!-- Contraseñas -->
+                <div class="section-header">
+                    <h3><i class="bi bi-shield-lock"></i> Seguridad</h3>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="password" class="form-label">Contraseña *</label>
+                        <input type="password" id="password" formControlName="password" class="form-control"
+                            [class.is-invalid]="isFieldInvalid('password')" placeholder="Contraseña de acceso" />
+                        <div class="invalid-feedback">{{ getFieldError('password') }}</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="confirm_password" class="form-label">Confirmar Contraseña *</label>
+                        <input type="password" id="confirm_password" formControlName="confirm_password"
+                            class="form-control" [class.is-invalid]="isFieldInvalid('confirm_password')"
+                            placeholder="Confirme la contraseña" />
+                        <div class="invalid-feedback">{{ getFieldError('confirm_password') }}</div>
+                    </div>
+                </div>
+
+                <!-- Datos del Gimnasio -->
+                <div class="section-header">
+                    <h3><i class="bi bi-building"></i> Información del Gimnasio</h3>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label for="nombre_gimnasio" class="form-label">Nombre del Gimnasio *</label>
+                        <input type="text" id="nombre_gimnasio" formControlName="nombre_gimnasio" class="form-control"
+                            [class.is-invalid]="isFieldInvalid('nombre_gimnasio')"
+                            placeholder="Nombre comercial del gimnasio" />
+                        <div class="invalid-feedback">{{ getFieldError('nombre_gimnasio') }}</div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label for="direccion_gimnasio" class="form-label">Dirección del Gimnasio *</label>
+                        <input type="text" id="direccion_gimnasio" formControlName="direccion_gimnasio"
+                            class="form-control" [class.is-invalid]="isFieldInvalid('direccion_gimnasio')"
+                            placeholder="Dirección completa del gimnasio" />
+                        <div class="invalid-feedback">{{ getFieldError('direccion_gimnasio') }}</div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="telefono" class="form-label">Teléfono del Gimnasio *</label>
+                        <input type="text" id="telefono" formControlName="telefono" class="form-control"
+                            [class.is-invalid]="isFieldInvalid('telefono')" placeholder="Teléfono de contacto" />
+                        <div class="invalid-feedback">{{ getFieldError('telefono') }}</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="correo_electronico" class="form-label">Email del Gimnasio *</label>
+                        <input type="email" id="correo_electronico" formControlName="correo_electronico"
+                            class="form-control" [class.is-invalid]="isFieldInvalid('correo_electronico')"
+                            placeholder="Email comercial del gimnasio" />
+                        <div class="invalid-feedback">{{ getFieldError('correo_electronico') }}</div>
+                    </div>
+                </div>
+
+                <!-- Horarios -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="horario_apertura" class="form-label">Horario de Apertura *</label>
+                        <input type="time" id="horario_apertura" formControlName="horario_apertura" class="form-control"
+                            [class.is-invalid]="isFieldInvalid('horario_apertura')" />
+                        <div class="invalid-feedback">{{ getFieldError('horario_apertura') }}</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="horario_cierre" class="form-label">Horario de Cierre *</label>
+                        <input type="time" id="horario_cierre" formControlName="horario_cierre" class="form-control"
+                            [class.is-invalid]="isFieldInvalid('horario_cierre')" />
+                        <div class="invalid-feedback">{{ getFieldError('horario_cierre') }}</div>
+                    </div>
+                </div>
+
+                <!-- Descripción -->
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label for="descripcion" class="form-label">Descripción del Gimnasio *</label>
+                        <textarea id="descripcion" formControlName="descripcion" class="form-control"
+                            [class.is-invalid]="isFieldInvalid('descripcion')" rows="4"
+                            placeholder="Describe tu gimnasio, servicios, equipamiento, etc.">
+            </textarea>
+                        <div class="invalid-feedback">{{ getFieldError('descripcion') }}</div>
+                    </div>
+                </div>
+
+                <!-- Página Web -->
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label for="pagina_web" class="form-label">Página Web</label>
+                        <input type="url" id="pagina_web" formControlName="pagina_web" class="form-control"
+                            [class.is-invalid]="isFieldInvalid('pagina_web')"
+                            placeholder="https://www.ejemplo.com (opcional)" />
+                        <div class="invalid-feedback">{{ getFieldError('pagina_web') }}</div>
+                    </div>
+                </div>
+
+                <!-- Términos y Condiciones -->
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox"
+                                [class.is-invalid]="isFieldInvalid('acepta_terminos')" id="acepta_terminos"
+                                formControlName="acepta_terminos">
+                            <label class="form-check-label text-white" for="acepta_terminos">
+                                Acepto los términos y condiciones para gimnasios *
+                            </label>
+                            <div class="invalid-feedback">{{ getFieldError('acepta_terminos') }}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botones -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-secondary btn-block" (click)="volverASeleccion()">
+                            <i class="bi bi-arrow-left"></i> Volver
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-primary btn-block" (click)="openModal()"
+                            [disabled]="gimnasioForm.invalid">
+                            <i class="bi bi-check-circle-fill"></i> Registrar Gimnasio
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Confirmación -->
+<app-modal-confirm [visible]="isModalVisible" [title]="'Confirmación de Registro'"
+    [message]="'¿Estás seguro de registrar este gimnasio con estos datos?'" (confirm)="handleConfirm()"
+    (cancel)="handleCancel()">
+</app-modal-confirm>

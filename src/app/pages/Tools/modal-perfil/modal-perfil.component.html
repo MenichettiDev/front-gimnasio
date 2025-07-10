@@ -1,0 +1,49 @@
+<div class="modal-overlay" [class.visible]="visible" (click)="cancelSelection()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h2 class="modal-title">
+                <i class="fas fa-user-plus"></i>
+                ¡Bienvenido!
+            </h2>
+            <p class="modal-subtitle">
+                Para comenzar, selecciona tu perfil en la plataforma
+            </p>
+        </div>
+
+        <div class="modal-body">
+            <div class="perfil-grid">
+                <div *ngFor="let perfil of perfilOptions" class="perfil-card"
+                    [class.selected]="selectedPerfil === perfil.id" [style.border-color]="perfil.color"
+                    (click)="selectPerfil(perfil.id)">
+
+                    <div class="perfil-icon" [style.color]="perfil.color">
+                        <i [class]="perfil.icono"></i>
+                    </div>
+
+                    <div class="perfil-info">
+                        <h3 class="perfil-nombre">{{ perfil.nombre }}</h3>
+                        <p class="perfil-descripcion">{{ perfil.descripcion }}</p>
+                    </div>
+
+                    <div class="perfil-selector">
+                        <div class="radio-button" [class.checked]="selectedPerfil === perfil.id">
+                            <i class="fas fa-check" *ngIf="selectedPerfil === perfil.id"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="cancelSelection()">
+                <i class="fas fa-times"></i>
+                Cancelar
+            </button>
+
+            <button type="button" class="btn btn-primary" [disabled]="!selectedPerfil" (click)="confirmSelection()">
+                <i class="fas fa-check-circle"></i>
+                Confirmar Selección
+            </button>
+        </div>
+    </div>
+</div>
