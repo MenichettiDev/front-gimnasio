@@ -1,1 +1,109 @@
-<p>noticias works!</p>
+<div class="noticias-container">
+    <!-- Header -->
+    <div class="noticias-header">
+        <h1 class="noticias-title">
+            <i class="bx bx-news"></i>
+            Noticias y Artículos
+        </h1>
+        <p class="noticias-subtitle">
+            Mantente actualizado con los últimos consejos y tendencias del fitness
+        </p>
+    </div>
+
+    <!-- Grid de Noticias -->
+    <div class="noticias-grid">
+        <div class="noticia-card" *ngFor="let noticia of noticias" (click)="verNoticia(noticia)">
+            <!-- Imagen -->
+            <div class="noticia-imagen">
+                <img [src]="noticia.imagen" [alt]="noticia.titulo" loading="lazy">
+                <div class="noticia-overlay">
+                    <span class="categoria-badge" [style.background-color]="getCategoriaColor(noticia.categoria)">
+                        {{ noticia.categoria }}
+                    </span>
+                </div>
+            </div>
+
+            <!-- Contenido -->
+            <div class="noticia-content">
+                <div class="noticia-meta">
+                    <span class="fecha">
+                        <i class="bx bx-calendar"></i>
+                        {{ noticia.fecha | date:'dd/MM/yyyy' }}
+                    </span>
+                    <span class="tiempo-lectura">
+                        <i class="bx bx-time"></i>
+                        {{ noticia.tiempoLectura }}
+                    </span>
+                </div>
+
+                <h3 class="noticia-titulo">{{ noticia.titulo }}</h3>
+                <p class="noticia-resumen">{{ noticia.resumen }}</p>
+
+                <div class="noticia-footer">
+                    <div class="autor">
+                        <i class="bx bx-user"></i>
+                        {{ noticia.autor }}
+                    </div>
+
+                    <div class="tags">
+                        <span class="tag" *ngFor="let tag of noticia.tags">
+                            #{{ tag }}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="leer-mas">
+                    <span>Leer más</span>
+                    <i class="bx bx-right-arrow-alt"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Ver Noticia Completa -->
+    <div class="modal-overlay" *ngIf="noticiaSeleccionada" (click)="cerrarNoticia()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+            <button class="modal-close" (click)="cerrarNoticia()">
+                <i class="bx bx-x"></i>
+            </button>
+
+            <div class="modal-header">
+                <img [src]="noticiaSeleccionada.imagen" [alt]="noticiaSeleccionada.titulo">
+                <div class="modal-header-content">
+                    <span class="modal-categoria"
+                        [style.background-color]="getCategoriaColor(noticiaSeleccionada.categoria)">
+                        {{ noticiaSeleccionada.categoria }}
+                    </span>
+                    <h2>{{ noticiaSeleccionada.titulo }}</h2>
+                    <div class="modal-meta">
+                        <span class="modal-fecha">
+                            <i class="bx bx-calendar"></i>
+                            {{ noticiaSeleccionada.fecha | date:'dd/MM/yyyy' }}
+                        </span>
+                        <span class="modal-autor">
+                            <i class="bx bx-user"></i>
+                            {{ noticiaSeleccionada.autor }}
+                        </span>
+                        <span class="modal-tiempo">
+                            <i class="bx bx-time"></i>
+                            {{ noticiaSeleccionada.tiempoLectura }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <p class="modal-resumen">{{ noticiaSeleccionada.resumen }}</p>
+                <div class="modal-contenido">
+                    <p>{{ noticiaSeleccionada.contenido }}</p>
+                </div>
+
+                <div class="modal-tags">
+                    <span class="modal-tag" *ngFor="let tag of noticiaSeleccionada.tags">
+                        #{{ tag }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

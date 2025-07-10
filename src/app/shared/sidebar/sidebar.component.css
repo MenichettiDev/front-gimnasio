@@ -4,7 +4,8 @@
 
 /* Barra superior para pantallas pequeñas */
 .top-bar {
-  display: none; /* Oculto por defecto */
+  display: none;
+  /* Oculto por defecto */
   position: fixed;
   top: 0;
   left: 0;
@@ -17,14 +18,18 @@
   justify-content: space-between;
   padding: 0 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  min-width: 320px; /* Asegurar un ancho mínimo para pantallas pequeñas */
+  min-width: 320px;
+  /* Asegurar un ancho mínimo para pantallas pequeñas */
 }
 
 /* Logo pequeño */
 .logo-small img {
-  width: auto; /* Ajustar automáticamente el ancho */
-  height: 40px; /* Altura fija */
-  max-width: 100%; /* Evitar que el logo se desborde */
+  width: auto;
+  /* Ajustar automáticamente el ancho */
+  height: 40px;
+  /* Altura fija */
+  max-width: 100%;
+  /* Evitar que el logo se desborde */
 }
 
 /* Botón de hamburguesa */
@@ -39,10 +44,12 @@
    ========================================================== */
 
 .sidebar {
-  width: 240px; /* Ancho fijo */
+  width: 240px;
+  /* Ancho fijo */
   background-color: rgba(71, 0, 99, 0.98);
   color: #d3d3d3;
-  padding: 20px; /* Espaciado interno fijo */
+  padding: 20px;
+  /* Espaciado interno fijo */
   position: fixed;
   top: 0;
   left: 0;
@@ -55,27 +62,34 @@
   height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
-  transition: none; /* Eliminar transiciones innecesarias */
+  transition: none;
+  /* Eliminar transiciones innecesarias */
 }
 
 /* Personalización de la barra de desplazamiento */
 .sidebar::-webkit-scrollbar {
-  width: 8px; /* Ancho de la barra de desplazamiento */
+  width: 8px;
+  /* Ancho de la barra de desplazamiento */
 }
 
 .sidebar::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.2); /* Color de la pista de desplazamiento */
+  background: rgba(0, 0, 0, 0.2);
+  /* Color de la pista de desplazamiento */
 }
 
 .sidebar::-webkit-scrollbar-thumb {
-  background-color: #5706b48c; /* Color de la barra de desplazamiento */
-  border-radius: 10px; /* Bordes redondeados */
+  background-color: #5706b48c;
+  /* Color de la barra de desplazamiento */
+  border-radius: 10px;
+  /* Bordes redondeados */
 }
 
 /* Clase para el contenido principal, asegurando que no se desplace detrás del sidebar */
 .main-content {
-  margin-left: 220px; /* Margen fijo en pantallas grandes */
-  transition: none; /* Eliminar transiciones innecesarias */
+  margin-left: 220px;
+  /* Margen fijo en pantallas grandes */
+  transition: none;
+  /* Eliminar transiciones innecesarias */
   z-index: 10;
   padding: 20px;
   position: relative;
@@ -83,9 +97,11 @@
 }
 
 /* Cuando el sidebar está oculto, el contenido principal se ajusta */
-.sidebar.hidden + .main-content {
-  margin-left: 0; /* El contenido principal se mueve al lado de la ventana cuando el sidebar está oculto */
-  max-width: 100%; /* El contenido ocupa todo el ancho de la pantalla cuando el sidebar está oculto */
+.sidebar.hidden+.main-content {
+  margin-left: 0;
+  /* El contenido principal se mueve al lado de la ventana cuando el sidebar está oculto */
+  max-width: 100%;
+  /* El contenido ocupa todo el ancho de la pantalla cuando el sidebar está oculto */
 }
 
 /* ==========================================================
@@ -98,25 +114,30 @@
   padding: 0;
   overflow: hidden;
 }
+
 .sidebar.hidden .sidebar-toggle {
-  right: -40px; /* Ajusta la posición cuando el sidebar está oculto */
+  right: -40px;
+  /* Ajusta la posición cuando el sidebar está oculto */
 }
 
 /* Espacio para la imagen en la parte superior */
 .sidebar-img {
   text-align: center;
   margin-bottom: 5px;
-  display: block; /* Visible por defecto */
+  display: block;
+  /* Visible por defecto */
 }
 
 /* Logo grande */
 .sidebar-img img {
-  width: 100px; /* Tamaño fijo */
+  width: 100px;
+  /* Tamaño fijo */
   height: auto;
   object-fit: contain;
   margin-bottom: 50px;
   margin-top: 10px;
-  transition: none; /* Eliminar transiciones innecesarias */
+  transition: none;
+  /* Eliminar transiciones innecesarias */
 }
 
 /* Ocultar la imagen cuando el sidebar está oculto */
@@ -129,24 +150,31 @@
    ========================================================== */
 
 .nav-link {
-  font-family: "Roboto", sans-serif; /* Aplica Roboto a los enlaces */
-  padding: 5px 15px; /* Padding fijo */
-  font-size: 18px; /* Tamaño de fuente fijo */
+  font-family: "Roboto", sans-serif;
+  /* Aplica Roboto a los enlaces */
+  padding: 5px 15px;
+  /* Padding fijo */
+  font-size: 18px;
+  /* Tamaño de fuente fijo */
   color: #ffffff;
   text-decoration: none;
   font-weight: 300;
-  letter-spacing: 0.5px; /* Ajusta el espaciado entre las letras */
+  letter-spacing: 0.5px;
+  /* Ajusta el espaciado entre las letras */
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 10px; /* Espacio fijo entre ícono y texto */
-  transition: none; /* Eliminar transiciones innecesarias */
+  gap: 10px;
+  /* Espacio fijo entre ícono y texto */
+  transition: none;
+  /* Eliminar transiciones innecesarias */
 }
 
 /* Cambiar color de los enlaces al pasar el ratón */
 .nav-link:hover {
   color: #ffffff;
-  background-color: rgba(179, 0, 137, 0.5); /* Fondo azul claro en hover */
+  background-color: rgba(179, 0, 137, 0.5);
+  /* Fondo azul claro en hover */
   text-decoration: none;
 }
 
@@ -155,39 +183,53 @@
    ========================================================== */
 
 .sub-menu {
-  padding-left: 30px; /* Espaciado fijo */
+  padding-left: 30px;
+  /* Espaciado fijo */
   margin-top: 5px;
   border-radius: 5px;
   overflow: hidden;
-  max-height: 0; /* Inicialmente colapsado */
-  transition: max-height 0.3s ease; /* Solo para expandir/colapsar submenús */
+  max-height: 0;
+  /* Inicialmente colapsado */
+  transition: max-height 0.3s ease;
+  /* Solo para expandir/colapsar submenús */
 }
 
 /* Cuando el submenú está expandido */
 .sub-menu.expanded {
-  max-height: 500px; /* Ajusta el alto del submenú automáticamente cuando está expandido */
+  max-height: 500px;
+  /* Ajusta el alto del submenú automáticamente cuando está expandido */
 }
 
 /* Eliminar las bolitas (marcadores) en los submenús */
 .sub-menu ul {
-  list-style-type: none; /* Asegura que no haya marcadores o bolitas */
-  padding-left: 0; /* Elimina el sangrado izquierdo de la lista */
-  margin-left: 0; /* Elimina el margen izquierdo */
+  list-style-type: none;
+  /* Asegura que no haya marcadores o bolitas */
+  padding-left: 0;
+  /* Elimina el sangrado izquierdo de la lista */
+  margin-left: 0;
+  /* Elimina el margen izquierdo */
 }
 
 /* Asegúrate de que los submenús también no tengan marcador */
 .sub-menu .nav-item {
-  list-style-type: none; /* Elimina las bolitas de los submenús */
-  padding: 5px 0; /* Reducir el espacio entre las líneas de los submenús */
-  margin: 0; /* Eliminar márgenes innecesarios */
-  line-height: 1.4; /* Ajustar la altura de línea para que el espacio entre las líneas sea más pequeño */
+  list-style-type: none;
+  /* Elimina las bolitas de los submenús */
+  padding: 5px 0;
+  /* Reducir el espacio entre las líneas de los submenús */
+  margin: 0;
+  /* Eliminar márgenes innecesarios */
+  line-height: 1.4;
+  /* Ajustar la altura de línea para que el espacio entre las líneas sea más pequeño */
 }
 
 /* Asegúrate de que los enlaces no tengan márgenes o padding innecesarios */
 .sub-menu .nav-link {
-  padding: 0px 15px; /* Ajusta el padding de los enlaces del submenú */
-  margin: 0; /* Eliminar márgenes adicionales */
-  font-size: 16px; /* Ajusta el tamaño de fuente de los enlaces del submenú */
+  padding: 0px 15px;
+  /* Ajusta el padding de los enlaces del submenú */
+  margin: 0;
+  /* Eliminar márgenes adicionales */
+  font-size: 16px;
+  /* Ajusta el tamaño de fuente de los enlaces del submenú */
 }
 
 /* ==========================================================
@@ -195,20 +237,25 @@
    ========================================================== */
 
 .arrow {
-  width: 8px; /* Tamaño fijo */
+  width: 8px;
+  /* Tamaño fijo */
   height: 8px;
   border-top: 2px solid #b0b0b0;
   border-right: 2px solid #b0b0b0;
   transform: rotate(45deg);
   margin-left: auto;
-  transition: none; /* Eliminar transiciones innecesarias */
+  transition: none;
+  /* Eliminar transiciones innecesarias */
 }
 
 /* Flecha rotada cuando el submenú está expandido */
 .arrow.rotate {
-  transform: rotate(135deg); /* Cambia el ángulo cuando está expandido */
-  border-top-color: #4c5b6b; /* Color de la flecha cuando se expande */
-  border-right-color: #4c5b6b; /* Color de la flecha cuando se expande */
+  transform: rotate(135deg);
+  /* Cambia el ángulo cuando está expandido */
+  border-top-color: #4c5b6b;
+  /* Color de la flecha cuando se expande */
+  border-right-color: #4c5b6b;
+  /* Color de la flecha cuando se expande */
 }
 
 /* ==========================================================
@@ -218,38 +265,47 @@
 .sidebar-toggle {
   position: absolute;
   top: 20px;
-  right: 10px; /* Coloca el botón fuera del sidebar */
+  right: 10px;
+  /* Coloca el botón fuera del sidebar */
   width: 30px;
   height: 30px;
-  background-color: #04df13bb; /* Color de fondo */
-  border-radius: 50%; /* Forma circular */
+  background-color: #04df13bb;
+  /* Color de fondo */
+  border-radius: 50%;
+  /* Forma circular */
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 1001; /* Asegúrate de que esté por encima del sidebar */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra suave */
+  z-index: 1001;
+  /* Asegúrate de que esté por encima del sidebar */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  /* Sombra suave */
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 /* Efecto hover para el botón */
 .sidebar-toggle:hover {
-  background-color: #038a0c; /* Cambia el color de fondo al pasar el ratón */
+  background-color: #038a0c;
+  /* Cambia el color de fondo al pasar el ratón */
 }
 
 /* Ícono del botón */
 .toggle-icon {
   width: 10px;
   height: 10px;
-  border-top: 2px solid white; /* Flecha hacia la izquierda */
+  border-top: 2px solid white;
+  /* Flecha hacia la izquierda */
   border-right: 2px solid white;
-  transform: rotate(45deg); /* Gira la flecha */
+  transform: rotate(45deg);
+  /* Gira la flecha */
   transition: transform 0.3s ease;
 }
 
 /* Rotación del ícono cuando el sidebar está oculto */
 .toggle-icon.rotate {
-  transform: rotate(-135deg); /* Gira la flecha hacia la derecha */
+  transform: rotate(-135deg);
+  /* Gira la flecha hacia la derecha */
 }
 
 /* ==========================================================
@@ -282,7 +338,8 @@
    ========================================================== */
 
 .sidebar-logout {
-  margin-top: auto; /* Coloca el botón al final del sidebar */
+  margin-top: auto;
+  /* Coloca el botón al final del sidebar */
   padding: 15px 0;
 }
 
@@ -292,38 +349,47 @@
   justify-content: flex-start;
   width: 100%;
   padding: 10px 20px;
-  background-color: transparent; /* Fondo transparente */
-  color: white; /* Color blanco para el texto */
-  border: 1px solid #d3d3d3; /* Borde gris claro */
-  border-radius: 5px; /* Bordes redondeados */
+  background-color: transparent;
+  /* Fondo transparente */
+  color: white;
+  /* Color blanco para el texto */
+  border: 1px solid #d3d3d3;
+  /* Borde gris claro */
+  border-radius: 5px;
+  /* Bordes redondeados */
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  /* Sombra sutil */
 }
 
 /* Efecto hover para el botón de Logout */
 .sidebar-logout .btn-logout:hover {
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.1
-  ); /* Fondo gris oscuro al pasar el ratón */
-  transform: translateX(5px); /* Desplazamiento suave al pasar el ratón */
+  background-color: rgba(255,
+      255,
+      255,
+      0.1);
+  /* Fondo gris oscuro al pasar el ratón */
+  transform: translateX(5px);
+  /* Desplazamiento suave al pasar el ratón */
 }
 
 /* Ícono del botón de Logout */
 .sidebar-logout .btn-logout i {
-  margin-right: 10px; /* Espacio entre el ícono y el texto */
-  font-size: 20px; /* Tamaño del ícono */
+  margin-right: 10px;
+  /* Espacio entre el ícono y el texto */
+  font-size: 20px;
+  /* Tamaño del ícono */
 }
 
 /* Efecto cuando el sidebar está oculto y el botón no se ve */
 .sidebar.hidden .sidebar-logout .btn-logout {
-  opacity: 0; /* Oculta el botón cuando el sidebar está cerrado */
-  pointer-events: none; /* Deshabilita la interacción */
+  opacity: 0;
+  /* Oculta el botón cuando el sidebar está cerrado */
+  pointer-events: none;
+  /* Deshabilita la interacción */
 }
 
 /* ==========================================================
@@ -331,55 +397,70 @@
    ========================================================== */
 
 @media (max-width: 991.98px) {
+
   /* Barra superior (Top-Bar) */
   .top-bar {
-    display: flex; /* Mostrar la barra superior */
+    display: flex;
+    /* Mostrar la barra superior */
   }
 
   /* Contenido principal */
   .main-content {
-    margin-left: 0; /* Sin margen en pantallas pequeñas */
+    margin-left: 0;
+    /* Sin margen en pantallas pequeñas */
     max-width: 100%;
   }
 
   /* Sidebar */
   .sidebar {
-    display: none; /* Ocultar el sidebar inicialmente */
+    display: none;
+    /* Ocultar el sidebar inicialmente */
   }
 
   .sidebar.visible {
-    display: block; /* Mostrar cuando se activa */
-    width: 250px; /* Ancho fijo */
+    display: block;
+    /* Mostrar cuando se activa */
+    width: 250px;
+    /* Ancho fijo */
   }
 
   .sidebar.hidden {
-    display: none; /* Asegurar que el sidebar esté oculto */
+    display: none;
+    /* Asegurar que el sidebar esté oculto */
   }
 
   /* Botón de toggle (hamburguesa) */
   .sidebar-toggle {
-    display: block; /* Mostrar el botón de toggle */
+    display: block;
+    /* Mostrar el botón de toggle */
   }
 
   .sidebar-img img {
-    width: 80px; /* Puedes ajustar el tamaño del logo si es necesario */
+    width: 80px;
+    /* Puedes ajustar el tamaño del logo si es necesario */
     height: auto;
     object-fit: contain;
-    margin-bottom: 0px; /* Espacio debajo del logo */
-    margin-top: 100px; /* Subir un poco el logo */
+    margin-bottom: 0px;
+    /* Espacio debajo del logo */
+    margin-top: 100px;
+    /* Subir un poco el logo */
   }
 
   /* Ajuste de los menús */
   .nav {
-    margin-top: 40px; /* Baja los menús para que no estén pegados al logo */
+    margin-top: 40px;
+    /* Baja los menús para que no estén pegados al logo */
   }
 
   /* Ajuste del botón de logout */
   .sidebar-logout {
-    margin-top: auto; /* Mueve el logout hacia el final */
+    margin-top: auto;
+    /* Mueve el logout hacia el final */
     padding: 15px 0;
-    position: absolute; /* Colócalo al fondo del sidebar */
-    bottom: 20px; /* Ajusta para bajarlo un poco */
+    position: absolute;
+    /* Colócalo al fondo del sidebar */
+    bottom: 20px;
+    /* Ajusta para bajarlo un poco */
     width: 100%;
   }
 
@@ -388,7 +469,8 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    width: 80%; /* Asegura que el botón ocupe el 80% del ancho del sidebar */
+    width: 80%;
+    /* Asegura que el botón ocupe el 80% del ancho del sidebar */
     padding: 10px 20px;
     background-color: transparent;
     color: white;
@@ -398,24 +480,27 @@
     font-weight: 500;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* Sombra sutil */
   }
 
   /* Efecto hover para el botón de Logout */
   .sidebar-logout .btn-logout:hover {
-    background-color: rgba(
-      255,
-      255,
-      255,
-      0.1
-    ); /* Fondo gris oscuro al pasar el ratón */
-    transform: translateX(5px); /* Desplazamiento suave al pasar el ratón */
+    background-color: rgba(255,
+        255,
+        255,
+        0.1);
+    /* Fondo gris oscuro al pasar el ratón */
+    transform: translateX(5px);
+    /* Desplazamiento suave al pasar el ratón */
   }
 
   /* Ícono del botón de Logout */
   .sidebar-logout .btn-logout i {
-    margin-right: 10px; /* Espacio entre el ícono y el texto */
-    font-size: 20px; /* Tamaño del ícono */
+    margin-right: 10px;
+    /* Espacio entre el ícono y el texto */
+    font-size: 20px;
+    /* Tamaño del ícono */
   }
 
 }
