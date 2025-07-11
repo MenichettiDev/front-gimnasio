@@ -1,31 +1,85 @@
-<div class="main-page" >
-  <div class="text-content" style="background-color: black; text-align: center; max-width: 800px; padding: 2rem; border: 2px solid #ff9500; border-radius: 20px; box-shadow: 0 0 25px #ff9500, 0 0 50px #ff9500 inset;">
-    
-    <h1 class="main-title" style="
-      color: #FFD700;
-      font-size: 2.8rem;
-      font-weight: bold;
-      text-shadow: 0 0 5px #FFD700, 0 0 20px #FFD700;
-      margin-bottom: 1.5rem;
-    ">
-      ¡No cuentes los días, haz que los días cuenten!
-    </h1>
+<div class="resumen-container">
+  <div class="hero-section">
+    <!-- Efectos de fondo -->
+    <div class="background-effects">
+      <div class="glow-effect glow-1"></div>
+      <div class="glow-effect glow-2"></div>
+      <div class="glow-effect glow-3"></div>
+    </div>
 
-    <!-- <button (click)="obtenerFraseAleatoria()" class="btn-refresh">
-        <i class="bx bx-refresh"></i> Nueva frase
-    </button> -->
+    <!-- Contenido principal -->
+    <div class="content-wrapper">
+      <!-- Header con icono -->
+      <div class="header-section">
+        <div class="icon-brutal">
+          <i class="bx bx-trophy"></i>
+        </div>
+        <h1 class="title-aggressive">
+          ZONA DE <span class="highlight-fire">CAMPEONES</span>
+        </h1>
+        <div class="subtitle-brutal">
+          Donde la excusa muere y nace la disciplina
+        </div>
+      </div>
 
-    <p class="random-quote" style="
-      color: #FF6600;
-      font-size: 1.5rem;
-      font-style: italic;
-      text-shadow: 0 0 8px #FF6600, 0 0 16px #FF6600;
-      border-top: 1px solid rgba(255, 255, 255, 0.2);
-      padding-top: 1rem;
-    ">
-      {{ fraseAleatoria?.frase }}
-    </p>
+      <!-- Frase motivacional -->
+      <div class="quote-section">
+        <div class="quote-container">
+          <div class="quote-decoration">
+            <i class="bx bx-run"></i>
+          </div>
+          <blockquote class="quote-text">
+            "{{ fraseAleatoria?.frase || 'El dolor que sientes hoy será la fuerza que sientes mañana.' }}"
+          </blockquote>
+          <!-- <div class="quote-author">
+            - {{ fraseAleatoria?.autor || 'Mentalidad de Guerrero' }}
+          </div> -->
+        </div>
+      </div>
 
+      <!-- Botón de acción -->
+      <div class="action-section">
+        <button (click)="obtenerFraseAleatoria()" class="btn-brutal">
+          <span class="btn-icon">
+            <i class="bx bx-refresh"></i>
+          </span>
+          <span class="btn-text">NUEVA MOTIVACIÓN</span>
+          <div class="btn-shine"></div>
+        </button>
+      </div>
+
+      <!-- Estadísticas motivacionales -->
+      <div class="stats-brutal">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="bx bx-dumbbell"></i>
+          </div>
+          <div class="stat-number">100%</div>
+          <div class="stat-label">DEDICACIÓN</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="bx bx-trending-up"></i>
+          </div>
+          <div class="stat-number">0%</div>
+          <div class="stat-label">EXCUSAS</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="bx bx-time"></i>
+          </div>
+          <div class="stat-number">24/7</div>
+          <div class="stat-label">MENTALIDAD</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Líneas decorativas -->
+    <div class="brutal-lines">
+      <div class="line line-top"></div>
+      <div class="line line-bottom"></div>
+      <div class="line line-left"></div>
+      <div class="line line-right"></div>
+    </div>
   </div>
 </div>
-
