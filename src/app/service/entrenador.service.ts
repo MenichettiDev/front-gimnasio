@@ -29,11 +29,6 @@ export class EntrenadorService {
     return this.http.post<Entrenador>(this.apiUrlGetEntrenadorByIdPersona, { id_persona });
   }
 
-  // crearEntrenador(entrenadorData: Entrenador): Observable<any> {
-  //   return this.http.post<any>(this.apiUrlcrearEntrenador, entrenadorData).pipe(
-  //     catchError(this.handleError)
-  //   );
-  // }
   crearEntrenador(entrenadorData: any): Observable<any> {
     return this.http.post<any>(this.apiUrlcrearEntrenador, entrenadorData).pipe(
       catchError(this.handleError)
