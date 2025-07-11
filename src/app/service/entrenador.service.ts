@@ -35,7 +35,9 @@ export class EntrenadorService {
   //   );
   // }
   crearEntrenador(entrenadorData: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, entrenadorData);
+    return this.http.post<any>(this.apiUrlcrearEntrenador, entrenadorData).pipe(
+      catchError(this.handleError)
+    );
   }
 
   // Método para asignar gimnasios a un entrenador
