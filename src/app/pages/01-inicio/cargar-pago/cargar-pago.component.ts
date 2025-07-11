@@ -19,7 +19,7 @@ import { Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-cargar-pago',
-  imports: [CboAtletaComponent, CboMembresiaComponent, ReactiveFormsModule, CommonModule, CboFormasPagoComponent, ModalConfirmComponent],
+  imports: [ReactiveFormsModule, CommonModule, CboFormasPagoComponent, ModalConfirmComponent],
   templateUrl: './cargar-pago.component.html',
   styleUrl: './cargar-pago.component.css'
 })
@@ -39,15 +39,13 @@ export class CargarPagoComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private gimnasioService: GimnasioService,
-    private membresiaService: MembresiaService,
     private pagoService: PagoService
   ) {
     this.frmData = this.fb.group({
       id_atleta: [null],
       id_entrenador: [null],
       id_gimnasio: [null],
-      id: [null],
+      fecha_pago: [this.getFechaActual(), Validators.required],
       monto: [{ value: null, disabled: true }, Validators.required],
       concepto: [{ value: null, disabled: true }, Validators.required],
       id_forma_pago: [null, Validators.required],
@@ -60,41 +58,42 @@ export class CargarPagoComponent implements OnInit {
 
 
   setConceptoYMonto(): void {
-
     console.log('Usuario:', this.authService.getUser());
     console.log('isGimnasio:', this.authService.isGimnasio());
     console.log('isEntrenador:', this.authService.isEntrenador());
     console.log('isAtleta:', this.authService.isAtleta());
 
+    const user = this.authService.getUser();
+
     if (this.authService.isGimnasio()) {
       this.montoFijo = 20000;
       this.conceptoFijo = 'Pago membresía gimnasio';
-      this.id = this.authService.getUser()?.id_gimnasio || null;
+      this.id = user?.id_gimnasio || null;
+      this.tipo = 'gimnasio';
     } else if (this.authService.isEntrenador()) {
       this.montoFijo = 2000;
       this.conceptoFijo = 'Pago de entrenador';
-      this.id = this.authService.getUser()?.id_entrenador || null;
+      this.id = user?.id_entrenador || null;
+      this.tipo = 'entrenador';
     } else if (this.authService.isAtleta()) {
       this.montoFijo = 500;
       this.conceptoFijo = 'Pago de atleta';
-      this.id = this.authService.getUser()?.id_entrenador || null; // Asigna el ID del entrenador del atleta
+      this.id = user?.id_atleta || null; // Corregir: usar id_atleta en lugar de id_entrenador
+      this.tipo = 'atleta';
     } else {
       this.montoFijo = 0;
       this.conceptoFijo = '';
     }
 
-    // Actualiza los valores del formulario
-    this.frmData.patchValue({
-      monto: this.montoFijo,
-      concepto: this.conceptoFijo,
-      id: this.id,
-    });
+    // Llamar a setFormValues para configurar correctamente todos los campos
+    this.setFormValues();
   }
 
   setFormValues(): void {
     this.frmData.patchValue({
       monto: this.montoFijo,
       concepto: this.conceptoFijo,
+      fecha_pago: this.getFechaActual(),
       id_atleta: this.tipo === 'atleta' ? this.id : null,
       id_entrenador: this.tipo === 'entrenador' ? this.id : null,
       id_gimnasio: this.tipo === 'gimnasio' ? this.id : null,
@@ -134,20 +133,32 @@ export class CargarPagoComponent implements OnInit {
       return;
     }
 
-    const formData = this.frmData.value;
+    // Preparar los datos correctamente usando getRawValue() para incluir campos deshabilitados
+    const formData = {
+      id_atleta: this.frmData.get('id_atleta')?.value,
+      id_entrenador: this.frmData.get('id_entrenador')?.value,
+      id_gimnasio: this.frmData.get('id_gimnasio')?.value,
+      fecha_pago: this.frmData.get('fecha_pago')?.value,
+      monto: this.montoFijo, // Usar el valor fijo ya que el campo está deshabilitado
+      concepto: this.conceptoFijo, // Usar el valor fijo ya que el campo está deshabilitado
+      id_forma_pago: this.frmData.get('id_forma_pago')?.value
+    };
+
+    console.log('Datos a enviar:', formData);
 
     // Crear el pago
     this.pagoService.createPago(formData).subscribe({
       next: (response) => {
         console.log('Pago creado exitosamente:', response);
-        alert('Pago registrado correctamente'); // Mensaje de éxito
-        this.frmData.reset(); // Limpia el formulario después del envío
-        this.isModalVisible = false; // Cierra el modal después de procesar el pago
+        alert('Pago registrado correctamente');
+        this.frmData.reset();
+        this.setConceptoYMonto(); // Restablecer valores después del reset
+        this.isModalVisible = false;
       },
       error: (error) => {
         console.error('Error al crear el pago:', error);
-        alert('Ocurrió un error al registrar el pago'); // Mensaje de error
-        this.isModalVisible = false; // Cierra el modal en caso de error
+        alert('Ocurrió un error al registrar el pago');
+        this.isModalVisible = false;
       }
     });
   }
