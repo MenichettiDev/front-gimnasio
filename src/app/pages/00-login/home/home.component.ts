@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   private startCountdown(): void {
-    const targetDate = new Date('2025-05-10T00:00:00Z').getTime();
+    const targetDate = new Date('2025-08-10T00:00:00Z').getTime();
 
     this.intervalId = setInterval(() => {
       const now = new Date().getTime();
