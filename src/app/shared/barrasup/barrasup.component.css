@@ -1,83 +1,417 @@
 /* ==========================================================
    Importación de la fuente 'Poppins' desde Google Fonts
    ========================================================== */
-   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
-   /* ==========================================================
+/* ==========================================================
       Estilos globales
       ========================================================== */
 
-   /* Aplicando márgenes, rellenos y configuración de la caja para todos los elementos */
-   * {
-       margin: 0;
-       padding: 0;
-       box-sizing: border-box;
-       font-family: 'Poppins', sans-serif; /* Fuente global 'Poppins' */
-   }
+/* Aplicando márgenes, rellenos y configuración de la caja para todos los elementos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    /* Fuente global 'Poppins' */
+}
 
-   /* ==========================================================
+/* ==========================================================
       Barra Superior (Top-Bar)
       ========================================================== */
 
-   /* Estilos de la barra superior */
-   .top-bar {
-       background-color: rgba(71, 0, 99, 0.94); /* Fondo verde forest con transparencia */
-       padding: 10px 20px; /* Relleno para la barra */
-       display: flex; /* Usamos flexbox para alinear el contenido */
-       justify-content: space-between; /* Espacio entre los elementos (a la izquierda y a la derecha) */
-       align-items: center; /* Alineación vertical de los elementos */
-       position: fixed; /* Fija la barra en la parte superior de la pantalla */
-       top: 0; /* Posiciona la barra en la parte superior */
-       left: 0; /* Posiciona la barra en el lado izquierdo */
-       width: 100%; /* Ocupa el ancho completo de la pantalla */
-       z-index: 1000; /* Asegura que la barra esté encima de otros elementos */
-       color: white; /* Texto e íconos en color blanco */
-       height: 50px; /* Ajusta la altura de la barra */
-   }
+/* Estilos de la barra superior */
+.top-bar {
+    background: linear-gradient(135deg, rgba(43, 1, 75, 0.95), rgba(71, 0, 99, 0.95));
+    /* Fondo verde forest con transparencia */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 12px 30px;
+    /* Relleno para la barra */
+    display: flex;
+    /* Usamos flexbox para alinear el contenido */
+    justify-content: space-between;
+    /* Espacio entre los elementos (a la izquierda y a la derecha) */
+    align-items: center;
+    /* Alineación vertical de los elementos */
+    position: fixed;
+    /* Fija la barra en la parte superior de la pantalla */
+    top: 0;
+    /* Posiciona la barra en la parte superior */
+    left: 0;
+    /* Posiciona la barra en el lado izquierdo */
+    width: 100%;
+    /* Ocupa el ancho completo de la pantalla */
+    z-index: 1000;
+    /* Asegura que la barra esté encima de otros elementos */
+    color: white;
+    /* Texto e íconos en color blanco */
+    height: 60px;
+    /* Ajusta la altura de la barra */
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+    animation: slideDown 1s ease-out forwards;
+    transition: all 0.3s ease;
+}
 
-   /* ==========================================================
-      Estilos del Botón de Login
-      ========================================================== */
+.top-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+    pointer-events: none;
+    border-radius: 0;
+}
 
-   /* Botón de login alineado a la derecha */
-   .top-bar .btn-login {
-       background: transparent; /* Fondo transparente */
-       border: none; /* Elimina el borde */
-       color: white; /* Color del texto e íconos en blanco */
-       font-size: 20px; /* Tamaño de la fuente */
-       cursor: pointer; /* Cambia el cursor a pointer para indicar que es clickeable */
-       display: flex; /* Utiliza flexbox para centrar el contenido */
-       align-items: center; /* Alineación vertical */
-       transition: background 0.3s ease; /* Transición suave para el color de fondo */
-       justify-content: center; /* Centra el contenido en el botón */
-       margin-left: 40px; /* Espacio a la izquierda del botón */
-   }
+.top-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.15), transparent),
+        radial-gradient(circle at 80% 50%, rgba(255, 119, 198, 0.1), transparent);
+    pointer-events: none;
+}
 
-   /* Efecto al pasar el ratón por encima del botón */
-   .btn-login:hover {
-       background-color: rgba(255, 255, 255, 0.1); /* Fondo blanco suave al pasar el ratón */
-       border-radius: 5px; /* Bordes redondeados para el botón */
-   }
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
 
-   /* ==========================================================
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.top-bar:hover {
+    background: linear-gradient(135deg, rgba(43, 1, 75, 0.98), rgba(71, 0, 99, 0.98));
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.15),
+        0 0 30px rgba(120, 119, 198, 0.2);
+}
+
+/* ==========================================================
       Contenedor de Iconos de Redes Sociales
       ========================================================== */
 
-   /* Estilos del contenedor de iconos de redes sociales */
-   .social-icons {
-       display: flex; /* Usamos flexbox para alinear los iconos */
-       gap: 20px; /* Espacio entre los iconos */
-       margin-left: auto; /* Empuja los iconos hacia la derecha */
-   }
+/* Estilos del contenedor de iconos de redes sociales */
+.social-icons {
+    display: flex;
+    /* Usamos flexbox para alinear los iconos */
+    gap: 25px;
+    /* Espacio entre los iconos */
+    align-items: center;
+    z-index: 2;
+}
 
-   /* Estilos de cada enlace de los iconos */
-   .social-icons a {
-       color: white; /* Color blanco para los iconos */
-       font-size: 25px; /* Tamaño de los iconos */
-       text-decoration: none; /* Elimina el subrayado de los enlaces */
-   }
+/* Estilos de cada enlace de los iconos */
+.social-icons a {
+    color: rgba(255, 255, 255, 0.9);
+    /* Color blanco para los iconos */
+    font-size: 24px;
+    /* Tamaño de los iconos */
+    text-decoration: none;
+    /* Elimina el subrayado de los enlaces */
+    padding: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
 
-   /* Efecto al pasar el ratón sobre los iconos */
-   .social-icons a:hover {
-       color: #ddd; /* Cambia el color de los iconos al pasar el ratón */
-   }
+.social-icons a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Efecto al pasar el ratón sobre los iconos */
+.social-icons a:hover {
+    color: #ffffff;
+    background: linear-gradient(135deg, rgba(120, 119, 198, 0.3), rgba(255, 119, 198, 0.2));
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(120, 119, 198, 0.4);
+}
+
+.social-icons a:hover::before {
+    opacity: 1;
+}
+
+.social-icons a:active {
+    transform: translateY(-1px) scale(1.02);
+}
+
+/* Efectos específicos para cada red social */
+.social-icons a[href*="instagram"]:hover {
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(225, 48, 108, 0.4);
+    background: linear-gradient(135deg, rgba(225, 48, 108, 0.2), rgba(253, 29, 29, 0.2));
+}
+
+.social-icons a[href*="whatsapp"]:hover {
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(37, 211, 102, 0.4);
+    background: linear-gradient(135deg, rgba(37, 211, 102, 0.2), rgba(56, 142, 60, 0.2));
+}
+
+/* ==========================================================
+      Estilos del Botón de Login
+      ========================================================== */
+
+/* Botón de login alineado a la derecha */
+.btn-login {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    /* Color del texto e íconos en blanco */
+    font-size: 16px;
+    /* Tamaño de la fuente */
+    font-weight: 600;
+    cursor: pointer;
+    /* Cambia el cursor a pointer para indicar que es clickeable */
+    display: flex;
+    /* Utiliza flexbox para centrar el contenido */
+    align-items: center;
+    /* Alineación vertical */
+    gap: 8px;
+    padding: 12px 24px;
+    /* Relleno del botón */
+    border-radius: 25px;
+    /* Bordes redondeados para el botón */
+    transition: all 0.3s ease;
+    /* Transición suave para el color de fondo */
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    z-index: 2;
+}
+
+.btn-login::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.3s ease;
+}
+
+.btn-login:hover::before {
+    left: 100%;
+}
+
+.btn-login:hover {
+    background: linear-gradient(135deg, rgba(120, 119, 198, 0.3), rgba(255, 119, 198, 0.2));
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(120, 119, 198, 0.4);
+    color: #ffffff;
+}
+
+.btn-login:active {
+    transform: translateY(0);
+}
+
+.btn-login i {
+    font-size: 18px;
+    transition: transform 0.3s ease;
+}
+
+.btn-login:hover i {
+    transform: rotate(10deg) scale(1.1);
+}
+
+/* ==========================================================
+      Efectos de partículas y animaciones adicionales
+      ========================================================== */
+
+.top-bar {
+    position: relative;
+}
+
+.top-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        radial-gradient(1px 1px at 20px 15px, rgba(255, 255, 255, 0.15), transparent),
+        radial-gradient(1px 1px at 40px 35px, rgba(255, 255, 255, 0.1), transparent),
+        radial-gradient(1px 1px at 90px 20px, rgba(255, 255, 255, 0.15), transparent),
+        radial-gradient(1px 1px at 130px 40px, rgba(255, 255, 255, 0.1), transparent);
+    background-repeat: repeat;
+    background-size: 200px 60px;
+    animation: sparkleBar 15s linear infinite;
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+@keyframes sparkleBar {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-200px);
+    }
+}
+
+/* ==========================================================
+      Responsive Design
+      ========================================================== */
+@media (max-width: 768px) {
+    .top-bar {
+        padding: 10px 20px;
+        height: 55px;
+    }
+
+    .social-icons {
+        gap: 15px;
+    }
+
+    .social-icons a {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+
+    .btn-login {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 576px) {
+    .top-bar {
+        padding: 8px 15px;
+        height: 50px;
+    }
+
+    .social-icons {
+        gap: 12px;
+    }
+
+    .social-icons a {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+    }
+
+    .btn-login {
+        padding: 8px 16px;
+        font-size: 13px;
+        gap: 6px;
+    }
+
+    .btn-login span {
+        display: none;
+        /* Ocultar texto en pantallas muy pequeñas */
+    }
+}
+
+@media (max-width: 360px) {
+    .top-bar {
+        padding: 6px 10px;
+    }
+
+    .social-icons {
+        gap: 8px;
+    }
+
+    .social-icons a {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+    }
+
+    .btn-login {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}
+
+/* ==========================================================
+      Micro-animaciones y efectos adicionales
+      ========================================================== */
+.social-icons a {
+    animation: float 3s ease-in-out infinite;
+    animation-delay: calc(var(--delay, 0) * 0.5s);
+}
+
+.social-icons a:nth-child(1) {
+    --delay: 0;
+}
+
+.social-icons a:nth-child(2) {
+    --delay: 1;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+.btn-login {
+    animation: pulse 3s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        box-shadow:
+            0 4px 15px rgba(0, 0, 0, 0.2),
+            0 0 0 1px rgba(255, 255, 255, 0.1);
+    }
+
+    50% {
+        box-shadow:
+            0 4px 15px rgba(0, 0, 0, 0.2),
+            0 0 0 1px rgba(255, 255, 255, 0.2),
+            0 0 20px rgba(120, 119, 198, 0.3);
+    }
+}
