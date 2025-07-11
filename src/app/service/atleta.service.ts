@@ -39,12 +39,6 @@ export class AtletaService {
   }
 
   // Método para crear un atleta
-  // crearAtleta(atletaData: Atleta): Observable<any> {
-  //   return this.http.post<any>(this.apiUrlCrearAtleta, atletaData).pipe(
-  //     catchError(this.handleError)
-  //   );
-  // }
-  // Método para crear un atleta
   crearAtleta(atletaData: any): Observable<any> {
     return this.http.post<any>(this.apiUrlCrearAtleta, atletaData).pipe(
       catchError(this.handleError)
