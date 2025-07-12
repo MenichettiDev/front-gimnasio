@@ -1,7 +1,9 @@
 /* Estilo general del contenedor */
 .container {
-  max-width: 2000px; /* Ancho máximo razonable */
-  padding: 0 70px; /* Espaciado lateral */
+  max-width: 2000px;
+  /* Ancho máximo razonable */
+  padding: 0 70px;
+  /* Espaciado lateral */
   margin: 0 auto;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   overflow: hidden;
@@ -16,13 +18,15 @@
 /* Estilo para el título dentro del formulario */
 .form-title {
   font-family: 'Oswald', sans-serif;
-  font-size: 1.8rem; /* Título más grande */
+  font-size: 1.8rem;
+  /* Título más grande */
   font-weight: 700;
   color: #ffffff;
   text-transform: uppercase;
   letter-spacing: 1px;
   text-align: center;
-  margin-bottom: 1.5rem; /* Más espacio debajo del título */
+  margin-bottom: 1.5rem;
+  /* Más espacio debajo del título */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
@@ -30,28 +34,34 @@
 .card {
   border: none;
   border-radius: 15px;
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  background-color: rgba(71, 0, 99, 0.94); /* Violeta oscuro */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+  /* Sombra suave */
+  background-color: rgba(71, 0, 99, 0.94);
+  /* Violeta oscuro */
   margin-top: 20px;
   overflow: hidden;
   transition: transform 0.3s ease-in-out;
 }
 
 .card-body {
-  padding: 2.5rem; /* Espaciado interno */
+  padding: 2.5rem;
+  /* Espaciado interno */
   color: #ffffff;
 }
 
 /* Botón "Crear Nueva Medida" */
 .btn-primary {
-  background-color: #04df13bb; /* Verde moderno */
+  background-color: #04df13bb;
+  /* Verde moderno */
   border: none;
-  border-radius: 25px; /* Botón completamente redondeado */
+  border-radius: 25px;
+  /* Botón completamente redondeado */
   padding: 0.7rem 1.2rem;
   font-size: 0.9rem;
   font-weight: 0;
   width: 130px;
-  margin-left: auto; /* Esto moverá el botón a la derecha */
+  margin-left: auto;
+  /* Esto moverá el botón a la derecha */
   margin-top: -30px;
   transition: background-color 0.3s ease-in-out;
 }
@@ -60,40 +70,54 @@
 /* Estilo de la tabla */
 .table {
   width: 100%;
-  border-collapse: separate; /* Necesario para bordes redondeados */
-  border-spacing: 0; /* Eliminar espacios entre celdas */
+  border-collapse: separate;
+  /* Necesario para bordes redondeados */
+  border-spacing: 0;
+  /* Eliminar espacios entre celdas */
   margin-top: 1.5rem;
   background-color: transparent;
-  table-layout: auto; /* Ajuste dinámico */
-  border-radius: 10px; /* Redondear bordes externos */
-  overflow: hidden; /* Asegurar que los bordes redondeados funcionen */
+  table-layout: auto;
+  /* Ajuste dinámico */
+  border-radius: 10px;
+  /* Redondear bordes externos */
+  overflow: hidden;
+  /* Asegurar que los bordes redondeados funcionen */
 }
 
 /* Encabezado de la tabla */
 .medidas-list thead {
-  background: linear-gradient(90deg, #e0811a, #ffde04); /* Gradiente horizontal continuo */
+  background: linear-gradient(90deg, #e0811a, #ffde04);
+  /* Gradiente horizontal continuo */
   text-transform: uppercase;
-  font-size: 0.6rem; /* Tamaño de fuente más pequeño */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  font-size: 0.6rem;
+  /* Tamaño de fuente más pequeño */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* Sombra ligera */
 }
 
 
 /* Celdas del encabezado */
 .medidas-list thead th {
-  padding: 0.3rem; /* Espaciado interno */
+  padding: 0.3rem;
+  /* Espaciado interno */
   text-align: center;
-  white-space: normal; /* Permitir saltos de línea */
-  word-wrap: break-word; /* Dividir palabras largas */
-  background: none; /* Evitar que las celdas sobrescriban el gradiente */
+  white-space: normal;
+  /* Permitir saltos de línea */
+  word-wrap: break-word;
+  /* Dividir palabras largas */
+  background: none;
+  /* Evitar que las celdas sobrescriban el gradiente */
 }
 
 /* Redondear solo las esquinas externas */
 .medidas-list thead th:first-child {
-  border-top-left-radius: 10px; /* Esquina superior izquierda */
+  border-top-left-radius: 10px;
+  /* Esquina superior izquierda */
 }
 
 .medidas-list thead th:last-child {
-  border-top-right-radius: 10px; /* Esquina superior derecha */
+  border-top-right-radius: 10px;
+  /* Esquina superior derecha */
 }
 
 /* Cuerpo de la tabla */
@@ -103,20 +127,25 @@ tbody tr {
 }
 
 tbody td {
-  padding: 0.8rem; /* Espacio interno */
+  padding: 0.8rem;
+  /* Espacio interno */
   text-align: center;
   color: #e0e0e0;
-  font-size: 0.9rem; /* Fuente más grande */
+  font-size: 0.9rem;
+  /* Fuente más grande */
   background-color: rgba(255, 255, 255, 0.1);
-  white-space: nowrap; /* Evitar saltos de línea en los datos */
+  white-space: nowrap;
+  /* Evitar saltos de línea en los datos */
   overflow: hidden;
-  text-overflow: ellipsis; /* Agregar puntos suspensivos si el texto es largo */
+  text-overflow: ellipsis;
+  /* Agregar puntos suspensivos si el texto es largo */
 }
 
 /* Resaltado de fila seleccionada */
 .selected-row {
   background-color: rgba(255, 255, 255, 0.1) !important;
-  border-left: 3px solid #4CAF50; /* Borde izquierdo verde */
+  border-left: 3px solid #4CAF50;
+  /* Borde izquierdo verde */
 }
 
 /* Botones de Acciones */
@@ -124,25 +153,32 @@ tbody td {
   background: none;
   border: none;
   color: #4CAF50;
-  font-size: 1.2rem; /* Iconos más grandes */
+  font-size: 1.2rem;
+  /* Iconos más grandes */
   cursor: pointer;
   transition: transform 0.3s ease, color 0.3s ease;
-  margin: 0 0.3rem; /* Espacio entre los botones */
+  margin: 0 0.3rem;
+  /* Espacio entre los botones */
 }
 
 .btn-icon:hover {
-  transform: scale(1.2); /* Escalar el ícono al pasar el mouse */
-  color: #038a0c; /* Verde oscuro */
+  transform: scale(1.2);
+  /* Escalar el ícono al pasar el mouse */
+  color: #038a0c;
+  /* Verde oscuro */
 }
 
 /* Estilo específico para el botón de eliminación */
 .btn-delete {
-  color: #f44336; /* Rojo */
+  color: #f44336;
+  /* Rojo */
 }
 
 .btn-delete:hover {
-  transform: scale(1.2); /* Escalar el ícono al pasar el mouse */
-  color: #d32f2f; /* Rojo oscuro */
+  transform: scale(1.2);
+  /* Escalar el ícono al pasar el mouse */
+  color: #d32f2f;
+  /* Rojo oscuro */
 }
 
 /* Paginación */
@@ -151,24 +187,28 @@ tbody td {
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  margin-top: 1.5rem; /* Espacio arriba */
+  margin-top: 1.5rem;
+  /* Espacio arriba */
 }
 
 .pagination button {
   background: none;
   border: 1px solid #4CAF50;
   color: #4CAF50;
-  padding: 0.6rem 1.2rem; /* Más altura y ancho */
+  padding: 0.6rem 1.2rem;
+  /* Más altura y ancho */
   border-radius: 20px;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-  font-size: 1rem; /* Fuente más grande */
+  font-size: 1rem;
+  /* Fuente más grande */
 }
 
 .pagination button:hover {
   background-color: #4CAF50;
   color: #fff;
-  transform: scale(1.05); /* Efecto de escala al pasar el mouse */
+  transform: scale(1.05);
+  /* Efecto de escala al pasar el mouse */
 }
 
 .pagination button:disabled {
@@ -179,21 +219,88 @@ tbody td {
 
 /* Scroll horizontal responsivo */
 .medidas-list {
-  overflow-x: auto; /* Habilitar scroll horizontal */
-  max-width: 100%; /* Limitar el ancho máximo */
-  scrollbar-width: thin; /* Scrollbar más delgado */
-  scrollbar-color: #4CAF50 rgba(255, 255, 255, 0.1); /* Color del scrollbar */
+  overflow-x: auto;
+  /* Habilitar scroll horizontal */
+  max-width: 100%;
+  /* Limitar el ancho máximo */
+  scrollbar-width: thin;
+  /* Scrollbar más delgado */
+  scrollbar-color: #4CAF50 rgba(255, 255, 255, 0.1);
+  /* Color del scrollbar */
 }
 
 .medidas-list::-webkit-scrollbar {
-  height: 8px; /* Altura del scrollbar */
+  height: 8px;
+  /* Altura del scrollbar */
 }
 
 .medidas-list::-webkit-scrollbar-thumb {
-  background: #4CAF50; /* Color del thumb */
-  border-radius: 10px; /* Bordes redondeados */
+  background: #4CAF50;
+  /* Color del thumb */
+  border-radius: 10px;
+  /* Bordes redondeados */
 }
 
 .medidas-list::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1); /* Fondo del track */
+  background: rgba(255, 255, 255, 0.1);
+  /* Fondo del track */
 }
+
+/*///////////////////////////////////////////////////////*/
+
+/* ...existing code... */
+
+/* Controles de vista */
+.view-controls {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.view-btn {
+  background-color: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.view-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: #4CAF50;
+  transform: translateY(-2px);
+}
+
+.view-btn.active {
+  background: linear-gradient(90deg, #e0811a, #ffde04);
+  border-color: #ffde04;
+  color: #000;
+  font-weight: 600;
+}
+
+.view-btn i {
+  font-size: 1rem;
+}
+
+/* Responsividad para controles de vista */
+@media (max-width: 768px) {
+  .view-controls {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .view-btn {
+    width: 200px;
+    justify-content: center;
+  }
+}
+
+/* ...existing code... */

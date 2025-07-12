@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms'; // Importa FormsModule para [(ngMo
 import { MedidaFormComponent } from '../../../components/medidas/medida-form/medida-form.component'; // Importa el formulario
 import { MedidasService } from '../../../service/medidas.service'; // Servicio de medidas
 import { AuthService } from '../../../service/auth/auth.service'; // Servicio de autenticación
-import { Medida } from '../../../data/interfaces/tbMedidaInterface'; // Interfaz de medidas
+import { Medida } from '../../../data/interfaces/tbMedidaInterface';
+import { MedidasChartComponent } from "../medidas-chart/medidas-chart.component"; // Interfaz de medidas
 
 @Component({
   selector: 'app-medidas-visor',
-  imports: [CommonModule, FormsModule, MedidaFormComponent], // Agrega FormsModule aquí
+  imports: [CommonModule, FormsModule, MedidaFormComponent, MedidasChartComponent], // Agrega FormsModule aquí
   templateUrl: './medidas-visor.component.html',
   styleUrls: ['./medidas-visor.component.css'],
 })
@@ -24,10 +25,13 @@ export class MedidasVisorComponent {
   currentPage = 1; // Página actual
   pageSize = 5; // Número de elementos por página
 
+  // Nueva variable para controlar la vista
+  vistaActiva: 'tabla' | 'grafico' = 'tabla';
+
   constructor(
     private medidaService: MedidasService,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     // Obtener el ID del atleta autenticado
@@ -52,7 +56,7 @@ export class MedidasVisorComponent {
       this.medidas = [];
       this.medidasFiltradas = [];
     }
-}
+  }
 
 
 
@@ -188,5 +192,10 @@ export class MedidasVisorComponent {
         console.error('Error al eliminar la medida:', error);
       }
     );
+  }
+
+  // Nuevo método para cambiar vista
+  cambiarVista(vista: 'tabla' | 'grafico'): void {
+    this.vistaActiva = vista;
   }
 }

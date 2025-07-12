@@ -10,5 +10,6 @@ export const perfilRoutes: Routes = [
     { path: 'perfil', loadComponent: () => import('./perfil/perfil.component').then(m => m.PerfilComponent) },
 
     // Ruta para el componente Estadísticas
-    { path: 'cargar-medidas', loadComponent: () => import('./medidas/medidas.component').then(m => m.MedidasComponent) }
+    { path: 'cargar-medidas', loadComponent: () => import('../02-perfil/medidas/medidas.component').then(m => m.MedidasComponent) },
+    { path: 'historial-medidas', loadComponent: () => import('../02-perfil/historial-medidas/historial-medidas.component').then(m => m.HistorialMedidasComponent) }
 ];

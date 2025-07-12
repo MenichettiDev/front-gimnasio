@@ -1,39 +1,28 @@
-<!-- Tarjeta con transparencia -->
 <div class="card shadow-lg">
   <div class="card-body">
-    <!-- Título dentro del formulario -->
     <h1 class="form-title text-center mb-4"><i class="fas fa-ruler-combined"></i> MEDIDAS DEL ATLETA</h1>
 
-    <!-- Botón para crear nueva medida -->
-    <button
-      *ngIf="!mostrarFormulario"
-      class="btn btn-primary rounded-pill"
-      (click)="abrirFormulario()"
-    >
-      <i class="bi bi-plus-square me-2"></i> Nueva
-    </button>
-
-    <!-- Formulario de creación/edición -->
-    <div *ngIf="mostrarFormulario">
-      <app-medida-form
-        [medidaSeleccionada]="medidaSeleccionada"
-        (guardar)="onGuardar($event)"
-        (cancelar)="cerrarFormulario()"
-      ></app-medida-form>
+    <!-- Controles de vista -->
+    <div class="view-controls" *ngIf="medidas.length > 0">
+      <button class="view-btn" [class.active]="vistaActiva === 'tabla'" (click)="cambiarVista('tabla')">
+        <i class="fas fa-table"></i> Tabla
+      </button>
+      <button class="view-btn" [class.active]="vistaActiva === 'grafico'" (click)="cambiarVista('grafico')">
+        <i class="fas fa-chart-line"></i> Gráficos
+      </button>
     </div>
 
-    <!-- Lista de medidas -->
-    <div class="medidas-list">
+    <!-- Vista de tabla (código existente) -->
+    <div *ngIf="vistaActiva === 'tabla'" class="medidas-list">
       <!-- Mensaje si no hay medidas -->
-<div *ngIf="medidas.length === 0" class="alert alert-warning d-flex align-items-center p-4">
-  <!-- Icono de advertencia -->
-  <i class="bi bi-exclamation-circle-fill me-3 fs-2 text-warning"></i>
-  <p class="mb-0">No se han cargado medidas para este atleta.</p>
-</div>
-
+      <div *ngIf="medidas.length === 0" class="alert alert-warning d-flex align-items-center p-4">
+        <i class="bi bi-exclamation-circle-fill me-3 fs-2 text-warning"></i>
+        <p class="mb-0">No se han cargado medidas para este atleta.</p>
+      </div>
 
       <!-- Tabla de medidas si existen -->
       <table *ngIf="medidas.length > 0" class="table custom-table">
+        <!-- ...existing table code... -->
         <thead>
           <tr>
             <th>Fecha</th>
@@ -53,12 +42,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr
-            *ngFor="let medida of medidasPaginadas"
-            [class.selected-row]="
+          <tr *ngFor="let medida of medidasPaginadas" [class.selected-row]="
               medidaSeleccionada?.id_medida === medida.id_medida
-            "
-          >
+            ">
             <td>{{ medida.fecha_medicion | date : "dd-MM-yy" }}</td>
             <td>{{ medida.peso }}</td>
             <td>{{ medida.altura }}</td>
@@ -76,35 +62,29 @@
               <button class="btn-icon" (click)="abrirFormulario(medida)">
                 <i class="fas fa-edit"></i>
               </button>
-              <button
-                class="btn-icon btn-delete"
-                (click)="eliminarMedida(medida.id_medida)"
-              >
+              <button class="btn-icon btn-delete" (click)="eliminarMedida(medida.id_medida)">
                 <i class="fas fa-trash-alt"></i>
               </button>
             </td>
           </tr>
         </tbody>
       </table>
+
+      <!-- Paginación -->
+      <div class="pagination" *ngIf="totalPages > 1">
+        <button (click)="prevPage()" [disabled]="currentPage === 1" *ngIf="currentPage > 1">
+          <i class="fas fa-arrow-left"></i> Anterior
+        </button>
+        <span><i class="fas fa-hashtag"></i> Página {{ currentPage }} de {{ totalPages }}</span>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages" *ngIf="currentPage < totalPages">
+          Siguiente <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
     </div>
 
-    <!-- Paginación -->
-    <div class="pagination" *ngIf="totalPages > 1">
-      <button
-        (click)="prevPage()"
-        [disabled]="currentPage === 1"
-        *ngIf="currentPage > 1"
-      >
-        <i class="fas fa-arrow-left"></i> Anterior
-      </button>
-      <span><i class="fas fa-hashtag"></i> Página {{ currentPage }} de {{ totalPages }}</span>
-      <button
-        (click)="nextPage()"
-        [disabled]="currentPage === totalPages"
-        *ngIf="currentPage < totalPages"
-      >
-        Siguiente <i class="fas fa-arrow-right"></i>
-      </button>
+    <!-- Vista de gráficos (nueva) -->
+    <div *ngIf="vistaActiva === 'grafico'">
+      <app-medidas-chart [medidas]="medidas"></app-medidas-chart>
     </div>
   </div>
 </div>

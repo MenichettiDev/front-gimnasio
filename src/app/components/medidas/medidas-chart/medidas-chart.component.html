@@ -1,0 +1,59 @@
+<div class="chart-container">
+    <!-- Título y controles -->
+    <div class="chart-header">
+        <h3 class="chart-title">
+            <i class="fas fa-chart-line"></i> Evolución de Medidas
+        </h3>
+
+        <!-- Botones para cambiar entre gráficos -->
+        <div class="chart-controls">
+            <button class="chart-btn" [class.active]="tipoGraficoActivo === 'peso'"
+                (click)="cambiarTipoGrafico('peso')">
+                <i class="fas fa-weight"></i> Peso
+            </button>
+            <button class="chart-btn" [class.active]="tipoGraficoActivo === 'medidas'"
+                (click)="cambiarTipoGrafico('medidas')">
+                <i class="fas fa-ruler"></i> Medidas
+            </button>
+            <button class="chart-btn" [class.active]="tipoGraficoActivo === 'grasa'"
+                (click)="cambiarTipoGrafico('grasa')">
+                <i class="fas fa-percentage"></i> Grasa
+            </button>
+        </div>
+    </div>
+
+    <!-- Contenedor del gráfico -->
+    <div class="chart-wrapper" *ngIf="medidas.length > 0">
+        <canvas baseChart [data]="datosGraficoActivo" [options]="chartOptions" [type]="chartType">
+        </canvas>
+    </div>
+
+    <!-- Mensaje cuando no hay datos -->
+    <div *ngIf="medidas.length === 0" class="no-data-message">
+        <i class="fas fa-chart-line"></i>
+        <p>No hay datos suficientes para mostrar el gráfico</p>
+        <small>Agrega al menos dos medidas para ver la evolución</small>
+    </div>
+
+    <!-- Estadísticas rápidas -->
+    <div class="stats-summary" *ngIf="medidas.length > 1">
+        <div class="stat-item" *ngIf="tipoGraficoActivo === 'peso'">
+            <span class="stat-label">Variación de Peso:</span>
+            <span class="stat-value" [class.positive]="(medidas[medidas.length-1].peso - medidas[0].peso) > 0"
+                [class.negative]="(medidas[medidas.length-1].peso - medidas[0].peso) < 0">
+                {{ (medidas[medidas.length-1].peso - medidas[0].peso) > 0 ? '+' : '' }}{{
+                (medidas[medidas.length-1].peso - medidas[0].peso).toFixed(1) }} kg
+            </span>
+        </div>
+
+        <div class="stat-item" *ngIf="tipoGraficoActivo === 'grasa'">
+            <span class="stat-label">Variación de Grasa:</span>
+            <span class="stat-value"
+                [class.positive]="(medidas[0].grasa_corporal - medidas[medidas.length-1].grasa_corporal) > 0"
+                [class.negative]="(medidas[0].grasa_corporal - medidas[medidas.length-1].grasa_corporal) < 0">
+                {{ (medidas[0].grasa_corporal - medidas[medidas.length-1].grasa_corporal) > 0 ? '-' : '+' }}{{
+                Math.abs(medidas[medidas.length-1].grasa_corporal - medidas[0].grasa_corporal).toFixed(1) }}%
+            </span>
+        </div>
+    </div>
+</div>

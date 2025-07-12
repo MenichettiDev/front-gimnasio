@@ -1,23 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // Importa FormsModule para [(ngModel)]
 import { MedidasVisorComponent } from '../../../components/medidas/medidas-visor/medidas-visor.component';  // Importación correcta
 import { MedidaFormComponent } from '../../../components/medidas/medida-form/medida-form.component'; // Importa el formulario
 import { MedidasService } from '../../../service/medidas.service'; // Servicio de medidas
 import { AuthService } from '../../../service/auth/auth.service'; // Servicio de autenticación
-import { Medida } from '../../../data/interfaces/tbMedidaInterface'; // Interfaz de medidas
-
+import { Medida } from '../../../data/interfaces/tbMedidaInterface';
 @Component({
   selector: 'app-medidas',
   standalone: true,
-  imports: [CommonModule, FormsModule, MedidasVisorComponent, MedidasVisorComponent],  // Agrega MedidasVisorComponent aquí
+  imports: [CommonModule, FormsModule, MedidasVisorComponent, MedidasVisorComponent, MedidaFormComponent],  // Agrega MedidasVisorComponent aquí
   templateUrl: './medidas.component.html',
   styleUrls: ['./medidas.component.css'],
 })
-export class MedidasComponent {
+export class MedidasComponent implements OnInit {
   medidas: Medida[] = []; // Lista completa de medidas del atleta
   medidasFiltradas: Medida[] = []; // Lista filtrada de medidas (para búsqueda)
-  mostrarFormulario = false; // Controla la visibilidad del formulario
+  mostrarFormulario = true; // Controla la visibilidad del formulario
   medidaSeleccionada: Medida | null = null; // Medida seleccionada para edición
   idAtleta: number | null = null; // ID del atleta autenticado
 
@@ -28,7 +27,7 @@ export class MedidasComponent {
   constructor(
     private medidaService: MedidasService,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     // Obtener el ID del atleta autenticado

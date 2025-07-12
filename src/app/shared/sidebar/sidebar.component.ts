@@ -50,7 +50,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     { id: 11, descripcion: 'Mi Perfil', icono: 'bi bi-file-person', link: '/perfil', grupo: 'GM02', principal: true, orden: 2, estado: true, requiredAccess: [1, 2, 3, 4] },
     { id: 12, descripcion: 'Perfil', icono: '', link: '/perfil/perfil', grupo: 'GM02', principal: false, orden: 1, estado: true, requiredAccess: [1, 2, 3, 4] },
     { id: 13, descripcion: 'Medidas', icono: '', link: '/perfil/cargar-medidas', grupo: 'GM02', principal: false, orden: 2, estado: true, requiredAccess: [2, 3] },
-    { id: 14, descripcion: 'Historial rutinas', icono: '', link: '/perfil/historial', grupo: 'GM02', principal: false, orden: 3, estado: false, requiredAccess: [2, 3] },
+    { id: 14, descripcion: 'Historial medidas', icono: '', link: '/perfil/historial-medidas', grupo: 'GM02', principal: false, orden: 3, estado: true, requiredAccess: [2, 3] },
     { id: 15, descripcion: 'Estadisticas Coach', icono: '', link: '/perfil/coach', grupo: 'GM02', principal: false, orden: 4, estado: true, requiredAccess: [2] },
 
     // GM03 - Rutinas

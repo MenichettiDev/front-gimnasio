@@ -1,1 +1,4 @@
-<app-medidas-visor></app-medidas-visor>
+<!-- Formulario (solo se muestra cuando mostrarFormulario es true) -->
+<app-medida-form *ngIf="mostrarFormulario" [medidaSeleccionada]="medidaSeleccionada" (guardar)="onGuardar($event)"
+    (cancelar)="cerrarFormulario()">
+</app-medida-form>
