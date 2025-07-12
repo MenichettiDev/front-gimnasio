@@ -99,6 +99,14 @@ export class MedidasChartComponent implements OnInit, OnChanges {
   public chartOptions: ChartConfiguration['options'] = {
     responsive: true,
     maintainAspectRatio: false,
+    layout: {
+      padding: {
+        left: 10,
+        right: 20,
+        top: 10,
+        bottom: 10
+      }
+    },
     plugins: {
       legend: {
         display: true,
@@ -129,19 +137,24 @@ export class MedidasChartComponent implements OnInit, OnChanges {
           color: '#ffffff',
           font: {
             size: 11
-          }
+          },
+          maxRotation: 45,
+          minRotation: 0
         },
         grid: {
           color: 'rgba(255, 255, 255, 0.1)',
           lineWidth: 1
-        }
+        },
+        offset: true
       },
       y: {
+        beginAtZero: false,
         ticks: {
           color: '#ffffff',
           font: {
             size: 11
-          }
+          },
+          padding: 10
         },
         grid: {
           color: 'rgba(255, 255, 255, 0.1)',
@@ -152,6 +165,15 @@ export class MedidasChartComponent implements OnInit, OnChanges {
     interaction: {
       intersect: false,
       mode: 'index'
+    },
+    elements: {
+      point: {
+        radius: 6,
+        hoverRadius: 8
+      },
+      line: {
+        tension: 0.4
+      }
     }
   };
 
