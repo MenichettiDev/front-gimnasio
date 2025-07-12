@@ -23,7 +23,10 @@
     <div class="user-profile" [ngClass]="getPerfilClass()">
       <div class="profile-content">
         <i [class]="getPerfilIcon()"></i>
-        <span class="profile-text">{{ getPerfilName() }}</span>
+        <div class="profile-info">
+          <span class="user-name">{{ getNombreCompleto() }}</span>
+          <span class="profile-type">{{ getPerfilName() }}</span>
+        </div>
       </div>
     </div>
 

@@ -34,6 +34,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
   isSmallScreen = window.innerWidth < 992;
   isPerfilModalVisible = false;
 
+  // Agregar propiedades para usuario
+  nombreCompleto = '';
+  nombreUsuario = '';
+  apellidoUsuario = '';
+
   private subscription = new Subscription();
 
   // Menú hardcodeado basado en tu estructura
@@ -139,6 +144,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
     const user = this.authService.getUser();
     if (user) {
       this.id_acceso = user.id_acceso;
+      this.nombreUsuario = user.nombre || '';
+      this.apellidoUsuario = user.apellido || '';
+      this.nombreCompleto = `${this.nombreUsuario} ${this.apellidoUsuario}`.trim();
     }
   }
 
@@ -221,6 +229,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
       4: 'perfil-gimnasio'
     };
     return classes[this.id_acceso] || 'perfil-default';
+  }
+
+  // Método para obtener el nombre completo
+  getNombreCompleto(): string {
+    return this.nombreCompleto || 'Usuario';
   }
 
   // Métodos del modal de logout
