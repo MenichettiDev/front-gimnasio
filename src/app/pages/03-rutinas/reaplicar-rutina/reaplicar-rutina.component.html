@@ -1,13 +1,42 @@
-<app-buscar-rutina (rutinasEncontradas)="manejarRutinasEncontradas($event)"
-    (filtrosAceptados)="manejarFiltrosAceptados($event)">
-</app-buscar-rutina>
+<div class="reaplicar-rutina-container">
+    <div class="page-header">
+        <h1 class="page-title">
+            <i class="fas fa-redo-alt"></i>
+            Reaplicar Rutina
+        </h1>
+        <p class="page-subtitle">
+            Busca y modifica rutinas existentes para crear nuevas versiones personalizadas
+        </p>
+    </div>
 
-<app-mostrar-rutinas [planes]="rutinasFiltradas" [mostrarEdicion]="true"
-    (editarRutinaSeleccionada)="onEditarRutina($event)">
-</app-mostrar-rutinas>
+    <div class="content-section search-section">
+        <h2 class="section-title">
+            <i class="fas fa-search"></i>
+            Buscar Rutinas
+        </h2>
+        <app-buscar-rutina (rutinasEncontradas)="manejarRutinasEncontradas($event)"
+            (filtrosAceptados)="manejarFiltrosAceptados($event)">
+        </app-buscar-rutina>
+    </div>
 
-<!-- Mostrar el componente de reaplicar rutina si hay una rutina seleccionada -->
-<div *ngIf="formularioHabilitado">
-    <h3>Editar Rutina</h3>
-    <app-editar-rutina [idRutina]="rutinaSeleccionada!.id_rutina"></app-editar-rutina>
+    <div class="content-section results-section">
+        <h2 class="section-title">
+            <i class="fas fa-list"></i>
+            Resultados de Búsqueda
+        </h2>
+        <app-mostrar-rutinas [planes]="rutinasFiltradas" [mostrarEdicion]="true"
+            (editarRutinaSeleccionada)="onEditarRutina($event)">
+        </app-mostrar-rutinas>
+    </div>
+
+    <!-- Mostrar el componente de reaplicar rutina si hay una rutina seleccionada -->
+    <div class="content-section" *ngIf="formularioHabilitado">
+        <div class="edit-section">
+            <h2 class="section-title">
+                <i class="fas fa-edit"></i>
+                Editar Rutina Seleccionada
+            </h2>
+            <app-editar-rutina [idRutina]="rutinaSeleccionada!.id_rutina"></app-editar-rutina>
+        </div>
+    </div>
 </div>

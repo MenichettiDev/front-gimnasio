@@ -60,7 +60,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     // GM03 - Rutinas
     { id: 21, descripcion: 'Rutinas', icono: 'bx bx-book-bookmark', link: '/', grupo: 'GM03', principal: true, orden: 3, estado: true, requiredAccess: [1, 2, 3, 4] },
-    { id: 22, descripcion: 'Actual', icono: '', link: '/rutinas/actual', grupo: 'GM03', principal: false, orden: 1, estado: true, requiredAccess: [2, 3] },
+    // { id: 22, descripcion: 'Actual', icono: '', link: '/rutinas/actual', grupo: 'GM03', principal: false, orden: 1, estado: true, requiredAccess: [2, 3] },
     { id: 23, descripcion: 'Mis rutinas', icono: '', link: '/rutinas/mis-rutinas', grupo: 'GM03', principal: false, orden: 2, estado: true, requiredAccess: [2, 3, 4] },
     // { id: 24, descripcion: 'Recomendadas', icono: '', link: '/rutinas/recomendadas', grupo: 'GM03', principal: false, orden: 3, estado: false, requiredAccess: [2, 3, 4] },
     // { id: 25, descripcion: 'Populares', icono: '', link: '/rutinas/populares', grupo: 'GM03', principal: false, orden: 4, estado: false, requiredAccess: [2, 3, 4] },

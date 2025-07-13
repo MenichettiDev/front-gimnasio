@@ -1,71 +1,104 @@
-<p-toast></p-toast>
-<p-confirmDialog header="Confirmación" icon="pi pi-exclamation-triangle"></p-confirmDialog>
-<p-progressSpinner *ngIf="loading" [style]="{'width': '50px', 'height': '50px'}"></p-progressSpinner>
+<div class="buscar-container">
+    <p-toast></p-toast>
+    <p-confirmDialog header="Confirmación" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+    <p-progressSpinner *ngIf="loading" [style]="{'width': '50px', 'height': '50px'}"></p-progressSpinner>
 
-<div class="container mt-3">
-    <form [formGroup]="exerciseForm" (ngSubmit)="onBuscar()">
-        <!-- Grupo Muscular -->
-        <div class="mb-3">
-            <label for="grupoMuscular" class="form-label">Grupo Muscular</label>
-            <app-cbo-gruposmusculares formControlName="idGrupoMuscular"
-                (valueChange)="onGrupoMuscularChange($event)"></app-cbo-gruposmusculares>
-        </div>
+    <div class="page-header">
+        <h1 class="page-title">
+            <i class="fas fa-search"></i>
+            Buscar Ejercicios
+        </h1>
+        <p class="page-subtitle">
+            Encuentra ejercicios específicos por grupo muscular y visualiza toda su información
+        </p>
+    </div>
 
-        <!-- Ejercicio -->
-        <div class="mb-3">
-            <label for="ejercicio" class="form-label">Ejercicio</label>
-            <app-cbo-ejercicio [grupoMuscularId]="selectedGrupoMuscular ?? null"
-                formControlName="idEjercicio" (valueChange)="onEjercicioChange($event)"></app-cbo-ejercicio>
-        </div>
+    <div class="content-section">
+        <h2 class="section-title">
+            <i class="fas fa-filter"></i>
+            Filtros de Búsqueda
+        </h2>
 
-        <!-- Botón de búsqueda -->
-        <div class="d-flex justify-content-between">
-            <button type="submit" class="btn btn-success" [disabled]="!exerciseForm.valid">Buscar</button>
-        </div>
-    </form>
+        <form [formGroup]="exerciseForm" (ngSubmit)="onBuscar()">
+            <!-- Grupo Muscular -->
+            <div class="mb-3">
+                <label for="grupoMuscular" class="form-label">Grupo Muscular</label>
+                <app-cbo-gruposmusculares formControlName="idGrupoMuscular"
+                    (valueChange)="onGrupoMuscularChange($event)"></app-cbo-gruposmusculares>
+            </div>
+
+            <!-- Ejercicio -->
+            <div class="mb-3">
+                <label for="ejercicio" class="form-label">Ejercicio</label>
+                <app-cbo-ejercicio [grupoMuscularId]="selectedGrupoMuscular ?? null" formControlName="idEjercicio"
+                    (valueChange)="onEjercicioChange($event)"></app-cbo-ejercicio>
+            </div>
+
+            <!-- Botón de búsqueda -->
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-success" [disabled]="!exerciseForm.valid">
+                    <i class="fas fa-search"></i>
+                    Buscar Ejercicio
+                </button>
+            </div>
+        </form>
+    </div>
 
     <!-- Resultados de la búsqueda -->
-    <div *ngIf="exerciseForm.get('nombre')?.value" class="mt-4">
-        <!-- Mostrar el nombre del ejercicio -->
-        <div class="mb-3">
-            <label class="form-label">Nombre del ejercicio:</label>
-            <p class="nombre-ejercicio">{{ exerciseForm.get('nombre')?.value }}</p>
-        </div>
-    
-        <!-- Mostrar la descripción del ejercicio -->
-        <div class="mb-3">
-            <label class="form-label">Descripción:</label>
-            <p class="descripcion-ejercicio">{{ exerciseForm.get('descripcion')?.value }}</p>
-        </div>
-    
-        <!-- Mostrar las imágenes del ejercicio -->
-        <div class="row mb-3">
-            <div class="col-md-4">
-                <div class="card">
-                    <img [src]="exerciseForm.get('img_1')?.value || 'images/rat.jpeg'" class="card-img-top" alt="Imagen 1">
+    <div class="content-section" *ngIf="exerciseForm.get('nombre')?.value">
+        <div class="results-section">
+            <h2 class="section-title">
+                <i class="fas fa-dumbbell"></i>
+                Información del Ejercicio
+            </h2>
+
+            <!-- Mostrar el nombre del ejercicio -->
+            <div class="mb-4">
+                <label class="form-label">Nombre del ejercicio:</label>
+                <h3 class="nombre-ejercicio">{{ exerciseForm.get('nombre')?.value }}</h3>
+            </div>
+
+            <!-- Mostrar la descripción del ejercicio -->
+            <div class="mb-4">
+                <label class="form-label">Descripción:</label>
+                <div class="descripcion-ejercicio">{{ exerciseForm.get('descripcion')?.value }}</div>
+            </div>
+
+            <!-- Mostrar las imágenes del ejercicio -->
+            <div class="mb-4">
+                <label class="form-label">Imágenes de referencia:</label>
+                <div class="row images-grid">
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <img [src]="exerciseForm.get('img_1')?.value || 'images/rat.jpeg'" class="card-img-top"
+                                alt="Imagen 1">
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <img [src]="exerciseForm.get('img_2')?.value || 'images/rat.jpeg'" class="card-img-top"
+                                alt="Imagen 2">
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <img [src]="exerciseForm.get('img_3')?.value || 'images/rat.jpeg'" class="card-img-top"
+                                alt="Imagen 3">
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <img [src]="exerciseForm.get('img_2')?.value || 'images/rat.jpeg'" class="card-img-top" alt="Imagen 2">
+
+            <!-- Mostrar el enlace del video -->
+            <div class="mb-3" *ngIf="exerciseForm.get('link_video')?.value">
+                <label class="form-label">Video demostrativo:</label>
+                <div class="video-container">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" [src]="getSafeUrl(exerciseForm.get('link_video')?.value)"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <img [src]="exerciseForm.get('img_3')?.value || 'images/rat.jpeg'" class="card-img-top" alt="Imagen 3">
-                </div>
-            </div>
-        </div>
-    
-        <!-- Mostrar el enlace del video -->
-        <div class="mb-3 video-container" *ngIf="exerciseForm.get('link_video')?.value">
-            <label class="form-label">Video del ejercicio:</label>
-            <div class="embed-responsive embed-responsive-16by9">
-                <iframe 
-                    class="embed-responsive-item" 
-                    [src]="getSafeUrl(exerciseForm.get('link_video')?.value)" 
-                    allowfullscreen>
-                </iframe>
             </div>
         </div>
     </div>
