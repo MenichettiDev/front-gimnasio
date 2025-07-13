@@ -1,3 +1,4 @@
+/* Visor de rutina optimizado */
 .visor-rutina-container {
     padding: 20px;
 }
@@ -8,6 +9,7 @@
     padding: 2rem;
 }
 
+/* Header base optimizado */
 .header {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 20px;
@@ -26,6 +28,7 @@
     margin: 0 auto;
 }
 
+/* Botón base optimizado */
 .btn-volver {
     background: linear-gradient(135deg, #4CAF50, #45a049);
     color: white;
@@ -51,6 +54,7 @@
     box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
 }
 
+/* Título base */
 .header h2 {
     font-family: 'Oswald', sans-serif;
     font-size: 2.5rem;
@@ -63,6 +67,7 @@
     flex-grow: 1;
 }
 
+/* Contenido base */
 .content {
     max-width: 1200px;
     margin: 0 auto;
@@ -74,6 +79,7 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
+/* Loading optimizado */
 .loading {
     display: flex;
     justify-content: center;
@@ -102,14 +108,6 @@
     margin: 0 auto 1rem;
 }
 
-.loading-text {
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: #e0e0e0;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
 @keyframes spin {
     0% {
         transform: rotate(0deg);
@@ -120,7 +118,7 @@
     }
 }
 
-/* Responsive Design */
+/* Responsive optimizado */
 @media (max-width: 768px) {
     .visor-rutina-page {
         padding: 1rem;
@@ -146,58 +144,9 @@
         justify-content: center;
         order: 2;
     }
-
-    .content {
-        padding: 1.5rem;
-    }
 }
 
-@media (max-width: 480px) {
-    .visor-rutina-page {
-        padding: 0.5rem;
-    }
-
-    .header {
-        padding: 1rem;
-        border-radius: 15px;
-    }
-
-    .header h2 {
-        font-size: 1.5rem;
-    }
-
-    .btn-volver {
-        padding: 0.8rem 1.5rem;
-        font-size: 0.8rem;
-    }
-
-    .content {
-        padding: 1rem;
-        border-radius: 15px;
-    }
-
-    .loading {
-        margin: 1rem auto;
-        border-radius: 15px;
-    }
-}
-
-/* Estilos globales para el componente hijo */
-:host ::ng-deep app-visor-rutina {
-    color: #ffffff;
-}
-
-:host ::ng-deep .rutina-container {
-    background: transparent;
-    border: none;
-    box-shadow: none;
-}
-
-:host ::ng-deep .rutina-header {
-    color: #ffffff;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
+/* Estilos globales optimizados */
 :host ::ng-deep .ejercicio-card {
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.1);

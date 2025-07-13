@@ -1,8 +1,8 @@
-/* Estilos generales */
+/* Perfil optimizado usando estilos base */
 .container {
-  max-width: 80%; /* Ancho máximo del contenedor */
-  padding: 0 15px; /* Espaciado lateral */
-  margin: 0 auto; /* Centrado */
+  max-width: 80%;
+  padding: 0 15px;
+  margin: 0 auto;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   overflow: hidden;
 }
@@ -12,56 +12,57 @@
   margin-right: 0;
 }
 
-/* Estilo para el título dentro del formulario */
+/* Título base */
 .form-title {
-  font-family: 'Oswald', sans-serif; /* Fuente moderna */
-  font-size: 1.5rem; /* Tamaño */
-  font-weight: 700; /* Negrita */
-  color: #ffffff; /* Color blanco para contrastar con el fondo oscuro */
-  text-transform: uppercase; /* Texto en mayúsculas */
-  letter-spacing: 1px; /* Espaciado entre letras */
-  text-align: center; /* Centrado */
-  margin-bottom: 1rem; /* Espaciado inferior */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra suave */
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* Estilos actualizados para el card */
+/* Card base */
 .card {
   border: none;
   border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   background-color: rgba(71, 0, 99, 0.94);
-  margin-top: 20px; /* Reducir el margen superior */
+  margin-top: 20px;
   overflow: hidden;
 }
 
 .card-header {
   border-radius: 15px 15px 0 0;
-  background-color: #4CAF50; /* Verde moderno */
+  background-color: #4CAF50;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .card-body {
-  padding: 2rem; /* Espaciado interno controlado */
-  overflow: auto; /* Permitir desplazamiento solo si es necesario */
+  padding: 2rem;
+  overflow: auto;
 }
 
-/* Estilos para los inputs */
+/* Inputs base */
 .form-control {
-  width: 100%; /* Asegura que los inputs ocupen todo el ancho disponible */
-  box-sizing: border-box; /* Incluye padding y border en el cálculo del ancho */
+  width: 100%;
+  box-sizing: border-box;
   border: none;
   border-radius: 10px;
-  background-color: #f8f8f844;
+  background-color: rgba(248, 248, 248, 0.27);
   padding: 0.8rem;
   font-size: 0.9rem;
-  transition: box-shadow 0.3s ease-in-out;
+  transition: all 0.3s ease;
+  color: #333;
 }
 
 .form-control:focus {
   background-color: #ffffff;
-  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2); /* Verde claro */
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
   outline: none;
 }
 
@@ -70,118 +71,133 @@
   color: #e0e0e0;
 }
 
-/* Botón de envío */
+/* Botón base */
 .btn-primary {
-  background-color: #04df13bb; /* Verde moderno */
+  background-color: #04df13bb;
   border: none;
-  border-radius: 25px; /* Botón completamente redondeado */
+  border-radius: 25px;
   padding: 0.7rem 1.2rem;
   font-size: 0.9rem;
-  font-weight: 0;
+  font-weight: 600;
   width: 130px;
   margin-left: auto;
   margin-top: -30px;
-  transition: background-color 0.3s ease-in-out;
+  transition: all 0.3s ease;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .btn-primary:hover {
-  background-color: #038a0c; /* Verde oscuro */
+  background-color: #038a0c;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(3, 138, 12, 0.4);
 }
 
-.btn-primary:disabled {
-  background-color: #cccccc;
-  cursor: not-allowed;
-}
-
-/* Espaciado adicional */
-.mb-3 {
-  margin-bottom: 1rem;
-}
-
-/* Estilo para la foto de perfil */
+/* Imagen de perfil optimizada */
 .profile-image {
   display: inline-block;
   width: 150px;
   height: 150px;
-  object-fit: cover; /* Recorta la imagen para mantener proporciones */
-  border-radius: 50%; /* Convierte el cuadrado en un círculo */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo para el ícono predeterminado */
 .default-avatar {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 150px;
   height: 150px;
-  background-color: #676b67; /* Color de fondo para el ícono */
-  border-radius: 50%; /* Hace que el contenedor sea circular */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  background-color: #676b67;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .default-avatar i {
-  font-size: 60px; /* Tamaño del ícono */
-  color: #ffffff; /* Color del ícono */
+  font-size: 60px;
+  color: #ffffff;
 }
 
-/* Contenedor principal */
-.mb-4.position-relative {
-  width: fit-content; /* Ajusta el ancho al contenido */
-  margin: 0 auto; /* Centra el contenedor */
-}
-
-/* Estilo para el botón de carga */
+/* Botones de acción optimizados */
 .upload-button {
   position: absolute;
-  bottom: 0; /* Ajusta la posición vertical para tocar el borde */
-  right: 0; /* Ajusta la posición horizontal para tocar el borde */
-  transform: translate(5%, 5%); /* Mueve el botón hacia afuera del círculo */
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
-  border-radius: 50%; /* Forma circular */
+  bottom: 0;
+  right: 0;
+  transform: translate(5%, 5%);
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
   width: 40px;
   height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-  transition: background-color 0.3s ease; /* Efecto de transición */
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .upload-button:hover {
-  background-color: rgba(0, 0, 0, 0.7); /* Oscurece el fondo al pasar el mouse */
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .upload-button i {
-  font-size: 20px; /* Tamaño del ícono de cámara */
-  color: #ffffff; /* Color del ícono */
+  font-size: 20px;
+  color: #ffffff;
+}
+
+transition: background-color 0.3s ease;
+/* Efecto de transición */
+}
+
+.upload-button:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+  /* Oscurece el fondo al pasar el mouse */
+}
+
+.upload-button i {
+  font-size: 20px;
+  /* Tamaño del ícono de cámara */
+  color: #ffffff;
+  /* Color del ícono */
 }
 
 /* Estilo para el botón de eliminación */
 .delete-button {
   position: absolute;
-  bottom: 0; /* Ajusta la posición vertical para tocar el borde */
-  left: 0; /* Ajusta la posición horizontal para tocar el borde */
-  transform: translate(-50%, 50%); /* Mueve el botón hacia afuera del círculo */
-  background-color: rgba(255, 0, 0, 0.7); /* Fondo rojo semitransparente */
-  border-radius: 50%; /* Forma circular */
+  bottom: 0;
+  /* Ajusta la posición vertical para tocar el borde */
+  left: 0;
+  /* Ajusta la posición horizontal para tocar el borde */
+  transform: translate(-50%, 50%);
+  /* Mueve el botón hacia afuera del círculo */
+  background-color: rgba(255, 0, 0, 0.7);
+  /* Fondo rojo semitransparente */
+  border-radius: 50%;
+  /* Forma circular */
   width: 40px;
   height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-  transition: background-color 0.3s ease; /* Efecto de transición */
-  border: 2px solid #ffffff; /* Borde blanco para destacarlo */
+  cursor: pointer;
+  /* Cambia el cursor al pasar sobre el botón */
+  transition: background-color 0.3s ease;
+  /* Efecto de transición */
+  border: 2px solid #ffffff;
+  /* Borde blanco para destacarlo */
 }
 
 .delete-button:hover {
-  background-color: rgba(255, 0, 0, 0.9); /* Oscurece el fondo al pasar el mouse */
+  background-color: rgba(255, 0, 0, 0.9);
+  /* Oscurece el fondo al pasar el mouse */
 }
 
 .delete-button i {
-  font-size: 20px; /* Tamaño del ícono de basura */
-  color: #ffffff; /* Color del ícono */
+  font-size: 20px;
+  /* Tamaño del ícono de basura */
+  color: #ffffff;
+  /* Color del ícono */
 }
 
 /* Mensajes de error */
@@ -197,5 +213,6 @@
 .spinner-border {
   width: 2rem;
   height: 2rem;
-  color: #4CAF50; /* Verde moderno */
+  color: #4CAF50;
+  /* Verde moderno */
 }

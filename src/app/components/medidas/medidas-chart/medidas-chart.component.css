@@ -1,3 +1,4 @@
+/* Chart container base */
 .chart-container {
     background-color: rgba(71, 0, 99, 0.94);
     border-radius: 15px;
@@ -16,6 +17,7 @@
     gap: 1rem;
 }
 
+/* Título optimizado */
 .chart-title {
     font-family: 'Oswald', sans-serif;
     font-size: 1.5rem;
@@ -32,6 +34,7 @@
     color: #4CAF50;
 }
 
+/* Controles base */
 .chart-controls {
     display: flex;
     gap: 0.5rem;
@@ -75,6 +78,7 @@
     overflow: hidden;
 }
 
+/* Mensaje sin datos optimizado */
 .no-data-message {
     text-align: center;
     padding: 3rem 1rem;
@@ -87,59 +91,7 @@
     color: rgba(255, 255, 255, 0.5);
 }
 
-.no-data-message p {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-}
-
-.no-data-message small {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.5);
-}
-
-.stats-summary {
-    margin-top: 1.5rem;
-    padding: 1rem;
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 2rem;
-}
-
-.stat-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.stat-label {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.8);
-    font-weight: 500;
-}
-
-.stat-value {
-    font-size: 1.2rem;
-    font-weight: 700;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-.stat-value.positive {
-    color: #4CAF50;
-    background-color: rgba(76, 175, 80, 0.2);
-}
-
-.stat-value.negative {
-    color: #f44336;
-    background-color: rgba(244, 67, 54, 0.2);
-}
-
-/* Responsividad */
+/* Responsive optimizado */
 @media (max-width: 768px) {
     .chart-header {
         flex-direction: column;
@@ -150,32 +102,8 @@
         justify-content: center;
     }
 
-    .chart-btn {
-        flex: 1;
-        justify-content: center;
-        min-width: 0;
-    }
-
     .chart-wrapper {
         height: 300px;
         padding: 1rem;
-    }
-
-    .stats-summary {
-        gap: 1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .chart-container {
-        padding: 1rem;
-    }
-
-    .chart-title {
-        font-size: 1.2rem;
-    }
-
-    .chart-controls {
-        flex-direction: column;
     }
 }

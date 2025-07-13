@@ -1,13 +1,18 @@
+/* Actual rutina optimizado */
 .card-header {
-    cursor: pointer;
-    background-color: #f8f9fa;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .card-header:hover {
-    background-color: #e9ecef;
-  }
-  
-  .d-none {
-    display: none;
-  }
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px 15px 0 0;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.card-header:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.d-none {
+  display: none;
+}

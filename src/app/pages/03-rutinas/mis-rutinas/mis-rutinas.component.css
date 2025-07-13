@@ -1,3 +1,4 @@
+/* Mis rutinas optimizado */
 .card {
     background: linear-gradient(135deg, rgba(71, 0, 99, 0.95), rgba(71, 0, 99, 0.98));
     border: none;
@@ -6,6 +7,7 @@
     backdrop-filter: blur(10px);
 }
 
+/* Título base */
 .form-title {
     font-family: 'Oswald', sans-serif;
     font-size: 2.5rem;
@@ -33,6 +35,7 @@
     margin-right: 0.5rem;
 }
 
+/* Alertas optimizadas */
 .alert-info {
     background: rgba(76, 175, 80, 0.1);
     border: 1px solid rgba(76, 175, 80, 0.3);
@@ -48,6 +51,7 @@
     letter-spacing: 0.5px;
 }
 
+/* Cards con bordes específicos */
 .card.border-primary {
     border: 2px solid #007bff !important;
     background: rgba(0, 123, 255, 0.05);
@@ -62,20 +66,7 @@
     border-radius: 15px;
 }
 
-.card.border-warning {
-    border: 2px solid #ffc107 !important;
-    background: rgba(255, 193, 7, 0.05);
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-}
-
-.card.border-secondary {
-    border: 2px solid #6c757d !important;
-    background: rgba(108, 117, 125, 0.05);
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-}
-
+/* Tabla optimizada */
 .custom-table {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 10px;
@@ -106,26 +97,7 @@
     transition: all 0.3s ease-in-out;
 }
 
-.table-primary thead th {
-    background: rgba(0, 123, 255, 0.2) !important;
-    color: #ffffff;
-}
-
-.table-success thead th {
-    background: rgba(76, 175, 80, 0.2) !important;
-    color: #ffffff;
-}
-
-.table-warning thead th {
-    background: rgba(255, 193, 7, 0.2) !important;
-    color: #ffffff;
-}
-
-.table-secondary thead th {
-    background: rgba(108, 117, 125, 0.2) !important;
-    color: #ffffff;
-}
-
+/* Botones optimizados */
 .btn-icon {
     background: linear-gradient(135deg, #4CAF50, #45a049);
     color: white;
@@ -147,25 +119,7 @@
     color: white;
 }
 
-.icon-view {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-}
-
-.alert-warning {
-    background: rgba(255, 193, 7, 0.1);
-    border: 1px solid rgba(255, 193, 7, 0.3);
-    color: #ffffff;
-    border-radius: 15px;
-    backdrop-filter: blur(10px);
-}
-
-.alert-warning i {
-    color: #ffc107;
-}
-
-/* Responsive */
+/* Responsive optimizado */
 @media (max-width: 768px) {
     .form-title {
         font-size: 2rem;

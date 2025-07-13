@@ -1,4 +1,12 @@
-/* Fondo completo de la pantalla */
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+/* Fondo optimizado */
 .fullscreen-background {
   position: fixed;
   top: 0;
@@ -13,15 +21,6 @@
   align-items: center;
 }
 
-/* Reset básico */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-
-/* Configuración del html y body */
 html,
 body {
   height: 100%;
@@ -30,7 +29,7 @@ body {
   overflow: hidden;
 }
 
-/* Estilo para el contenedor */
+/* Container optimizado */
 .container {
   width: 420px;
   background: rgba(43, 1, 75, 0.95);
@@ -44,22 +43,8 @@ body {
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   animation: fadeInForm 1.2s ease-out forwards;
-  transform: translateY(0);
 }
 
-.container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
-  border-radius: 20px;
-  pointer-events: none;
-}
-
-/* Título dentro del contenedor */
 .container h1 {
   font-size: 32px;
   text-align: center;
@@ -70,7 +55,7 @@ body {
   letter-spacing: 1px;
 }
 
-/* Estilo de los campos de entrada */
+/* Form groups optimizados */
 .form-group {
   position: relative;
   width: 100%;
@@ -175,7 +160,7 @@ body {
   }
 }
 
-/* Estilo del botón */
+/* Botón optimizado */
 .btn {
   width: 100%;
   height: 50px;

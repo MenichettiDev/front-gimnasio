@@ -1,9 +1,11 @@
+/* Reaplicar rutina optimizado */
 .reaplicar-rutina-container {
     min-height: 100vh;
     background: linear-gradient(135deg, rgba(71, 0, 99, 0.95), rgba(71, 0, 99, 0.98));
     padding: 2rem;
 }
 
+/* Header base */
 .page-header {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 20px;
@@ -19,6 +21,7 @@
     margin-bottom: 2rem;
 }
 
+/* Título base */
 .page-title {
     font-family: 'Oswald', sans-serif;
     font-size: 2.5rem;
@@ -42,6 +45,7 @@
     font-weight: 300;
 }
 
+/* Secciones base */
 .content-section {
     max-width: 1200px;
     margin: 0 auto 2rem;
@@ -51,14 +55,6 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
-
-.search-section {
-    margin-bottom: 2rem;
-}
-
-.results-section {
-    margin-bottom: 2rem;
 }
 
 .edit-section {
@@ -88,32 +84,13 @@
     font-size: 1.5rem;
 }
 
-/* Estilos globales para componentes hijos */
-:host ::ng-deep app-buscar-rutina {
-    color: #ffffff;
-}
-
-:host ::ng-deep app-mostrar-rutinas {
-    color: #ffffff;
-}
-
-:host ::ng-deep app-editar-rutina {
-    color: #ffffff;
-}
-
+/* Estilos globales optimizados */
 :host ::ng-deep .card,
 :host ::ng-deep .rutina-card {
     background: rgba(255, 255, 255, 0.08) !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
     border-radius: 15px !important;
     transition: all 0.3s ease-in-out !important;
-}
-
-:host ::ng-deep .card:hover,
-:host ::ng-deep .rutina-card:hover {
-    background: rgba(255, 255, 255, 0.12) !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2) !important;
 }
 
 :host ::ng-deep .btn-primary {
@@ -128,34 +105,7 @@
     box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3) !important;
 }
 
-:host ::ng-deep .btn-primary:hover {
-    background: linear-gradient(135deg, #45a049, #3d8b40) !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4) !important;
-}
-
-:host ::ng-deep .btn-secondary {
-    background: rgba(255, 255, 255, 0.1) !important;
-    color: #e0e0e0 !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    border-radius: 25px !important;
-    padding: 0.8rem 2rem !important;
-    font-weight: 600 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.5px !important;
-    transition: all 0.3s ease-in-out !important;
-}
-
-:host ::ng-deep .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.2) !important;
-    color: #ffffff !important;
-}
-
-:host ::ng-deep .form-control,
-:host ::ng-deep .form-select,
-:host ::ng-deep input,
-:host ::ng-deep select,
-:host ::ng-deep textarea {
+:host ::ng-deep .form-control {
     background: rgba(255, 255, 255, 0.1) !important;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
     border-radius: 10px !important;
@@ -164,56 +114,14 @@
     transition: all 0.3s ease-in-out !important;
 }
 
-:host ::ng-deep .form-control:focus,
-:host ::ng-deep .form-select:focus,
-:host ::ng-deep input:focus,
-:host ::ng-deep select:focus,
-:host ::ng-deep textarea:focus {
+:host ::ng-deep .form-control:focus {
     background: rgba(255, 255, 255, 0.15) !important;
     border-color: #4CAF50 !important;
     box-shadow: 0 0 10px rgba(76, 175, 80, 0.3) !important;
     outline: none !important;
 }
 
-:host ::ng-deep .form-control::placeholder,
-:host ::ng-deep input::placeholder,
-:host ::ng-deep textarea::placeholder {
-    color: #b0b0b0 !important;
-}
-
-:host ::ng-deep .form-label,
-:host ::ng-deep label {
-    color: #e0e0e0 !important;
-    font-weight: 500 !important;
-    margin-bottom: 0.5rem !important;
-}
-
-:host ::ng-deep .table {
-    background: rgba(255, 255, 255, 0.05) !important;
-    border-radius: 15px !important;
-    overflow: hidden !important;
-    color: #ffffff !important;
-}
-
-:host ::ng-deep .table th {
-    background: rgba(255, 255, 255, 0.1) !important;
-    border: none !important;
-    color: #ffffff !important;
-    font-weight: 600 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.5px !important;
-}
-
-:host ::ng-deep .table td {
-    border-color: rgba(255, 255, 255, 0.1) !important;
-    color: #e0e0e0 !important;
-}
-
-:host ::ng-deep .table tbody tr:hover {
-    background: rgba(255, 255, 255, 0.08) !important;
-}
-
-/* Responsive Design */
+/* Responsive optimizado */
 @media (max-width: 768px) {
     .reaplicar-rutina-container {
         padding: 1rem;
@@ -231,33 +139,5 @@
 
     .section-title {
         font-size: 1.5rem;
-    }
-
-    .edit-section {
-        padding: 1.5rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .reaplicar-rutina-container {
-        padding: 0.5rem;
-    }
-
-    .page-header,
-    .content-section {
-        padding: 1rem;
-        border-radius: 15px;
-    }
-
-    .page-title {
-        font-size: 1.5rem;
-    }
-
-    .section-title {
-        font-size: 1.2rem;
-    }
-
-    .edit-section {
-        padding: 1rem;
     }
 }

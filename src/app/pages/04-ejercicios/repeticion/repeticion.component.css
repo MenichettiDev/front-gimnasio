@@ -4,6 +4,7 @@
   padding: 2rem;
 }
 
+/* Header base optimizado */
 .page-header {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 20px;
@@ -19,6 +20,7 @@
   margin-bottom: 2rem;
 }
 
+/* Título base */
 .page-title {
   font-family: 'Oswald', sans-serif;
   font-size: 2.5rem;
@@ -35,6 +37,7 @@
   color: #4CAF50;
 }
 
+/* Secciones base */
 .content-section {
   max-width: 1200px;
   margin: 0 auto 2rem;
@@ -65,7 +68,7 @@
   font-size: 1.5rem;
 }
 
-/* Form styles */
+/* Formularios optimizados */
 .form-label {
   color: #e0e0e0 !important;
   font-weight: 600 !important;
@@ -75,7 +78,8 @@
   letter-spacing: 0.5px;
 }
 
-.form-control, textarea {
+.form-control,
+textarea {
   background: rgba(255, 255, 255, 0.1) !important;
   border: 1px solid rgba(255, 255, 255, 0.2) !important;
   border-radius: 10px !important;
@@ -85,18 +89,15 @@
   font-size: 1rem;
 }
 
-.form-control:focus, textarea:focus {
+.form-control:focus,
+textarea:focus {
   background: rgba(255, 255, 255, 0.15) !important;
   border-color: #4CAF50 !important;
   box-shadow: 0 0 10px rgba(76, 175, 80, 0.3) !important;
   outline: none !important;
 }
 
-.form-control::placeholder, textarea::placeholder {
-  color: #b0b0b0 !important;
-}
-
-/* Button styles */
+/* Botones optimizados */
 .btn {
   border: none !important;
   border-radius: 25px !important;
@@ -123,47 +124,7 @@
   box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4) !important;
 }
 
-.btn-secondary {
-  background: rgba(255, 255, 255, 0.1) !important;
-  color: #e0e0e0 !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-}
-
-.btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.2) !important;
-  color: #ffffff !important;
-}
-
-.btn-warning {
-  background: linear-gradient(135deg, #FF9800, #F57C00) !important;
-  color: white !important;
-  box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3) !important;
-}
-
-.btn-warning:hover {
-  background: linear-gradient(135deg, #F57C00, #E65100) !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4) !important;
-}
-
-.btn-danger {
-  background: linear-gradient(135deg, #f44336, #d32f2f) !important;
-  color: white !important;
-  box-shadow: 0 4px 15px rgba(244, 67, 54, 0.3) !important;
-}
-
-.btn-danger:hover {
-  background: linear-gradient(135deg, #d32f2f, #c62828) !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 6px 20px rgba(244, 67, 54, 0.4) !important;
-}
-
-.btn-sm {
-  padding: 0.5rem 1rem !important;
-  font-size: 0.9rem !important;
-}
-
-/* Table styles */
+/* Tabla optimizada */
 .table {
   background: rgba(255, 255, 255, 0.05) !important;
   border-radius: 15px !important;
@@ -181,6 +142,47 @@
   letter-spacing: 0.5px !important;
   padding: 1rem !important;
 }
+
+.table td {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #e0e0e0 !important;
+  padding: 1rem !important;
+}
+
+/* Form section */
+.form-section {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 15px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Responsive optimizado */
+@media (max-width: 768px) {
+  .repeticion-container {
+    padding: 1rem;
+  }
+
+  .page-header,
+  .content-section {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .page-title {
+    font-size: 2rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .form-section {
+    padding: 1.5rem;
+  }
+}
+
 
 .table td {
   border-color: rgba(255, 255, 255, 0.1) !important;

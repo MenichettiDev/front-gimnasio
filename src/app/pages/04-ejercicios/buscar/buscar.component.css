@@ -1,11 +1,11 @@
-/* Estilos para el contenedor principal de la página de búsqueda */
+/* Buscar ejercicios optimizado */
 .buscar-container {
   min-height: 100vh;
   background: linear-gradient(135deg, rgba(71, 0, 99, 0.95), rgba(71, 0, 99, 0.98));
   padding: 2rem;
 }
 
-/* Estilos para el encabezado de la página */
+/* Header base */
 .page-header {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 20px;
@@ -21,7 +21,7 @@
   margin-bottom: 2rem;
 }
 
-/* Estilos para el título de la página */
+/* Título base */
 .page-title {
   font-family: 'Oswald', sans-serif;
   font-size: 2.5rem;
@@ -33,13 +33,11 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* Estilos para el ícono del título de la página */
 .page-title i {
   margin-right: 0.5rem;
   color: #4CAF50;
 }
 
-/* Estilos para el subtítulo de la página */
 .page-subtitle {
   font-size: 1.1rem;
   color: #e0e0e0;
@@ -47,7 +45,7 @@
   font-weight: 300;
 }
 
-/* Estilos para las secciones de contenido */
+/* Secciones base */
 .content-section {
   max-width: 1200px;
   margin: 0 auto 2rem;
@@ -59,7 +57,6 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-/* Estilos para los títulos de sección */
 .section-title {
   font-family: 'Oswald', sans-serif;
   font-size: 1.8rem;
@@ -74,13 +71,11 @@
   gap: 0.5rem;
 }
 
-/* Estilos para los íconos en los títulos de sección */
 .section-title i {
   color: #4CAF50;
   font-size: 1.5rem;
 }
 
-/* Estilos para la sección de resultados */
 .results-section {
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -89,7 +84,7 @@
   margin-top: 2rem;
 }
 
-/* Aumentar el tamaño de la letra del nombre del ejercicio */
+/* Contenido de ejercicios optimizado */
 .nombre-ejercicio {
   font-size: 2.2rem;
   font-weight: 700;
@@ -100,7 +95,6 @@
   margin-bottom: 1rem;
 }
 
-/* Aumentar el tamaño de la letra de las descripciones */
 .descripcion-ejercicio {
   font-size: 1.2rem;
   line-height: 1.6;
@@ -111,7 +105,7 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Ajustar el tamaño del video */
+/* Video container optimizado */
 .video-container {
   width: 100%;
   max-width: 800px;
@@ -122,7 +116,6 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Estilos para los iframes de los videos */
 .video-container iframe {
   width: 100%;
   height: 450px;
@@ -130,7 +123,7 @@
   border-radius: 10px;
 }
 
-/* Estilos adicionales para las imágenes */
+/* Cards optimizadas */
 .card {
   background: rgba(255, 255, 255, 0.08) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
@@ -139,31 +132,23 @@
   transition: all 0.3s ease-in-out;
 }
 
-/* Efecto hover para las tarjetas */
 .card:hover {
   background: rgba(255, 255, 255, 0.12) !important;
   transform: translateY(-5px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-/* Estilos para las imágenes en las tarjetas */
 .card-img-top {
   max-height: 250px;
   object-fit: cover;
   transition: transform 0.3s ease-in-out;
 }
 
-/* Efecto de zoom para las imágenes en las tarjetas al hacer hover */
 .card:hover .card-img-top {
   transform: scale(1.05);
 }
 
-/* Estilos para la cuadrícula de imágenes */
-.images-grid {
-  margin: 2rem 0;
-}
-
-/* Estilos para formularios */
+/* Formularios optimizados */
 .form-label {
   color: #e0e0e0 !important;
   font-weight: 600 !important;
@@ -173,7 +158,7 @@
   letter-spacing: 0.5px;
 }
 
-/* Estilos para botones */
+/* Botones optimizados */
 .btn-success {
   background: linear-gradient(135deg, #4CAF50, #45a049) !important;
   border: none !important;
@@ -187,28 +172,13 @@
   font-size: 1rem;
 }
 
-/* Efecto hover para el botón de éxito */
 .btn-success:hover {
   background: linear-gradient(135deg, #45a049, #3d8b40) !important;
   transform: translateY(-2px) !important;
   box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4) !important;
 }
 
-/* Estilos para el botón de éxito deshabilitado */
-.btn-success:disabled {
-  background: rgba(255, 255, 255, 0.2) !important;
-  color: #999 !important;
-  cursor: not-allowed;
-  transform: none !important;
-  box-shadow: none !important;
-}
-
-/* Estilos para componentes hijos */
-:host ::ng-deep app-cbo-gruposmusculares,
-:host ::ng-deep app-cbo-ejercicio {
-  color: #ffffff;
-}
-
+/* Estilos globales para componentes hijos */
 :host ::ng-deep .form-control,
 :host ::ng-deep .form-select,
 :host ::ng-deep select,
@@ -232,26 +202,7 @@
   outline: none !important;
 }
 
-:host ::ng-deep option {
-  background: rgba(71, 0, 99, 0.95) !important;
-  color: #ffffff !important;
-}
-
-/* Loading spinner */
-:host ::ng-deep p-progressSpinner {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1000;
-}
-
-/* Toast messages */
-:host ::ng-deep .p-toast {
-  z-index: 2000;
-}
-
-/* Responsive Design */
+/* Responsive optimizado */
 @media (max-width: 768px) {
   .buscar-container {
     padding: 1rem;
@@ -275,17 +226,8 @@
     font-size: 1.8rem;
   }
 
-  .descripcion-ejercicio {
-    font-size: 1rem;
-    padding: 1rem;
-  }
-
   .video-container iframe {
     height: 300px;
-  }
-
-  .card-img-top {
-    max-height: 200px;
   }
 
   .results-section {

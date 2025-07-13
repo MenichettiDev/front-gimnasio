@@ -1,54 +1,54 @@
-/* Contenedor principal */
+/* Contenedor principal optimizado */
 .container-fluid {
   display: flex;
   flex-direction: column;
-  height: 100vh; /* Ocupa el 100% de la altura de la ventana */
+  height: 100vh;
 }
 
-/* Fila que contiene el sidebar y el contenido principal */
 .row {
   display: flex;
   flex: 1;
-  height: calc(100vh - 60px); /* Ajusta la altura restante después de la barra superior */
-  margin-top: 60px; /* Esto evita el solapamiento con la barra superior */
+  height: calc(100vh - 60px);
+  margin-top: 60px;
   position: relative;
-  overflow: hidden; /* Evita el desbordamiento horizontal */
-  padding: 0 20px; /* Añadir padding controlado para mantener la distancia */
+  overflow: hidden;
+  padding: 0 20px;
 }
 
-/* Sidebar */
+/* Sidebar optimizado */
 .col-2 {
-  width: 220px; /* Asegura que el sidebar tenga un ancho fijo */
-  position: fixed; /* Fija el sidebar en su lugar */
-  top: 60px; /* Empuja el sidebar debajo de la barra superior */
+  width: 220px;
+  position: fixed;
+  top: 60px;
   bottom: 0;
-  background-color: transparent; /* Fondo transparente en el sidebar */
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Sombra para separar el sidebar del contenido */
-  z-index: 90; /* Asegura que el sidebar esté por encima del contenido */
-  height: calc(100vh - 60px); /* Ocupa todo el alto menos la barra superior */
+  background-color: transparent;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  z-index: 90;
+  height: calc(100vh - 60px);
 }
 
-/* Contenido principal */
+/* Contenido principal optimizado */
 .col-10 {
-  margin-left: 240px; /* Esto asegura que el contenido comience después del sidebar */
-  padding: 20px; /* Espaciado interno */
-  overflow-y: auto; /* Permite desplazamiento vertical si el contenido excede la altura */
-  z-index: 80; /* Asegura que el contenido esté debajo del sidebar */
-  background-color: transparent; /* Fondo transparente para el contenido */
+  margin-left: 240px;
+  padding: 20px;
+  overflow-y: auto;
+  z-index: 80;
+  background-color: transparent;
   position: relative;
-  height: calc(100vh - 60px); /* Ajusta el alto */
-  box-sizing: border-box; /* Asegura que el padding y el borde se incluyan en el cálculo del tamaño */
-  flex: 1; /* Asegura que el contenido ocupe el espacio restante */
+  height: calc(100vh - 60px);
+  box-sizing: border-box;
+  flex: 1;
 }
 
-/* Media query para pantallas pequeñas (< 992px) */
+/* Responsive optimizado */
 @media (max-width: 991.98px) {
-
   .col-10 {
-    margin-left: 0; /* El contenido ocupa todo el ancho */
-    padding: 5px; /* Espaciado interno */
-    height: calc(100vh - 60px); /* Resta la altura del top-bar */
-    margin-top: 30px; /* Deja espacio para el top-bar */
-    overflow-y: auto; /* Permite desplazamiento vertical si el contenido excede la altura */
+    margin-left: 0;
+    padding: 5px;
+    height: calc(100vh - 60px);
+    margin-top: 30px;
+    overflow-y: auto;
   }
+}
+}
 }

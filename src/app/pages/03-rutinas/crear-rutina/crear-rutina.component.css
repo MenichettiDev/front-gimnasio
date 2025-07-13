@@ -1,3 +1,4 @@
+/* Crear rutina optimizado */
 mat-form-field {
     display: block;
     width: 100%;
@@ -6,43 +7,36 @@ mat-form-field {
 
 .collapsed {
     display: none;
-    /* Oculta el contenido cuando está colapsado */
 }
 
+/* Botones de card header optimizados */
 .card-header button {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    /* Espacio entre el ícono y el texto */
     text-decoration: none;
-    /* Elimina el subrayado */
     color: inherit;
-    /* Usa el color del texto del contenedor padre */
     background-color: transparent;
-    /* Fondo transparente */
     border: none;
-    /* Sin borde */
     font-size: 1rem;
-    /* Tamaño de fuente adecuado */
     cursor: pointer;
-    /* Cambia el cursor al pasar el mouse */
+    transition: all 0.3s ease;
+    padding: 0.5rem;
+    border-radius: 8px;
 }
 
 .card-header button:hover {
     text-decoration: none;
-    /* Sin subrayado al pasar el mouse */
-    color: #333;
-    /* Color más oscuro al pasar el mouse */
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
 }
 
 .card-header button i.bx {
     font-size: 1.2rem;
-    /* Tamaño del ícono */
-    color: inherit;
-    /* Usa el color del texto del botón */
+    color: #4CAF50;
+    transition: all 0.3s ease;
 }
 
 .card-header button:hover i.bx {
-    color: #333;
-    /* Cambia el color del ícono al pasar el mouse */
+    transform: rotate(10deg) scale(1.1);
 }
