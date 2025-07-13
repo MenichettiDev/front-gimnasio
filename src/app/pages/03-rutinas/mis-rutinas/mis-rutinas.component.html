@@ -1,5 +1,51 @@
-
-
-<div *ngIf="id_atleta">
+<!-- <div *ngIf="id_atleta">
     <app-tb-rutinas [idAtleta]="id_atleta"></app-tb-rutinas>
+</div> -->
+
+<!-- Tarjeta con transparencia -->
+<div class="card shadow-lg">
+    <div class="card-body">
+        <!-- Título dentro del formulario -->
+        <h1 class="form-title text-center mb-4">
+            <i class="fas fa-list-check"></i> MIS RUTINAS
+        </h1>
+
+        <div *ngIf="rutinas.length > 0; else noData">
+            <!-- Tabla de rutinas -->
+            <table class="table custom-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Fecha Creación</th>
+                        <th>Objetivo</th>
+                        <th>Nivel</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let rutina of rutinas">
+                        <td>{{ rutina.nombre }}</td>
+                        <td>{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
+                        <td>{{ rutina.objetivo }}</td>
+                        <td>{{ rutina.nivel_atleta }}</td>
+                        <td>
+                            <!-- Icono para ver detalles -->
+                            <span class="icon-view btn-icon" (click)="verDetallesRutina(rutina.id_rutina)">
+                                <i class="fas fa-eye"></i> Ver
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Mensaje cuando no hay datos -->
+        <ng-template #noData>
+            <div class="alert alert-warning d-flex align-items-center p-4">
+                <!-- Icono de advertencia -->
+                <i class="bi bi-exclamation-triangle-fill me-3 fs-2 text-warning"></i>
+                <p class="mb-0">No hay rutinas disponibles para este atleta.</p>
+            </div>
+        </ng-template>
+    </div>
 </div>

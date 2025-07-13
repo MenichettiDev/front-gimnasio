@@ -13,6 +13,8 @@ export interface Atleta {
     direccion: string;
     email: string;
     foto_archivo: string;
+    id_entrenador: number | null; // ID del entrenador asignado, puede ser nulo si no tiene uno
+    id_gimnasio: number | null; // ID del gimnasio al que pertenece,
 
     // Otros campos según la API
 }

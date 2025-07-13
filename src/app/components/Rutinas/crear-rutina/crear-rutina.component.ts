@@ -74,7 +74,7 @@ export class CrearRutComponent implements OnInit {
       objetivo: ['', Validators.required],
       descripcion: ['', [Validators.required, Validators.maxLength(200)]],
       fecha_asignacion: ['', Validators.required],
-      id_atleta: [''],
+      id_atleta: ['', Validators.required],
       dias: this.fb.array([])
     });
     this.agregarDias(this.rutinaForm.get('cantidad_dias')?.value);
