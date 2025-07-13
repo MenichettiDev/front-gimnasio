@@ -1,0 +1,16 @@
+<div class="visor-rutina-page">
+    <div class="header">
+        <button class="btn-volver" (click)="volver()">
+            ← Volver a Mis Rutinas
+        </button>
+        <h2>Detalles de la Rutina</h2>
+    </div>
+
+    <div class="content" *ngIf="rutinaCruda">
+        <app-visor-rutina [rutinaCruda]="rutinaCruda"></app-visor-rutina>
+    </div>
+
+    <div class="loading" *ngIf="!rutinaCruda">
+        Cargando rutina...
+    </div>
+</div>

@@ -11,6 +11,7 @@ import { AtletaService } from '../../../service/atleta.service';
 import { RutinasService } from '../../../service/rutinas.service'; // Add missing import
 import { ModalVisorRutinaComponent } from '../../../components/Rutinas/modal-visor-rutina/modal-visor-rutina.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 // Add import for plan interface - adjust path as needed
 // import { plan } from '../../../data/interfaces/planInterface';
@@ -46,9 +47,9 @@ export class MisRutinasComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private atletaService: AtletaService,
-
     private dialog: MatDialog,
-    private rutinaService: RutinasService // Add missing service injection
+    private rutinaService: RutinasService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -142,9 +143,6 @@ export class MisRutinasComponent implements OnInit {
   }
 
   verDetallesRutina(id_rutina: number): void {
-    // console.log('Ver detalles de la rutina:', rutina);
-    this.dialog.open(ModalVisorRutinaComponent, {
-      data: id_rutina,
-    });
+    this.router.navigate(['/rutinas/visor-rutina', id_rutina]);
   }
 }
