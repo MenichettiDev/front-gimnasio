@@ -1,7 +1,3 @@
-<!-- <div *ngIf="id_atleta">
-    <app-tb-rutinas [idAtleta]="id_atleta"></app-tb-rutinas>
-</div> -->
-
 <!-- Tarjeta con transparencia -->
 <div class="card shadow-lg">
     <div class="card-body">
@@ -10,39 +6,178 @@
             <i class="fas fa-list-check"></i> MIS RUTINAS
         </h1>
 
+        <!-- DEBUG INFO - Remover después -->
+        <div class="alert alert-info mb-4" *ngIf="rutinas.length > 0">
+            <h6>INFORMACION DE MIS RUTINAS:</h6>
+            <p>Total rutinas: {{ rutinas.length }}</p>
+            <p>Rutinas entrenador: {{ rutinasDelEntrenador.length }}</p>
+            <p>Rutinas gimnasio: {{ rutinasDelGimnasio.length }}</p>
+            <p>Rutinas atleta: {{ rutinasDelAtleta.length }}</p>
+            <!-- <p>IDs - Atleta: {{ id_atleta }}, Entrenador: {{ id_entrenador }}, Gimnasio: {{ id_gimnasio }}, Persona: {{
+                id_persona }}</p> -->
+            <!-- <div class="mt-2">
+                <strong>Detalle rutinas:</strong>
+                <ul>
+                    <li *ngFor="let rutina of rutinas">
+                        {{ rutina.nombre }} - Creador: {{ rutina.id_creador }}, Asignada a: {{ rutina.id_atleta }}
+                    </li>
+                </ul>
+            </div> -->
+        </div>
+
         <div *ngIf="rutinas.length > 0; else noData">
-            <!-- Tabla de rutinas -->
-            <table class="table custom-table">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Fecha Creación</th>
-                        <th>Objetivo</th>
-                        <th>Nivel</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let rutina of rutinas">
-                        <td>{{ rutina.nombre }}</td>
-                        <td>{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
-                        <td>{{ rutina.objetivo }}</td>
-                        <td>{{ rutina.nivel_atleta }}</td>
-                        <td>
-                            <!-- Icono para ver detalles -->
-                            <span class="icon-view btn-icon" (click)="verDetallesRutina(rutina.id_rutina)">
-                                <i class="fas fa-eye"></i> Ver
-                            </span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+
+            <!-- Sección: Rutinas del Entrenador -->
+            <div *ngIf="rutinasDelEntrenador.length > 0" class="mb-5">
+                <h3 class="section-title text-primary mb-3">
+                    <i class="fas fa-user-tie"></i> Rutinas Asignadas por mi Entrenador ({{ rutinasDelEntrenador.length
+                    }})
+                </h3>
+                <div class="card border-primary">
+                    <div class="card-body">
+                        <table class="table custom-table">
+                            <thead class="table-primary">
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Fecha Creación</th>
+                                    <th>Objetivo</th>
+                                    <th>Nivel</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let rutina of rutinasDelEntrenador">
+                                    <td>{{ rutina.nombre }}</td>
+                                    <td>{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
+                                    <td>{{ rutina.objetivo }}</td>
+                                    <td>{{ rutina.nivel_atleta }}</td>
+                                    <td>
+                                        <span class="icon-view btn-icon" (click)="verDetallesRutina(rutina.id_rutina)">
+                                            <i class="fas fa-eye"></i> Ver
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección: Rutinas del Gimnasio -->
+            <div *ngIf="rutinasDelGimnasio.length > 0" class="mb-5">
+                <h3 class="section-title text-success mb-3">
+                    <i class="fas fa-dumbbell"></i> Rutinas del Gimnasio ({{ rutinasDelGimnasio.length }})
+                </h3>
+                <div class="card border-success">
+                    <div class="card-body">
+                        <table class="table custom-table">
+                            <thead class="table-success">
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Fecha Creación</th>
+                                    <th>Objetivo</th>
+                                    <th>Nivel</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let rutina of rutinasDelGimnasio">
+                                    <td>{{ rutina.nombre }}</td>
+                                    <td>{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
+                                    <td>{{ rutina.objetivo }}</td>
+                                    <td>{{ rutina.nivel_atleta }}</td>
+                                    <td>
+                                        <span class="icon-view btn-icon" (click)="verDetallesRutina(rutina.id_rutina)">
+                                            <i class="fas fa-eye"></i> Ver
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección: Mis Rutinas Creadas -->
+            <div *ngIf="rutinasDelAtleta.length > 0" class="mb-5">
+                <h3 class="section-title text-warning mb-3">
+                    <i class="fas fa-user-edit"></i> Mis Rutinas Creadas ({{ rutinasDelAtleta.length }})
+                </h3>
+                <div class="card border-warning">
+                    <div class="card-body">
+                        <table class="table custom-table">
+                            <thead class="table-warning">
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Fecha Creación</th>
+                                    <th>Objetivo</th>
+                                    <th>Nivel</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let rutina of rutinasDelAtleta">
+                                    <td>{{ rutina.nombre }}</td>
+                                    <td>{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
+                                    <td>{{ rutina.objetivo }}</td>
+                                    <td>{{ rutina.nivel_atleta }}</td>
+                                    <td>
+                                        <span class="icon-view btn-icon" (click)="verDetallesRutina(rutina.id_rutina)">
+                                            <i class="fas fa-eye"></i> Ver
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FALLBACK: Mostrar todas las rutinas si no hay categorización -->
+            <div *ngIf="rutinasDelEntrenador.length === 0 && rutinasDelGimnasio.length === 0 && rutinasDelAtleta.length === 0"
+                class="mb-5">
+                <h3 class="section-title text-secondary mb-3">
+                    <i class="fas fa-question-circle"></i> Todas las Rutinas (Sin categorizar)
+                </h3>
+                <div class="card border-secondary">
+                    <div class="card-body">
+                        <table class="table custom-table">
+                            <thead class="table-secondary">
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>ID Creador</th>
+                                    <th>Asignada a</th>
+                                    <th>Fecha Creación</th>
+                                    <th>Objetivo</th>
+                                    <th>Nivel</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let rutina of rutinas">
+                                    <td>{{ rutina.nombre }}</td>
+                                    <td>{{ rutina.id_creador }}</td>
+                                    <td>{{ rutina.id_atleta || 'General' }}</td>
+                                    <td>{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
+                                    <td>{{ rutina.objetivo }}</td>
+                                    <td>{{ rutina.nivel_atleta }}</td>
+                                    <td>
+                                        <span class="icon-view btn-icon" (click)="verDetallesRutina(rutina.id_rutina)">
+                                            <i class="fas fa-eye"></i> Ver
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <!-- Mensaje cuando no hay datos -->
         <ng-template #noData>
             <div class="alert alert-warning d-flex align-items-center p-4">
-                <!-- Icono de advertencia -->
                 <i class="bi bi-exclamation-triangle-fill me-3 fs-2 text-warning"></i>
                 <p class="mb-0">No hay rutinas disponibles para este atleta.</p>
             </div>
