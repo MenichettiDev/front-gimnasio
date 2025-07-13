@@ -400,9 +400,9 @@
   padding: 20px 15px;
   margin: 15px 10px;
   border-radius: 12px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -415,7 +415,7 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
   transition: left 0.5s ease;
 }
 
@@ -425,7 +425,7 @@
 
 .user-profile:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .profile-content {
@@ -440,9 +440,9 @@
   font-size: 2.2rem;
   padding: 12px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(5px);
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease;
   min-width: 50px;
   text-align: center;
@@ -459,7 +459,7 @@
   font-size: 1.1rem;
   font-weight: 600;
   color: #ffffff;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   line-height: 1.2;
   letter-spacing: 0.3px;
 }
@@ -487,7 +487,7 @@
 
 .perfil-admin .profile-content i {
   color: #8B4513;
-  background: rgba(255,255,255,0.25);
+  background: rgba(255, 255, 255, 0.25);
 }
 
 .perfil-entrenador {
@@ -524,21 +524,21 @@
     margin: 10px 5px;
     padding: 15px 12px;
   }
-  
+
   .profile-content {
     gap: 12px;
   }
-  
+
   .profile-content i {
     font-size: 1.8rem;
     padding: 10px;
     min-width: 45px;
   }
-  
+
   .user-name {
     font-size: 1rem;
   }
-  
+
   .profile-type {
     font-size: 0.8rem;
   }
@@ -550,6 +550,7 @@
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

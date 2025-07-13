@@ -25,7 +25,7 @@ export class CoachComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.id_persona = this.authService.getIdPersona();
+    this.id_persona = this.authService.getUserId();
     // Obtener el usuario actual desde el servicio de autenticación
 
     // Usar el ID de la persona para obtener el entrenador correspondiente
@@ -47,7 +47,7 @@ export class CoachComponent implements OnInit {
   onAtletaSeleccionado(value: number | Atleta): void {
     if (typeof value === 'number') {
       this.idAtletaSeleccionado = value; // Si es un número, asignarlo directamente
-      console.log( 'atleta seleccionado : ' , this.idAtletaSeleccionado);
+      console.log('atleta seleccionado : ', this.idAtletaSeleccionado);
     } else if (value && typeof value === 'object' && 'id_atleta' in value) {
       this.idAtletaSeleccionado = value.id_atleta; // Si es un objeto Atleta, extraer el ID
     }

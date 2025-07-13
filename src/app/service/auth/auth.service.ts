@@ -34,7 +34,7 @@ export class AuthService {
   }
 
   // Obtener el ID persona (si existe)
-  getIdPersona(): number | null {
+  getUserId(): number | null {
     const user = this.getUser();
     return user && user.id_persona ? user.id_persona : null;
   }

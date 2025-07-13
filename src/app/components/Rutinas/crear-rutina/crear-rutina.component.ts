@@ -49,8 +49,8 @@ export class CrearRutComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private rutinaService : RutinasService,
-    private confirmacionService : ConfirmacionService,
+    private rutinaService: RutinasService,
+    private confirmacionService: ConfirmacionService,
     public router: Router
   ) { }
 
@@ -74,7 +74,7 @@ export class CrearRutComponent implements OnInit {
       objetivo: ['', Validators.required],
       descripcion: ['', [Validators.required, Validators.maxLength(200)]],
       fecha_asignacion: ['', Validators.required],
-      id_atleta: ['', Validators.required],
+      id_atleta: [''],
       dias: this.fb.array([])
     });
     this.agregarDias(this.rutinaForm.get('cantidad_dias')?.value);
@@ -114,7 +114,7 @@ export class CrearRutComponent implements OnInit {
   construirYEnviarDatos(): void {
     const rutinaData = {
       rutina: {
-        id_creador: this.authService.getIdPersona(),
+        id_creador: this.authService.getUserId(),
         nombre: this.rutinaForm.get('nombre')?.value,
         cantidad_dias: this.rutinaForm.get('cantidad_dias')?.value,
         nivel_atleta: this.rutinaForm.get('nivel_atleta')?.value,
@@ -163,8 +163,8 @@ export class CrearRutComponent implements OnInit {
       this.confirmacionService.showError('Por favor, complete todos los campos');
     }
 
-      // Navegar a la página de inicio
-      this.router.navigate(['/home']);
+    // Navegar a la página de inicio
+    this.router.navigate(['/home']);
 
   }
 

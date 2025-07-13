@@ -30,14 +30,14 @@ export class MisRutinasComponent implements OnInit {
   ngOnInit(): void {
 
 
-    this.id_persona = this.authService.getIdPersona();
+    this.id_persona = this.authService.getUserId();
     // Obtener el usuario actual desde el servicio de autenticación
 
     // Usar el ID de la persona para obtener el entrenador correspondiente
     this.atletaService.getAtletasPorIdPersona(this.id_persona!).subscribe({
       next: (atleta) => {
         if (atleta) {
-          console.log( 'arleta completo: ' , atleta);
+          console.log('arleta completo: ', atleta);
           this.id_atleta = atleta.id_atleta; // Asignar el ID del entrenador
           console.log('ID del atleta:', this.id_atleta);
         } else {

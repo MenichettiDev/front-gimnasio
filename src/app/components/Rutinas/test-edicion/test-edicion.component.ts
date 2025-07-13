@@ -21,12 +21,12 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-test-edicion',
   imports: [FormsModule,
-      CommonModule, ReactiveFormsModule,
-      InputTextoComponent, CboAtletaComponent,
-      CboDiasComponent, CboNiveldificultadComponent,
-      CboObjetivoComponent, InputFechaComponent,
-      CboGruposmuscularesComponent, CboEjercicioComponent
-      , CboRepeticionesComponent, CalendarModule, ButtonModule, ProgressSpinnerModule],
+    CommonModule, ReactiveFormsModule,
+    InputTextoComponent, CboAtletaComponent,
+    CboDiasComponent, CboNiveldificultadComponent,
+    CboObjetivoComponent, InputFechaComponent,
+    CboGruposmuscularesComponent, CboEjercicioComponent
+    , CboRepeticionesComponent, CalendarModule, ButtonModule, ProgressSpinnerModule],
   templateUrl: './test-edicion.component.html',
   styleUrl: './test-edicion.component.css'
 })
@@ -99,12 +99,12 @@ export class TestEdicionComponent implements OnInit, OnChanges {
 
   cargarDatosRutina(rutina: any): void {
     console.log('Cargar datos de la rutina:', rutina);
-  
+
     if (!rutina || !rutina.rutina) {
       console.error('La estructura de la rutina no es válida:', rutina);
       return;
     }
-  
+
     // Asignar los valores básicos del formulario
     this.rutinaForm.patchValue({
       nombre: rutina.rutina.nombre,
@@ -115,25 +115,25 @@ export class TestEdicionComponent implements OnInit, OnChanges {
       fecha_asignacion: rutina.rutina.fecha_asignacion,
       id_atleta: rutina.rutina.id_atleta
     });
-  
+
     // Limpiar el FormArray de días antes de agregar nuevos
     this.dias.clear();
-  
+
     // Agregar los días necesarios al formulario
     for (let i = 0; i < rutina.rutina.cantidad_dias; i++) {
       this.agregarDia();
     }
-  
+
     // Cargar los ejercicios para cada día
     rutina.ejercicios.forEach((dia: any, diaIndex: number) => {
       if (!dia.ejercicios || dia.ejercicios.length === 0) {
         console.warn(`No hay ejercicios disponibles para el día ${diaIndex + 1}.`);
         return;
       }
-  
+
       // Obtener el FormArray de ejercicios para este día
       const ejerciciosArray = (this.dias.at(diaIndex).get('ejercicios') as FormArray);
-  
+
       // Agregar y cargar los ejercicios para este día
       dia.ejercicios.forEach((ejercicio: any) => {
         ejerciciosArray.push(
@@ -195,7 +195,7 @@ export class TestEdicionComponent implements OnInit, OnChanges {
 
     const rutinaData = {
       rutina: {
-        id_creador: this.authService.getIdPersona(),
+        id_creador: this.authService.getUserId(),
         nombre: this.rutinaForm.get('nombre')?.value,
         cantidad_dias: this.rutinaForm.get('cantidad_dias')?.value,
         nivel_atleta: this.rutinaForm.get('nivel_atleta')?.value,

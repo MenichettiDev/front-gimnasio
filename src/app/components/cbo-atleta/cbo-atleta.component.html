@@ -1,14 +1,8 @@
-  <label [for]="'atleta-' + label" class="form-label">{{ label }}</label>
-  <select
-    [id]="'atleta-' + label"
-    [(ngModel)]="selectedAtleta"
-    class="form-select form-select-lg"
-    aria-label="Selecciona un atleta"
-    [disabled]="isDisabled"
-    (ngModelChange)="onValueChange()">
-    <option value="" disabled selected>Selecciona un Atleta</option>
-    <option *ngFor="let atleta of atletas" [value]="atleta.id_atleta">
-      {{ atleta.nombre }} {{ atleta.apellido }}
-    </option>
-  </select>
-
+<label [for]="'atleta-' + label" class="form-label">{{ label }}</label>
+<select [id]="'atleta-' + label" [(ngModel)]="selectedAtleta" class="form-select form-select-lg"
+  aria-label="Selecciona un atleta" [disabled]="isDisabled" (ngModelChange)="onValueChange()">
+  <option value="0" disabled selected>Selecciona un Atleta</option>
+  <option *ngFor="let atleta of atletas" [value]="atleta.id_atleta">
+    {{ atleta.nombre }} {{ atleta.apellido }}
+  </option>
+</select>

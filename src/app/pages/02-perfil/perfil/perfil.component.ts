@@ -46,7 +46,7 @@ export class PerfilComponent implements OnInit {
   }
 
   cargarUsuarioActual(): void {
-    const idUsuario = this.authService.getIdPersona();
+    const idUsuario = this.authService.getUserId();
     if (!idUsuario) {
       this.errorMessage = 'No se pudo obtener el usuario actual.';
       this.isLoading = false;
@@ -82,7 +82,7 @@ export class PerfilComponent implements OnInit {
   // }
 
   guardarCambios(): void {
-    const idUsuario = this.authService.getIdPersona();
+    const idUsuario = this.authService.getUserId();
     if (!idUsuario) {
       this.errorMessage = 'No se pudo obtener el usuario actual.';
       return;
