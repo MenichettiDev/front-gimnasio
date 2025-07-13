@@ -1,27 +1,58 @@
-<div>
-    <h3>Selecciona las variables a mostrar:</h3>
-    <div *ngFor="let variable of variablesDisponibles">
-      <label>
-        <input
-          type="checkbox"
-          [(ngModel)]="variable.seleccionado"
-          (change)="actualizarGrafico()"
-        />
-        {{ variable.nombre.charAt(0).toUpperCase() + variable.nombre.slice(1) }}
-      </label>
+<div class="estadisticas-container">
+  <div class="page-header">
+    <h1 class="page-title">
+      <i class="fas fa-chart-line"></i>
+      Estadísticas de Progreso
+    </h1>
+  </div>
+
+  <div class="content-section">
+    <div class="variables-section">
+      <h2 class="section-title">
+        <i class="fas fa-sliders-h"></i>
+        Selecciona las variables a mostrar
+      </h2>
+      
+      <div class="variables-grid">
+        <div *ngFor="let variable of variablesDisponibles" 
+             class="variable-item" 
+             [class.selected]="variable.seleccionado">
+          <label>
+            <input
+              type="checkbox"
+              [(ngModel)]="variable.seleccionado"
+              (change)="actualizarGrafico()"
+            />
+            {{ variable.nombre.charAt(0).toUpperCase() + variable.nombre.slice(1) }}
+          </label>
+        </div>
+      </div>
     </div>
   </div>
-  
-  <div *ngIf="medidasFiltradas.length > 0; else noData" class="chart-container">
-    <canvas
-      baseChart
-      [datasets]="chartData"
-      [labels]="chartLabels"
-      [options]="chartOptions"
-      [type]="'line'"
-    ></canvas>
+
+  <div class="content-section">
+    <h2 class="section-title">
+      <i class="fas fa-chart-area"></i>
+      Gráfico de Evolución
+    </h2>
+    
+    <div *ngIf="medidasFiltradas.length > 0; else noData" class="chart-container">
+      <canvas
+        baseChart
+        [datasets]="chartData"
+        [labels]="chartLabels"
+        [options]="chartOptions"
+        [type]="'line'"
+      ></canvas>
+    </div>
+    
+    <ng-template #noData>
+      <div class="no-data">
+        <div class="no-data-icon">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <p class="no-data-text">No hay datos disponibles para mostrar en el gráfico.</p>
+      </div>
+    </ng-template>
   </div>
-  
-  <ng-template #noData>
-    <p>No hay datos disponibles para mostrar en el gráfico.</p>
-  </ng-template>
+</div>

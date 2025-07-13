@@ -1,76 +1,94 @@
-<p-toast></p-toast>
-<p-confirmDialog header="Confirmación" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<div class="editar-ejercicio-container">
+  <p-toast></p-toast>
+  <p-confirmDialog header="Confirmación" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+  <p-progressSpinner *ngIf="loading" [style]="{'width': '50px', 'height': '50px'}"></p-progressSpinner>
 
-<p-progressSpinner *ngIf="loading" [style]="{'width': '50px', 'height': '50px'}"></p-progressSpinner>
+  <div class="page-header">
+    <h1 class="page-title">
+      <i class="fas fa-edit"></i>
+      Editar Ejercicio
+    </h1>
+    <p class="page-subtitle">
+      Modifica o elimina ejercicios existentes del sistema
+    </p>
+  </div>
 
-<div class="container mt-3">
+  <div class="content-section">
     <form [formGroup]="exerciseForm" (ngSubmit)="onUpdate()">
-        
-        <!-- Grupo Muscular -->
-        <div class="mb-3">
-            <label for="grupoMuscular" class="form-label">Grupo Muscular</label>
-            <app-cbo-gruposmusculares formControlName="idGrupoMuscular"
-            (valueChange)="onGrupoMuscularChange($event)"></app-cbo-gruposmusculares>
-        </div>
-        
-        <!-- Ejercicio -->
-        <div class="mb-3">
-            <label for="ejercicio" class="form-label">Ejercicio</label>
-            <app-cbo-ejercicio [grupoMuscularId]="selectedGrupoMuscular ?? null"
-            formControlName="idEjercicio" (valueChange)="onEjercicioChange($event)"></app-cbo-ejercicio>
-        </div>
+      
+      <!-- Grupo Muscular -->
+      <div class="mb-3">
+        <label for="grupoMuscular" class="form-label">Grupo Muscular</label>
+        <app-cbo-gruposmusculares formControlName="idGrupoMuscular"
+        (valueChange)="onGrupoMuscularChange($event)"></app-cbo-gruposmusculares>
+      </div>
+      
+      <!-- Ejercicio -->
+      <div class="mb-3">
+        <label for="ejercicio" class="form-label">Ejercicio</label>
+        <app-cbo-ejercicio [grupoMuscularId]="selectedGrupoMuscular ?? null"
+        formControlName="idEjercicio" (valueChange)="onEjercicioChange($event)"></app-cbo-ejercicio>
+      </div>
 
-        <!-- ID Ejercicio -->
-        <div class="mb-3">
-            <label for="id_ejercicio" class="form-label">ID Ejercicio</label>
-            <input id="id_ejercicio" type="text" formControlName="id_ejercicio" class="form-control" readonly>
-        </div>
-        <!-- ID grupo muscular -->
-        <div class="mb-3">
-            <label for="id_grupo_muscular" class="form-label">ID Grupo Muscular</label>
-            <input id="id_grupo_muscular" type="text" formControlName="id_grupo_muscular" class="form-control" readonly>
-        </div>
+      <!-- ID Ejercicio -->
+      <div class="mb-3">
+        <label for="id_ejercicio" class="form-label">ID Ejercicio</label>
+        <input id="id_ejercicio" type="text" formControlName="id_ejercicio" class="form-control" readonly>
+      </div>
+      
+      <!-- ID grupo muscular -->
+      <div class="mb-3">
+        <label for="id_grupo_muscular" class="form-label">ID Grupo Muscular</label>
+        <input id="id_grupo_muscular" type="text" formControlName="id_grupo_muscular" class="form-control" readonly>
+      </div>
 
-        <!-- Nombre -->
-        <div class="mb-3">
-            <label for="nombre" class="form-label">Nombre</label>
-            <input id="nombre" type="text" formControlName="nombre" class="form-control">
-        </div>
+      <!-- Nombre -->
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input id="nombre" type="text" formControlName="nombre" class="form-control">
+      </div>
 
-        <!-- Descripción -->
-        <div class="mb-3">
-            <label for="descripcion" class="form-label">Descripción</label>
-            <textarea id="descripcion" formControlName="descripcion" class="form-control" rows="3"></textarea>
-        </div>
+      <!-- Descripción -->
+      <div class="mb-3">
+        <label for="descripcion" class="form-label">Descripción</label>
+        <textarea id="descripcion" formControlName="descripcion" class="form-control" rows="3"></textarea>
+      </div>
 
-        <!-- Imagen 1 -->
-        <div class="mb-3">
-            <label for="img_1" class="form-label">Imagen 1</label>
-            <input id="img_1" type="text" formControlName="img_1" class="form-control">
-        </div>
+      <!-- Imagen 1 -->
+      <div class="mb-3">
+        <label for="img_1" class="form-label">Imagen 1</label>
+        <input id="img_1" type="text" formControlName="img_1" class="form-control">
+      </div>
 
-        <!-- Imagen 2 -->
-        <div class="mb-3">
-            <label for="img_2" class="form-label">Imagen 2</label>
-            <input id="img_2" type="text" formControlName="img_2" class="form-control">
-        </div>
+      <!-- Imagen 2 -->
+      <div class="mb-3">
+        <label for="img_2" class="form-label">Imagen 2</label>
+        <input id="img_2" type="text" formControlName="img_2" class="form-control">
+      </div>
 
-        <!-- Imagen 3 -->
-        <div class="mb-3">
-            <label for="img_3" class="form-label">Imagen 3</label>
-            <input id="img_3" type="text" formControlName="img_3" class="form-control">
-        </div>
+      <!-- Imagen 3 -->
+      <div class="mb-3">
+        <label for="img_3" class="form-label">Imagen 3</label>
+        <input id="img_3" type="text" formControlName="img_3" class="form-control">
+      </div>
 
-        <!-- Link Video -->
-        <div class="mb-3">
-            <label for="link_video" class="form-label">Link Video</label>
-            <input id="link_video" type="text" formControlName="link_video" class="form-control">
-        </div>
+      <!-- Link Video -->
+      <div class="mb-3">
+        <label for="link_video" class="form-label">Link Video</label>
+        <input id="link_video" type="text" formControlName="link_video" class="form-control">
+      </div>
 
-        <!-- Botones -->
-        <div class="d-flex justify-content-between">
-            <button type="submit" class="btn btn-warning" [disabled]="!exerciseForm.valid">Modificar</button>
-            <button type="button" class="btn btn-danger" (click)="onDelete()">Eliminar Ejercicio</button>
-        </div>
+      <!-- Botones -->
+      <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-warning" [disabled]="!exerciseForm.valid">
+          <i class="fas fa-save"></i>
+          Modificar
+        </button>
+        <button type="button" class="btn btn-danger" (click)="onDelete()">
+          <i class="fas fa-trash"></i>
+          Eliminar Ejercicio
+        </button>
+      </div>
     </form>
+  </div>
 </div>
