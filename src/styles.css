@@ -1,228 +1,225 @@
-/* ================================================
-   Estilos Generales
-   ================================================ */
+/* ==========================================================
+   ESTILOS GLOBALES CENTRALIZADOS
+   ========================================================== */
 
-/* Estilo global para la página */
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  overflow-x: hidden; /* Mantener el scroll horizontal deshabilitado */
-  overflow-y: auto; /* Habilitar el scroll vertical solo cuando sea necesario */
+/* Variables CSS para consistencia */
+:root {
+  --primary-gradient: linear-gradient(135deg, rgba(71, 0, 99, 0.95), rgba(71, 0, 99, 0.98));
+  --card-background: rgba(43, 1, 75, 0.94);
+  --glass-background: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+  --text-muted: #b0b0b0;
+  --border-radius-lg: 20px;
+  --border-radius-md: 15px;
+  --border-radius-sm: 10px;
+  --shadow-base: 0 4px 15px rgba(0, 0, 0, 0.2);
+  --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.3);
+  --transition-base: all 0.3s ease-in-out;
+}
+
+/* Contenedores base */
+.container-base {
+  max-width: 1300px;
+  padding: 0 15px;
+  margin: 0 auto;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-image: url("/images/FONDO_APP.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  overflow: hidden;
 }
 
-app-root {
-  height: 100%;
+/* Cards base */
+.card-base {
+  border: none;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-base);
+  background: var(--card-background);
+  margin-top: 20px;
+  overflow: hidden;
+  transition: var(--transition-base);
+  backdrop-filter: blur(10px);
+}
+
+.card-base:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.card-body-base {
+  padding: 2rem;
+  overflow: auto;
+}
+
+/* Títulos de formulario */
+.form-title-base {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Headers de sección */
+.section-header-base {
+  margin: 2rem 0 1rem 0;
+  padding-bottom: 0.5rem;
+}
+
+.section-header-base h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Controles de formulario */
+.form-control-base {
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  border-radius: var(--border-radius-sm);
+  background-color: rgba(248, 248, 248, 0.1);
+  padding: 0.8rem;
+  font-size: 0.9rem;
+  transition: var(--transition-base);
+  color: #333;
+}
+
+.form-control-base:focus {
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+  outline: none;
+}
+
+.form-control-base.is-invalid {
+  background-color: #fff5f5;
+  border: 1px solid #dc3545;
+}
+
+.form-label-base {
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+/* Mensajes de error */
+.invalid-feedback-base {
+  display: block;
+  color: #dc3545;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}
+
+/* Botones base */
+.btn-base {
+  border: none;
+  border-radius: 25px;
+  padding: 0.8rem 2rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-base);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-/* ================================================
-   Encabezado Fijo
-   ================================================ */
+.btn-primary-base {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
 
-.page-title {
+.btn-primary-base:hover {
+  background: linear-gradient(135deg, #45a049, #3d8b40);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+.btn-secondary-base {
+  background: var(--glass-background);
+  color: var(--text-secondary);
+  border: 1px solid var(--glass-border);
+}
+
+.btn-secondary-base:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--text-primary);
+}
+
+.btn-disabled {
+  background: #cccccc !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Modales base */
+.modal-overlay-base {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.8); /* Fondo semitransparente */
-  padding: 1rem;
-  z-index: 1000; /* Asegura que esté por encima de otros elementos */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
-}
-
-.page-title h4 {
-  margin: 0;
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #333333; /* Color oscuro para el texto */
-  text-align: left; /* Alineación a la izquierda */
-}
-
-/* ================================================
-   Estilos de la Tarjeta (Card)
-   ================================================ */
-
-.card {
-  border: none;
-  border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  background-color: rgba(255, 255, 255, 0.9); /* Transparencia para ver el fondo */
-  margin-top: 4rem; /* Espacio para el encabezado fijo */
-}
-
-.card-body {
-  padding: 2rem;
-}
-
-/* ================================================
-   Estilos para Formularios e Inputs
-   ================================================ */
-
-/* Estilo general de los inputs */
-.form-control {
-  border: none;
-  border-radius: 10px;
-  background-color: #f8f9fa;
-  padding: 1rem;
-  font-size: 1rem;
-}
-
-.form-control:focus {
-  background-color: #ffffff;
-  outline: none;
-}
-
-/* Estilo de la etiqueta de los inputs */
-.form-label {
-  font-weight: 500;
-  color: #333333;
-}
-
-/* ================================================
-   Estilos para Botones
-   ================================================ */
-
-/* Estilo para el botón principal (botón de acción) */
-.btn-primary {
-  background-color: #4CAF50; /* Verde moderno */
-  border: none;
-  border-radius: 25px; /* Botón completamente redondeado */
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.btn-primary:hover {
-  background-color: #45a049; /* Verde oscuro */
-}
-
-.btn-primary:disabled {
-  background-color: #cccccc;
-  cursor: not-allowed;
-}
-
-/* Estilo para el botón secundario (botón de acción secundaria) */
-.btn-secondary {
-  background-color: #6c757d; /* Gris oscuro */
-  border: none;
-  border-radius: 25px; /* Redondear bordes */
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.btn-secondary:hover {
-  background-color: #5a6268; /* Gris oscuro al pasar el mouse */
-  transform: scale(1.05); /* Efecto de escala */
-}
-
-.btn-secondary:disabled {
-  background-color: #cccccc;
-  cursor: not-allowed;
-}
-
-/* Estilo para el botón de cancelar */
-.btn-cancel {
-  background-color: #dc3545; /* Rojo para cancelar */
-  border: none;
-  border-radius: 25px; /* Redondear bordes */
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.btn-cancel:hover {
-  background-color: #c82333; /* Rojo más oscuro al pasar el mouse */
-  transform: scale(1.05); /* Efecto de escala */
-}
-
-.btn-cancel:disabled {
-  background-color: #cccccc;
-  cursor: not-allowed;
-}
-
-/* ================================================
-   Estilos para el Componente de Selección de Gimnasio
-   ================================================ */
-
-app-cbo-gimnasio {
-  display: block;
-  margin-top: 1rem;
-}
-
-/* ================================================
-   Mejora Visual para el Input de Tipo File
-   ================================================ */
-
-.input-group {
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
+  justify-content: center;
   align-items: center;
+  z-index: 1050;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition-base);
 }
 
-input[type="file"] {
-  background-color: #ffffff;
-  border: 1px solid #ced4da;
-  border-radius: 10px 0 0 10px;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  flex: 1;
+.modal-overlay-base.visible {
+  opacity: 1;
+  visibility: visible;
 }
 
-.input-group-text {
-  background-color: #4CAF50; /* Verde moderno */
-  border: none;
-  border-radius: 0 10px 10px 0;
-  color: white;
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
+.modal-container-base {
+  background: var(--primary-gradient);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-hover);
+  max-width: 800px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  transform: scale(0.9);
+  transition: var(--transition-base);
 }
 
-.input-group-text:hover {
-  background-color: #45a049; /* Verde oscuro */
+.modal-overlay-base.visible .modal-container-base {
+  transform: scale(1);
 }
 
-/* ================================================
-   Estilos para los Mensajes de Alerta (Ej: No se han cargado medidas)
-   ================================================ */
+/* Responsive base */
+@media (max-width: 768px) {
+  .container-base {
+    padding: 0 10px;
+  }
 
-/* Estilo global para los mensajes de advertencia (alert-warning) */
-.alert-warning {
-  background-color: rgba(255, 193, 7, 0.8); /* Amarillo suave con opacidad */
-  color: #fff; /* Color de texto blanco */
-  font-size: 1.1rem; /* Tamaño de fuente más grande */
-  padding: 1rem 1.5rem; /* Espaciado superior e inferior */
-  border-radius: 10px; /* Bordes redondeados */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  margin-top: 1rem;
-  transition: all 0.3s ease;
+  .form-title-base {
+    font-size: 1.5rem;
+  }
+
+  .card-body-base {
+    padding: 1.5rem;
+  }
 }
 
-.alert-warning i {
-  margin-right: 1rem; /* Espaciado entre el ícono y el texto */
-  font-size: 1.5rem; /* Ícono de mayor tamaño */
-  color: #f39c12; /* Ícono amarillo */
-}
-
-.alert-warning:hover {
-  background-color: rgb(248, 99, 35); /* Fondo más oscuro al pasar el mouse */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombra más intensa */
+@media (max-width: 576px) {
+  .btn-base {
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
 }
 
 /* ================================================
@@ -232,39 +229,53 @@ input[type="file"] {
 /* Estilo para la tabla de medidas */
 .table {
   width: 100%;
-  border-collapse: separate; /* Necesario para bordes redondeados */
-  border-spacing: 0; /* Eliminar espacios entre celdas */
+  border-collapse: separate;
+  /* Necesario para bordes redondeados */
+  border-spacing: 0;
+  /* Eliminar espacios entre celdas */
   margin-top: 1.5rem;
   background-color: transparent;
-  table-layout: auto; /* Ajuste dinámico */
-  border-radius: 10px; /* Redondear bordes externos */
-  overflow: hidden; /* Asegurar que los bordes redondeados funcionen */
+  table-layout: auto;
+  /* Ajuste dinámico */
+  border-radius: 10px;
+  /* Redondear bordes externos */
+  overflow: hidden;
+  /* Asegurar que los bordes redondeados funcionen */
 }
 
 /* Encabezado de la tabla */
 .medidas-list thead {
-  background: linear-gradient(90deg, #e0811a, #ffde04); /* Gradiente horizontal continuo */
+  background: linear-gradient(90deg, #e0811a, #ffde04);
+  /* Gradiente horizontal continuo */
   text-transform: uppercase;
-  font-size: 0.6rem; /* Tamaño de fuente más pequeño */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  font-size: 0.6rem;
+  /* Tamaño de fuente más pequeño */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* Sombra ligera */
 }
 
 /* Celdas del encabezado */
 .medidas-list thead th {
-  padding: 0.3rem; /* Espaciado interno */
+  padding: 0.3rem;
+  /* Espaciado interno */
   text-align: center;
-  white-space: normal; /* Permitir saltos de línea */
-  word-wrap: break-word; /* Dividir palabras largas */
-  background: none; /* Evitar que las celdas sobrescriban el gradiente */
+  white-space: normal;
+  /* Permitir saltos de línea */
+  word-wrap: break-word;
+  /* Dividir palabras largas */
+  background: none;
+  /* Evitar que las celdas sobrescriban el gradiente */
 }
 
 /* Redondear solo las esquinas externas */
 .medidas-list thead th:first-child {
-  border-top-left-radius: 10px; /* Esquina superior izquierda */
+  border-top-left-radius: 10px;
+  /* Esquina superior izquierda */
 }
 
 .medidas-list thead th:last-child {
-  border-top-right-radius: 10px; /* Esquina superior derecha */
+  border-top-right-radius: 10px;
+  /* Esquina superior derecha */
 }
 
 /* Cuerpo de la tabla */
@@ -274,20 +285,25 @@ tbody tr {
 }
 
 tbody td {
-  padding: 0.8rem; /* Espacio interno */
+  padding: 0.8rem;
+  /* Espacio interno */
   text-align: center;
   color: #e0e0e0;
-  font-size: 0.9rem; /* Fuente más grande */
+  font-size: 0.9rem;
+  /* Fuente más grande */
   background-color: rgba(255, 255, 255, 0.1);
-  white-space: nowrap; /* Evitar saltos de línea en los datos */
+  white-space: nowrap;
+  /* Evitar saltos de línea en los datos */
   overflow: hidden;
-  text-overflow: ellipsis; /* Agregar puntos suspensivos si el texto es largo */
+  text-overflow: ellipsis;
+  /* Agregar puntos suspensivos si el texto es largo */
 }
 
 /* Resaltado de fila seleccionada */
 .selected-row {
   background-color: rgba(255, 255, 255, 0.1) !important;
-  border-left: 3px solid #4CAF50; /* Borde izquierdo verde */
+  border-left: 3px solid #4CAF50;
+  /* Borde izquierdo verde */
 }
 
 /* ================================================
@@ -298,25 +314,32 @@ tbody td {
   background: none;
   border: none;
   color: #4CAF50;
-  font-size: 1.2rem; /* Iconos más grandes */
+  font-size: 1.2rem;
+  /* Iconos más grandes */
   cursor: pointer;
   transition: transform 0.3s ease, color 0.3s ease;
-  margin: 0 0.3rem; /* Espacio entre los botones */
+  margin: 0 0.3rem;
+  /* Espacio entre los botones */
 }
 
 .btn-icon:hover {
-  transform: scale(1.2); /* Escalar el ícono al pasar el mouse */
-  color: #038a0c; /* Verde oscuro */
+  transform: scale(1.2);
+  /* Escalar el ícono al pasar el mouse */
+  color: #038a0c;
+  /* Verde oscuro */
 }
 
 /* Estilo específico para el botón de eliminación */
 .btn-delete {
-  color: #f44336; /* Rojo */
+  color: #f44336;
+  /* Rojo */
 }
 
 .btn-delete:hover {
-  transform: scale(1.2); /* Escalar el ícono al pasar el mouse */
-  color: #d32f2f; /* Rojo oscuro */
+  transform: scale(1.2);
+  /* Escalar el ícono al pasar el mouse */
+  color: #d32f2f;
+  /* Rojo oscuro */
 }
 
 /* ================================================
@@ -328,24 +351,28 @@ tbody td {
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  margin-top: 1.5rem; /* Espacio arriba */
+  margin-top: 1.5rem;
+  /* Espacio arriba */
 }
 
 .pagination button {
   background: none;
   border: 1px solid #4CAF50;
   color: #4CAF50;
-  padding: 0.6rem 1.2rem; /* Más altura y ancho */
+  padding: 0.6rem 1.2rem;
+  /* Más altura y ancho */
   border-radius: 20px;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-  font-size: 1rem; /* Fuente más grande */
+  font-size: 1rem;
+  /* Fuente más grande */
 }
 
 .pagination button:hover {
   background-color: #4CAF50;
   color: #fff;
-  transform: scale(1.05); /* Efecto de escala al pasar el mouse */
+  transform: scale(1.05);
+  /* Efecto de escala al pasar el mouse */
 }
 
 .pagination button:disabled {
@@ -359,21 +386,29 @@ tbody td {
    ================================================ */
 
 .medidas-list {
-  overflow-x: auto; /* Habilitar scroll horizontal */
-  max-width: 100%; /* Limitar el ancho máximo */
-  scrollbar-width: thin; /* Scrollbar más delgado */
-  scrollbar-color: #4CAF50 rgba(255, 255, 255, 0.1); /* Color del scrollbar */
+  overflow-x: auto;
+  /* Habilitar scroll horizontal */
+  max-width: 100%;
+  /* Limitar el ancho máximo */
+  scrollbar-width: thin;
+  /* Scrollbar más delgado */
+  scrollbar-color: #4CAF50 rgba(255, 255, 255, 0.1);
+  /* Color del scrollbar */
 }
 
 .medidas-list::-webkit-scrollbar {
-  height: 8px; /* Altura del scrollbar */
+  height: 8px;
+  /* Altura del scrollbar */
 }
 
 .medidas-list::-webkit-scrollbar-thumb {
-  background: #4CAF50; /* Color del thumb */
-  border-radius: 10px; /* Bordes redondeados */
+  background: #4CAF50;
+  /* Color del thumb */
+  border-radius: 10px;
+  /* Bordes redondeados */
 }
 
 .medidas-list::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1); /* Fondo del track */
+  background: rgba(255, 255, 255, 0.1);
+  /* Fondo del track */
 }

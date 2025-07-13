@@ -1,9 +1,4 @@
 /* ==========================================================
-   Importación de la fuente 'Poppins' desde Google Fonts
-   ========================================================== */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
-
-/* ==========================================================
       Estilos globales
       ========================================================== */
 
@@ -12,8 +7,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-    /* Fuente global 'Poppins' */
+    font-family: 'Roboto', sans-serif;
+    /* Cambiado a Roboto */
 }
 
 /* ==========================================================

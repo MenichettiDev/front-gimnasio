@@ -68,6 +68,7 @@
     padding: 2rem;
 }
 
+/* Estilos específicos del modal de perfil */
 .perfil-grid {
     display: grid;
     gap: 1.5rem;
@@ -90,7 +91,7 @@
 .perfil-card:hover {
     background: rgba(255, 255, 255, 0.1);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .perfil-card.selected {
@@ -126,12 +127,6 @@
     line-height: 1.4;
 }
 
-.perfil-selector {
-    min-width: 30px;
-    display: flex;
-    justify-content: center;
-}
-
 .radio-button {
     width: 24px;
     height: 24px;
@@ -149,75 +144,8 @@
     color: white;
 }
 
-.radio-button i {
-    font-size: 0.8rem;
-}
-
-.modal-footer {
-    padding: 1.5rem 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-}
-
-.btn {
-    border: none;
-    border-radius: 25px;
-    padding: 0.8rem 2rem;
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.btn-secondary {
-    background: rgba(255, 255, 255, 0.1);
-    color: #e0e0e0;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.2);
-    color: #ffffff;
-}
-
-.btn-primary {
-    background: linear-gradient(135deg, #4CAF50, #45a049);
-    color: white;
-    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
-}
-
-.btn-primary:hover {
-    background: linear-gradient(135deg, #45a049, #3d8b40);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
-}
-
-.btn-primary:disabled {
-    background: #cccccc;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
-}
-
-.btn-primary:disabled:hover {
-    background: #cccccc;
-    transform: none;
-}
-
-/* Responsive */
+/* Responsive específico */
 @media (max-width: 768px) {
-    .modal-container {
-        width: 95%;
-        margin: 1rem;
-    }
-
     .perfil-grid {
         grid-template-columns: 1fr;
     }
