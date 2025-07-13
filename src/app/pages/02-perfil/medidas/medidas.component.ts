@@ -9,7 +9,7 @@ import { Medida } from '../../../data/interfaces/tbMedidaInterface';
 @Component({
   selector: 'app-medidas',
   standalone: true,
-  imports: [CommonModule, FormsModule, MedidasVisorComponent, MedidasVisorComponent, MedidaFormComponent],  // Agrega MedidasVisorComponent aquí
+  imports: [CommonModule, FormsModule, MedidaFormComponent],  // Agrega MedidasVisorComponent aquí
   templateUrl: './medidas.component.html',
   styleUrls: ['./medidas.component.css'],
 })

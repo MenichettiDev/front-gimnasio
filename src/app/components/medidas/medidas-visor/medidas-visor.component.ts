@@ -9,7 +9,7 @@ import { MedidasChartComponent } from "../medidas-chart/medidas-chart.component"
 
 @Component({
   selector: 'app-medidas-visor',
-  imports: [CommonModule, FormsModule, MedidaFormComponent, MedidasChartComponent], // Agrega FormsModule aquí
+  imports: [CommonModule, FormsModule, MedidasChartComponent], // Agrega FormsModule aquí
   templateUrl: './medidas-visor.component.html',
   styleUrls: ['./medidas-visor.component.css'],
 })

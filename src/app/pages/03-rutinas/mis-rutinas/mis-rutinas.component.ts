@@ -1,15 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CboAtletaComponent } from '../../../components/cbo-atleta/cbo-atleta.component';
 import { FormsModule } from '@angular/forms';
-import { TbRutinasComponent } from '../../../components/Rutinas/tb-rutinas/tb-rutinas.component';
-import { Atleta } from '../../../data/interfaces/atletaInterface';
 import { AuthService } from '../../../service/auth/auth.service';
-import { EntrenadorService } from '../../../service/entrenador.service';
-import { Entrenador } from '../../../data/interfaces/entrenadorInterface';
 import { AtletaService } from '../../../service/atleta.service';
 import { RutinasService } from '../../../service/rutinas.service'; // Add missing import
-import { ModalVisorRutinaComponent } from '../../../components/Rutinas/modal-visor-rutina/modal-visor-rutina.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
@@ -19,7 +13,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-mis-rutinas',
   standalone: true,
-  imports: [CommonModule, FormsModule, TbRutinasComponent],
+  imports: [CommonModule, FormsModule],
   templateUrl: './mis-rutinas.component.html',
   styleUrls: ['./mis-rutinas.component.css']
 })
