@@ -6,23 +6,13 @@
             <i class="fas fa-list-check"></i> MIS RUTINAS
         </h1>
 
-        <!-- DEBUG INFO - Remover después -->
+        <!-- INFO - Información de rutinas -->
         <div class="alert alert-info mb-4" *ngIf="rutinas.length > 0">
-            <h6>INFORMACION DE MIS RUTINAS:</h6>
-            <p>Total rutinas: {{ rutinas.length }}</p>
-            <p>Rutinas entrenador: {{ rutinasDelEntrenador.length }}</p>
-            <p>Rutinas gimnasio: {{ rutinasDelGimnasio.length }}</p>
-            <p>Rutinas atleta: {{ rutinasDelAtleta.length }}</p>
-            <!-- <p>IDs - Atleta: {{ id_atleta }}, Entrenador: {{ id_entrenador }}, Gimnasio: {{ id_gimnasio }}, Persona: {{
-                id_persona }}</p> -->
-            <!-- <div class="mt-2">
-                <strong>Detalle rutinas:</strong>
-                <ul>
-                    <li *ngFor="let rutina of rutinas">
-                        {{ rutina.nombre }} - Creador: {{ rutina.id_creador }}, Asignada a: {{ rutina.id_atleta }}
-                    </li>
-                </ul>
-            </div> -->
+            <h6>INFORMACIÓN DE MIS RUTINAS:</h6>
+            <p class="mb-1">Total rutinas: <strong>{{ rutinas.length }}</strong></p>
+            <p class="mb-1">Rutinas del entrenador: <strong>{{ rutinasDelEntrenador.length }}</strong></p>
+            <p class="mb-1">Rutinas del gimnasio: <strong>{{ rutinasDelGimnasio.length }}</strong></p>
+            <p class="mb-0">Mis rutinas creadas: <strong>{{ rutinasDelAtleta.length }}</strong></p>
         </div>
 
         <div *ngIf="rutinas.length > 0; else noData">
