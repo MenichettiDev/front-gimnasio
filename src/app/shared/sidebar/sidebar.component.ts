@@ -54,21 +54,21 @@ export class SidebarComponent implements OnInit, OnDestroy {
     // GM02 - Mi Perfil
     { id: 11, descripcion: 'Mi Perfil', icono: 'bi bi-file-person', link: '/perfil', grupo: 'GM02', principal: true, orden: 2, estado: true, requiredAccess: [1, 2, 3, 4] },
     { id: 12, descripcion: 'Perfil', icono: '', link: '/perfil/perfil', grupo: 'GM02', principal: false, orden: 1, estado: true, requiredAccess: [1, 2, 3, 4] },
-    { id: 13, descripcion: 'Cargar Medidas', icono: '', link: '/perfil/cargar-medidas', grupo: 'GM02', principal: false, orden: 2, estado: true, requiredAccess: [2, 3] },
-    { id: 14, descripcion: 'Historial medidas', icono: '', link: '/perfil/historial-medidas', grupo: 'GM02', principal: false, orden: 3, estado: true, requiredAccess: [2, 3] },
-    { id: 15, descripcion: 'Estadisticas Coach', icono: '', link: '/perfil/coach', grupo: 'GM02', principal: false, orden: 4, estado: true, requiredAccess: [2] },
+    { id: 13, descripcion: 'Cargar Medidas', icono: '', link: '/perfil/cargar-medidas', grupo: 'GM02', principal: false, orden: 2, estado: true, requiredAccess: [1, 2, 3] },
+    { id: 14, descripcion: 'Historial medidas', icono: '', link: '/perfil/historial-medidas', grupo: 'GM02', principal: false, orden: 3, estado: true, requiredAccess: [1, 2, 3] },
+    { id: 15, descripcion: 'Estadisticas Coach', icono: '', link: '/perfil/coach', grupo: 'GM02', principal: false, orden: 4, estado: true, requiredAccess: [1, 2] },
 
     // GM03 - Rutinas
     { id: 21, descripcion: 'Rutinas', icono: 'bx bx-book-bookmark', link: '/', grupo: 'GM03', principal: true, orden: 3, estado: true, requiredAccess: [1, 2, 3, 4] },
     // { id: 22, descripcion: 'Actual', icono: '', link: '/rutinas/actual', grupo: 'GM03', principal: false, orden: 1, estado: true, requiredAccess: [2, 3] },
-    { id: 23, descripcion: 'Mis rutinas', icono: '', link: '/rutinas/mis-rutinas', grupo: 'GM03', principal: false, orden: 2, estado: true, requiredAccess: [2, 3, 4] },
+    { id: 23, descripcion: 'Mis rutinas', icono: '', link: '/rutinas/mis-rutinas', grupo: 'GM03', principal: false, orden: 2, estado: true, requiredAccess: [1, 2, 3, 4] },
     // { id: 24, descripcion: 'Recomendadas', icono: '', link: '/rutinas/recomendadas', grupo: 'GM03', principal: false, orden: 3, estado: false, requiredAccess: [2, 3, 4] },
     // { id: 25, descripcion: 'Populares', icono: '', link: '/rutinas/populares', grupo: 'GM03', principal: false, orden: 4, estado: false, requiredAccess: [2, 3, 4] },
     // { id: 26, descripcion: 'Especificas', icono: '', link: '/rutinas/especificas', grupo: 'GM03', principal: false, orden: 5, estado: false, requiredAccess: [2, 3, 4] },
-    { id: 27, descripcion: 'Favoritas', icono: '', link: '/rutinas/favoritas', grupo: 'GM03', principal: false, orden: 6, estado: false, requiredAccess: [2, 3] },
+    { id: 27, descripcion: 'Favoritas', icono: '', link: '/rutinas/favoritas', grupo: 'GM03', principal: false, orden: 6, estado: false, requiredAccess: [1, 2, 3] },
     // { id: 28, descripcion: 'Historial', icono: '', link: '/rutinas/historial', grupo: 'GM03', principal: false, orden: 7, estado: false, requiredAccess: [2, 3] },
-    { id: 29, descripcion: 'Crear rutina', icono: '', link: '/rutinas/crear-rutina', grupo: 'GM03', principal: false, orden: 8, estado: true, requiredAccess: [2, 3, 4] },
-    { id: 30, descripcion: 'Reaplicar rutina', icono: '', link: '/rutinas/reaplicar-rutina', grupo: 'GM03', principal: false, orden: 9, estado: true, requiredAccess: [2, 3, 4] },
+    { id: 29, descripcion: 'Crear rutina', icono: '', link: '/rutinas/crear-rutina', grupo: 'GM03', principal: false, orden: 8, estado: true, requiredAccess: [1, 2, 3, 4] },
+    { id: 30, descripcion: 'Reaplicar rutina', icono: '', link: '/rutinas/reaplicar-rutina', grupo: 'GM03', principal: false, orden: 9, estado: true, requiredAccess: [1, 2, 4] },
 
     // GM04 - Ejercicios
     { id: 32, descripcion: 'Ejercicios', icono: 'bx bx-dumbbell', link: '/ejercicios', grupo: 'GM04', principal: true, orden: 4, estado: true, requiredAccess: [1, 2, 3, 4] },
@@ -84,10 +84,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
     // { id: 45, descripcion: 'Coach', icono: '', link: '/asistencia/coach', grupo: 'GM05', principal: false, orden: 3, estado: true, requiredAccess: [1, 2] },
 
     // GM06 - Progreso
-    { id: 52, descripcion: 'Progreso', icono: 'bi bi-percent', link: '/progreso', grupo: 'GM06', principal: true, orden: 6, estado: true, requiredAccess: [2, 3] },
-    { id: 53, descripcion: 'Estadisticas', icono: '', link: '/progreso/estadistica', grupo: 'GM06', principal: false, orden: 1, estado: true, requiredAccess: [2, 3] },
-    { id: 54, descripcion: 'Logros', icono: '', link: '/progreso/logros', grupo: 'GM06', principal: false, orden: 2, estado: true, requiredAccess: [2, 3] },
-    { id: 55, descripcion: 'Metas', icono: '', link: '/progreso/metas', grupo: 'GM06', principal: false, orden: 3, estado: true, requiredAccess: [2, 3] },
+    { id: 52, descripcion: 'Progreso', icono: 'bi bi-percent', link: '/progreso', grupo: 'GM06', principal: true, orden: 6, estado: true, requiredAccess: [1, 2, 3] },
+    { id: 53, descripcion: 'Estadisticas', icono: '', link: '/progreso/estadistica', grupo: 'GM06', principal: false, orden: 1, estado: true, requiredAccess: [1, 2, 3] },
+    { id: 54, descripcion: 'Logros', icono: '', link: '/progreso/logros', grupo: 'GM06', principal: false, orden: 2, estado: true, requiredAccess: [1, 2, 3] },
+    { id: 55, descripcion: 'Metas', icono: '', link: '/progreso/metas', grupo: 'GM06', principal: false, orden: 3, estado: true, requiredAccess: [1, 2, 3] },
 
     // GM07 - Comunidad
     { id: 62, descripcion: 'Comunidad', icono: 'bi bi-people-fill', link: '/comunidad', grupo: 'GM07', principal: true, orden: 7, estado: true, requiredAccess: [1, 2, 3, 4] },
