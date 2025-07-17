@@ -1,0 +1,24 @@
+<div class="modal-overlay">
+    <div class="modal-box">
+        <ng-container *ngIf="!resultado">
+            <h2 class="modal-title">Confirmación</h2>
+            <p class="modal-message">{{ mensaje }}</p>
+            <div class="modal-actions">
+                <button class="btn btn-cancel" (click)="cancelar()" [disabled]="confirmando">Cancelar</button>
+                <button class="btn btn-confirm" (click)="confirmar()" [disabled]="confirmando">
+                    <span *ngIf="!confirmando">Confirmar</span>
+                    <span *ngIf="confirmando">Procesando...</span>
+                </button>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="resultado">
+            <div [ngClass]="{'resultado-exito': resultado === 'exito', 'resultado-error': resultado === 'error'}"
+                class="modal-resultado">
+                <span *ngIf="resultado === 'exito'" class="icon-exito">&#10003;</span>
+                <span *ngIf="resultado === 'error'" class="icon-error">&#10007;</span>
+                <p>{{ mensajeResultado }}</p>
+                <button class="btn btn-close" (click)="cerrarResultado()">Cerrar</button>
+            </div>
+        </ng-container>
+    </div>
+</div>

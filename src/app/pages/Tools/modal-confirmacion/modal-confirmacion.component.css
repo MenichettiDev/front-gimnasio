@@ -1,0 +1,123 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-box {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+    padding: 2rem 2.5rem;
+    min-width: 320px;
+    max-width: 90vw;
+    text-align: center;
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modal-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #222;
+}
+
+.modal-message {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: #444;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.btn {
+    padding: 0.6rem 1.4rem;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-cancel {
+    background: #eee;
+    color: #333;
+}
+
+.btn-cancel:hover:not(:disabled) {
+    background: #ddd;
+}
+
+.btn-confirm {
+    background: #1976d2;
+    color: #fff;
+}
+
+.btn-confirm:hover:not(:disabled) {
+    background: #1565c0;
+}
+
+.btn-close {
+    background: #1976d2;
+    color: #fff;
+    margin-top: 1rem;
+}
+
+.btn-close:hover:not(:disabled) {
+    background: #1565c0;
+}
+
+.modal-resultado {
+    padding: 1.5rem 1rem;
+    border-radius: 6px;
+    margin-top: 1rem;
+}
+
+.resultado-exito {
+    background: #e6f7ee;
+    color: #2e7d32;
+    border: 1px solid #b2dfdb;
+}
+
+.resultado-error {
+    background: #ffebee;
+    color: #c62828;
+    border: 1px solid #ef9a9a;
+}
+
+.icon-exito {
+    font-size: 2.2rem;
+    color: #2e7d32;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.icon-error {
+    font-size: 2.2rem;
+    color: #c62828;
+    display: block;
+    margin-bottom: 0.5rem;
+}
