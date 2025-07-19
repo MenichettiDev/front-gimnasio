@@ -5,7 +5,7 @@
 </div>
 
 <!-- Sidebar condicional -->
-<div class="row">
+<div class="row" style="background-color: rgb(71, 0, 99);">
   <!-- Sidebar -->
   <div *ngIf="isLoggedIn">
     <app-sidebar></app-sidebar>
@@ -13,6 +13,7 @@
 
   <!-- Contenido principal -->
   <div class="col-10">
-    <router-outlet></router-outlet> <!-- Aquí se inyectará el componente de resumen o cualquier otro componente según la ruta -->
+    <router-outlet></router-outlet>
+    <!-- Aquí se inyectará el componente de resumen o cualquier otro componente según la ruta -->
   </div>
 </div>
