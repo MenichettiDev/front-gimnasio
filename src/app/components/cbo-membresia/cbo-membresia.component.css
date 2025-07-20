@@ -1,28 +1,3 @@
-/* Estilo para el select */
-.form-select {
-  width: 100%;
-  /* Asegura que el select ocupe todo el ancho disponible */
-  box-sizing: border-box;
-  /* Incluye el padding y el border en el cálculo del ancho */
-  border: none;
-  border-radius: 10px;
-  /* Bordes redondeados como los demás campos */
-  background-color: #f8f8f844;
-  /* Fondo suave, consistente con los demás inputs */
-  padding: 0.75rem;
-  /* Ajustar el padding para que la altura sea consistente */
-  font-size: 1rem;
-  /* Tamaño de fuente coherente con los otros campos */
-  transition: box-shadow 0.3s ease-in-out;
-  /* Transición suave para el enfoque */
-  height: 44px;
-  /* Ajustar la altura para que sea consistente con otros inputs */
-  color: #333;
-  /* Color de texto más oscuro para mayor legibilidad */
-}
-
-
-
 /* Estilo para la etiqueta */
 .form-label {
   font-weight: 500;
