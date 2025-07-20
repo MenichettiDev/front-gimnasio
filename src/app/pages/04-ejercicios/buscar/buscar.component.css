@@ -178,30 +178,6 @@
   box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4) !important;
 }
 
-/* Estilos globales para componentes hijos */
-:host ::ng-deep .form-control,
-:host ::ng-deep .form-select,
-:host ::ng-deep select,
-:host ::ng-deep input {
-  background: rgba(255, 255, 255, 0.1) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  border-radius: 10px !important;
-  color: #ffffff !important;
-  padding: 0.8rem 1rem !important;
-  transition: all 0.3s ease-in-out !important;
-  font-size: 1rem;
-}
-
-:host ::ng-deep .form-control:focus,
-:host ::ng-deep .form-select:focus,
-:host ::ng-deep select:focus,
-:host ::ng-deep input:focus {
-  background: rgba(255, 255, 255, 0.15) !important;
-  border-color: #4CAF50 !important;
-  box-shadow: 0 0 10px rgba(76, 175, 80, 0.3) !important;
-  outline: none !important;
-}
-
 /* Responsive optimizado */
 @media (max-width: 768px) {
   .buscar-container {

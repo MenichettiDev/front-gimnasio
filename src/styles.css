@@ -107,44 +107,9 @@
   margin-bottom: 0.5rem;
 }
 
-/* Estilo cuando el select está enfocado */
-.form-select:focus {
-  background-color: #541891e7;
-  /* Mantener fondo coherente al enfocar */
-  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
-  /* Resaltado verde claro al enfocar */
-  outline: none;
-  /* Eliminar contorno predeterminado */
-}
 
-.form-select option {
-  background-color: #4a1766;
-  /* Violeta oscuro acorde a tu paleta */
-  color: #fff;
-  /* Letras blancas para máximo contraste */
-  font-weight: 500;
-}
 
-/* Estilo para el select */
-.form-select {
-  width: 100%;
-  /* Asegura que el select ocupe todo el ancho disponible */
-  box-sizing: border-box;
-  /* Incluye el padding y el border en el cálculo del ancho */
-  border: none;
-  border-radius: 10px;
-  /* Bordes redondeados como los demás campos */
-  background-color: #f8f8f844;
-  /* Fondo suave, consistente con los demás inputs */
-  padding: 0.75rem;
-  /* Ajustar el padding para que la altura sea consistente */
-  font-size: 1rem;
-  /* Tamaño de fuente coherente con los otros campos */
-  /* height: 44px; */
-  /* Ajustar la altura para que sea consistente con otros inputs */
-  color: #333;
-  /* Color de texto más oscuro para mayor legibilidad */
-}
+
 
 /* Mensajes de error */
 .invalid-feedback-base {
@@ -450,4 +415,70 @@ tbody td {
 .medidas-list::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.1);
   /* Fondo del track */
+}
+
+
+/* estilos probando selects e inputs */
+
+/* Estilos globales para selects e inputs */
+.form-control,
+.form-select,
+select,
+input {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 10px !important;
+  color: #ffffff !important;
+  padding: 0.8rem 1rem !important;
+  transition: all 0.3s ease-in-out !important;
+  font-size: 1rem;
+}
+
+.form-control:focus,
+.form-select:focus,
+select:focus,
+input:focus {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: #4CAF50 !important;
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.3) !important;
+  outline: none !important;
+}
+
+/* Estilo cuando el select está enfocado */
+.form-select:focus {
+  background-color: #541891e7;
+  /* Mantener fondo coherente al enfocar */
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+  /* Resaltado verde claro al enfocar */
+  outline: none;
+  /* Eliminar contorno predeterminado */
+}
+
+.form-select option {
+  background-color: #4a1766;
+  /* Violeta oscuro acorde a tu paleta */
+  color: #fff;
+  /* Letras blancas para máximo contraste */
+  font-weight: 500;
+}
+
+/* Estilo para el select */
+.form-select {
+  width: 100%;
+  /* Asegura que el select ocupe todo el ancho disponible */
+  box-sizing: border-box;
+  /* Incluye el padding y el border en el cálculo del ancho */
+  border: none;
+  border-radius: 10px;
+  /* Bordes redondeados como los demás campos */
+  background-color: #f8f8f844;
+  /* Fondo suave, consistente con los demás inputs */
+  padding: 0.75rem;
+  /* Ajustar el padding para que la altura sea consistente */
+  font-size: 1rem;
+  /* Tamaño de fuente coherente con los otros campos */
+  /* height: 44px; */
+  /* Ajustar la altura para que sea consistente con otros inputs */
+  color: #333;
+  /* Color de texto más oscuro para mayor legibilidad */
 }
