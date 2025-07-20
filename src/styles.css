@@ -91,7 +91,7 @@
 }
 
 .form-control-base:focus {
-  background-color: #ffffff;
+  background-color: #603096;
   box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
   outline: none;
 }
@@ -105,6 +105,24 @@
   font-weight: 500;
   color: var(--text-secondary);
   margin-bottom: 0.5rem;
+}
+
+/* Estilo cuando el select está enfocado */
+.form-select:focus {
+  background-color: #541891e7;
+  /* Mantener fondo coherente al enfocar */
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+  /* Resaltado verde claro al enfocar */
+  outline: none;
+  /* Eliminar contorno predeterminado */
+}
+
+.form-select option {
+  background-color: #4a1766;
+  /* Violeta oscuro acorde a tu paleta */
+  color: #fff;
+  /* Letras blancas para máximo contraste */
+  font-weight: 500;
 }
 
 /* Mensajes de error */

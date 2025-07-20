@@ -1,40 +1,45 @@
 /* Estilo para el select */
 .form-select {
-  width: 100%; /* Asegura que el select ocupe todo el ancho disponible */
-  box-sizing: border-box; /* Incluye el padding y el border en el cálculo del ancho */
+  width: 100%;
+  /* Asegura que el select ocupe todo el ancho disponible */
+  box-sizing: border-box;
+  /* Incluye el padding y el border en el cálculo del ancho */
   border: none;
-  border-radius: 10px; /* Bordes redondeados como los demás campos */
-  background-color: #f8f8f844; /* Fondo suave, consistente con los demás inputs */
-  padding: 0.75rem; /* Ajustar el padding para que la altura sea consistente */
-  font-size: 1rem; /* Tamaño de fuente coherente con los otros campos */
-  transition: box-shadow 0.3s ease-in-out; /* Transición suave para el enfoque */
-  height: 44px; /* Ajustar la altura para que sea consistente con otros inputs */
-  color: #333; /* Color de texto más oscuro para mayor legibilidad */
+  border-radius: 10px;
+  /* Bordes redondeados como los demás campos */
+  background-color: #f8f8f844;
+  /* Fondo suave, consistente con los demás inputs */
+  padding: 0.75rem;
+  /* Ajustar el padding para que la altura sea consistente */
+  font-size: 1rem;
+  /* Tamaño de fuente coherente con los otros campos */
+  transition: box-shadow 0.3s ease-in-out;
+  /* Transición suave para el enfoque */
+  height: 44px;
+  /* Ajustar la altura para que sea consistente con otros inputs */
+  color: #333;
+  /* Color de texto más oscuro para mayor legibilidad */
 }
 
-/* Estilo cuando el select está enfocado */
-.form-select:focus {
-  background-color: #f8f8f844; /* Mantener fondo coherente al enfocar */
-  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2); /* Resaltado verde claro al enfocar */
-  outline: none; /* Eliminar contorno predeterminado */
-}
+
 
 /* Estilo para la etiqueta */
 .form-label {
   font-weight: 500;
-  color: #ffffff; /* Etiquetas en blanco para mayor contraste */
-  font-size: 1rem; /* Tamaño de fuente para las etiquetas */
-  margin-bottom: 0.5rem; /* Espaciado debajo de la etiqueta */
+  color: #ffffff;
+  /* Etiquetas en blanco para mayor contraste */
+  font-size: 1rem;
+  /* Tamaño de fuente para las etiquetas */
+  margin-bottom: 0.5rem;
+  /* Espaciado debajo de la etiqueta */
 }
 
-/* Opciones dentro del select */
-.form-select option {
-  background-color: #f8f8f8; /* Fondo suave para las opciones */
-  color: #333; /* Color de texto oscuro */
-}
+
 
 /* Estilo para el select deshabilitado */
 .form-select:disabled {
-  background-color: #e0e0e0; /* Fondo gris cuando está deshabilitado */
-  cursor: not-allowed; /* Cambiar el cursor para indicar que está deshabilitado */
+  background-color: #e0e0e0;
+  /* Fondo gris cuando está deshabilitado */
+  cursor: not-allowed;
+  /* Cambiar el cursor para indicar que está deshabilitado */
 }

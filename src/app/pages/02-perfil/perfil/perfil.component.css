@@ -80,12 +80,15 @@
   font-size: 0.9rem;
   font-weight: 600;
   width: 130px;
-  margin-left: auto;
-  margin-top: -30px;
+  /* margin-left: auto;
+  margin-top: -30px; */
   transition: all 0.3s ease;
   color: white;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  display: block;
+  /* Hace que el botón ocupe su propia línea */
+  margin: 2rem auto 0;
 }
 
 .btn-primary:hover {
@@ -146,9 +149,6 @@
   color: #ffffff;
 }
 
-transition: background-color 0.3s ease;
-/* Efecto de transición */
-}
 
 .upload-button:hover {
   background-color: rgba(0, 0, 0, 0.7);
