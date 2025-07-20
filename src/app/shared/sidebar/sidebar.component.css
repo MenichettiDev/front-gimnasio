@@ -44,7 +44,7 @@
    ========================================================== */
 
 .sidebar {
-  width: 240px;
+  width: 280px;
   /* Ancho fijo */
   background-color: rgba(71, 0, 99, 0.98);
   color: #d3d3d3;
@@ -519,9 +519,12 @@
 
   /* Contenido principal */
   .main-content {
+    padding-top: 0px;
     margin-left: 0;
     /* Sin margen en pantallas pequeñas */
     max-width: 100%;
+    margin-top: 10px;
+    /* Siempre deja espacio para la top-bar en móvil */
   }
 
   /* Sidebar */
@@ -531,6 +534,8 @@
   }
 
   .sidebar.visible {
+    top: 80px;
+    height: calc(100vh - 80px);
     display: block;
     /* Mostrar cuando se activa */
     width: 250px;
@@ -568,12 +573,8 @@
   /* Ajuste del botón de logout */
   .sidebar-logout {
     margin-top: auto;
-    /* Mueve el logout hacia el final */
     padding: 15px 0;
-    position: absolute;
-    /* Colócalo al fondo del sidebar */
-    bottom: 20px;
-    /* Ajusta para bajarlo un poco */
+    position: static;
     width: 100%;
   }
 
