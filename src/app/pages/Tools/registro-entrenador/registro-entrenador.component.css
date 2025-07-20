@@ -49,11 +49,11 @@
     padding: 0.8rem;
     font-size: 0.9rem;
     transition: all 0.3s ease-in-out;
-    color: #333;
+    color: #f9f1f1;
 }
 
 .form-control:focus {
-    background-color: #ffffff;
+    background-color: #330255;
     box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
     outline: none;
 }

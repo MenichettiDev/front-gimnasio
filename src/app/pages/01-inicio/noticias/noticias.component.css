@@ -19,7 +19,7 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: linear-gradient(135deg, #52246b 0%, #7b4aa3 100%);
     min-height: 100vh;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -50,7 +50,7 @@
 
 .noticias-subtitle {
     font-size: 1.1rem;
-    color: var(--text-light);
+    color: whitesmoke;
     margin: 0;
     opacity: 0.9;
 }
@@ -65,9 +65,10 @@
 
 /* Tarjeta optimizada */
 .noticia-card {
-    background: white;
+    background: linear-gradient(135deg, #414345 0%, #5e2d7d 100%);
     border-radius: 15px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border: 2px solid #7b4aa3;
+    box-shadow: 0 6px 28px 0 rgba(76, 183, 209, 0.18), 0 2px 8px 0 rgba(0,0,0,0.18);
     overflow: hidden;
     transition: all 0.3s ease;
     cursor: pointer;
@@ -133,7 +134,7 @@
 .noticia-titulo {
     font-size: 1.3rem;
     font-weight: 700;
-    color: #2c3e50;
+    color: whitesmoke;
     margin-bottom: 0.8rem;
     line-height: 1.3;
     display: -webkit-box;
@@ -222,7 +223,7 @@
 }
 
 .modal-content {
-    background: white;
+    background: linear-gradient(135deg, #232526 0%, #414345 100%);
     border-radius: 15px;
     max-width: 800px;
     width: 100%;
@@ -236,7 +237,7 @@
     position: absolute;
     top: 1rem;
     right: 1rem;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(193, 39, 39, 0.9);
     border: none;
     border-radius: 50%;
     width: 40px;
