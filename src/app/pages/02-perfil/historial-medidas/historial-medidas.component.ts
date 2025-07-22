@@ -8,11 +8,13 @@ import { AuthService } from '../../../service/auth/auth.service'; // Servicio de
 import { Medida } from '../../../data/interfaces/tbMedidaInterface';
 import { MedidasChartComponent } from "../../../components/medidas/medidas-chart/medidas-chart.component"; // Interfaz de medidas
 import { Router } from '@angular/router';
+import { ModalToastComponent } from "../../../components/modal/modal-toast/modal-toast.component";
+import { ModalConfirmComponent } from "../../../components/modal/modal-confirm/modal-confirm.component";
 
 
 @Component({
   selector: 'app-historial-medidas',
-  imports: [CommonModule, FormsModule, MedidasChartComponent],
+  imports: [CommonModule, FormsModule, MedidasChartComponent, ModalConfirmComponent],
   templateUrl: './historial-medidas.component.html',
   styleUrl: './historial-medidas.component.css'
 })
@@ -31,6 +33,10 @@ export class HistorialMedidasComponent {
 
   // Nueva variable para controlar la vista
   vistaActiva: 'tabla' | 'grafico' = 'tabla';
+
+  //mensajes
+  mostrarModalConfirm: boolean = false;
+  idMedidaAEliminar: number | null = null;
 
   constructor(
     private medidaService: MedidasService,
@@ -121,19 +127,30 @@ export class HistorialMedidasComponent {
 
 
   // Eliminar una medida
-  eliminarMedida(id: number): void {
-    this.medidaService.eliminarMedida(id).subscribe(
-      () => {
-        this.cargarMedidas(); // Recargar la lista de medidas
-      },
-      (error) => {
-        console.error('Error al eliminar la medida:', error);
-      }
-    );
+  eliminarMedidaConfirmada(): void {
+    if (this.idMedidaAEliminar !== null) {
+      this.medidaService.eliminarMedida(this.idMedidaAEliminar).subscribe(
+        () => {
+          this.cargarMedidas();
+          this.mostrarModalConfirm = false;
+          this.idMedidaAEliminar = null;
+        },
+        (error) => {
+          console.error('Error al eliminar la medida:', error);
+          this.mostrarModalConfirm = false;
+          this.idMedidaAEliminar = null;
+        }
+      );
+    }
   }
 
   // Nuevo método para cambiar vista
   cambiarVista(vista: 'tabla' | 'grafico'): void {
     this.vistaActiva = vista;
+  }
+
+  confirmarEliminarMedida(id: number): void {
+    this.idMedidaAEliminar = id;
+    this.mostrarModalConfirm = true;
   }
 }

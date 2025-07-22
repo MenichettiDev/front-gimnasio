@@ -1,3 +1,9 @@
+<app-modal-confirm [visible]="mostrarModalConfirm" [title]="'Confirmar eliminación'"
+    [message]="'¿Estás seguro de que deseas eliminar esta medida?'" (confirm)="eliminarMedidaConfirmada()"
+    (cancel)="mostrarModalConfirm = false">
+</app-modal-confirm>
+
+
 <div class="card shadow-lg">
     <div class="card-body">
         <h1 class="form-title text-center mb-4"><i class="fas fa-ruler-combined"></i> MEDIDAS DEL ATLETA</h1>
@@ -62,7 +68,7 @@
                             <button class="btn-icon" (click)="editarMedida(medida)">
                                 <i class="fas fa-edit"></i>
                             </button>
-                            <button class="btn-icon btn-delete" (click)="eliminarMedida(medida.id_medida)">
+                            <button class="btn-icon btn-delete" (click)="confirmarEliminarMedida(medida.id_medida)">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
                         </td>
