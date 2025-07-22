@@ -1,4 +1,4 @@
-<div *ngIf="isVisible" class="toast" [ngClass]="['toast-' + type, { 'show': isVisible }]">
+<div *ngIf="isVisible" class="toast" [ngClass]="'toast-' + type">
   <div class="toast-message">
     {{ message }}
   </div>
