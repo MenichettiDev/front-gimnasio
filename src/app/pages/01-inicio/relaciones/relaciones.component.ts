@@ -142,32 +142,39 @@ export class RelacionesComponent implements OnInit {
     // Determinar tipo de solicitud según perfil
     if (this.perfil === 2) { // entrenador
       this.relacionesService.responderSolicitudAtletaEntrenador(solicitudId, aceptar).subscribe(
-        () => {
-          this.mensaje = aceptar ? 'Solicitud aceptada.' : 'Solicitud rechazada.';
+        res => {
+          this.mostrarToast(
+            res?.message || (aceptar ? 'Solicitud aceptada.' : 'Solicitud rechazada.'),
+            aceptar ? 'success' : 'error'
+          );
           this.cargarSolicitudesEntrenador();
         },
-        err => this.mensaje = 'Error al responder solicitud.'
+        err => this.mostrarToast('Error al responder solicitud.', 'error')
       );
     }
     if (this.perfil === 4) { // gimnasio
-      // Aquí deberías saber si la solicitud es de atleta o entrenador
-      // Ejemplo: si la solicitud tiene tipo === 'atleta'
       const solicitud = this.solicitudesPendientes.find(s => s.id === solicitudId);
       if (solicitud?.tipo === 'atleta-gimnasio') {
         this.relacionesService.responderSolicitudAtletaGimnasio(solicitudId, aceptar).subscribe(
-          () => {
-            this.mensaje = aceptar ? 'Solicitud aceptada.' : 'Solicitud rechazada.';
+          res => {
+            this.mostrarToast(
+              res?.message || (aceptar ? 'Solicitud aceptada.' : 'Solicitud rechazada.'),
+              aceptar ? 'success' : 'error'
+            );
             this.cargarSolicitudesGimnasio();
           },
-          err => this.mensaje = 'Error al responder solicitud.'
+          err => this.mostrarToast('Error al responder solicitud.', 'error')
         );
       } else if (solicitud?.tipo === 'entrenador-gimnasio') {
         this.relacionesService.responderSolicitudEntrenadorGimnasio(solicitudId, aceptar).subscribe(
-          () => {
-            this.mensaje = aceptar ? 'Solicitud aceptada.' : 'Solicitud rechazada.';
+          res => {
+            this.mostrarToast(
+              res?.message || (aceptar ? 'Solicitud aceptada.' : 'Solicitud rechazada.'),
+              aceptar ? 'success' : 'error'
+            );
             this.cargarSolicitudesGimnasio();
           },
-          err => this.mensaje = 'Error al responder solicitud.'
+          err => this.mostrarToast('Error al responder solicitud.', 'error')
         );
       }
     }
