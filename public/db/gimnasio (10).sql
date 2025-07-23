@@ -306,7 +306,6 @@ CREATE TABLE `tb_gimnasio` (
   `nombre` varchar(255) NOT NULL,
   `direccion` varchar(255) DEFAULT NULL,
   `telefono` varchar(15) DEFAULT NULL,
-  `correo_electronico` varchar(255) DEFAULT NULL,
   `horario_apertura` time DEFAULT NULL,
   `horario_cierre` time DEFAULT NULL,
   `estado` enum('activo','inactivo') DEFAULT 'activo',
@@ -318,8 +317,8 @@ CREATE TABLE `tb_gimnasio` (
 -- Dumping data for table `tb_gimnasio`
 --
 
-INSERT INTO `tb_gimnasio` (`id_gimnasio`, `nombre`, `direccion`, `telefono`, `correo_electronico`, `horario_apertura`, `horario_cierre`, `estado`, `descripcion`, `fecha_registro`) VALUES
-(1, 'Apolo', 'Peron y Ardiles', '2657-', 'apolo@gmail.com', '00:00:06', '00:00:23', 'activo', 'Frente a Escuela', '2025-01-15 03:00:00');
+INSERT INTO `tb_gimnasio` (`id_gimnasio`, `nombre`, `direccion`, `telefono`, `horario_apertura`, `horario_cierre`, `estado`, `descripcion`, `fecha_registro`) VALUES
+(1, 'Apolo', 'Peron y Ardiles', '2657-', '00:00:06', '00:00:23', 'activo', 'Frente a Escuela', '2025-01-15 03:00:00');
 
 -- --------------------------------------------------------
 

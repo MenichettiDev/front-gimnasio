@@ -114,22 +114,6 @@
                     </div>
                 </div>
 
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label for="telefono" class="form-label">Teléfono del Gimnasio *</label>
-                        <input type="text" id="telefono" formControlName="telefono" class="form-control"
-                            [class.is-invalid]="isFieldInvalid('telefono')" placeholder="Teléfono de contacto" />
-                        <div class="invalid-feedback">{{ getFieldError('telefono') }}</div>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="correo_electronico" class="form-label">Email del Gimnasio *</label>
-                        <input type="email" id="correo_electronico" formControlName="correo_electronico"
-                            class="form-control" [class.is-invalid]="isFieldInvalid('correo_electronico')"
-                            placeholder="Email comercial del gimnasio" />
-                        <div class="invalid-feedback">{{ getFieldError('correo_electronico') }}</div>
-                    </div>
-                </div>
-
                 <!-- Horarios -->
                 <div class="row mb-3">
                     <div class="col-md-6">
