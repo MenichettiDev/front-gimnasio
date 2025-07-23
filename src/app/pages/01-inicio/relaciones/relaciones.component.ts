@@ -6,12 +6,13 @@ import { GimnasioService } from '../../../service/gimnasio.service';
 import { RelacionesService } from '../../../service/relaciones.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ModalToastComponent } from '../../../components/modal/modal-toast/modal-toast.component';
 
 @Component({
   selector: 'app-relaciones',
   templateUrl: './relaciones.component.html',
   styleUrls: ['./relaciones.component.css'],
-  imports: [CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule, ModalToastComponent]
 })
 export class RelacionesComponent implements OnInit {
   perfil: number | null = null;
@@ -24,6 +25,8 @@ export class RelacionesComponent implements OnInit {
   selectedGimnasio: number | null = null;
   // Mensajes
   mensaje: string = '';
+  toastVisible: boolean = false;
+  toastType: string = 'success';
 
   constructor(
     private authService: AuthService,
@@ -94,6 +97,13 @@ export class RelacionesComponent implements OnInit {
     }
   }
 
+  mostrarToast(message: string, type: string = 'success') {
+    this.mensaje = message;
+    this.toastType = type;
+    this.toastVisible = true;
+    setTimeout(() => this.toastVisible = false, 3000);
+  }
+
   // Crear solicitud de relación
   solicitarRelacion(tipo: 'gimnasio' | 'entrenador') {
     if (tipo === 'gimnasio' && this.selectedGimnasio) {
@@ -101,8 +111,8 @@ export class RelacionesComponent implements OnInit {
         const idAtleta = this.authService.getIdAtleta();
         if (idAtleta) {
           this.relacionesService.solicitarAtletaGimnasio(idAtleta, this.selectedGimnasio).subscribe(
-            () => this.mensaje = 'Solicitud enviada al gimnasio.',
-            err => this.mensaje = 'Error al enviar solicitud.'
+            res => this.mostrarToast(res.message || (res.success ? 'Solicitud enviada al gimnasio.' : 'Error al enviar solicitud.'), res.success ? 'success' : 'error'),
+            err => this.mostrarToast('Error al enviar solicitud.', 'error')
           );
         }
       }
@@ -110,8 +120,8 @@ export class RelacionesComponent implements OnInit {
         const idEntrenador = this.authService.getIdEntrenador();
         if (idEntrenador) {
           this.relacionesService.solicitarEntrenadorGimnasio(idEntrenador, this.selectedGimnasio).subscribe(
-            () => this.mensaje = 'Solicitud enviada al gimnasio.',
-            err => this.mensaje = 'Error al enviar solicitud.'
+            res => this.mostrarToast(res.message || (res.success ? 'Solicitud enviada al gimnasio.' : 'Error al enviar solicitud.'), res.success ? 'success' : 'error'),
+            err => this.mostrarToast('Error al enviar solicitud.', 'error')
           );
         }
       }
@@ -120,8 +130,8 @@ export class RelacionesComponent implements OnInit {
       const idAtleta = this.authService.getIdAtleta();
       if (idAtleta) {
         this.relacionesService.solicitarAtletaEntrenador(idAtleta, this.selectedEntrenador).subscribe(
-          () => this.mensaje = 'Solicitud enviada al entrenador.',
-          err => this.mensaje = 'Error al enviar solicitud.'
+          res => this.mostrarToast(res.message || (res.success ? 'Solicitud enviada al entrenador.' : 'Error al enviar solicitud.'), res.success ? 'success' : 'error'),
+          err => this.mostrarToast('Error al enviar solicitud.', 'error')
         );
       }
     }
