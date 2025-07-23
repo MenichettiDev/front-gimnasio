@@ -1,0 +1,74 @@
+<div class="container-base card-base">
+    <div class="card-body-base">
+        <div class="form-title-base">Gestión de Relaciones</div>
+        <div *ngIf="mensaje" class="invalid-feedback-base">{{ mensaje }}</div>
+
+        <!-- Atleta: puede agregar gimnasios y entrenadores -->
+        <ng-container *ngIf="perfil === 3">
+            <div class="section-header-base">
+                <h3>Agregar Gimnasio</h3>
+            </div>
+            <select class="form-select" [(ngModel)]="selectedGimnasio">
+                <option [ngValue]="null">Seleccione un gimnasio</option>
+                <option *ngFor="let gim of gimnasios" [ngValue]="gim.id_gimnasio">{{ gim.nombre }}</option>
+            </select>
+            <button class="btn-base btn-primary-base" (click)="solicitarRelacion('gimnasio')"
+                [disabled]="!selectedGimnasio">Solicitar agregar</button>
+
+            <div class="section-header-base">
+                <h3>Agregar Entrenador</h3>
+            </div>
+            <select class="form-select" [(ngModel)]="selectedEntrenador">
+                <option [ngValue]="null">Seleccione un entrenador</option>
+                <option *ngFor="let ent of entrenadores" [ngValue]="ent.id_entrenador">
+                    {{ ent.nombre }} {{ ent.apellido }}
+                </option>
+            </select>
+            <button class="btn-base btn-primary-base" (click)="solicitarRelacion('entrenador')"
+                [disabled]="!selectedEntrenador">Solicitar agregar</button>
+        </ng-container>
+
+        <!-- Entrenador: puede agregar gimnasios -->
+        <ng-container *ngIf="perfil === 2">
+            <div class="section-header-base">
+                <h3>Agregar Gimnasio</h3>
+            </div>
+            <select class="form-select" [(ngModel)]="selectedGimnasio">
+                <option [ngValue]="null">Seleccione un gimnasio</option>
+                <option *ngFor="let gim of gimnasios" [ngValue]="gim.id_gimnasio">{{ gim.nombre }}</option>
+            </select>
+            <button class="btn-base btn-primary-base" (click)="solicitarRelacion('gimnasio')"
+                [disabled]="!selectedGimnasio">Solicitar agregar</button>
+        </ng-container>
+
+        <!-- Solicitudes pendientes para aceptar/rechazar -->
+        <ng-container *ngIf="solicitudesPendientes.length > 0">
+            <div class="section-header-base">
+                <h3>Solicitudes Pendientes</h3>
+            </div>
+            <div class="medidas-list">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Solicitante</th>
+                            <th>Tipo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let sol of solicitudesPendientes">
+                            <td>{{ sol.nombreSolicitante }}</td>
+                            <td>{{ sol.tipo }}</td>
+                            <td>
+                                <button class="btn-base btn-primary-base"
+                                    (click)="responderSolicitud(sol.id, true)">Aceptar</button>
+                                <button class="btn-base btn-secondary-base"
+                                    (click)="responderSolicitud(sol.id, false)">Rechazar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </ng-container>
+    </div>
+</div>

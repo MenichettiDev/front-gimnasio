@@ -49,7 +49,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     { id: 3, descripcion: 'Noticias', icono: '', link: '/inicio/noticias', grupo: 'GM01', principal: false, orden: 2, estado: true, requiredAccess: [1, 2, 3, 4] },
     { id: 4, descripcion: 'Cargar Atleta', icono: '', link: '/inicio/cargar-atleta', grupo: 'GM01', principal: false, orden: 3, estado: true, requiredAccess: [1] },
     { id: 5, descripcion: 'Cargar pago', icono: '', link: '/inicio/cargar-pago', grupo: 'GM01', principal: false, orden: 4, estado: true, requiredAccess: [1, 2, 3, 4] },
-    { id: 6, descripcion: 'Cargar Entrenador', icono: '', link: '/inicio/cargar-entrenador', grupo: 'GM01', principal: false, orden: 5, estado: true, requiredAccess: [1] },
+    { id: 6, descripcion: 'Relaciones', icono: '', link: '/inicio/relaciones', grupo: 'GM01', principal: false, orden: 5, estado: true, requiredAccess: [1, 2, 3, 4] },
 
     // GM02 - Mi Perfil
     { id: 11, descripcion: 'Mi Perfil', icono: 'bi bi-file-person', link: '/perfil', grupo: 'GM02', principal: true, orden: 2, estado: true, requiredAccess: [1, 2, 3, 4] },
