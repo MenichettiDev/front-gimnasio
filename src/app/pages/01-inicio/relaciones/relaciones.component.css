@@ -1,0 +1,138 @@
+/* Fondo y card */
+:host {
+    display: block;
+    width: 100%;
+}
+
+.card-base {
+    background: var(--card-background, rgba(43, 1, 75, 0.94));
+    border-radius: var(--border-radius-md, 15px);
+    box-shadow: var(--shadow-base, 0 4px 15px rgba(0, 0, 0, 0.2));
+    margin-top: 24px;
+    padding: 2rem;
+    transition: var(--transition-base, all 0.3s ease-in-out);
+}
+
+/* Título principal */
+.form-title-base {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary, #fff);
+    text-align: center;
+    margin-bottom: 2rem;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 8px rgba(71, 0, 99, 0.2);
+}
+
+/* Secciones */
+.section-header-base h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-secondary, #e0e0e0);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.5px;
+}
+
+/* Selects y botones */
+.form-select {
+    margin-bottom: 1rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1rem;
+    padding: 0.7rem 1rem;
+    transition: background 0.3s;
+}
+
+.form-select:focus {
+    background: #541891e7;
+    outline: none;
+}
+
+.btn-base {
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    min-width: 160px;
+    font-size: 1rem;
+    border-radius: 25px;
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.15);
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.btn-primary-base {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: #fff;
+}
+
+.btn-primary-base:hover {
+    background: linear-gradient(135deg, #45a049, #3d8b40);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.25);
+}
+
+.btn-secondary-base {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-secondary, #e0e0e0);
+    border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.1));
+}
+
+.btn-secondary-base:hover {
+    background: rgba(255, 255, 255, 0.18);
+    color: var(--text-primary, #fff);
+}
+
+/* Tabla de solicitudes */
+.medidas-list .table {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.04);
+    margin-top: 1.5rem;
+}
+
+.medidas-list thead {
+    background: linear-gradient(90deg, #e0811a, #ffde04);
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.medidas-list th,
+.medidas-list td {
+    padding: 0.7rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.medidas-list tbody tr:hover {
+    background: rgba(76, 175, 80, 0.08);
+    transition: background 0.2s;
+}
+
+.invalid-feedback-base {
+    color: #dc3545;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .card-base {
+        padding: 1rem;
+    }
+
+    .form-title-base {
+        font-size: 1.3rem;
+    }
+
+    .btn-base {
+        min-width: 120px;
+        font-size: 0.95rem;
+    }
+
+    .medidas-list th,
+    .medidas-list td {
+        padding: 0.5rem;
+        font-size: 0.95rem;
+    }
+}

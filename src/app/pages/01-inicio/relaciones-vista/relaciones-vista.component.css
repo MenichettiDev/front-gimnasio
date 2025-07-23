@@ -1,0 +1,77 @@
+/* Fondo y card */
+:host {
+  display: block;
+  width: 100%;
+}
+
+.card-base {
+  background: var(--card-background, rgba(43, 1, 75, 0.94));
+  border-radius: var(--border-radius-md, 15px);
+  box-shadow: var(--shadow-base, 0 4px 15px rgba(0,0,0,0.2));
+  margin-top: 24px;
+  padding: 2rem;
+  transition: var(--transition-base, all 0.3s ease-in-out);
+}
+
+/* Título principal */
+.form-title-base {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary, #fff);
+  text-align: center;
+  margin-bottom: 2rem;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 8px rgba(71,0,99,0.2);
+}
+
+/* Secciones */
+.section-header-base h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-secondary, #e0e0e0);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.5px;
+}
+
+/* Listas de relaciones */
+ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.5rem;
+}
+
+ul li {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  padding: 0.7rem 1rem;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(76,175,80,0.10);
+  transition: background 0.3s;
+}
+
+ul li:hover {
+  background: rgba(76,175,80,0.15);
+}
+
+.invalid-feedback-base {
+  color: #dc3545;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .card-base {
+    padding: 1rem;
+  }
+  .form-title-base {
+    font-size: 1.3rem;
+  }
+  ul li {
+    font-size: 0.95rem;
+    padding: 0.5rem 0.7rem;
+  }
+}
