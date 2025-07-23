@@ -75,6 +75,24 @@ export class RelacionesService {
       .pipe(catchError(this.handleError));
   }
 
+  // Obtener relaciones activas de un atleta (gimnasios y entrenadores)
+  getRelacionesActivasAtleta(id_atleta: number): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/relaciones-activas-atleta`, { id_atleta })
+      .pipe(catchError(this.handleError));
+  }
+
+  // Obtener relaciones activas de un entrenador (atletas y gimnasios)
+  getRelacionesActivasEntrenador(id_entrenador: number): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/relaciones-activas-entrenador`, { id_entrenador })
+      .pipe(catchError(this.handleError));
+  }
+
+  // Obtener relaciones activas de un gimnasio (atletas y entrenadores)
+  getRelacionesActivasGimnasio(id_gimnasio: number): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/relaciones-activas-gimnasio`, { id_gimnasio })
+      .pipe(catchError(this.handleError));
+  }
+
   // Manejo de errores
   // Centraliza el manejo de errores para todas las peticiones HTTP del service.
   private handleError(error: HttpErrorResponse) {

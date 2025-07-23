@@ -1,0 +1,75 @@
+<div class="container-base card-base">
+    <div class="card-body-base">
+        <div class="form-title-base">Relaciones Activas</div>
+        <div *ngIf="mensaje" class="invalid-feedback-base">{{ mensaje }}</div>
+
+        <!-- Atleta -->
+        <ng-container *ngIf="perfil === 3">
+            <div class="section-header-base">
+                <h3>Gimnasios donde asistes</h3>
+            </div>
+            <ul *ngIf="relaciones.gimnasios?.length; else noGimnasios">
+                <li *ngFor="let gim of relaciones.gimnasios">{{ gim.nombre }}</li>
+            </ul>
+            <ng-template #noGimnasios>
+                <div>No tienes gimnasios activos.</div>
+            </ng-template>
+
+            <div class="section-header-base">
+                <h3>Entrenadores</h3>
+            </div>
+            <ul *ngIf="relaciones.entrenadores?.length; else noEntrenadores">
+                <li *ngFor="let ent of relaciones.entrenadores">{{ ent.nombre }} {{ ent.apellido }}</li>
+            </ul>
+            <ng-template #noEntrenadores>
+                <div>No tienes entrenadores activos.</div>
+            </ng-template>
+        </ng-container>
+
+        <!-- Entrenador -->
+        <ng-container *ngIf="perfil === 2">
+            <div class="section-header-base">
+                <h3>Gimnasios donde trabajas</h3>
+            </div>
+            <ul *ngIf="relaciones.gimnasios?.length; else noGimnasiosE">
+                <li *ngFor="let gim of relaciones.gimnasios">{{ gim.nombre }}</li>
+            </ul>
+            <ng-template #noGimnasiosE>
+                <div>No tienes gimnasios activos.</div>
+            </ng-template>
+
+            <div class="section-header-base">
+                <h3>Atletas</h3>
+            </div>
+            <ul *ngIf="relaciones.atletas?.length; else noAtletas">
+                <li *ngFor="let atl of relaciones.atletas">{{ atl.nombre }} {{ atl.apellido }}</li>
+            </ul>
+            <ng-template #noAtletas>
+                <div>No tienes atletas activos.</div>
+            </ng-template>
+        </ng-container>
+
+        <!-- Gimnasio -->
+        <ng-container *ngIf="perfil === 4">
+            <div class="section-header-base">
+                <h3>Entrenadores que trabajan aquí</h3>
+            </div>
+            <ul *ngIf="relaciones.entrenadores?.length; else noEntrenadoresG">
+                <li *ngFor="let ent of relaciones.entrenadores">{{ ent.nombre }} {{ ent.apellido }}</li>
+            </ul>
+            <ng-template #noEntrenadoresG>
+                <div>No tienes entrenadores activos.</div>
+            </ng-template>
+
+            <div class="section-header-base">
+                <h3>Atletas que asisten</h3>
+            </div>
+            <ul *ngIf="relaciones.atletas?.length; else noAtletasG">
+                <li *ngFor="let atl of relaciones.atletas">{{ atl.nombre }} {{ atl.apellido }}</li>
+            </ul>
+            <ng-template #noAtletasG>
+                <div>No tienes atletas activos.</div>
+            </ng-template>
+        </ng-container>
+    </div>
+</div>
