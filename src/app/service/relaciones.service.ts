@@ -93,6 +93,24 @@ export class RelacionesService {
       .pipe(catchError(this.handleError));
   }
 
+  // Eliminar relación atleta-gimnasio
+  eliminarRelacionAtletaGimnasio(id_atleta_gimnasio: number): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/eliminar-atleta-gimnasio`, { id: id_atleta_gimnasio })
+      .pipe(catchError(this.handleError));
+  }
+
+  // Eliminar relación atleta-entrenador
+  eliminarRelacionAtletaEntrenador(id_atleta_entrenador: number): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/eliminar-atleta-entrenador`, { id: id_atleta_entrenador })
+      .pipe(catchError(this.handleError));
+  }
+
+  // Eliminar relación entrenador-gimnasio
+  eliminarRelacionEntrenadorGimnasio(id_entrenador_gimnasio: number): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/eliminar-entrenador-gimnasio`, { id: id_entrenador_gimnasio })
+      .pipe(catchError(this.handleError));
+  }
+
   // Manejo de errores
   // Centraliza el manejo de errores para todas las peticiones HTTP del service.
   private handleError(error: HttpErrorResponse) {

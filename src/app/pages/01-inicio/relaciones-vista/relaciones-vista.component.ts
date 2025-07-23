@@ -49,4 +49,25 @@ export class RelacionesVistaComponent implements OnInit {
       }
     }
   }
+
+  eliminarRelacion(tipo: string, relacion: any) {
+    if (tipo === 'gimnasio' && relacion.id_atleta_gimnasio) {
+      this.relacionesService.eliminarRelacionAtletaGimnasio(relacion.id_atleta_gimnasio).subscribe(
+        () => this.ngOnInit(),
+        err => this.mensaje = 'Error al eliminar relación.'
+      );
+    }
+    if (tipo === 'entrenador' && relacion.id_atleta_entrenador) {
+      this.relacionesService.eliminarRelacionAtletaEntrenador(relacion.id_atleta_entrenador).subscribe(
+        () => this.ngOnInit(),
+        err => this.mensaje = 'Error al eliminar relación.'
+      );
+    }
+    if (tipo === 'gimnasio-entrenador' && relacion.id_entrenador_gimnasio) {
+      this.relacionesService.eliminarRelacionEntrenadorGimnasio(relacion.id_entrenador_gimnasio).subscribe(
+        () => this.ngOnInit(),
+        err => this.mensaje = 'Error al eliminar relación.'
+      );
+    }
+  }
 }

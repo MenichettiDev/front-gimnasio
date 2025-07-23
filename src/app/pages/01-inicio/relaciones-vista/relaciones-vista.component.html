@@ -9,7 +9,12 @@
                 <h3>Gimnasios donde asistes</h3>
             </div>
             <ul *ngIf="relaciones.gimnasios?.length; else noGimnasios">
-                <li *ngFor="let gim of relaciones.gimnasios">{{ gim.nombre }}</li>
+                <li *ngFor="let gim of relaciones.gimnasios">
+                    {{ gim.nombre }}
+                    <button class="btn-icon btn-delete" title="Eliminar" (click)="eliminarRelacion('gimnasio', gim)">
+                        <span style="color:#f44336;font-size:1.3em;">&#128465;</span>
+                    </button>
+                </li>
             </ul>
             <ng-template #noGimnasios>
                 <div>No tienes gimnasios activos.</div>
@@ -19,7 +24,12 @@
                 <h3>Entrenadores</h3>
             </div>
             <ul *ngIf="relaciones.entrenadores?.length; else noEntrenadores">
-                <li *ngFor="let ent of relaciones.entrenadores">{{ ent.nombre }} {{ ent.apellido }}</li>
+                <li *ngFor="let ent of relaciones.entrenadores">
+                    {{ ent.nombre }} {{ ent.apellido }}
+                    <button class="btn-icon btn-delete" title="Eliminar" (click)="eliminarRelacion('entrenador', ent)">
+                        <span style="color:#f44336;font-size:1.3em;">&#128465;</span>
+                    </button>
+                </li>
             </ul>
             <ng-template #noEntrenadores>
                 <div>No tienes entrenadores activos.</div>
@@ -32,7 +42,12 @@
                 <h3>Gimnasios donde trabajas</h3>
             </div>
             <ul *ngIf="relaciones.gimnasios?.length; else noGimnasiosE">
-                <li *ngFor="let gim of relaciones.gimnasios">{{ gim.nombre }}</li>
+                <li *ngFor="let gim of relaciones.gimnasios">
+                    {{ gim.nombre }}
+                    <button class="btn-icon btn-delete" title="Eliminar" (click)="eliminarRelacion('gimnasio', gim)">
+                        <span style="color:#f44336;font-size:1.3em;">&#128465;</span>
+                    </button>
+                </li>
             </ul>
             <ng-template #noGimnasiosE>
                 <div>No tienes gimnasios activos.</div>
@@ -42,7 +57,12 @@
                 <h3>Atletas</h3>
             </div>
             <ul *ngIf="relaciones.atletas?.length; else noAtletas">
-                <li *ngFor="let atl of relaciones.atletas">{{ atl.nombre }} {{ atl.apellido }}</li>
+                <li *ngFor="let atl of relaciones.atletas">
+                    {{ atl.nombre }} {{ atl.apellido }}
+                    <button class="btn-icon btn-delete" title="Eliminar" (click)="eliminarRelacion('entrenador', atl)">
+                        <span style="color:#f44336;font-size:1.3em;">&#128465;</span>
+                    </button>
+                </li>
             </ul>
             <ng-template #noAtletas>
                 <div>No tienes atletas activos.</div>
@@ -55,7 +75,13 @@
                 <h3>Entrenadores que trabajan aquí</h3>
             </div>
             <ul *ngIf="relaciones.entrenadores?.length; else noEntrenadoresG">
-                <li *ngFor="let ent of relaciones.entrenadores">{{ ent.nombre }} {{ ent.apellido }}</li>
+                <li *ngFor="let ent of relaciones.entrenadores">
+                    {{ ent.nombre }} {{ ent.apellido }}
+                    <button class="btn-icon btn-delete" title="Eliminar"
+                        (click)="eliminarRelacion('gimnasio-entrenador', ent)">
+                        <span style="color:#f44336;font-size:1.3em;">&#128465;</span>
+                    </button>
+                </li>
             </ul>
             <ng-template #noEntrenadoresG>
                 <div>No tienes entrenadores activos.</div>
@@ -65,7 +91,12 @@
                 <h3>Atletas que asisten</h3>
             </div>
             <ul *ngIf="relaciones.atletas?.length; else noAtletasG">
-                <li *ngFor="let atl of relaciones.atletas">{{ atl.nombre }} {{ atl.apellido }}</li>
+                <li *ngFor="let atl of relaciones.atletas">
+                    {{ atl.nombre }} {{ atl.apellido }}
+                    <button class="btn-icon btn-delete" title="Eliminar" (click)="eliminarRelacion('entrenador', atl)">
+                        <span style="color:#f44336;font-size:1.3em;">&#128465;</span>
+                    </button>
+                </li>
             </ul>
             <ng-template #noAtletasG>
                 <div>No tienes atletas activos.</div>

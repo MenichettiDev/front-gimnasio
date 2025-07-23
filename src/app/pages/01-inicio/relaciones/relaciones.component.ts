@@ -39,14 +39,14 @@ export class RelacionesComponent implements OnInit {
   ngOnInit() {
     this.perfil = this.authService.getIdAcceso();
     // Cargar datos según perfil
-    if (this.perfil === 2 || this.perfil === 1) {
+    if (this.perfil === 2) {
       this.cargarGimnasios();
       this.cargarSolicitudesEntrenador();
     }
     if (this.perfil === 3) {
       this.cargarEntrenadores();
       this.cargarGimnasios();
-      this.cargarSolicitudesAtleta();
+      // this.cargarSolicitudesAtleta();
     }
     if (this.perfil === 4) {
       this.cargarSolicitudesGimnasio();
