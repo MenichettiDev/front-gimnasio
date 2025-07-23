@@ -424,7 +424,11 @@ tbody td {
 .form-control,
 .form-select,
 select,
-input {
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="url"],
+input[type="number"] {
   background: rgba(255, 255, 255, 0.1) !important;
   border: 1px solid rgba(255, 255, 255, 0.2) !important;
   border-radius: 10px !important;
@@ -432,6 +436,17 @@ input {
   padding: 0.8rem 1rem !important;
   transition: all 0.3s ease-in-out !important;
   font-size: 1rem;
+}
+
+input[type="checkbox"] {
+  padding: 0 !important;
+  border-radius: 3px !important;
+  width: 1.2em !important;
+  height: 1.2em !important;
+  background: #fff !important;
+  color: inherit !important;
+  border: 1px solid #45B7D1 !important;
+  accent-color: #45B7D1;
 }
 
 .form-control:focus,

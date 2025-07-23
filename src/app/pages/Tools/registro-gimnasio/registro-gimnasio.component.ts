@@ -44,11 +44,11 @@ export class RegistroGimnasioComponent implements OnInit {
       // Datos específicos del Gimnasio
       nombre_gimnasio: ['', [Validators.required, Validators.minLength(3)]],
       direccion_gimnasio: ['', [Validators.required, Validators.minLength(10)]],
-      telefono: ['', [Validators.required, Validators.pattern(/^[0-9]{10,15}$/)]],
+      telefono: ['', [Validators.pattern(/^[0-9]{10,15}$/)]],
       horario_apertura: ['', Validators.required],
       horario_cierre: ['', Validators.required],
       descripcion: ['', [Validators.required, Validators.minLength(20)]],
-      pagina_web: ['', this.urlValidator],
+      pagina_web: [''],
       acepta_terminos: [false, Validators.requiredTrue]
     }, {
       validators: [this.passwordMatchValidator, this.horarioValidator]

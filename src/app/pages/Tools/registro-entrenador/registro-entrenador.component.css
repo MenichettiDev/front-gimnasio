@@ -131,6 +131,19 @@
     letter-spacing: 0.5px;
 }
 
+/* Estilos para checkbox */
+.checkbox {
+    width: 1.2em;
+    height: 1.2em;
+    accent-color: #139624;
+    border-radius: 3px;
+    border: 1px solid #45B7D1;
+    background: #fff;
+    vertical-align: middle;
+    margin-right: 0.5em;
+    cursor: pointer;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .container {
