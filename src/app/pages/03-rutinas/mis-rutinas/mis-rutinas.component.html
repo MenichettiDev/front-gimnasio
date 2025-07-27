@@ -10,9 +10,12 @@
         <div class="alert alert-info mb-4" *ngIf="rutinas.length > 0">
             <h6>INFORMACIÓN DE MIS RUTINAS:</h6>
             <p class="mb-1">Total rutinas: <strong>{{ rutinas.length }}</strong></p>
+            <p class="mb-1">Mis rutinas creadas: <strong>{{ rutinasDelAtleta.length }}</strong></p>
             <p class="mb-1">Rutinas del entrenador: <strong>{{ rutinasDelEntrenador.length }}</strong></p>
             <p class="mb-1">Rutinas del gimnasio: <strong>{{ rutinasDelGimnasio.length }}</strong></p>
-            <p class="mb-0">Mis rutinas creadas: <strong>{{ rutinasDelAtleta.length }}</strong></p>
+            <p class="mb-1">Rutinas genéricas de entrenador: <strong>{{ rutinasGenericasEntrenador.length }}</strong>
+            </p>
+            <p class="mb-0">Rutinas genéricas de gimnasio: <strong>{{ rutinasGenericasGimnasio.length }}</strong></p>
         </div>
 
         <div *ngIf="rutinas.length > 0; else noData">
@@ -107,6 +110,78 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let rutina of rutinasDelAtleta">
+                                    <td>{{ rutina.nombre }}</td>
+                                    <td>{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
+                                    <td>{{ rutina.objetivo }}</td>
+                                    <td>{{ rutina.nivel_atleta }}</td>
+                                    <td>
+                                        <span class="icon-view btn-icon" (click)="verDetallesRutina(rutina.id_rutina)">
+                                            <i class="fas fa-eye"></i> Ver
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección: Rutinas Genéricas de Entrenador -->
+            <div *ngIf="rutinasGenericasEntrenador.length > 0" class="mb-5">
+                <h3 class="section-title text-info mb-3">
+                    <i class="fas fa-user-tie"></i> Rutinas Genéricas de Entrenador ({{
+                    rutinasGenericasEntrenador.length }})
+                </h3>
+                <div class="card border-info">
+                    <div class="card-body">
+                        <table class="table custom-table">
+                            <thead class="table-info">
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Fecha Creación</th>
+                                    <th>Objetivo</th>
+                                    <th>Nivel</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let rutina of rutinasGenericasEntrenador">
+                                    <td>{{ rutina.nombre }}</td>
+                                    <td>{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
+                                    <td>{{ rutina.objetivo }}</td>
+                                    <td>{{ rutina.nivel_atleta }}</td>
+                                    <td>
+                                        <span class="icon-view btn-icon" (click)="verDetallesRutina(rutina.id_rutina)">
+                                            <i class="fas fa-eye"></i> Ver
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección: Rutinas Genéricas de Gimnasio -->
+            <div *ngIf="rutinasGenericasGimnasio.length > 0" class="mb-5">
+                <h3 class="section-title text-secondary mb-3">
+                    <i class="fas fa-dumbbell"></i> Rutinas Genéricas de Gimnasio ({{ rutinasGenericasGimnasio.length
+                    }})
+                </h3>
+                <div class="card border-secondary">
+                    <div class="card-body">
+                        <table class="table custom-table">
+                            <thead class="table-secondary">
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Fecha Creación</th>
+                                    <th>Objetivo</th>
+                                    <th>Nivel</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let rutina of rutinasGenericasGimnasio">
                                     <td>{{ rutina.nombre }}</td>
                                     <td>{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
                                     <td>{{ rutina.objetivo }}</td>
