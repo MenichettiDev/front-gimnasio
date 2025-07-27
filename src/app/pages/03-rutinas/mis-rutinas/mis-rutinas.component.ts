@@ -26,6 +26,7 @@ export class MisRutinasComponent implements OnInit {
   id_entrenador: number | null = null;
   id_gimnasio: number | null = null;
   id_persona: number | null = null;
+  id_acceso: number | null = null;
   test: number | null = null;
   test2: number | null = null;
 
@@ -53,38 +54,70 @@ export class MisRutinasComponent implements OnInit {
 
   ngOnInit(): void {
     this.id_persona = this.authService.getUserId();
+    this.id_acceso = this.authService.getIdAcceso();
 
+    // Primero, busca si el usuario es atleta
     this.atletaService.getAtletasPorIdPersona(this.id_persona!).subscribe({
       next: (atleta) => {
         if (atleta) {
-          console.log('atleta completo: ', atleta);
           this.id_atleta = atleta.id_atleta;
           this.id_entrenador = atleta.id_entrenador;
           this.id_gimnasio = atleta.id_gimnasio;
 
-          // Set the properties used in rutinaService call
-          this.idAtleta = this.id_atleta;
-          this.idEntrenador = this.id_entrenador;
-          this.idGimnasio = this.id_gimnasio;
-
-          console.log('ID del atleta:', this.id_atleta);
-
-          // Move the rutinaService call inside the success callback
-          this.rutinaService.getRutinaByIdAtleta(
-            this.idAtleta!,
-            this.idEntrenador ?? 0,
-            this.idGimnasio ?? 0
-          ).subscribe({
+          // Si es entrenador (o gimnasio) Y atleta, trae ambas fuentes y une
+          if (this.id_acceso === 2 || this.id_acceso === 4) {
+            forkJoin([
+              this.rutinaService.getRutinaByIdCreador(this.id_persona!),
+              this.rutinaService.getRutinaByIdAtleta(
+                this.id_atleta!,
+                this.id_entrenador ?? 0,
+                this.id_gimnasio ?? 0
+              )
+            ]).subscribe({
+              next: ([creadas, asignadas]: [any[], any[]]) => {
+                // Unir rutinas por id_rutina para evitar duplicados
+                const todas = [
+                  ...creadas.map(plan => plan.rutina),
+                  ...asignadas.map(plan => plan.rutina)
+                ];
+                // Elimina duplicados por id_rutina
+                this.rutinas = todas.filter(
+                  (rutina, index, self) =>
+                    index === self.findIndex(r => r.id_rutina === rutina.id_rutina)
+                );
+                this.categorizarRutinas();
+              },
+              error: (error) => {
+                console.error('Error al cargar rutinas', error);
+              }
+            });
+          } else {
+            // Solo atleta
+            this.rutinaService.getRutinaByIdAtleta(
+              this.id_atleta!,
+              this.id_entrenador ?? 0,
+              this.id_gimnasio ?? 0
+            ).subscribe({
+              next: (data: any[]) => {
+                this.rutinas = data.map(plan => plan.rutina);
+                this.categorizarRutinas();
+              },
+              error: (error) => {
+                console.error('Error al cargar rutinas', error);
+              }
+            });
+          }
+        } else if (this.id_acceso === 2 || this.id_acceso === 4) {
+          // Es solo entrenador o gimnasio, no atleta
+          this.rutinaService.getRutinaByIdCreador(this.id_persona!).subscribe({
             next: (data: any[]) => {
               this.rutinas = data.map(plan => plan.rutina);
               this.categorizarRutinas();
             },
             error: (error) => {
-              console.error('Error al cargar rutinas', error);
+              console.error('Error al cargar rutinas del creador', error);
             }
           });
-        } else {
-          console.error('No se encontró ningún atleta con el ID proporcionado.');
         }
       },
       error: (err) => {

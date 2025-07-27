@@ -35,8 +35,8 @@ export class RutinasService {
   }
 
   // Método para obtener las rutinas creadas por un creador por ID
-  getRutinaByIdCreador(id_Creador: number): Observable<plan[]> {
-    return this.http.post<plan[]>(this.apiUrlGetRutinaByIdCreador, { id_Creador });
+  getRutinaByIdCreador(id_persona: number): Observable<plan[]> {
+    return this.http.post<plan[]>(this.apiUrlGetRutinaByIdCreador, { id_persona });
   }
 
   // Método para obtener las rutinas by id
