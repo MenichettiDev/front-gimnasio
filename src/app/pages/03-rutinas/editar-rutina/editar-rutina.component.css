@@ -1,129 +1,131 @@
-/* Reaplicar rutina optimizado */
-.reaplicar-rutina-container {
+/* Fondo principal violeta */
+.editar-rutina-container {
+    background: var(--primary-gradient);
     min-height: 100vh;
-    background: linear-gradient(135deg, rgba(71, 0, 99, 0.95), rgba(71, 0, 99, 0.98));
     padding: 2rem;
 }
 
-/* Header base */
-.page-header {
-    background: rgba(255, 255, 255, 0.05);
+/* Card de edición con fondo violeta y borde amarillo sutil */
+form.p-4.border.rounded.bg-warning {
+    background: var(--card-background);
+    border: 2px solid #ffe066;
     border-radius: 20px;
-    padding: 2rem;
-    margin-bottom: 2rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    text-align: center;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(71, 0, 99, 0.15), 0 4px 15px rgba(71, 0, 99, 0.25);
+    transition: box-shadow 0.3s;
+    overflow: hidden;
+    /* Evita que los bordes redondeados muestren blanco */
 }
 
-/* Título base */
-.page-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: 2.5rem;
+/* Título de edición con violeta claro */
+h2.text-center {
+    color: #c7a4ff;
+    text-shadow: 1px 1px 4px rgba(71, 0, 99, 0.3);
     font-weight: 700;
-    color: #ffffff;
-    text-transform: uppercase;
     letter-spacing: 1px;
-    margin: 0 0 0.5rem 0;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.page-title i {
-    margin-right: 0.5rem;
-    color: #4CAF50;
+/* Card-header de cada día con fondo violeta */
+.card-header.bg-primary {
+    background: var(--primary-gradient);
+    color: #fff;
+    border-bottom: 1px solid #ffe066;
+    /* borde amarillo sutil */
 }
 
-.page-subtitle {
-    font-size: 1.1rem;
-    color: #e0e0e0;
-    margin: 0;
-    font-weight: 300;
-}
-
-/* Secciones base */
-.content-section {
-    max-width: 1200px;
-    margin: 0 auto 2rem;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-    padding: 2rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
-
-.edit-section {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 15px;
-    padding: 2rem;
-    margin-top: 2rem;
-}
-
-.section-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.8rem;
+/* Botón de agregar ejercicio con verde y violeta */
+.btn-success.btn-sm {
+    background: linear-gradient(90deg, var(--card-background) 60%, #4CAF50 100%);
+    color: #fff;
+    border: none;
     font-weight: 600;
-    color: #ffffff;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin: 0 0 1.5rem 0;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
 }
 
-.section-title i {
-    color: #4CAF50;
-    font-size: 1.5rem;
+.btn-success.btn-sm:hover {
+    background: linear-gradient(90deg, #541891 60%, #45a049 100%);
+    color: #fff;
 }
 
-/* Estilos globales optimizados */
-:host ::ng-deep .card,
-:host ::ng-deep .rutina-card {
-    background: rgba(255, 255, 255, 0.08) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    border-radius: 15px !important;
-    transition: all 0.3s ease-in-out !important;
+/* Botón de eliminar con rojo y violeta */
+.btn-danger.btn-sm {
+    background: linear-gradient(90deg, var(--card-background) 10%, #f44336 100%);
+    color: #fff;
+    border: none;
+    font-weight: 600;
 }
 
-:host ::ng-deep .btn-primary {
-    background: linear-gradient(135deg, #4CAF50, #45a049) !important;
+.btn-danger.btn-sm:hover {
+    background: linear-gradient(90deg, #541891 20%, #d32f2f 100%);
+    color: #fff;
+}
+
+/* Spinner con violeta */
+.p-progressSpinner {
+    --p-progressSpinner-color: #541891;
+}
+
+/* Botones de acción abajo con verde y violeta */
+.p-button-success {
+    background: linear-gradient(90deg, var(--card-background) 10%, #4CAF50 100%) !important;
+    color: #fff !important;
     border: none !important;
-    border-radius: 25px !important;
-    padding: 0.8rem 2rem !important;
-    font-weight: 600 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.5px !important;
-    transition: all 0.3s ease-in-out !important;
-    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3) !important;
 }
 
+.p-button-success:hover {
+    background: linear-gradient(90deg, #541891 20%, #45a049 100%) !important;
+    color: #fff !important;
+}
 
+/* Sombra y borde para cards de días */
+.card.mb-4.shadow-sm {
+    border: 1px solid #ffe066;
+    /* borde amarillo sutil */
+    box-shadow: 0 2px 10px rgba(255, 221, 51, 0.08);
+    border-radius: 15px;
+    background: var(--card-background);
+    overflow: hidden;
+    /* Evita que los bordes redondeados muestren blanco */
+}
 
-/* Responsive optimizado */
+/* Estilo para el cuerpo de la tarjeta */
+.box-card-body {
+    background: var(--card-background);
+    /* Opcional: sombra suave */
+    box-shadow: 0 2px 10px rgba(71, 0, 99, 0.10);
+    padding: 1rem;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+/* Fondo violeta para card-body en este componente */
+.card-body.card-body-base {
+    background: var(--card-background) !important;
+    border-radius: 15px;
+    /* Opcional: sombra suave */
+    box-shadow: 0 2px 10px rgba(71, 0, 99, 0.08);
+    color: #fff;
+    overflow: hidden;
+}
+
+/* Fondo violeta para sub-card */
+.sub-card.card-base {
+    background: var(--card-background);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(71, 0, 99, 0.07);
+    color: #fff;
+    overflow: hidden;
+}
+
+/* Responsive: */
 @media (max-width: 768px) {
-    .reaplicar-rutina-container {
+    .editar-rutina-container {
         padding: 1rem;
     }
 
-    .page-header,
-    .content-section {
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
+    form.p-4.border.rounded.bg-warning {
+        padding: 1rem;
     }
 
-    .page-title {
-        font-size: 2rem;
-    }
-
-    .section-title {
+    h2.text-center {
         font-size: 1.5rem;
     }
 }

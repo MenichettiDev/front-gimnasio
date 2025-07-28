@@ -1,14 +1,17 @@
 <div class="container mt-4">
-    <h2 class="mb-4 text-center">Reaplicar Rutina</h2>
-    <form [formGroup]="rutinaForm" (ngSubmit)="guardarRutina()" class="p-4 border rounded bg-warning">
+    <h2 class="mb-4 text-center">Editar Rutina</h2>
+    <form [formGroup]="rutinaForm" (ngSubmit)="guardarRutina()" class="p-4 border rounded">
         <!-- Primera fila: Nombre, atleta y cantidad de días -->
         <div class="row mb-4">
             <div class="col-md-4">
                 <app-input-texto label="Nombre de la rutina" formControlName="nombre"></app-input-texto>
             </div>
-            <div class="col-md-4">
-                <app-cbo-atleta formControlName="id_atleta"></app-cbo-atleta>
-            </div>
+            <select class="form-select" formControlName="id_atleta">
+                <option [ngValue]="''">Seleccione un atleta</option>
+                <option *ngFor="let atl of atletas" [ngValue]="atl.id_atleta">
+                    {{ atl.nombre }} {{ atl.apellido }}
+                </option>
+            </select>
             <div class="col-md-4">
                 <app-cbo-dias formControlName="cantidad_dias"></app-cbo-dias>
             </div>
@@ -37,7 +40,6 @@
         <!-- Creación de cards de días -->
         <div class="box-card-body">
             <div *ngFor="let dia of dias.controls; let i = index" class="card mb-4 shadow-sm">
-                <!-- Cabecera del día -->
                 <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                     <span>Día {{ i + 1 }}</span>
                     <button type="button" class="btn btn-light btn-sm" (click)="toggleCollapse(i)">
@@ -45,29 +47,24 @@
                         {{ collapsed[i] ? 'Expandir' : 'Colapsar' }}
                     </button>
                 </div>
-                <!-- Contenido del día -->
-                <div *ngIf="!collapsed[i]" class="card-body">
+                <div *ngIf="!collapsed[i]" class="card-body card-body-base">
                     <div *ngFor="let ejercicio of getEjercicios(dia).controls; let j = index"
-                        class="sub-card mb-3 p-3 border rounded">
+                        class="sub-card mb-3 p-3 border rounded card-base">
                         <div class="row">
-                            <!-- Combo de Grupo Muscular -->
                             <div class="col-md-4">
                                 <app-cbo-gruposmusculares [formControl]="getControl(i, j, 'id_grupo_muscular')"
                                     (valueChange)="filtrarEjercicios(i, j, $event)">
                                 </app-cbo-gruposmusculares>
                             </div>
-                            <!-- Combo de Ejercicio -->
                             <div class="col-md-4">
                                 <app-cbo-ejercicio [formControl]="getControl(i, j, 'id_ejercicio')"
                                     [grupoMuscularId]="ejercicio.get('id_grupo_muscular')?.value">
                                 </app-cbo-ejercicio>
                             </div>
-                            <!-- Combo de Repeticiones -->
                             <div class="col-md-3">
                                 <app-cbo-repeticiones [formControl]="getControl(i, j, 'id_repeticion')">
                                 </app-cbo-repeticiones>
                             </div>
-                            <!-- Botón Eliminar -->
                             <div class="col-md-1 d-flex align-items-center">
                                 <button type="button" class="btn btn-danger btn-sm" (click)="eliminarEjercicio(i, j)">
                                     <i class="bi bi-trash"></i>
@@ -75,7 +72,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Botón Agregar Ejercicio -->
                     <button type="button" class="btn btn-success btn-sm" (click)="agregarEjercicio(i)">
                         <i class="bi bi-plus-circle"></i> Agregar Ejercicio
                     </button>
@@ -86,8 +82,6 @@
         <!-- Botones de acción -->
         <div class="row mt-4">
             <div class="col-12 d-flex justify-content-end">
-                <p-button icon="pi pi-arrow-left" label="Anterior" styleClass="p-button-rounded p-button-secondary me-2"
-                    (onClick)="anterior()"></p-button>
                 <p-button icon="pi pi-check" label="Confirmar" styleClass="p-button-rounded p-button-success me-2"
                     (onClick)="guardarRutina()"></p-button>
                 <p-button icon="pi pi-times" label="Cancelar" styleClass="p-button-rounded p-button-danger"

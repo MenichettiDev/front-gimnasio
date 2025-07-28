@@ -18,7 +18,7 @@ import { CommonModule } from '@angular/common';
   ],
 })
 export class CboRepeticionesComponent implements OnInit, ControlValueAccessor {
-  @Input() label: string = "Selecciona un tipo de repetición"; // Para el label del combo
+  @Input() label: string = "Tipo de repetición"; // Para el label del combo
   @Output() valueChange: EventEmitter<number> = new EventEmitter<number>();
   repeticiones: Repeticion[] = []; // Lista de repeticiones
   selectedRepeticion: Repeticion | null = null; // Valor seleccionado (objeto repeticion)
@@ -26,10 +26,10 @@ export class CboRepeticionesComponent implements OnInit, ControlValueAccessor {
   private datosCargados = false; // Flag para indicar si los datos están cargados
 
   // Funciones de callback registradas por Angular
-  private onChange: (value: any) => void = () => {};
-  private onTouched: () => void = () => {};
+  private onChange: (value: any) => void = () => { };
+  private onTouched: () => void = () => { };
 
-  constructor(private repeticionService: RepeticionService) {}
+  constructor(private repeticionService: RepeticionService) { }
 
   ngOnInit(): void {
     this.obtenerRepeticiones();
@@ -49,12 +49,12 @@ export class CboRepeticionesComponent implements OnInit, ControlValueAccessor {
   }
 
   // Maneja cambios en el select
-onValueChange(): void {
-  const idRepeticion = this.selectedRepeticion?.id_repeticion || undefined; // Obtiene el ID de la repetición
-  this.valueChange.emit(idRepeticion); // Emite el ID al padre
-  this.onChange(idRepeticion); // Notifica a Angular sobre el cambio
-  this.onTouched(); // Marca el control como "tocado"
-}
+  onValueChange(): void {
+    const idRepeticion = this.selectedRepeticion?.id_repeticion || undefined; // Obtiene el ID de la repetición
+    this.valueChange.emit(idRepeticion); // Emite el ID al padre
+    this.onChange(idRepeticion); // Notifica a Angular sobre el cambio
+    this.onTouched(); // Marca el control como "tocado"
+  }
 
   // Métodos de ControlValueAccessor
   writeValue(value: number): void {
