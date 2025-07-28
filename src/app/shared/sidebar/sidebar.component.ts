@@ -69,7 +69,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     { id: 27, descripcion: 'Favoritas', icono: '', link: '/rutinas/favoritas', grupo: 'GM03', principal: false, orden: 6, estado: false, requiredAccess: [1, 2, 3] },
     // { id: 28, descripcion: 'Historial', icono: '', link: '/rutinas/historial', grupo: 'GM03', principal: false, orden: 7, estado: false, requiredAccess: [2, 3] },
     { id: 29, descripcion: 'Crear rutina', icono: '', link: '/rutinas/crear-rutina', grupo: 'GM03', principal: false, orden: 8, estado: true, requiredAccess: [1, 2, 3, 4] },
-    { id: 30, descripcion: 'Reaplicar rutina', icono: '', link: '/rutinas/reaplicar-rutina', grupo: 'GM03', principal: false, orden: 9, estado: true, requiredAccess: [1, 2, 4] },
+    // { id: 30, descripcion: 'Reaplicar rutina', icono: '', link: '/rutinas/reaplicar-rutina', grupo: 'GM03', principal: false, orden: 9, estado: true, requiredAccess: [1, 2, 4] },
 
     // GM04 - Ejercicios
     { id: 32, descripcion: 'Ejercicios', icono: 'bx bx-dumbbell', link: '/ejercicios', grupo: 'GM04', principal: true, orden: 4, estado: true, requiredAccess: [1, 2, 3, 4] },

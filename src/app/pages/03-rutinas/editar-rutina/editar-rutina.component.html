@@ -4,9 +4,11 @@
         <!-- Primera fila: Nombre, atleta y cantidad de días -->
         <div class="row mb-4">
             <div class="col-md-4">
-                <app-input-texto label="Nombre de la rutina" formControlName="nombre"></app-input-texto>
+                <label for="nombre" class="form-label-base">Nombre de la rutina</label>
+                <input type="text" id="nombre" class="form-control" formControlName="nombre" />
             </div>
             <div class="col-md-4">
+                <label for="id_atleta" class="form-label-base">Seleccione Atleta</label>
                 <select class="form-select" formControlName="id_atleta">
                     <option [ngValue]="''">Seleccione un atleta</option>
                     <option *ngFor="let atl of atletas" [ngValue]="atl.id_atleta">
@@ -28,9 +30,11 @@
                 <app-cbo-objetivo formControlName="objetivo"></app-cbo-objetivo>
             </div>
             <div class="col-md-4">
-                <app-input-fecha label="Fecha de asignación" formControlName="fecha_asignacion"></app-input-fecha>
+                <!-- <label for="fecha_asignacion" class="form-label">Fecha de Asignación</label> -->
+                <app-input-fecha formControlName="fecha_asignacion"></app-input-fecha>
             </div>
         </div>
+
 
         <!-- Tercera fila: Descripción de la rutina -->
         <div class="row mb-4">
