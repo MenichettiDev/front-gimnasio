@@ -6,12 +6,14 @@
             <div class="col-md-4">
                 <app-input-texto label="Nombre de la rutina" formControlName="nombre"></app-input-texto>
             </div>
-            <select class="form-select" formControlName="id_atleta">
-                <option [ngValue]="''">Seleccione un atleta</option>
-                <option *ngFor="let atl of atletas" [ngValue]="atl.id_atleta">
-                    {{ atl.nombre }} {{ atl.apellido }}
-                </option>
-            </select>
+            <div class="col-md-4">
+                <select class="form-select" formControlName="id_atleta">
+                    <option [ngValue]="''">Seleccione un atleta</option>
+                    <option *ngFor="let atl of atletas" [ngValue]="atl.id_atleta">
+                        {{ atl.nombre }} {{ atl.apellido }}
+                    </option>
+                </select>
+            </div>
             <div class="col-md-4">
                 <app-cbo-dias formControlName="cantidad_dias"></app-cbo-dias>
             </div>
