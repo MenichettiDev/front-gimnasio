@@ -64,12 +64,17 @@ export class EditarRutinaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cargarAtletasPorPerfil(); // <-- igual que en crear
+    this.cargarAtletasPorPerfil();
     this.idRutina = Number(this.route.snapshot.paramMap.get('id'));
     console.log('Cargando rutina con ID:', this.idRutina);
     if (this.idRutina) {
       this.cargarRutina();
     }
+
+    // Dinamiza el agregado/borrado de días al cambiar cantidad_dias
+    this.rutinaForm.get('cantidad_dias')?.valueChanges.subscribe((cantidadDias: number) => {
+      this.actualizarDias(cantidadDias);
+    });
   }
 
   // Consulta la rutina por id y la carga en el formulario
@@ -290,6 +295,22 @@ export class EditarRutinaComponent implements OnInit {
   // Cancela y vuelve al home
   cancelar(): void {
     this.router.navigate(['/home']);
+  }
+
+  // Actualiza los días en el formulario según la cantidad indicada
+  actualizarDias(cantidadDias: number): void {
+    const diasActuales = this.dias.length;
+    if (cantidadDias > diasActuales) {
+      for (let i = diasActuales; i < cantidadDias; i++) {
+        this.dias.push(this.fb.group({ ejercicios: this.fb.array([]) }));
+        this.collapsed.push(false);
+      }
+    } else if (cantidadDias < diasActuales) {
+      for (let i = diasActuales - 1; i >= cantidadDias; i--) {
+        this.dias.removeAt(i);
+        this.collapsed.splice(i, 1);
+      }
+    }
   }
 }
 
