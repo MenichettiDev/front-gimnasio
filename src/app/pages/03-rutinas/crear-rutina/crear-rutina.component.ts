@@ -18,6 +18,7 @@ import { MessagesModule } from 'primeng/messages';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { RelacionesService } from '../../../service/relaciones.service';
+import { InputFechaComponent } from "../../../components/input-fecha/input-fecha.component";
 
 @Component({
   selector: 'app-crear-rutina',
@@ -39,6 +40,7 @@ import { RelacionesService } from '../../../service/relaciones.service';
     ButtonModule,
     CalendarModule,
     FormsModule,
+    InputFechaComponent
   ]
 })
 export class CrearRutinaComponent implements OnInit {

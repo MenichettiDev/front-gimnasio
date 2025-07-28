@@ -1,6 +1,8 @@
 /* Estilos generales */
 /* Ajustar estilos del contenedor principal */
 .container {
+    background: var(--primary-gradient);
+    /* Fondo principal violeta */
     max-width: 1300px;
     /* Evitar que el contenedor sea más ancho que la pantalla */
     padding: 0 15px;
@@ -15,9 +17,10 @@
 .row {
     display: flex;
     flex-wrap: wrap;
-    /* Permite que los elementos se ajusten al ancho disponible */
-    gap: 1rem;
-    /* Espaciado uniforme entre los elementos */
+    /* gap: 1rem; */
+    /* Elimina el gap para que los cols estén alineados */
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .col-md-6 {
@@ -51,23 +54,23 @@
 
 /* Estilos actualizados para el card */
 .card {
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: rgba(71, 0, 99, 0.94);
+    composes: card-base from '../../../../../styles.css';
+    /* Card base igual a editar */
+    border: 1px solid #ffe066;
+    background: var(--card-background);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-base);
     margin-top: 20px;
-    /* Reducir el margen superior */
     overflow: hidden;
 }
 
 .card-header {
-    background: linear-gradient(90deg, #e0811a, #ffde04);
-    /* Gradiente horizontal continuo */
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    /* Tamaño de fuente más pequeño */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /* Sombra ligera */
+    background: var(--primary-gradient);
+    color: #fff;
+    border-bottom: 1px solid #ffe066;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 1rem;
 }
 
 .card-header h4 {
@@ -78,32 +81,42 @@
 }
 
 .card-body {
+    composes: card-body-base from '../../../../../styles.css';
+    /* Card body igual a editar */
     padding: 2rem;
     /* Espaciado interno controlado */
     overflow: auto;
     /* Permitir desplazamiento solo si es necesario */
+    color: #fff;
+    background: var(--card-background);
 }
 
 /* Estilos para los inputs */
-.form-control {
-    width: 100%;
-    /* Asegura que los inputs ocupen todo el ancho disponible */
-    box-sizing: border-box;
-    /* Incluye padding y border en el cálculo del ancho */
-    border: none;
-    border-radius: 10px;
-    background-color: #f8f8f844;
-    padding: 0.8rem;
-    font-size: 0.9rem;
-    transition: box-shadow 0.3s ease-in-out;
+.form-control,
+.form-select,
+select,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="url"],
+input[type="number"] {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 10px !important;
+    color: #fff !important;
+    padding: 0.8rem 1rem !important;
+    font-size: 1rem;
+    transition: all 0.3s ease-in-out !important;
 }
 
-
-.form-control:focus {
-    background-color: #ffffff;
-    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
-    /* Verde claro */
-    outline: none;
+.form-control:focus,
+.form-select:focus,
+select:focus,
+input:focus {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-color: #4CAF50 !important;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.3) !important;
+    outline: none !important;
 }
 
 .form-label {
@@ -111,9 +124,18 @@
     color: #e0e0e0;
 }
 
+/* Label global */
+.form-label-base {
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
 /* Botón de envío */
 .btn-primary {
-    background-color: #04df13bb;
+    background: linear-gradient(90deg, var(--card-background) 10%, #4CAF50 100%);
+    color: #fff;
     border: none;
     border-radius: 25px;
     padding: 0.7rem 1.2rem;
@@ -125,12 +147,24 @@
 }
 
 .btn-primary:hover {
-    background-color: #038a0c;
+    background: linear-gradient(90deg, #541891 20%, #45a049 100%);
+    color: #fff;
 }
 
 .btn-primary:disabled {
     background-color: #cccccc;
     cursor: not-allowed;
+}
+
+/* Botones de acción alineados y del mismo tamaño */
+.btn-primary,
+.btn-danger {
+    min-width: 140px;
+    padding: 0.7rem 1.2rem;
+    font-size: 1rem;
+    border-radius: 25px;
+    /* Elimina margin-top si existe */
+    margin-top: 0 !important;
 }
 
 /* Espaciado adicional */
@@ -224,4 +258,55 @@ input:invalid {
         width: 100%;
         /* Asegurarse que el botón ocupe el 100% del ancho en pantallas pequeñas */
     }
+}
+
+/* Responsive igual a editar */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    h2.text-center {
+        font-size: 1.5rem;
+    }
+}
+
+/* Sombra y borde para cards de días */
+.card.mb-4.shadow-sm {
+    border: 1px solid #ffe066;
+    box-shadow: 0 2px 10px rgba(255, 221, 51, 0.08);
+    border-radius: 15px;
+    background: var(--card-background);
+    overflow: hidden;
+}
+
+/* Estilo para el cuerpo de la tarjeta */
+.box-card-body {
+    background: var(--card-background);
+    box-shadow: 0 2px 10px rgba(71, 0, 99, 0.10);
+    padding: 1rem;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+/* Fondo violeta para card-body en este componente */
+.card-body.card-body-base {
+    background: var(--card-background) !important;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(71, 0, 99, 0.08);
+    color: #fff;
+    overflow: hidden;
+}
+
+/* Fondo violeta para sub-card */
+.sub-card.card-base {
+    background: var(--card-background);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(71, 0, 99, 0.07);
+    color: #fff;
+    overflow: hidden;
 }
