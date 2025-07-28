@@ -214,4 +214,8 @@ export class MisRutinasComponent implements OnInit {
   verDetallesRutina(id_rutina: number): void {
     this.router.navigate(['/rutinas/visor-rutina', id_rutina]);
   }
+
+  editarRutina(id_rutina: number): void {
+    this.router.navigate(['/rutinas/editar-rutina', id_rutina]);
+  }
 }

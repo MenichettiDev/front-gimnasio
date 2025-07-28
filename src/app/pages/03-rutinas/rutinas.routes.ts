@@ -15,6 +15,7 @@ export const rutinasRoutes: Routes = [
     { path: 'historial', loadComponent: () => import('./historial/historial.component').then(m => m.HistorialComponent) },
     { path: 'mis-rutinas', loadComponent: () => import('./mis-rutinas/mis-rutinas.component').then(m => m.MisRutinasComponent) },
     { path: 'visor-rutina/:id', loadComponent: () => import('./visor-rutina/visor-rutina.component').then(m => m.VisorRutinaComponent) },
+    { path: 'editar-rutina/:id', loadComponent: () => import('./editar-rutina/editar-rutina.component').then(m => m.EditarRutinaComponent) },
     { path: 'populares', loadComponent: () => import('./populares/populares.component').then(m => m.PopularesComponent) },
     { path: 'recomendadas', loadComponent: () => import('./recomendadas/recomendadas.component').then(m => m.RecomendadasComponent) }
 ];
