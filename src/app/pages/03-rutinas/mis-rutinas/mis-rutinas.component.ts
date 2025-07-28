@@ -56,74 +56,85 @@ export class MisRutinasComponent implements OnInit {
     this.id_persona = this.authService.getUserId();
     this.id_acceso = this.authService.getIdAcceso();
 
-    // Primero, busca si el usuario es atleta
-    this.atletaService.getAtletasPorIdPersona(this.id_persona!).subscribe({
-      next: (atleta) => {
-        if (atleta) {
-          this.id_atleta = atleta.id_atleta;
-          this.id_entrenador = atleta.id_entrenador;
-          this.id_gimnasio = atleta.id_gimnasio;
+    if (this.id_acceso === 4) {
+      // Solo gimnasio, no atleta
+      this.rutinaService.getRutinaByIdCreador(this.id_persona!).subscribe({
+        next: (data: any[]) => {
+          this.rutinas = data.map(plan => plan.rutina);
+          this.categorizarRutinas();
+        },
+        error: (error) => {
+          console.error('Error al cargar rutinas del creador', error);
+        }
+      });
+    } else {
+      // Atleta o entrenador (o ambos)
+      this.atletaService.getAtletasPorIdPersona(this.id_persona!).subscribe({
+        next: (atleta) => {
+          if (atleta) {
+            this.id_atleta = atleta.id_atleta;
+            this.id_entrenador = atleta.id_entrenador;
+            this.id_gimnasio = atleta.id_gimnasio;
 
-          // Si es entrenador (o gimnasio) Y atleta, trae ambas fuentes y une
-          if (this.id_acceso === 2 || this.id_acceso === 4) {
-            forkJoin([
-              this.rutinaService.getRutinaByIdCreador(this.id_persona!),
+            if (this.id_acceso === 2) {
+              // Entrenador que también es atleta
+              forkJoin([
+                this.rutinaService.getRutinaByIdCreador(this.id_persona!),
+                this.rutinaService.getRutinaByIdAtleta(
+                  this.id_atleta!,
+                  this.id_entrenador ?? 0,
+                  this.id_gimnasio ?? 0
+                )
+              ]).subscribe({
+                next: ([creadas, asignadas]: [any[], any[]]) => {
+                  const todas = [
+                    ...creadas.map(plan => plan.rutina),
+                    ...asignadas.map(plan => plan.rutina)
+                  ];
+                  this.rutinas = todas.filter(
+                    (rutina, index, self) =>
+                      index === self.findIndex(r => r.id_rutina === rutina.id_rutina)
+                  );
+                  this.categorizarRutinas();
+                },
+                error: (error) => {
+                  console.error('Error al cargar rutinas', error);
+                }
+              });
+            } else {
+              // Solo atleta
               this.rutinaService.getRutinaByIdAtleta(
                 this.id_atleta!,
                 this.id_entrenador ?? 0,
                 this.id_gimnasio ?? 0
-              )
-            ]).subscribe({
-              next: ([creadas, asignadas]: [any[], any[]]) => {
-                // Unir rutinas por id_rutina para evitar duplicados
-                const todas = [
-                  ...creadas.map(plan => plan.rutina),
-                  ...asignadas.map(plan => plan.rutina)
-                ];
-                // Elimina duplicados por id_rutina
-                this.rutinas = todas.filter(
-                  (rutina, index, self) =>
-                    index === self.findIndex(r => r.id_rutina === rutina.id_rutina)
-                );
-                this.categorizarRutinas();
-              },
-              error: (error) => {
-                console.error('Error al cargar rutinas', error);
-              }
-            });
-          } else {
-            // Solo atleta
-            this.rutinaService.getRutinaByIdAtleta(
-              this.id_atleta!,
-              this.id_entrenador ?? 0,
-              this.id_gimnasio ?? 0
-            ).subscribe({
+              ).subscribe({
+                next: (data: any[]) => {
+                  this.rutinas = data.map(plan => plan.rutina);
+                  this.categorizarRutinas();
+                },
+                error: (error) => {
+                  console.error('Error al cargar rutinas', error);
+                }
+              });
+            }
+          } else if (this.id_acceso === 2) {
+            // Solo entrenador, no atleta
+            this.rutinaService.getRutinaByIdCreador(this.id_persona!).subscribe({
               next: (data: any[]) => {
                 this.rutinas = data.map(plan => plan.rutina);
                 this.categorizarRutinas();
               },
               error: (error) => {
-                console.error('Error al cargar rutinas', error);
+                console.error('Error al cargar rutinas del creador', error);
               }
             });
           }
-        } else if (this.id_acceso === 2 || this.id_acceso === 4) {
-          // Es solo entrenador o gimnasio, no atleta
-          this.rutinaService.getRutinaByIdCreador(this.id_persona!).subscribe({
-            next: (data: any[]) => {
-              this.rutinas = data.map(plan => plan.rutina);
-              this.categorizarRutinas();
-            },
-            error: (error) => {
-              console.error('Error al cargar rutinas del creador', error);
-            }
-          });
+        },
+        error: (err) => {
+          console.error('Error al obtener el atleta:', err);
         }
-      },
-      error: (err) => {
-        console.error('Error al obtener el atleta:', err);
-      }
-    });
+      });
+    }
   }
 
   // Método para categorizar rutinas según el creador
