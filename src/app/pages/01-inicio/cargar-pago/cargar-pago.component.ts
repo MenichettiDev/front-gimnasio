@@ -96,17 +96,17 @@ export class CargarPagoComponent implements OnInit {
     const user = this.authService.getUser();
 
     if (this.authService.isGimnasio()) {
-      this.montoFijo = 20000;
+      this.montoFijo = 20;
       this.conceptoFijo = 'Pago membresía gimnasio';
       this.id = user?.id_gimnasio || null;
       this.tipo = 'gimnasio';
     } else if (this.authService.isEntrenador()) {
-      this.montoFijo = 2000;
+      this.montoFijo = 15;
       this.conceptoFijo = 'Pago de entrenador';
       this.id = user?.id_entrenador || null;
       this.tipo = 'entrenador';
     } else if (this.authService.isAtleta()) {
-      this.montoFijo = 500;
+      this.montoFijo = 5;
       this.conceptoFijo = 'Pago de atleta';
       this.id = user?.id_atleta || null; // Corregir: usar id_atleta en lugar de id_entrenador
       this.tipo = 'atleta';
