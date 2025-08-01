@@ -23,15 +23,20 @@
       </div>
 
       <!-- Selector de Forma de Pago -->
-      <div class="mb-3">
+      <!-- <div class="mb-3">
         <app-cbo-forma-pago label="Forma de Pago" (valueChange)="onFormaPagoChange($event)">
         </app-cbo-forma-pago>
-      </div>
+      </div> -->
 
       <!-- Botón de Envío -->
-      <div class="d-grid gap-2">
+      <!-- <div class="d-grid gap-2">
         <button type="submit" class="btn btn-primary rounded-pill" [disabled]="frmData.invalid">
           <i class="bi bi-check-circle-fill me-2"></i> Registrar
+        </button>
+      </div> -->
+      <div class="d-grid gap-2 mt-2">
+        <button type="button" class="btn btn-success rounded-pill" (click)="pagarConMercadoPago()">
+          <i class="bi bi-credit-card me-2"></i> Pagar con MercadoPago
         </button>
       </div>
     </form>

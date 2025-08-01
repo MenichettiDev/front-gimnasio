@@ -27,6 +27,8 @@ export class CargarPagoComponent implements OnInit {
   @Input() id!: number;
   @Input() tipo!: 'atleta' | 'entrenador' | 'gimnasio';
 
+  user: any = null;
+
   montoFijo: number = 0;
   conceptoFijo: string = '';
 
@@ -48,14 +50,42 @@ export class CargarPagoComponent implements OnInit {
       fecha_pago: [this.getFechaActual(), Validators.required],
       monto: [{ value: null, disabled: true }, Validators.required],
       concepto: [{ value: null, disabled: true }, Validators.required],
-      id_forma_pago: [null, Validators.required],
+      id_forma_pago: [null],
     });
   }
 
   ngOnInit(): void {
+    this.user = this.authService.getUser();
     this.setConceptoYMonto();
   }
 
+  pagarConMercadoPago(): void {
+    const user = this.authService.getUser();
+    const suscripcionData = {
+      reason: this.conceptoFijo,
+      frequency: 1,
+      frequency_type: 'months',
+      transaction_amount: this.montoFijo,
+      currency_id: 'ARS',
+      // payer_email: 'TESTUSER790271875@gmail.com',
+      payer_email: user?.email,
+      back_url: 'https://gymrats.com.ar',
+    };
+
+    this.pagoService.crearSuscripcion(suscripcionData).subscribe({
+      next: (resp) => {
+        if (resp && resp.init_point) {
+          window.location.href = resp.init_point; // Redirige a MercadoPago
+        } else {
+          alert('No se pudo iniciar el pago con MercadoPago');
+        }
+      },
+      error: (err) => {
+        alert('Error al iniciar el pago con MercadoPago');
+        console.error(err);
+      }
+    });
+  }
 
   setConceptoYMonto(): void {
     console.log('Usuario:', this.authService.getUser());

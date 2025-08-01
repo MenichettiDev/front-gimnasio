@@ -20,7 +20,17 @@ export class PagoService {
   private apiUrlGetPagosPorFecha = `${this.apiUrl}/getPagosPorFecha`; // URL para obtener pagos por fecha
   private apiUrlGetTotalPagosPorAtleta = `${this.apiUrl}/getTotalPagosPorAtleta`; // URL para obtener el total de pagos por atleta
 
+  private apiUrlCrearSuscripcion = `${this.apiUrl}/crearSuscripcion`;
+
   constructor(private http: HttpClient) { }
+
+  // Método para crear una suscripción
+  crearSuscripcion(suscripcionData: any): Observable<any> {
+    return this.http.post<any>(this.apiUrlCrearSuscripcion, suscripcionData).pipe(
+      catchError(this.handleError)
+    );
+  }
+
 
   // Método para obtener pagos por atleta
   getPagosPorAtleta(idAtleta: number): Observable<any> {
