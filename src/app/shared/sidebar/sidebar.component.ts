@@ -47,7 +47,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     { id: 1, descripcion: 'Inicio', icono: 'bi bi-house', link: '/inicio', grupo: 'GM01', principal: true, orden: 1, estado: true, requiredAccess: [1, 2, 3, 4] },
     { id: 2, descripcion: 'Resumen', icono: '', link: '/inicio/resumen', grupo: 'GM01', principal: false, orden: 1, estado: false, requiredAccess: [1, 2, 3, 4] },
     { id: 3, descripcion: 'Noticias', icono: '', link: '/inicio/noticias', grupo: 'GM01', principal: false, orden: 2, estado: true, requiredAccess: [1, 2, 3, 4] },
-    { id: 4, descripcion: 'Cargar Atleta', icono: '', link: '/inicio/cargar-atleta', grupo: 'GM01', principal: false, orden: 3, estado: true, requiredAccess: [1] },
+    // { id: 4, descripcion: 'Cargar Atleta', icono: '', link: '/inicio/cargar-atleta', grupo: 'GM01', principal: false, orden: 3, estado: true, requiredAccess: [1] },
     { id: 5, descripcion: 'Cargar pago', icono: '', link: '/inicio/cargar-pago', grupo: 'GM01', principal: false, orden: 4, estado: true, requiredAccess: [1, 2, 3, 4] },
     { id: 6, descripcion: 'Relaciones', icono: '', link: '/inicio/relaciones', grupo: 'GM01', principal: false, orden: 5, estado: true, requiredAccess: [1, 2, 3, 4] },
     { id: 6, descripcion: 'Visor Relaciones', icono: '', link: '/inicio/relaciones-vista', grupo: 'GM01', principal: false, orden: 5, estado: true, requiredAccess: [1, 2, 3, 4] },
@@ -57,7 +57,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     { id: 12, descripcion: 'Perfil', icono: '', link: '/perfil/perfil', grupo: 'GM02', principal: false, orden: 1, estado: true, requiredAccess: [1, 2, 3, 4] },
     { id: 13, descripcion: 'Cargar Medidas', icono: '', link: '/perfil/cargar-medidas', grupo: 'GM02', principal: false, orden: 2, estado: true, requiredAccess: [1, 2, 3] },
     { id: 14, descripcion: 'Historial medidas', icono: '', link: '/perfil/historial-medidas', grupo: 'GM02', principal: false, orden: 3, estado: true, requiredAccess: [1, 2, 3] },
-    { id: 15, descripcion: 'Estadisticas Coach', icono: '', link: '/perfil/coach', grupo: 'GM02', principal: false, orden: 4, estado: true, requiredAccess: [1, 2] },
+    // { id: 15, descripcion: 'Estadisticas Coach', icono: '', link: '/perfil/coach', grupo: 'GM02', principal: false, orden: 4, estado: true, requiredAccess: [1, 2] },
 
     // GM03 - Rutinas
     { id: 21, descripcion: 'Rutinas', icono: 'bx bx-book-bookmark', link: '/', grupo: 'GM03', principal: true, orden: 3, estado: true, requiredAccess: [1, 2, 3, 4] },
@@ -66,7 +66,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     // { id: 24, descripcion: 'Recomendadas', icono: '', link: '/rutinas/recomendadas', grupo: 'GM03', principal: false, orden: 3, estado: false, requiredAccess: [2, 3, 4] },
     // { id: 25, descripcion: 'Populares', icono: '', link: '/rutinas/populares', grupo: 'GM03', principal: false, orden: 4, estado: false, requiredAccess: [2, 3, 4] },
     // { id: 26, descripcion: 'Especificas', icono: '', link: '/rutinas/especificas', grupo: 'GM03', principal: false, orden: 5, estado: false, requiredAccess: [2, 3, 4] },
-    { id: 27, descripcion: 'Favoritas', icono: '', link: '/rutinas/favoritas', grupo: 'GM03', principal: false, orden: 6, estado: false, requiredAccess: [1, 2, 3] },
+    // { id: 27, descripcion: 'Favoritas', icono: '', link: '/rutinas/favoritas', grupo: 'GM03', principal: false, orden: 6, estado: false, requiredAccess: [1, 2, 3] },
     // { id: 28, descripcion: 'Historial', icono: '', link: '/rutinas/historial', grupo: 'GM03', principal: false, orden: 7, estado: false, requiredAccess: [2, 3] },
     { id: 29, descripcion: 'Crear rutina', icono: '', link: '/rutinas/crear-rutina', grupo: 'GM03', principal: false, orden: 8, estado: true, requiredAccess: [1, 2, 3, 4] },
     // { id: 30, descripcion: 'Reaplicar rutina', icono: '', link: '/rutinas/reaplicar-rutina', grupo: 'GM03', principal: false, orden: 9, estado: true, requiredAccess: [1, 2, 4] },
@@ -91,13 +91,13 @@ export class SidebarComponent implements OnInit, OnDestroy {
     { id: 55, descripcion: 'Metas', icono: '', link: '/progreso/metas', grupo: 'GM06', principal: false, orden: 3, estado: true, requiredAccess: [1, 2, 3] },
 
     // GM07 - Comunidad
-    { id: 62, descripcion: 'Comunidad', icono: 'bi bi-people-fill', link: '/comunidad', grupo: 'GM07', principal: true, orden: 7, estado: true, requiredAccess: [1, 2, 3, 4] },
-    { id: 63, descripcion: 'Grupos', icono: '', link: '/comunidad/grupos', grupo: 'GM07', principal: false, orden: 1, estado: true, requiredAccess: [1, 2, 3, 4] },
-    { id: 64, descripcion: 'Articulos', icono: '', link: '/comunidad/articulos', grupo: 'GM07', principal: false, orden: 2, estado: true, requiredAccess: [1, 2, 3, 4] },
+    // { id: 62, descripcion: 'Comunidad', icono: 'bi bi-people-fill', link: '/comunidad', grupo: 'GM07', principal: true, orden: 7, estado: true, requiredAccess: [1, 2, 3, 4] },
+    // { id: 63, descripcion: 'Grupos', icono: '', link: '/comunidad/grupos', grupo: 'GM07', principal: false, orden: 1, estado: true, requiredAccess: [1, 2, 3, 4] },
+    // { id: 64, descripcion: 'Articulos', icono: '', link: '/comunidad/articulos', grupo: 'GM07', principal: false, orden: 2, estado: true, requiredAccess: [1, 2, 3, 4] },
 
     // GM08 - Configuracion
-    { id: 72, descripcion: 'Configuracion', icono: 'bi bi-gear', link: '/configuracion', grupo: 'GM08', principal: true, orden: 8, estado: true, requiredAccess: [1, 2, 3, 4] },
-    { id: 73, descripcion: 'Editar perfil', icono: '', link: '/configuracion/editar-perfil', grupo: 'GM08', principal: false, orden: 1, estado: true, requiredAccess: [1, 2, 3, 4] },
+    // { id: 72, descripcion: 'Configuracion', icono: 'bi bi-gear', link: '/configuracion', grupo: 'GM08', principal: true, orden: 8, estado: true, requiredAccess: [1, 2, 3, 4] },
+    // { id: 73, descripcion: 'Editar perfil', icono: '', link: '/configuracion/editar-perfil', grupo: 'GM08', principal: false, orden: 1, estado: true, requiredAccess: [1, 2, 3, 4] },
 
     // GM09 - Ayuda
     { id: 81, descripcion: 'Ayuda', icono: 'bi bi-info-circle', link: '/ayuda', grupo: 'GM09', principal: true, orden: 9, estado: true, requiredAccess: [1, 2, 3, 4] },

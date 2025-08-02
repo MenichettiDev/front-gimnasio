@@ -11,8 +11,10 @@
             <ul *ngIf="relaciones.gimnasios?.length; else noGimnasios">
                 <li *ngFor="let gim of relaciones.gimnasios">
                     {{ gim.nombre }}
-                    <button class="btn-icon btn-delete" title="Eliminar" (click)="eliminarRelacion('gimnasio', gim)">
-                        <span style="color:#f44336;font-size:1.3em;">&#128465;</span>
+                    <button
+                        class="btn btn-danger btn-sm rounded-circle d-flex align-items-center justify-content-center"
+                        title="Eliminar" (click)="eliminarRelacion('gimnasio', gim)">
+                        <i class="bi bi-x-lg"></i>
                     </button>
                 </li>
             </ul>
@@ -26,8 +28,10 @@
             <ul *ngIf="relaciones.entrenadores?.length; else noEntrenadores">
                 <li *ngFor="let ent of relaciones.entrenadores">
                     {{ ent.nombre }} {{ ent.apellido }}
-                    <button class="btn-icon btn-delete" title="Eliminar" (click)="eliminarRelacion('entrenador', ent)">
-                        <span style="color:#f44336;font-size:1.3em;">&#128465;</span>
+                    <button
+                        class="btn btn-danger btn-sm rounded-circle d-flex align-items-center justify-content-center"
+                        title="Eliminar" (click)="eliminarRelacion('entrenador', ent)">
+                        <i class="bi bi-x-lg"></i>
                     </button>
                 </li>
             </ul>
@@ -44,8 +48,10 @@
             <ul *ngIf="relaciones.gimnasios?.length; else noGimnasiosE">
                 <li *ngFor="let gim of relaciones.gimnasios">
                     {{ gim.nombre }}
-                    <button class="btn-icon btn-delete" title="Eliminar" (click)="eliminarRelacion('gimnasio', gim)">
-                        <span style="color:#f44336;font-size:1.3em;">&#128465;</span>
+                    <button
+                        class="btn btn-danger btn-sm rounded-circle d-flex align-items-center justify-content-center"
+                        title="Eliminar" (click)="eliminarRelacion('gimnasio-entrenador', gim)">
+                        <i class="bi bi-x-lg"></i>
                     </button>
                 </li>
             </ul>
@@ -59,8 +65,10 @@
             <ul *ngIf="relaciones.atletas?.length; else noAtletas">
                 <li *ngFor="let atl of relaciones.atletas">
                     {{ atl.nombre }} {{ atl.apellido }}
-                    <button class="btn-icon btn-delete" title="Eliminar" (click)="eliminarRelacion('entrenador', atl)">
-                        <span style="color:#f44336;font-size:1.3em;">&#128465;</span>
+                    <button
+                        class="btn btn-danger btn-sm rounded-circle d-flex align-items-center justify-content-center"
+                        title="Eliminar" (click)="eliminarRelacion('entrenador', atl)">
+                        <i class="bi bi-x-lg"></i>
                     </button>
                 </li>
             </ul>
@@ -77,9 +85,10 @@
             <ul *ngIf="relaciones.entrenadores?.length; else noEntrenadoresG">
                 <li *ngFor="let ent of relaciones.entrenadores">
                     {{ ent.nombre }} {{ ent.apellido }}
-                    <button class="btn-icon btn-delete" title="Eliminar"
-                        (click)="eliminarRelacion('gimnasio-entrenador', ent)">
-                        <span style="color:#f44336;font-size:1.3em;">&#128465;</span>
+                    <button
+                        class="btn btn-danger btn-sm rounded-circle d-flex align-items-center justify-content-center"
+                        title="Eliminar" (click)="eliminarRelacion('gimnasio-entrenador', ent)">
+                        <i class="bi bi-x-lg"></i>
                     </button>
                 </li>
             </ul>
@@ -93,8 +102,10 @@
             <ul *ngIf="relaciones.atletas?.length; else noAtletasG">
                 <li *ngFor="let atl of relaciones.atletas">
                     {{ atl.nombre }} {{ atl.apellido }}
-                    <button class="btn-icon btn-delete" title="Eliminar" (click)="eliminarRelacion('entrenador', atl)">
-                        <span style="color:#f44336;font-size:1.3em;">&#128465;</span>
+                    <button
+                        class="btn btn-danger btn-sm rounded-circle d-flex align-items-center justify-content-center"
+                        title="Eliminar" (click)="eliminarRelacion('gimnasio', atl)">
+                        <i class="bi bi-x-lg"></i>
                     </button>
                 </li>
             </ul>
