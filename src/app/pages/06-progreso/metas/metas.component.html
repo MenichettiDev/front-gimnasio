@@ -1,3 +1,6 @@
+<app-modal-toast [message]="toastMessage" [isVisible]="toastVisible" [type]="toastType">
+</app-modal-toast>
+
 <div class="metas-container">
   <div class="page-header">
     <h1 class="page-title">
@@ -11,11 +14,13 @@
       <i class="fas fa-plus-circle"></i>
       Agregar Nueva Meta
     </h2>
-    
+
     <form (ngSubmit)="crearMeta()" class="meta-form">
       <input [(ngModel)]="nuevaMeta.descripcion" name="descripcion" placeholder="Descripción de la meta" required />
-      <input [(ngModel)]="nuevaMeta.tipo_meta" name="tipo_meta" placeholder="Tipo de meta (ej: peso, fuerza, resistencia)" required />
-      <input [(ngModel)]="nuevaMeta.valor_objetivo" name="valor_objetivo" type="number" placeholder="Valor objetivo" required />
+      <input [(ngModel)]="nuevaMeta.tipo_meta" name="tipo_meta"
+        placeholder="Tipo de meta (ej: peso, fuerza, resistencia)" required />
+      <input [(ngModel)]="nuevaMeta.valor_objetivo" name="valor_objetivo" type="number" placeholder="Valor objetivo"
+        required />
       <input [(ngModel)]="nuevaMeta.fecha_vencimiento" name="fecha_vencimiento" type="date" required />
       <button type="submit">
         <i class="fas fa-save"></i>
@@ -29,21 +34,24 @@
       <i class="fas fa-list-alt"></i>
       Mis Metas
     </h2>
-    
+
     <ul>
       <li *ngFor="let meta of metas" class="meta-item">
         <div class="meta-titulo">{{ meta.descripcion }}</div>
         <div class="meta-detalle">
-          <strong>Tipo:</strong> {{ meta.tipo_meta }} | 
+          <strong>Tipo:</strong> {{ meta.tipo_meta }} |
           <strong>Objetivo:</strong> {{ meta.valor_objetivo }}
         </div>
         <div class="meta-detalle">
-          <strong>Establecida:</strong> {{ meta.fecha_establecimiento }} | 
+          <strong>Establecida:</strong> {{ meta.fecha_establecimiento }} |
           <strong>Vence:</strong> {{ meta.fecha_vencimiento }}
         </div>
-        <div class="meta-estado" [ngClass]="{'completada': meta.estado === 'completada', 'pendiente': meta.estado === 'pendiente'}">
-          <input type="checkbox" [checked]="meta.estado === 'completada'" (change)="actualizarEstadoMeta(meta)" />
-          <i class="fas" [ngClass]="{'fa-check-circle': meta.estado === 'completada', 'fa-clock': meta.estado === 'pendiente'}"></i>
+        <div class="meta-estado"
+          [ngClass]="{'completada': meta.estado === 'completada', 'pendiente': meta.estado === 'pendiente'}">
+          <input type="checkbox" [checked]="meta.estado === 'completada'"
+            (change)="meta.estado === 'pendiente' ? convertirMetaEnLogro(meta) : null" />
+          <i class="fas"
+            [ngClass]="{'fa-check-circle': meta.estado === 'completada', 'fa-clock': meta.estado === 'pendiente'}"></i>
           <span>{{ meta.estado === 'completada' ? 'Completada' : 'Pendiente' }}</span>
         </div>
         <button (click)="eliminarMeta(meta.id_meta)" class="btn-eliminar">

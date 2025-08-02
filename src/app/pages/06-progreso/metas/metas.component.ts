@@ -4,12 +4,14 @@ import { Meta } from '../../../data/interfaces/tbMetaInterface';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../service/auth/auth.service';
+import { ModalToastComponent } from '../../../components/modal/modal-toast/modal-toast.component';
+import { LogrosService } from '../../../service/logros.service';
 
 @Component({
   selector: 'app-metas',
   templateUrl: './metas.component.html',
   styleUrls: ['./metas.component.css'],
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ModalToastComponent],
 })
 export class MetasComponent implements OnInit {
   idAtleta: number | null = null;
@@ -23,7 +25,15 @@ export class MetasComponent implements OnInit {
     estado: 'pendiente',
   };
 
-  constructor(private metasService: MetasService, private authService: AuthService) { }
+  toastMessage: string = '';
+  toastVisible: boolean = false;
+  toastType: string = 'success';
+
+  constructor(
+    private metasService: MetasService,
+    private authService: AuthService,
+    private logrosService: LogrosService
+  ) { }
 
   ngOnInit(): void {
     this.idAtleta = this.authService.getIdAtleta();
@@ -42,10 +52,7 @@ export class MetasComponent implements OnInit {
   // Crear una nueva meta
   crearMeta(): void {
     if (this.idAtleta == null) return;
-
-    // Asignar la fecha actual a la fecha de establecimiento
     const fechaActual = this.getFormattedDate();
-
     this.metasService
       .crearMeta(
         this.idAtleta,
@@ -56,9 +63,15 @@ export class MetasComponent implements OnInit {
         this.nuevaMeta.fecha_vencimiento,
         this.nuevaMeta.estado
       )
-      .subscribe(() => {
-        this.cargarMetas(); // Recargar la lista de metas
-        this.resetForm(); // Limpiar el formulario
+      .subscribe({
+        next: () => {
+          this.cargarMetas();
+          this.resetForm();
+          this.mostrarToast('Meta creada exitosamente', 'success');
+        },
+        error: () => {
+          this.mostrarToast('Error al crear meta', 'error');
+        }
       });
   }
 
@@ -66,9 +79,6 @@ export class MetasComponent implements OnInit {
   actualizarEstadoMeta(meta: Meta): void {
     if (this.idAtleta == null) return;
     meta.estado = meta.estado === 'completada' ? 'pendiente' : 'completada';
-
-
-
     this.metasService
       .actualizarMeta(
         meta.id_meta,
@@ -80,16 +90,64 @@ export class MetasComponent implements OnInit {
         meta.fecha_vencimiento,
         meta.estado
       )
-      .subscribe(() => {
-        this.cargarMetas(); // Recargar la lista de metas
+      .subscribe({
+        next: () => {
+          this.cargarMetas();
+          this.mostrarToast('Estado de meta actualizado', 'success');
+        },
+        error: () => {
+          this.mostrarToast('Error al actualizar meta', 'error');
+        }
       });
   }
 
   // Eliminar una meta
   eliminarMeta(id: number): void {
-    this.metasService.eliminarMeta(id).subscribe(() => {
-      this.cargarMetas(); // Recargar la lista de metas
+    this.metasService.eliminarMeta(id).subscribe({
+      next: () => {
+        this.cargarMetas();
+        this.mostrarToast('Meta eliminada', 'success');
+      },
+      error: () => {
+        this.mostrarToast('Error al eliminar meta', 'error');
+      }
     });
+  }
+
+  // Convertir meta en logro
+  convertirMetaEnLogro(meta: Meta): void {
+    if (this.idAtleta == null) return;
+    this.logrosService.crearLogro(
+      this.idAtleta,
+      meta.descripcion,
+      `Meta lograda: ${meta.tipo_meta} - Objetivo: ${meta.valor_objetivo}`,
+      this.getFormattedDate()
+    ).subscribe({
+      next: () => {
+        this.metasService.eliminarMeta(meta.id_meta).subscribe({
+          next: () => {
+            this.cargarMetas(); // Recargar metas después de eliminar
+            this.mostrarToast('¡Meta convertida en logro!', 'success');
+          },
+          error: () => {
+            this.cargarMetas(); // Recargar aunque haya error al eliminar
+            this.mostrarToast('Error al eliminar meta', 'error');
+          }
+        });
+      },
+      error: () => {
+        this.mostrarToast('Error al crear logro', 'error');
+      }
+    });
+  }
+
+  mostrarToast(mensaje: string, tipo: string = 'success') {
+    this.toastMessage = mensaje;
+    this.toastType = tipo;
+    this.toastVisible = true;
+    setTimeout(() => {
+      this.toastVisible = false;
+    }, 2500);
   }
 
   // Resetear el formulario
