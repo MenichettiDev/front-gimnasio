@@ -44,8 +44,7 @@ export class MetasComponent implements OnInit {
     if (this.idAtleta == null) return;
 
     // Asignar la fecha actual a la fecha de establecimiento
-    const fechaActual =  this.getFormattedDate();
-    console.log( 'fecha..'  ,fechaActual);
+    const fechaActual = this.getFormattedDate();
 
     this.metasService
       .crearMeta(
@@ -68,7 +67,7 @@ export class MetasComponent implements OnInit {
     if (this.idAtleta == null) return;
     meta.estado = meta.estado === 'completada' ? 'pendiente' : 'completada';
 
-    
+
 
     this.metasService
       .actualizarMeta(

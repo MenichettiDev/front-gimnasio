@@ -10,17 +10,16 @@ import { Frase } from '../../../data/interfaces/fraseInterface';
 export class ResumenComponent implements OnInit {
   fraseAleatoria: Frase | null = null;
 
-  constructor(private frasesService: FrasesService) {}
+  constructor(private frasesService: FrasesService) { }
 
   ngOnInit(): void {
     this.obtenerFraseAleatoria();
-    
+
   }
 
   obtenerFraseAleatoria() {
     this.frasesService.getFraseAleatoria().subscribe(
       (data: Frase) => {
-        console.log('Frase aleatoria:', data);
         this.fraseAleatoria = data;
       },
       (error) => {

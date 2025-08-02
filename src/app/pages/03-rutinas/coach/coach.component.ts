@@ -33,7 +33,6 @@ export class CoachComponent implements OnInit {
       next: (entrenador) => {
         if (entrenador) {
           this.id_entrenador = entrenador.id_entrenador; // Asignar el ID del entrenador
-          console.log('ID del entrenador:', this.id_entrenador);
         } else {
           console.error('No se encontró ningún entrenador con el ID proporcionado.');
         }
@@ -47,7 +46,6 @@ export class CoachComponent implements OnInit {
   onAtletaSeleccionado(value: number | Atleta): void {
     if (typeof value === 'number') {
       this.idAtletaSeleccionado = value; // Si es un número, asignarlo directamente
-      console.log('atleta seleccionado : ', this.idAtletaSeleccionado);
     } else if (value && typeof value === 'object' && 'id_atleta' in value) {
       this.idAtletaSeleccionado = value.id_atleta; // Si es un objeto Atleta, extraer el ID
     }

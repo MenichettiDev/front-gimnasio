@@ -47,11 +47,9 @@ export class TbRutinasComponent implements OnInit, OnChanges {
     this.atletaService.getAtletasPorIdPersona(idAtleta).subscribe({
       next: (atleta) => {
         if (atleta) {
-          console.log('atleta completo: ', atleta);
           this.idAtleta = atleta.id_atleta;
           this.idEntrenador = atleta.id_entrenador;
           this.idGimnasio = atleta.id_gimnasio;
-          console.log('ID del atleta:', this.idAtleta);
 
           // Cargar rutinas, pasando null si no existen entrenador o gimnasio
           this.rutinaService.getRutinaByIdAtleta(
@@ -77,7 +75,6 @@ export class TbRutinasComponent implements OnInit, OnChanges {
   }
 
   verDetallesRutina(id_rutina: number): void {
-    // console.log('Ver detalles de la rutina:', rutina);
     this.dialog.open(ModalVisorRutinaComponent, {
       data: id_rutina,
     });

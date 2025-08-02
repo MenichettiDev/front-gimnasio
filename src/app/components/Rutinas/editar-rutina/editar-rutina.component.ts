@@ -52,7 +52,6 @@ export class EditarRutinaComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.createForm();
-    // console.log(' cambios de editar rutina');
     // Verifica si la propiedad 'idRutina' ha cambiado
     if (changes['idRutina'] && changes['idRutina'].currentValue && this.idRutina) {
       this.resetForm(); // Reinicia el formulario antes de cargar nuevos datos
@@ -65,7 +64,6 @@ export class EditarRutinaComponent implements OnInit, OnChanges {
     this.rutinaService.getRutinaByIdRutina(id_rutina).subscribe(
       (rutina: any) => {
         this.rutinaSeleccionada = rutina; // Asigna los datos de la rutina encontrada
-        // console.log('Rutina seleccionada:', this.rutinaSeleccionada);
         this.cargarDatosRutina(this.rutinaSeleccionada); // Carga los datos en el formulario
         this.loading = false; // Desactiva el spinner
       },
@@ -96,7 +94,6 @@ export class EditarRutinaComponent implements OnInit, OnChanges {
   }
 
   cargarDatosRutina(rutina: any): void {
-    // console.log('Cargar datos de la rutina:', rutina);
 
     if (!rutina || !rutina.rutina) {
       console.error('La estructura de la rutina no es válida:', rutina);
@@ -113,7 +110,6 @@ export class EditarRutinaComponent implements OnInit, OnChanges {
       fecha_asignacion: rutina.rutina.fecha_asignacion,
       id_atleta: rutina.rutina.id_atleta
     });
-    console.log('Valor de nivel_atleta:', this.rutinaForm.get('nivel_atleta')?.value);
 
     // Limpiar el FormArray de días antes de agregar nuevos
     this.dias.clear();
@@ -143,9 +139,7 @@ export class EditarRutinaComponent implements OnInit, OnChanges {
           })
         );
       });
-      console.log('Estado del FormArray:', ejerciciosArray.value);
     });
-    console.log('Datos del formulario después de cargar:', this.rutinaForm.value);
   }
 
   get dias(): FormArray {
@@ -220,7 +214,6 @@ export class EditarRutinaComponent implements OnInit, OnChanges {
       })
     };
 
-    console.log('Datos de la rutina a guardar:', rutinaData);
     this.rutinaService.createRutina(rutinaData).subscribe(
       response => {
         this.loading = false;
@@ -314,6 +307,5 @@ export class EditarRutinaComponent implements OnInit, OnChanges {
     // Actualizar el valor del grupo muscular en el formulario
     ejercicio.get('id_grupo_muscular')?.setValue(grupoMuscularId);
 
-    console.log(`Filtrando ejercicios para el día ${diaIndex + 1}, ejercicio ${ejercicioIndex + 1}, grupo muscular: ${grupoMuscularId}`);
   }
 }

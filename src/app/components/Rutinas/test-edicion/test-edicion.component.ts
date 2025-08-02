@@ -46,7 +46,6 @@ export class TestEdicionComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnInit(): void {
-    console.log(' inicio de editar rutina');
     this.createForm();
     // if (this.rutinaSeleccionada !== 0) {
     //   this.cargarDatosRutina(this.rutinaSeleccionada);
@@ -54,7 +53,6 @@ export class TestEdicionComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(' cambios de editar rutina');
     // Verifica si la propiedad 'idRutina' ha cambiado
     if (changes['idRutina'] && changes['idRutina'].currentValue) {
       this.resetForm(); // Reinicia el formulario antes de cargar nuevos datos
@@ -67,7 +65,6 @@ export class TestEdicionComponent implements OnInit, OnChanges {
     this.rutinaService.getRutinaByIdRutina(id_rutina).subscribe(
       (rutina: any) => {
         this.rutinaSeleccionada = rutina; // Asigna los datos de la rutina encontrada
-        console.log('Rutina seleccionada:', this.rutinaSeleccionada);
         this.cargarDatosRutina(this.rutinaSeleccionada); // Carga los datos en el formulario
         this.loading = false; // Desactiva el spinner
       },
@@ -98,10 +95,8 @@ export class TestEdicionComponent implements OnInit, OnChanges {
   }
 
   cargarDatosRutina(rutina: any): void {
-    console.log('Cargar datos de la rutina:', rutina);
 
     if (!rutina || !rutina.rutina) {
-      console.error('La estructura de la rutina no es válida:', rutina);
       return;
     }
 
@@ -282,6 +277,5 @@ export class TestEdicionComponent implements OnInit, OnChanges {
     // Actualizar el valor del grupo muscular en el formulario
     ejercicio.get('id_grupo_muscular')?.setValue(grupoMuscularId);
 
-    console.log(`Filtrando ejercicios para el día ${diaIndex + 1}, ejercicio ${ejercicioIndex + 1}, grupo muscular: ${grupoMuscularId}`);
   }
 }

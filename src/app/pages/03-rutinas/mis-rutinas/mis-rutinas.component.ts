@@ -139,16 +139,9 @@ export class MisRutinasComponent implements OnInit {
 
   // Método para categorizar rutinas según el creador
   categorizarRutinas(): void {
-    console.log('=== DEBUG CATEGORIZACIÓN ===');
-    console.log('ID Atleta:', this.id_atleta);
-    console.log('ID Entrenador:', this.id_entrenador);
-    console.log('ID Gimnasio:', this.id_gimnasio);
-    console.log('ID Persona (usuario logueado):', this.id_persona);
-    console.log('Rutinas totales:', this.rutinas);
 
     // Verificar los id_creador de cada rutina
     this.rutinas.forEach((rutina, index) => {
-      console.log(`Rutina ${index + 1}: ${rutina.nombre}, id_creador: ${rutina.id_creador}, id_atleta: ${rutina.id_atleta}`);
     });
 
     // Rutinas dedicadas al atleta (id_atleta == this.id_atleta)
@@ -179,7 +172,6 @@ export class MisRutinasComponent implements OnInit {
       const perfilPorId: { [key: number]: number } = {};
       personas.forEach(persona => {
         perfilPorId[persona.id_persona] = Number(persona.id_acceso);
-        console.log(`Persona ${persona.id_persona} id_acceso: ${persona.id_acceso}`);
       });
 
       // Rutinas dedicadas al atleta por entrenador
@@ -203,11 +195,6 @@ export class MisRutinasComponent implements OnInit {
       );
 
       // Logs para debug
-      console.log('Rutinas del atleta:', this.rutinasDelAtleta);
-      console.log('Rutinas del entrenador:', this.rutinasDelEntrenador);
-      console.log('Rutinas del gimnasio:', this.rutinasDelGimnasio);
-      console.log('Rutinas genéricas de entrenador:', this.rutinasGenericasEntrenador);
-      console.log('Rutinas genéricas de gimnasio:', this.rutinasGenericasGimnasio);
     });
   }
 

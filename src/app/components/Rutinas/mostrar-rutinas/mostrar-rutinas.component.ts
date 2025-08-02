@@ -18,15 +18,13 @@ export class MostrarRutinasComponent implements OnChanges {
   @Output() editarRutinaSeleccionada = new EventEmitter<rutinaArmada>(); // Emite la rutina seleccionada al padre
   rutinasArmadas: rutinaArmada[] = []; // Array de rutinas armadas extraídas
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     // Verifica si la propiedad 'planes' ha cambiado
     if (changes['planes']) {
-      // console.log('Planes actualizados:', this.planes);
       // Extrae las rutinas armadas de los planes
       this.rutinasArmadas = this.planes.map(plan => plan.rutina);
-      // console.log('Rutinas armadas:', this.rutinasArmadas);
     }
   }
 

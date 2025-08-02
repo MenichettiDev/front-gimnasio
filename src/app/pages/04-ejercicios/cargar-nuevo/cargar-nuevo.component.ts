@@ -72,23 +72,22 @@ export class CargarNuevoComponent {
 
   async cargarEjercicio() {
     const confirmed = await this.confirmacionService.confirmAction('¿Estás seguro de que deseas proceder?', 'Confirmación');
-    
+
     if (confirmed) {
       this.loading = true; // Mostrar spinner
-      
+
       // Log para depuración
-      console.log(this.exerciseForm.value, 'ejercicio a cargar');
-      
+
       if (this.exerciseForm.valid) {
         // Llamar al servicio para crear el ejercicio
         this.ejercicioService.createEjercicio(this.exerciseForm.value).subscribe(
           response => {
             // Si la respuesta es exitosa
             this.isEditable = false;
-            
+
             // Limpiar el formulario
             this.resetStatus();
-  
+
             // Ocultar el spinner y mostrar el mensaje de éxito
             this.loading = false;
             this.confirmacionService.showSuccess('Operación exitosa');
@@ -107,7 +106,7 @@ export class CargarNuevoComponent {
       }
     }
   }
-  
+
 
   resetStatus(): void {
     this.exerciseForm.reset();

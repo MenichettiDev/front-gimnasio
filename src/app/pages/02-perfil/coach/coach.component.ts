@@ -22,14 +22,13 @@ export class CoachComponent {
 
   idAtletaSeleccionado: number | null = null;
 
-// ngOnInit(): void {
-//     this.idAtletaSeleccionado = null;
-// }
+  // ngOnInit(): void {
+  //     this.idAtletaSeleccionado = null;
+  // }
 
 
   // Manejar el cambio de atleta seleccionado
   onAtletaSeleccionado(value: number | Atleta): void {
-    // console.log(typeof value, 'value');
     this.idAtletaSeleccionado = null;
     if (typeof value === 'number') {
       // Si el valor es un número, asignarlo directamente
@@ -42,6 +41,5 @@ export class CoachComponent {
       this.idAtletaSeleccionado = null;
     }
   }
-  // console.log( this.idAtletaSeleccionado, 'idAtletaSeleccionado');
 
 }

@@ -25,10 +25,10 @@ export class CboFormasPagoComponent implements OnInit, ControlValueAccessor {
   isDisabled: boolean = false; // Estado de deshabilitado
 
   // Funciones de callback registradas por Angular
-  private onChange: (value: any) => void = () => {};
-  private onTouched: () => void = () => {};
+  private onChange: (value: any) => void = () => { };
+  private onTouched: () => void = () => { };
 
-  constructor(private formaPagoService: FormaPagoService) {}
+  constructor(private formaPagoService: FormaPagoService) { }
 
   ngOnInit(): void {
     this.obtenerFormasPago();
@@ -39,7 +39,6 @@ export class CboFormasPagoComponent implements OnInit, ControlValueAccessor {
     this.formaPagoService.getFormasPago().subscribe(
       (data) => {
         this.formasPago = data; // Asignamos los datos de las formas de pago
-        console.log('Formas de pago obtenidas', this.formasPago);
       },
       (error) => {
         console.error('Error al obtener formas de pago', error);

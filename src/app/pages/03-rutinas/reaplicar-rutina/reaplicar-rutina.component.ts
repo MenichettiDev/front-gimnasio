@@ -19,13 +19,11 @@ export class ReaplicarRutinaComponent {
     formularioHabilitado: boolean = false; // Controla si el formulario está habilitado
 
     manejarRutinasEncontradas(rutinas: any[]) {
-        console.log('Rutinas recibidas:', rutinas);
         // Aquí puedes mostrar las rutinas en una tabla o realizar otras acciones
         this.rutinasFiltradas = rutinas;
     }
 
     manejarFiltrosAceptados(filtros: any) {
-        // console.log('Filtros aceptados:', filtros);
         // Aquí puedes guardar los filtros o realizar otras acciones
     }
 
@@ -33,7 +31,6 @@ export class ReaplicarRutinaComponent {
         // Almacena la rutina seleccionada
         this.rutinaSeleccionada = rutina;
         this.formularioHabilitado = true; // Habilitar el formulario
-        console.log('Rutina seleccionada para editar:', this.rutinaSeleccionada);
     }
 
 }

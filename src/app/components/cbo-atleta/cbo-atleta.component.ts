@@ -54,12 +54,9 @@ export class CboAtletaComponent implements ControlValueAccessor {
     const userProfile = this.authService.getIdAcceso();
     const userId = this.authService.getUserId();
 
-    console.log('Perfil de usuario:', userProfile);
-    console.log('ID de usuario:', userId);
 
     this.atletaService.getAtletasPorPerfil().subscribe({
       next: (data) => {
-        console.log('Datos recibidos del servicio:', data);
 
         // Manejar diferentes estructuras de respuesta
         if (Array.isArray(data)) {
@@ -76,7 +73,6 @@ export class CboAtletaComponent implements ControlValueAccessor {
           this.atletas = [];
         }
 
-        console.log('Atletas procesados:', this.atletas);
       },
       error: (error) => {
         console.error('Error al obtener atletas:', error);

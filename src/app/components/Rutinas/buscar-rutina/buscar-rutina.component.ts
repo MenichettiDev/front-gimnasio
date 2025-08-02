@@ -22,72 +22,70 @@ import { InputFechaComponent } from "../../input-fecha/input-fecha.component";
     ReactiveFormsModule,
     InputTextoComponent,
     InputFechaComponent
-],
+  ],
   templateUrl: './buscar-rutina.component.html',
   styleUrl: './buscar-rutina.component.css'
 })
 export class BuscarRutinaComponent implements OnInit {
   filtroForm: FormGroup = new FormGroup({});
   loading = false;
-// Eventos para comunicarse con el componente padre
-@Output() rutinasEncontradas = new EventEmitter<any>();
-@Output() filtrosAceptados = new EventEmitter<any>();
+  // Eventos para comunicarse con el componente padre
+  @Output() rutinasEncontradas = new EventEmitter<any>();
+  @Output() filtrosAceptados = new EventEmitter<any>();
 
 
   constructor(private rutinaService: RutinasService,
-      private fb: FormBuilder,
+    private fb: FormBuilder,
   ) { };
 
   ngOnInit(): void {
-      this.createForm();
+    this.createForm();
   }
 
   createForm(): void {
-      this.filtroForm = this.fb.group({
-          nombre: '',
-          fechaDesde: null,
-          fechaHasta: null,
-          objetivo: '',
-          idAtleta: null,
-          nivelAtleta: '',
-          cantidadDias: ''
-      });
+    this.filtroForm = this.fb.group({
+      nombre: '',
+      fechaDesde: null,
+      fechaHasta: null,
+      objetivo: '',
+      idAtleta: null,
+      nivelAtleta: '',
+      cantidadDias: ''
+    });
   }
 
   onSubmit() {
-      // Validar que al menos un campo esté lleno
-      // console.log('Filtro:', this.filtroForm.value);
-      if (
-        !this.filtroForm.value.nombre &&
-        !this.filtroForm.value.fechaDesde &&
-        !this.filtroForm.value.fechaHasta &&
-        !this.filtroForm.value.objetivo &&
-        !this.filtroForm.value.idAtleta &&
-        !this.filtroForm.value.nivelAtleta &&
-        !this.filtroForm.value.cantidadDias
-      ) {
-        alert('Debe seleccionar al menos un criterio de búsqueda.');
-        return;
-      }
-      
-      this.filtroForm.value.fechaDesde = this.formatoFecha(this.filtroForm.value.fechaDesde);
-      this.filtroForm.value.fechaHasta = this.formatoFecha(this.filtroForm.value.fechaHasta);
+    // Validar que al menos un campo esté lleno
+    if (
+      !this.filtroForm.value.nombre &&
+      !this.filtroForm.value.fechaDesde &&
+      !this.filtroForm.value.fechaHasta &&
+      !this.filtroForm.value.objetivo &&
+      !this.filtroForm.value.idAtleta &&
+      !this.filtroForm.value.nivelAtleta &&
+      !this.filtroForm.value.cantidadDias
+    ) {
+      alert('Debe seleccionar al menos un criterio de búsqueda.');
+      return;
+    }
 
-      this.loading = true;
-      // Llamar al servicio para buscar las rutinas
-      this.rutinaService.filtrada(this.filtroForm.value).subscribe(
-          (response) => {
-              // console.log('Rutinas encontradas:', response);
-              this.loading = false;
-              // Aquí puedes manejar la respuesta, por ejemplo, mostrar las rutinas en una tabla
-              this.rutinasEncontradas.emit(response);
-          },
-          (error) => {
-              console.error('Error al buscar rutinas:', error);
-              this.loading = false;
-              alert('Ocurrió un error al buscar las rutinas.');
-          }
-      );
+    this.filtroForm.value.fechaDesde = this.formatoFecha(this.filtroForm.value.fechaDesde);
+    this.filtroForm.value.fechaHasta = this.formatoFecha(this.filtroForm.value.fechaHasta);
+
+    this.loading = true;
+    // Llamar al servicio para buscar las rutinas
+    this.rutinaService.filtrada(this.filtroForm.value).subscribe(
+      (response) => {
+        this.loading = false;
+        // Aquí puedes manejar la respuesta, por ejemplo, mostrar las rutinas en una tabla
+        this.rutinasEncontradas.emit(response);
+      },
+      (error) => {
+        console.error('Error al buscar rutinas:', error);
+        this.loading = false;
+        alert('Ocurrió un error al buscar las rutinas.');
+      }
+    );
   }
 
   onAceptar() {
@@ -100,11 +98,11 @@ export class BuscarRutinaComponent implements OnInit {
   }
 
   formatoFecha(fecha: Date | string): string {
-      if (!fecha) return '';
-      const fechaDate = new Date(fecha);
-      const year = fechaDate.getFullYear();
-      const month = String(fechaDate.getMonth() + 1).padStart(2, '0');
-      const day = String(fechaDate.getDate()).padStart(2, '0');
-      return `${year}-${month}-${day}`;
+    if (!fecha) return '';
+    const fechaDate = new Date(fecha);
+    const year = fechaDate.getFullYear();
+    const month = String(fechaDate.getMonth() + 1).padStart(2, '0');
+    const day = String(fechaDate.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 }

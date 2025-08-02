@@ -18,11 +18,10 @@ export class ModalVisorRutinaComponent {
   constructor(
     private rutinasService: RutinasService,
     @Inject(MAT_DIALOG_DATA) public data: number // Recibe el id_rutina desde el modal
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const id_rutina = this.data; // Extrae el id_rutina del MAT_DIALOG_DATA
-    console.log('ID de la rutina:', id_rutina);
     if (id_rutina) {
       this.obtenerRutinaPorId(id_rutina); // Busca la rutina por su ID
     } else {

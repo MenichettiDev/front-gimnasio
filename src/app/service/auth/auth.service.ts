@@ -30,7 +30,6 @@ export class AuthService {
   logout(): void {
     sessionStorage.removeItem(this.USER_KEY);
     this.loggedIn.next(false);
-    console.log('Sesión cerrada automáticamente');
   }
 
   // Obtener el ID persona (si existe)

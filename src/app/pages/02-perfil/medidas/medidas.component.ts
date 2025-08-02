@@ -55,7 +55,6 @@ export class MedidasComponent implements OnInit {
     this.idAtleta = this.authService.getIdAtleta();
     if (this.medidaSeleccionada) {
       // Edición: inicializar el formulario con los valores de la medida
-      console.log('Medida seleccionada para edición:', this.medidaSeleccionada);
       this.medidaForm = { ...this.medidaSeleccionada };
     }
     // Convertir fecha_medicion a formato YYYY-MM-DD si existe

@@ -88,25 +88,21 @@ export class CargarPagoComponent implements OnInit {
   }
 
   setConceptoYMonto(): void {
-    console.log('Usuario:', this.authService.getUser());
-    console.log('isGimnasio:', this.authService.isGimnasio());
-    console.log('isEntrenador:', this.authService.isEntrenador());
-    console.log('isAtleta:', this.authService.isAtleta());
 
     const user = this.authService.getUser();
 
     if (this.authService.isGimnasio()) {
-      this.montoFijo = 20;
+      this.montoFijo = 30;
       this.conceptoFijo = 'Pago membresía gimnasio';
       this.id = user?.id_gimnasio || null;
       this.tipo = 'gimnasio';
     } else if (this.authService.isEntrenador()) {
-      this.montoFijo = 15;
+      this.montoFijo = 25;
       this.conceptoFijo = 'Pago de entrenador';
       this.id = user?.id_entrenador || null;
       this.tipo = 'entrenador';
     } else if (this.authService.isAtleta()) {
-      this.montoFijo = 5;
+      this.montoFijo = 20;
       this.conceptoFijo = 'Pago de atleta';
       this.id = user?.id_atleta || null; // Corregir: usar id_atleta en lugar de id_entrenador
       this.tipo = 'atleta';
@@ -132,7 +128,6 @@ export class CargarPagoComponent implements OnInit {
 
   // Maneja el cambio de forma de pago
   onFormaPagoChange(idFormaPago: number): void {
-    console.log('Forma de pago seleccionada:', idFormaPago);
     this.frmData.get('id_forma_pago')?.setValue(idFormaPago); // Actualiza el control 'forma_pago'
   }
 
@@ -174,12 +169,10 @@ export class CargarPagoComponent implements OnInit {
       id_forma_pago: this.frmData.get('id_forma_pago')?.value
     };
 
-    console.log('Datos a enviar:', formData);
 
     // Crear el pago
     this.pagoService.createPago(formData).subscribe({
       next: (response) => {
-        console.log('Pago creado exitosamente:', response);
         alert('Pago registrado correctamente');
         this.frmData.reset();
         this.setConceptoYMonto(); // Restablecer valores después del reset

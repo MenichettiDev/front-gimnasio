@@ -163,6 +163,9 @@
                             <label class="form-check-label text-white" for="acepta_terminos">
                                 Acepto los términos y condiciones para gimnasios *
                             </label>
+                            <button type="button" class="btn btn-link p-0 ms-2" (click)="showTerminos = true">
+                                Ver términos y condiciones
+                            </button>
                             <div class="invalid-feedback">{{ getFieldError('acepta_terminos') }}</div>
                         </div>
                     </div>
@@ -193,3 +196,96 @@
     [message]="'¿Estás seguro de registrar este gimnasio con estos datos?'" (confirm)="handleConfirm()"
     (cancel)="handleCancel()">
 </app-modal-confirm>
+
+<!-- Modal de Términos y Condiciones para Gimnasios -->
+<div class="modal fade" [class.show]="showTerminos" [style.display]="showTerminos ? 'block' : 'none'" tabindex="-1"
+    role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content card-base"
+            style="background: var(--primary-gradient); color: var(--text-primary); border-radius: var(--border-radius-lg); box-shadow: var(--shadow-hover);">
+            <div class="modal-header" style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                <h5 class="modal-title" style="display:flex;align-items:center;gap:0.5rem;">
+                    <i class="bi bi-heart-fill text-danger" style="font-size:1.5rem;"></i>
+                    <span>Términos y Condiciones para Gimnasios</span>
+                </h5>
+                <button type="button" class="btn-close btn-secondary-base" (click)="showTerminos = false"></button>
+            </div>
+            <div class="modal-body" style="max-height:60vh;overflow-y:auto;">
+                <div style="padding:1rem;">
+                    <div style="text-align:center;margin-bottom:1rem;">
+                        <i class="bx bx-building" style="font-size:2rem;color:#ffde04;"></i>
+                        <span style="font-size:1.2rem;font-weight:600;color:#e0811a;">¡Bienvenido gimnasio!</span>
+                        <p style="color:var(--text-secondary);margin-top:0.5rem;">Queremos que tu experiencia sea
+                            excelente. Lee con atención nuestros términos:</p>
+                    </div>
+                    <ul style="list-style:none;padding-left:0;">
+                        <li style="margin-bottom:1rem;">
+                            <span style="font-weight:600;color:#ffde04;"><i class="bi bi-person-check"></i> Registro y
+                                veracidad:</span>
+                            <span style="color:var(--text-secondary);"> Los datos proporcionados deben ser verídicos y
+                                completos. La falsedad puede implicar suspensión o eliminación de la cuenta.</span>
+                        </li>
+                        <li style="margin-bottom:1rem;">
+                            <span style="font-weight:600;color:#ffde04;"><i class="bi bi-people-fill"></i> Uso de la
+                                plataforma:</span>
+                            <span style="color:var(--text-secondary);"> Compromiso de respeto y responsabilidad. Evita
+                                conductas ofensivas, fraudulentas o ilegales.</span>
+                        </li>
+                        <li style="margin-bottom:1rem;">
+                            <span style="font-weight:600;color:#ffde04;"><i class="bi bi-shield-lock"></i>
+                                Privacidad:</span>
+                            <span style="color:var(--text-secondary);"> Tus datos serán tratados conforme a la política
+                                de privacidad. Puedes solicitar la eliminación de tu cuenta y datos en cualquier
+                                momento.</span>
+                        </li>
+                        <li style="margin-bottom:1rem;">
+                            <span style="font-weight:600;color:#ffde04;"><i class="bi bi-heart-pulse"></i>
+                                Responsabilidad:</span>
+                            <span style="color:var(--text-secondary);"> El gimnasio es responsable de la seguridad y
+                                bienestar de sus usuarios. La plataforma no se responsabiliza por daños, accidentes o
+                                consecuencias derivadas de la gestión del gimnasio.</span>
+                        </li>
+                        <li style="margin-bottom:1rem;">
+                            <span style="font-weight:600;color:#ffde04;"><i class="bi bi-exclamation-triangle-fill"></i>
+                                Exención de responsabilidad:</span>
+                            <span style="color:var(--text-secondary);">
+                                El uso de la plataforma y la gestión de actividades son bajo tu propio riesgo. La
+                                plataforma, sus desarrolladores y colaboradores quedan eximidos de cualquier
+                                responsabilidad por daños, pérdidas, lesiones o consecuencias derivadas del uso de la
+                                información, servicios o actividades ofrecidas. Consulta siempre con profesionales y
+                                cumple con la normativa vigente.
+                            </span>
+                        </li>
+                        <li style="margin-bottom:1rem;">
+                            <span style="font-weight:600;color:#ffde04;"><i class="bi bi-pencil-square"></i>
+                                Modificaciones:</span>
+                            <span style="color:var(--text-secondary);"> Los términos pueden cambiar. Te avisaremos sobre
+                                cambios relevantes.</span>
+                        </li>
+                        <li style="margin-bottom:1rem;">
+                            <span style="font-weight:600;color:#ffde04;"><i class="bi bi-copyright"></i> Propiedad
+                                intelectual:</span>
+                            <span style="color:var(--text-secondary);"> El contenido está protegido. No copies,
+                                distribuyas ni modifiques sin autorización.</span>
+                        </li>
+                        <li style="margin-bottom:1rem;">
+                            <span style="font-weight:600;color:#ffde04;"><i class="bi bi-envelope-heart"></i>
+                                Contacto:</span>
+                            <span style="color:var(--text-secondary);"> Para consultas o reclamos, comunícate con
+                                nuestro soporte. ¡Estamos para ayudarte!</span>
+                        </li>
+                    </ul>
+                    <div style="text-align:center;margin-top:2rem;">
+                        <span style="font-size:1.1rem;color:#4CAF50;font-weight:600;">
+                            Al registrar tu gimnasio, aceptas estos términos y condiciones.<br>
+                            <i class="bi bi-emoji-heart-eyes" style="font-size:1.5rem;color:#ffde04;"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border-top: 1px solid rgba(255,255,255,0.1);">
+                <button type="button" class="btn btn-secondary-base" (click)="showTerminos = false">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

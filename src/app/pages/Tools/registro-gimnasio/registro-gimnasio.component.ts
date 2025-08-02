@@ -16,6 +16,8 @@ import { GimnasioService } from '../../../service/gimnasio.service';
 export class RegistroGimnasioComponent implements OnInit {
   gimnasioForm!: FormGroup;
   isModalVisible: boolean = false;
+  showTerminos: boolean = false;
+
 
   constructor(
     private fb: FormBuilder,
@@ -221,7 +223,6 @@ export class RegistroGimnasioComponent implements OnInit {
     // Enviar todo junto al backend
     this.gimnasioService.crearGimnasio(gimnasioData).subscribe({
       next: (response) => {
-        console.log('Gimnasio registrado:', response);
 
         // Preparar datos del usuario para la sesión
         const userData = {

@@ -138,7 +138,6 @@ export class CrearRutComponent implements OnInit {
       }),
     };
 
-    console.log('Datos formateados para enviar:', rutinaData);
 
     if (rutinaData) {
       // Llamar al servicio para crear el ejercicio
@@ -183,7 +182,6 @@ export class CrearRutComponent implements OnInit {
     Object.keys(this.rutinaForm.controls).forEach((controlName) => {
       const control = this.rutinaForm.get(controlName);
       if (control?.invalid) {
-        // console.log('datos del form' + this.rutinaForm.value);
         console.warn(`Campo inválido: ${controlName}`, control.errors);
       }
       control?.markAsTouched();
@@ -210,7 +208,6 @@ export class CrearRutComponent implements OnInit {
   }
 
   anterior(): void {
-    console.log('Botón Anterior clickeado');
   }
 
   cancelar(): void {
@@ -218,7 +215,6 @@ export class CrearRutComponent implements OnInit {
   }
 
   filtrarEjercicios(diaIndex: number, ejercicioIndex: number, grupoMuscularId: number): void {
-    console.log('ID del grupo muscular seleccionado:', grupoMuscularId); // Verifica este valor
     const ejercicio = (this.dias.at(diaIndex).get('ejercicios') as FormArray).at(ejercicioIndex);
 
     // Limpiar el ejercicio seleccionado
@@ -230,13 +226,10 @@ export class CrearRutComponent implements OnInit {
 
   getControl(diaIndex: number, ejercicioIndex: number, controlName: string): FormControl {
     const ejercicio = (this.dias.at(diaIndex).get('ejercicios') as FormArray).at(ejercicioIndex);
-    // console.log(`Obteniendo control '${controlName}' para el día ${diaIndex + 1}, ejercicio ${ejercicioIndex + 1}:`, ejercicio.get(controlName));
     return ejercicio.get(controlName) as FormControl;
   }
 
   guardarRutina(): void {
-    // console.log('Valores actuales del formulario:', this.rutinaForm.value);
-    // console.log(this.authService.getUser()[0].id_persona);
 
     if (this.rutinaForm.invalid) {
       console.warn('El formulario es inválido.');

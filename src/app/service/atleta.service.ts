@@ -31,7 +31,6 @@ export class AtletaService {
   getAtletasPorPerfil(): Observable<any> {
     const userProfile = this.authService.getIdAcceso();
 
-    console.log('Perfil de usuario:', userProfile);
 
     switch (userProfile) {
       case 1: // admin
@@ -39,7 +38,6 @@ export class AtletaService {
 
       case 2: // entrenador
         const idEntrenador = this.authService.getIdEntrenador();
-        console.log('ID Entrenador:', idEntrenador);
         if (idEntrenador) {
           return this.getAtletasPorEntrenador(idEntrenador); // Sus atletas
         }
@@ -47,11 +45,9 @@ export class AtletaService {
 
       case 3: // atleta
         const idPersonaAtleta = this.authService.getUserId();
-        console.log('ID Persona (Atleta):', idPersonaAtleta);
         if (idPersonaAtleta) {
           return this.getAtletasPorIdPersona(idPersonaAtleta).pipe(
             map(atleta => {
-              console.log('Atleta obtenido:', atleta);
               return { atletas: atleta ? [atleta] : [] };
             }),
             catchError(error => {
@@ -64,7 +60,6 @@ export class AtletaService {
 
       case 4: // gimnasio
         const idGimnasio = this.authService.getIdGimnasio();
-        console.log('ID Gimnasio:', idGimnasio);
         if (idGimnasio) {
           return this.getAtletasPorGimnasio(idGimnasio); // Atletas de su gimnasio
         }

@@ -49,7 +49,6 @@ export class LoginComponent implements OnInit {
           }
 
           // Guarda el usuario
-          console.log('Usuario guardado:', response.usuario[0]);
           this.authService.saveUser(response.usuario[0]);
 
           // Verifica que el usuario se haya guardado correctamente

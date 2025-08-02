@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CboGimnasioComponent } from '../../../components/cbo-gimnasio/cbo-gimnasio.component';
 import { ModalConfirmComponent } from '../../../components/modal/modal-confirm/modal-confirm.component';
 import { AuthService } from '../../../service/auth/auth.service';
 import { AtletaService } from '../../../service/atleta.service';
@@ -10,13 +9,14 @@ import { AtletaService } from '../../../service/atleta.service';
 @Component({
   selector: 'app-registro-atleta',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, CboGimnasioComponent, ModalConfirmComponent],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, ModalConfirmComponent],
   templateUrl: './registro-atleta.component.html',
   styleUrls: ['./registro-atleta.component.css']
 })
 export class RegistroAtletaComponent implements OnInit {
   atletaForm!: FormGroup;
   isModalVisible: boolean = false;
+  showTerminos: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -176,13 +176,12 @@ export class RegistroAtletaComponent implements OnInit {
       password: formValue.password,
       // Datos específicos de atleta
       id_entrenador: null, // Por defecto null, se puede asignar después
-      id_gimnasio: formValue.id_gimnasio || null
+      id_gimnasio: null
     };
 
     // Enviar todo junto al backend
     this.atletaService.crearAtleta(atletaData).subscribe({
       next: (response) => {
-        console.log('Atleta registrado:', response);
 
         // Preparar datos del usuario para la sesión
         const userData = {

@@ -39,7 +39,7 @@ export class BuscarComponent implements OnInit {
     private sharedGrupoMuscularService: SharedGrupoMuscularService,
     private confirmacionService: ConfirmacionService,
     private sanitizer: DomSanitizer
-  ) {}
+  ) { }
 
 
   ngOnInit(): void {
@@ -88,7 +88,6 @@ export class BuscarComponent implements OnInit {
   onGrupoMuscularChange(musculo: number): void {
     if (musculo) {
       this.selectedGrupoMuscular = musculo;
-      // console.log('frupo muscular seleccionado: ' + musculo);
       this.exerciseForm.controls['idGrupoMuscular'].setValue(musculo);
       this.isEditable = true;
       // this.sharedGrupoMuscularService.setSelectedGrupo(musculo);
@@ -117,7 +116,6 @@ export class BuscarComponent implements OnInit {
 
     this.ejercicioService.getEjercicioById(this.selectedEjercicio).subscribe(
       (data) => {
-        console.log('Ejercicio encontrado', data);
         this.exerciseForm.patchValue(data); // Actualiza el formulario con los datos del ejercicio
         this.exerciseForm.enable(); // Habilita el formulario si está deshabilitado
         this.loading = false;
@@ -143,25 +141,22 @@ export class BuscarComponent implements OnInit {
   getSafeUrl(url: string): SafeResourceUrl {
     // Verifica si la URL es de YouTube
     if (url.includes('youtube.com/watch?v=')) {
-        console.log('URL original:', url); // Depuración
-        const urlParams = new URLSearchParams(new URL(url).search);
-        const videoId = urlParams.get('v');
-        console.log('ID del video extraído:', videoId); // Depuración
-        if (videoId) {
-            // Convierte la URL al formato de incrustación
-            url = `https://www.youtube.com/embed/${videoId}`;
-        }
+      const urlParams = new URLSearchParams(new URL(url).search);
+      const videoId = urlParams.get('v');
+      if (videoId) {
+        // Convierte la URL al formato de incrustación
+        url = `https://www.youtube.com/embed/${videoId}`;
+      }
     } else if (url.includes('youtu.be/')) {
-        // Maneja URLs cortas de YouTube
-        const videoId = url.split('youtu.be/')[1].split('?')[0];
-        console.log('ID del video extraído (URL corta):', videoId); // Depuración
-        if (videoId) {
-            url = `https://www.youtube.com/embed/${videoId}`;
-        }
+      // Maneja URLs cortas de YouTube
+      const videoId = url.split('youtu.be/')[1].split('?')[0];
+      if (videoId) {
+        url = `https://www.youtube.com/embed/${videoId}`;
+      }
     }
 
     // Sanitiza la URL para que Angular la permita en el iframe
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
-}
+  }
 
 }

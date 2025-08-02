@@ -85,7 +85,6 @@ export class EditarEjercicioComponent implements OnInit {
   onGrupoMuscularChange(musculo: number): void {
     if (musculo) {
       this.selectedGrupoMuscular = musculo;
-      // console.log('frupo muscular seleccionado: ' + musculo);
       this.exerciseForm.controls['idGrupoMuscular'].setValue(musculo);
       this.isEditable = true;
       // this.sharedGrupoMuscularService.setSelectedGrupo(musculo);
@@ -106,13 +105,12 @@ export class EditarEjercicioComponent implements OnInit {
 
   async onDelete() {
     const confirmed = await this.confirmacionService.confirmAction('¿Estás seguro de que deseas proceder?', 'Confirmación');
-    
+
     if (confirmed) {
       this.loading = true; // Mostrar spinner
-  
+
       // Log para depuración
-      console.log('Ejercicio seleccionado:', this.selectedEjercicio);
-  
+
       if (this.selectedEjercicio) {
         // Llamar al servicio para eliminar el ejercicio
         this.ejercicioService.deleteEjercicio(this.selectedEjercicio).subscribe(
@@ -120,7 +118,7 @@ export class EditarEjercicioComponent implements OnInit {
             // Si la respuesta es exitosa
             this.createForm(); // Recrear el formulario
             this.resetStatus(); // Limpiar el estado
-  
+
             // Detener el spinner y mostrar mensaje de éxito
             this.loading = false;
             this.confirmacionService.showSuccess('Ejercicio eliminado exitosamente');
@@ -139,27 +137,26 @@ export class EditarEjercicioComponent implements OnInit {
       }
     }
   }
-  
+
 
   async onUpdate() {
     const confirmed = await this.confirmacionService.confirmAction('¿Estás seguro de que deseas proceder?', 'Confirmación');
-    
+
     if (confirmed) {
       this.loading = true; // Mostrar spinner
-  
+
       // Log para depuración
-      console.log(this.exerciseForm.value, 'ejercicio a actualizar');
-  
+
       if (this.exerciseForm.valid) {
         // Llamar al servicio para actualizar el ejercicio
         this.ejercicioService.updateEjercicio(this.exerciseForm.value).subscribe(
           response => {
             // Si la respuesta es exitosa
             this.isEditable = false;
-  
+
             // Limpiar el formulario
             this.resetStatus();
-  
+
             // Detener el spinner y mostrar mensaje de éxito
             this.loading = false;
             this.confirmacionService.showSuccess('Operación exitosa');
@@ -178,7 +175,7 @@ export class EditarEjercicioComponent implements OnInit {
       }
     }
   }
-  
+
 
   resetStatus(): void {
     this.exerciseForm.reset();

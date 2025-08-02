@@ -66,7 +66,6 @@ export class EditarRutinaComponent implements OnInit {
   ngOnInit(): void {
     this.cargarAtletasPorPerfil();
     this.idRutina = Number(this.route.snapshot.paramMap.get('id'));
-    console.log('Cargando rutina con ID:', this.idRutina);
     if (this.idRutina) {
       this.cargarRutina();
     }

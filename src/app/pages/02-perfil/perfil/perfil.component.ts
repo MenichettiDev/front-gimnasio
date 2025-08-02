@@ -102,7 +102,6 @@ export class PerfilComponent implements OnInit {
 
     this.personaService.editarPersona(idUsuario, this.perfil).subscribe(
       (response) => {
-        console.log('Perfil actualizado:', response);
         alert('Los cambios han sido guardados exitosamente.');
       },
       (error) => {

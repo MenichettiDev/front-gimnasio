@@ -11,13 +11,15 @@ import { CboGimnasiosMultiplesComponent } from "../../../components/Gimnasios/cb
 @Component({
   selector: 'app-registro-entrenador',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, ModalConfirmComponent, CboGimnasiosMultiplesComponent],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, ModalConfirmComponent],
   templateUrl: './registro-entrenador.component.html',
   styleUrls: ['./registro-entrenador.component.css']
 })
 export class RegistroEntrenadorComponent implements OnInit {
   frmData!: FormGroup;
   isModalVisible: boolean = false;
+  showTerminos: boolean = false;
+
 
   constructor(
     private fb: FormBuilder,
@@ -182,13 +184,12 @@ export class RegistroEntrenadorComponent implements OnInit {
       password: formValue.password, // El backend ya hashea la contraseña
       // Datos específicos de entrenador
       fecha_ingreso: formValue.fecha_ingreso,
-      gimnasios: formValue.gimnasios || [] // Array de IDs de gimnasios
+      gimnasios: [] // Array de IDs de gimnasios
     };
 
     // Enviar todo junto al backend
     this.entrenadorService.crearEntrenador(entrenadorData).subscribe({
       next: (response) => {
-        console.log('Entrenador registrado:', response);
 
         // Preparar datos del usuario para la sesión
         const userData = {
