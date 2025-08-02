@@ -1,3 +1,5 @@
+<app-modal-toast [message]="toastMessage" [isVisible]="toastVisible" [type]="toastType">
+</app-modal-toast>
 <div class="container-base card-base">
     <div class="card-body-base">
         <div class="form-title-base">Relaciones Activas</div>
@@ -14,7 +16,7 @@
                     <button
                         class="btn btn-danger btn-sm rounded-circle d-flex align-items-center justify-content-center"
                         title="Eliminar" (click)="eliminarRelacion('gimnasio', gim)">
-                        <i class="bi bi-x-lg"></i>
+                        <i class="bi bi-trash-fill"></i>
                     </button>
                 </li>
             </ul>
@@ -31,7 +33,7 @@
                     <button
                         class="btn btn-danger btn-sm rounded-circle d-flex align-items-center justify-content-center"
                         title="Eliminar" (click)="eliminarRelacion('entrenador', ent)">
-                        <i class="bi bi-x-lg"></i>
+                        <i class="bi bi-trash-fill"></i>
                     </button>
                 </li>
             </ul>
@@ -51,7 +53,7 @@
                     <button
                         class="btn btn-danger btn-sm rounded-circle d-flex align-items-center justify-content-center"
                         title="Eliminar" (click)="eliminarRelacion('gimnasio-entrenador', gim)">
-                        <i class="bi bi-x-lg"></i>
+                        <i class="bi bi-trash-fill"></i>
                     </button>
                 </li>
             </ul>
@@ -68,7 +70,7 @@
                     <button
                         class="btn btn-danger btn-sm rounded-circle d-flex align-items-center justify-content-center"
                         title="Eliminar" (click)="eliminarRelacion('entrenador', atl)">
-                        <i class="bi bi-x-lg"></i>
+                        <i class="bi bi-trash-fill"></i>
                     </button>
                 </li>
             </ul>
@@ -88,7 +90,7 @@
                     <button
                         class="btn btn-danger btn-sm rounded-circle d-flex align-items-center justify-content-center"
                         title="Eliminar" (click)="eliminarRelacion('gimnasio-entrenador', ent)">
-                        <i class="bi bi-x-lg"></i>
+                        <i class="bi bi-trash-fill"></i>
                     </button>
                 </li>
             </ul>
@@ -105,7 +107,7 @@
                     <button
                         class="btn btn-danger btn-sm rounded-circle d-flex align-items-center justify-content-center"
                         title="Eliminar" (click)="eliminarRelacion('gimnasio', atl)">
-                        <i class="bi bi-x-lg"></i>
+                        <i class="bi bi-trash-fill"></i>
                     </button>
                 </li>
             </ul>

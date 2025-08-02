@@ -47,3 +47,8 @@
 <app-modal-confirm [visible]="isModalVisible" [title]="'Confirmación'"
   [message]="'¿Estás seguro de registrar este pago?'" (confirm)="handleConfirm()" (cancel)="handleCancel()">
 </app-modal-confirm>
+
+<!-- Modal para mostrar resultado (éxito/error) -->
+<app-modal-confirm [visible]="showResultModal" [title]="modalTitle" [message]="modalMessage"
+  (confirm)="handleResultModalClose()" (cancel)="handleResultModalClose()">
+</app-modal-confirm>

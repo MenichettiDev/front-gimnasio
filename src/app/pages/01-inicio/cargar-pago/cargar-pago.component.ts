@@ -11,7 +11,6 @@ import { MembresiaService } from '../../../service/membresia.service';
 import { CommonModule } from '@angular/common';
 import { Atleta } from '../../../data/interfaces/atletaInterface';
 import { GimnasioService } from '../../../service/gimnasio.service';
-import { CboFormasPagoComponent } from "../../../components/cbo-forma-pago/cbo-forma-pago.component";
 import { PagoService } from '../../../service/pago.service';
 import { ModalConfirmComponent } from '../../../components/modal/modal-confirm/modal-confirm.component';
 import { Input, OnChanges, SimpleChanges } from '@angular/core';
@@ -19,7 +18,7 @@ import { Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-cargar-pago',
-  imports: [ReactiveFormsModule, CommonModule, CboFormasPagoComponent, ModalConfirmComponent],
+  imports: [ReactiveFormsModule, CommonModule, ModalConfirmComponent],
   templateUrl: './cargar-pago.component.html',
   styleUrl: './cargar-pago.component.css'
 })
@@ -37,6 +36,10 @@ export class CargarPagoComponent implements OnInit {
   isModalVisible: boolean = false; // Controla la visibilidad del modal
   gimnasioAtleta: string | null = null;
   frmData: FormGroup;
+
+  modalMessage: string = '';
+  modalTitle: string = 'Confirmación';
+  showResultModal: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -67,21 +70,24 @@ export class CargarPagoComponent implements OnInit {
       frequency_type: 'months',
       transaction_amount: this.montoFijo,
       currency_id: 'ARS',
-      // payer_email: 'TESTUSER790271875@gmail.com',
       payer_email: user?.email,
-      back_url: 'https://gymrats.com.ar',
+      back_url: 'https://gymrats.com.ar/inicio/resumen',
     };
 
     this.pagoService.crearSuscripcion(suscripcionData).subscribe({
       next: (resp) => {
         if (resp && resp.init_point) {
-          window.location.href = resp.init_point; // Redirige a MercadoPago
+          window.location.href = resp.init_point;
         } else {
-          alert('No se pudo iniciar el pago con MercadoPago');
+          this.modalTitle = 'Error';
+          this.modalMessage = 'No se pudo iniciar el pago con MercadoPago';
+          this.showResultModal = true;
         }
       },
       error: (err) => {
-        alert('Error al iniciar el pago con MercadoPago');
+        this.modalTitle = 'Error';
+        this.modalMessage = 'Error al iniciar el pago con MercadoPago';
+        this.showResultModal = true;
         console.error(err);
       }
     });
@@ -154,33 +160,36 @@ export class CargarPagoComponent implements OnInit {
   // Manejar la confirmación del modal
   handleConfirm(): void {
     if (!this.id) {
-      console.error('El ID no está disponible');
+      this.modalTitle = 'Error';
+      this.modalMessage = 'El ID no está disponible';
+      this.showResultModal = true;
       return;
     }
 
-    // Preparar los datos correctamente usando getRawValue() para incluir campos deshabilitados
     const formData = {
       id_atleta: this.frmData.get('id_atleta')?.value,
       id_entrenador: this.frmData.get('id_entrenador')?.value,
       id_gimnasio: this.frmData.get('id_gimnasio')?.value,
       fecha_pago: this.frmData.get('fecha_pago')?.value,
-      monto: this.montoFijo, // Usar el valor fijo ya que el campo está deshabilitado
-      concepto: this.conceptoFijo, // Usar el valor fijo ya que el campo está deshabilitado
+      monto: this.montoFijo,
+      concepto: this.conceptoFijo,
       id_forma_pago: this.frmData.get('id_forma_pago')?.value
     };
 
-
-    // Crear el pago
     this.pagoService.createPago(formData).subscribe({
       next: (response) => {
-        alert('Pago registrado correctamente');
+        this.modalTitle = 'Éxito';
+        this.modalMessage = 'Pago registrado correctamente';
+        this.showResultModal = true;
         this.frmData.reset();
-        this.setConceptoYMonto(); // Restablecer valores después del reset
+        this.setConceptoYMonto();
         this.isModalVisible = false;
       },
       error: (error) => {
         console.error('Error al crear el pago:', error);
-        alert('Ocurrió un error al registrar el pago');
+        this.modalTitle = 'Error';
+        this.modalMessage = 'Ocurrió un error al registrar el pago';
+        this.showResultModal = true;
         this.isModalVisible = false;
       }
     });
@@ -189,6 +198,11 @@ export class CargarPagoComponent implements OnInit {
   // Manejar la cancelación del modal
   handleCancel(): void {
     this.isModalVisible = false; // Cierra el modal
+  }
+
+  // Cerrar el modal de resultado
+  handleResultModalClose(): void {
+    this.showResultModal = false;
   }
 
   // Obtener la fecha actual en formato YYYY-MM-DD
