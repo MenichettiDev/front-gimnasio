@@ -22,14 +22,12 @@
         <form [formGroup]="exerciseForm" (ngSubmit)="onBuscar()">
             <!-- Grupo Muscular -->
             <div class="mb-3">
-                <label for="grupoMuscular" class="form-label">Grupo Muscular</label>
                 <app-cbo-gruposmusculares formControlName="idGrupoMuscular"
                     (valueChange)="onGrupoMuscularChange($event)"></app-cbo-gruposmusculares>
             </div>
 
             <!-- Ejercicio -->
             <div class="mb-3">
-                <label for="ejercicio" class="form-label">Ejercicio</label>
                 <app-cbo-ejercicio [grupoMuscularId]="selectedGrupoMuscular ?? null" formControlName="idEjercicio"
                     (valueChange)="onEjercicioChange($event)"></app-cbo-ejercicio>
             </div>
