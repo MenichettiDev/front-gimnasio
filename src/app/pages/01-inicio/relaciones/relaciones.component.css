@@ -72,13 +72,13 @@
 
 .btn-secondary-base {
     background: rgba(255, 255, 255, 0.08);
-    color: var(--text-secondary, #e0e0e0);
+    color: var(--text-secondary, #f50404);
     border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.1));
 }
 
 .btn-secondary-base:hover {
     background: rgba(255, 255, 255, 0.18);
-    color: var(--text-primary, #fff);
+    color: var(--text-primary, #f50404);
 }
 
 /* Tabla de solicitudes */

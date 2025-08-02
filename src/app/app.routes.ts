@@ -10,8 +10,8 @@ import { SeleccionarPerfilComponent } from './pages/Tools/seleccionar-perfil/sel
 
 export const routes: Routes = [
     // Ruta para el componente Inicio
-    { path: '', loadComponent: () => import('./pages/00-login/home/home.component').then(m => m.HomeComponent) },
-    // { path: '', loadComponent: () => import('./pages/01-inicio/resumen/resumen.component').then(m => m.ResumenComponent) },
+    // { path: '', loadComponent: () => import('./pages/00-login/home/home.component').then(m => m.HomeComponent) },
+    { path: '', loadComponent: () => import('./pages/00-login/login/login.component').then(m => m.LoginComponent) },
 
     {
         path: 'login',

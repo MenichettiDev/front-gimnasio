@@ -86,7 +86,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     // GM06 - Progreso
     { id: 52, descripcion: 'Progreso', icono: 'bi bi-percent', link: '/progreso', grupo: 'GM06', principal: true, orden: 6, estado: true, requiredAccess: [1, 2, 3] },
-    { id: 53, descripcion: 'Estadisticas', icono: '', link: '/progreso/estadistica', grupo: 'GM06', principal: false, orden: 1, estado: true, requiredAccess: [1, 2, 3] },
+    // { id: 53, descripcion: 'Estadisticas', icono: '', link: '/progreso/estadistica', grupo: 'GM06', principal: false, orden: 1, estado: true, requiredAccess: [1, 2, 3] },
     { id: 54, descripcion: 'Logros', icono: '', link: '/progreso/logros', grupo: 'GM06', principal: false, orden: 2, estado: true, requiredAccess: [1, 2, 3] },
     { id: 55, descripcion: 'Metas', icono: '', link: '/progreso/metas', grupo: 'GM06', principal: false, orden: 3, estado: true, requiredAccess: [1, 2, 3] },
 

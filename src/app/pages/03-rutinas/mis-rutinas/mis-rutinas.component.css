@@ -131,11 +131,24 @@
 
     .custom-table {
         font-size: 0.9rem;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
     .custom-table thead th,
     .custom-table tbody td {
         padding: 0.75rem 0.5rem;
+    }
+
+    .custom-table {
+        min-width: 600px;
+    }
+
+    /* Oculta columnas menos importantes en pantallas chicas */
+    .custom-table th.hide-mobile,
+    .custom-table td.hide-mobile {
+        display: none;
     }
 }
 
@@ -150,6 +163,7 @@
 
     .custom-table {
         font-size: 0.8rem;
+        min-width: 500px;
     }
 
     .custom-table thead th,
@@ -160,5 +174,11 @@
     .btn-icon {
         padding: 0.4rem 0.8rem;
         font-size: 0.8rem;
+    }
+
+    /* Oculta más columnas en pantallas muy chicas */
+    .custom-table th.hide-mobile,
+    .custom-table td.hide-mobile {
+        display: none;
     }
 }

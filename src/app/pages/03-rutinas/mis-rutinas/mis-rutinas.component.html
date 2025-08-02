@@ -28,30 +28,33 @@
                 </h3>
                 <div class="card border-primary">
                     <div class="card-body">
-                        <table class="table custom-table">
-                            <thead class="table-primary">
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Fecha Creación</th>
-                                    <th>Objetivo</th>
-                                    <th>Nivel</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let rutina of rutinasDelEntrenador">
-                                    <td>{{ rutina.nombre }}</td>
-                                    <td>{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
-                                    <td>{{ rutina.objetivo }}</td>
-                                    <td>{{ rutina.nivel_atleta }}</td>
-                                    <td>
-                                        <span class="icon-view btn-icon" (click)="verDetallesRutina(rutina.id_rutina)">
-                                            <i class="fas fa-eye"></i> Ver
-                                        </span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table custom-table">
+                                <thead class="table-primary">
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th class="hide-mobile">Fecha Creación</th>
+                                        <th class="hide-mobile">Objetivo</th>
+                                        <th class="hide-mobile">Nivel</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let rutina of rutinasDelEntrenador">
+                                        <td>{{ rutina.nombre }}</td>
+                                        <td class="hide-mobile">{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
+                                        <td class="hide-mobile">{{ rutina.objetivo }}</td>
+                                        <td class="hide-mobile">{{ rutina.nivel_atleta }}</td>
+                                        <td>
+                                            <span class="icon-view" (click)="verDetallesRutina(rutina.id_rutina)"
+                                                title="Ver rutina">
+                                                <i class="bi bi-eye-fill text-info fs-5"></i>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -63,30 +66,33 @@
                 </h3>
                 <div class="card border-success">
                     <div class="card-body">
-                        <table class="table custom-table">
-                            <thead class="table-success">
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Fecha Creación</th>
-                                    <th>Objetivo</th>
-                                    <th>Nivel</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let rutina of rutinasDelGimnasio">
-                                    <td>{{ rutina.nombre }}</td>
-                                    <td>{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
-                                    <td>{{ rutina.objetivo }}</td>
-                                    <td>{{ rutina.nivel_atleta }}</td>
-                                    <td>
-                                        <span class="icon-view btn-icon" (click)="verDetallesRutina(rutina.id_rutina)">
-                                            <i class="fas fa-eye"></i> Ver
-                                        </span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table custom-table">
+                                <thead class="table-success">
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th class="hide-mobile">Fecha Creación</th>
+                                        <th class="hide-mobile">Objetivo</th>
+                                        <th class="hide-mobile">Nivel</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let rutina of rutinasDelGimnasio">
+                                        <td>{{ rutina.nombre }}</td>
+                                        <td class="hide-mobile">{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
+                                        <td class="hide-mobile">{{ rutina.objetivo }}</td>
+                                        <td class="hide-mobile">{{ rutina.nivel_atleta }}</td>
+                                        <td>
+                                            <span class="icon-view" (click)="verDetallesRutina(rutina.id_rutina)"
+                                                title="Ver rutina">
+                                                <i class="bi bi-eye-fill text-info fs-5"></i>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -98,33 +104,37 @@
                 </h3>
                 <div class="card border-warning">
                     <div class="card-body">
-                        <table class="table custom-table">
-                            <thead class="table-warning">
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Fecha Creación</th>
-                                    <th>Objetivo</th>
-                                    <th>Nivel</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let rutina of rutinasDelAtleta">
-                                    <td>{{ rutina.nombre }}</td>
-                                    <td>{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
-                                    <td>{{ rutina.objetivo }}</td>
-                                    <td>{{ rutina.nivel_atleta }}</td>
-                                    <td>
-                                        <span class="icon-view btn-icon" (click)="verDetallesRutina(rutina.id_rutina)">
-                                            <i class="fas fa-eye"></i> Ver
-                                        </span>
-                                        <span class="icon-edit btn-icon ms-2" (click)="editarRutina(rutina.id_rutina)">
-                                            <i class="fas fa-edit"></i> Editar
-                                        </span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table custom-table">
+                                <thead class="table-warning">
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th class="hide-mobile">Fecha Creación</th>
+                                        <th class="hide-mobile">Objetivo</th>
+                                        <th class="hide-mobile">Nivel</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let rutina of rutinasDelAtleta">
+                                        <td>{{ rutina.nombre }}</td>
+                                        <td class="hide-mobile">{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
+                                        <td class="hide-mobile">{{ rutina.objetivo }}</td>
+                                        <td class="hide-mobile">{{ rutina.nivel_atleta }}</td>
+                                        <td>
+                                            <span class="icon-view" (click)="verDetallesRutina(rutina.id_rutina)"
+                                                title="Ver rutina">
+                                                <i class="bi bi-eye-fill text-info fs-5"></i>
+                                            </span>
+                                            <span class="icon-edit ms-2" (click)="editarRutina(rutina.id_rutina)"
+                                                title="Editar rutina">
+                                                <i class="bi bi-pencil-fill text-warning fs-5"></i>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -137,30 +147,33 @@
                 </h3>
                 <div class="card border-info">
                     <div class="card-body">
-                        <table class="table custom-table">
-                            <thead class="table-info">
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Fecha Creación</th>
-                                    <th>Objetivo</th>
-                                    <th>Nivel</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let rutina of rutinasGenericasEntrenador">
-                                    <td>{{ rutina.nombre }}</td>
-                                    <td>{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
-                                    <td>{{ rutina.objetivo }}</td>
-                                    <td>{{ rutina.nivel_atleta }}</td>
-                                    <td>
-                                        <span class="icon-view btn-icon" (click)="verDetallesRutina(rutina.id_rutina)">
-                                            <i class="fas fa-eye"></i> Ver
-                                        </span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table custom-table">
+                                <thead class="table-info">
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th class="hide-mobile">Fecha Creación</th>
+                                        <th class="hide-mobile">Objetivo</th>
+                                        <th class="hide-mobile">Nivel</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let rutina of rutinasGenericasEntrenador">
+                                        <td>{{ rutina.nombre }}</td>
+                                        <td class="hide-mobile">{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
+                                        <td class="hide-mobile">{{ rutina.objetivo }}</td>
+                                        <td class="hide-mobile">{{ rutina.nivel_atleta }}</td>
+                                        <td>
+                                            <span class="icon-view" (click)="verDetallesRutina(rutina.id_rutina)"
+                                                title="Ver rutina">
+                                                <i class="bi bi-eye-fill text-info fs-5"></i>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -173,30 +186,33 @@
                 </h3>
                 <div class="card border-secondary">
                     <div class="card-body">
-                        <table class="table custom-table">
-                            <thead class="table-secondary">
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Fecha Creación</th>
-                                    <th>Objetivo</th>
-                                    <th>Nivel</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let rutina of rutinasGenericasGimnasio">
-                                    <td>{{ rutina.nombre }}</td>
-                                    <td>{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
-                                    <td>{{ rutina.objetivo }}</td>
-                                    <td>{{ rutina.nivel_atleta }}</td>
-                                    <td>
-                                        <span class="icon-view btn-icon" (click)="verDetallesRutina(rutina.id_rutina)">
-                                            <i class="fas fa-eye"></i> Ver
-                                        </span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table custom-table">
+                                <thead class="table-secondary">
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th class="hide-mobile">Fecha Creación</th>
+                                        <th class="hide-mobile">Objetivo</th>
+                                        <th class="hide-mobile">Nivel</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let rutina of rutinasGenericasGimnasio">
+                                        <td>{{ rutina.nombre }}</td>
+                                        <td class="hide-mobile">{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
+                                        <td class="hide-mobile">{{ rutina.objetivo }}</td>
+                                        <td class="hide-mobile">{{ rutina.nivel_atleta }}</td>
+                                        <td>
+                                            <span class="icon-view" (click)="verDetallesRutina(rutina.id_rutina)"
+                                                title="Ver rutina">
+                                                <i class="bi bi-eye-fill text-info fs-5"></i>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -209,34 +225,37 @@
                 </h3>
                 <div class="card border-secondary">
                     <div class="card-body">
-                        <table class="table custom-table">
-                            <thead class="table-secondary">
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>ID Creador</th>
-                                    <th>Asignada a</th>
-                                    <th>Fecha Creación</th>
-                                    <th>Objetivo</th>
-                                    <th>Nivel</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let rutina of rutinas">
-                                    <td>{{ rutina.nombre }}</td>
-                                    <td>{{ rutina.id_creador }}</td>
-                                    <td>{{ rutina.id_atleta || 'General' }}</td>
-                                    <td>{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
-                                    <td>{{ rutina.objetivo }}</td>
-                                    <td>{{ rutina.nivel_atleta }}</td>
-                                    <td>
-                                        <span class="icon-view btn-icon" (click)="verDetallesRutina(rutina.id_rutina)">
-                                            <i class="fas fa-eye"></i> Ver
-                                        </span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table custom-table">
+                                <thead class="table-secondary">
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>ID Creador</th>
+                                        <th class="hide-mobile">Asignada a</th>
+                                        <th class="hide-mobile">Fecha Creación</th>
+                                        <th class="hide-mobile">Objetivo</th>
+                                        <th class="hide-mobile">Nivel</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let rutina of rutinas">
+                                        <td>{{ rutina.nombre }}</td>
+                                        <td>{{ rutina.id_creador }}</td>
+                                        <td class="hide-mobile">{{ rutina.id_atleta || 'General' }}</td>
+                                        <td>{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
+                                        <td class="hide-mobile">{{ rutina.objetivo }}</td>
+                                        <td class="hide-mobile">{{ rutina.nivel_atleta }}</td>
+                                        <td>
+                                            <span class="icon-view" (click)="verDetallesRutina(rutina.id_rutina)"
+                                                title="Ver rutina">
+                                                <i class="bi bi-eye-fill text-info fs-5"></i>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
