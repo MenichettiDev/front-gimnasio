@@ -148,15 +148,7 @@
   transform: scale(1.05);
 }
 
-/* Formularios optimizados */
-.form-label {
-  color: #e0e0e0 !important;
-  font-weight: 600 !important;
-  font-size: 1.1rem;
-  margin-bottom: 0.8rem !important;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
+
 
 /* Botones optimizados */
 .btn-success {

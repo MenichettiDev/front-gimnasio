@@ -1,20 +1,7 @@
- /* Estilo para la etiqueta */
- .form-label {
-   font-weight: 500;
-   color: #ffffff;
-   /* Etiquetas en blanco para mayor contraste */
-   font-size: 1rem;
-   /* Tamaño de fuente para las etiquetas */
-   margin-bottom: 0.5rem;
-   /* Espaciado debajo de la etiqueta */
- }
-
-
-
- /* Estilo para el select deshabilitado */
- .form-select:disabled {
-   background-color: #e0e0e0;
-   /* Fondo gris cuando está deshabilitado */
-   cursor: not-allowed;
-   /* Cambiar el cursor para indicar que está deshabilitado */
- }
+/* Estilo para el select deshabilitado */
+.form-select:disabled {
+  background-color: #e0e0e0;
+  /* Fondo gris cuando está deshabilitado */
+  cursor: not-allowed;
+  /* Cambiar el cursor para indicar que está deshabilitado */
+}

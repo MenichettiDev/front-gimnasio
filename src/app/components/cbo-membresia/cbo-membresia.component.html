@@ -1,5 +1,5 @@
 <!-- <div class="mb-3 col-4">
-  <label [for]="'membresia-' + label" class="form-label fs-5">{{ label }}</label>
+  <label [for]="'membresia-' + label" class="form-label-base fs-5">{{ label }}</label>
   <select
     [id]="'membresia-' + label"
     [(ngModel)]="selectedMembresia"
@@ -15,13 +15,9 @@
   </select>
 </div> -->
 <div>
-  <label class="form-label">{{ label }}</label>
-  <select
-  class="form-select form-select-lg"
-    [(ngModel)]="selectedMembresia"
-    (ngModelChange)="onValueChange()"
-    [disabled]="isDisabled"
-  >
+  <label class="form-label-base">{{ label }}</label>
+  <select class="form-select form-select-lg" [(ngModel)]="selectedMembresia" (ngModelChange)="onValueChange()"
+    [disabled]="isDisabled">
     <option [ngValue]="null">Seleccione una opción</option>
     <option *ngFor="let membresia of membresias" [ngValue]="membresia">
       {{ membresia.nombre }} {{ membresia.precio }}

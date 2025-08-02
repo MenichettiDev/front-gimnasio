@@ -1,8 +1,8 @@
-    <label for="ejercicio" class="form-label">{{ label }}</label>
-    <select id="ejercicio" [(ngModel)]="selectedEjercicio" (ngModelChange)="onEjercicioChange($event)"
-        class="form-select form-select-lg" aria-label="Selecciona un ejercicio">
-        <option value="" disabled selected>Selecciona un ejercicio</option>
-        <option *ngFor="let ejercicio of ejercicios" [ngValue]="ejercicio">
-            {{ ejercicio.nombre }}
-        </option>
-    </select>
+<label for="ejercicio" class="form-label-base">{{ label }}</label>
+<select id="ejercicio" [(ngModel)]="selectedEjercicio" (ngModelChange)="onEjercicioChange($event)"
+    class="form-select form-select-lg" aria-label="Selecciona un ejercicio">
+    <option value="" disabled selected>Selecciona un ejercicio</option>
+    <option *ngFor="let ejercicio of ejercicios" [ngValue]="ejercicio">
+        {{ ejercicio.nombre }}
+    </option>
+</select>

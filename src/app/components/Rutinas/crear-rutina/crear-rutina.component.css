@@ -1,9 +1,12 @@
 /* Estilos generales */
 /* Ajustar estilos del contenedor principal */
 .container {
-  max-width: 1300px; /* Evitar que el contenedor sea más ancho que la pantalla */
-  padding: 0 15px; /* Espaciado lateral controlado */
-  margin: 0 auto; /* Centrar contenido */
+  max-width: 1300px;
+  /* Evitar que el contenedor sea más ancho que la pantalla */
+  padding: 0 15px;
+  /* Espaciado lateral controlado */
+  margin: 0 auto;
+  /* Centrar contenido */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   overflow: hidden;
 }
@@ -11,26 +14,39 @@
 /* Asegura que los elementos dentro del formulario se alineen bien */
 .row {
   display: flex;
-  flex-wrap: wrap; /* Permite que los elementos se ajusten al ancho disponible */
-  gap: 1rem; /* Espaciado uniforme entre los elementos */
+  flex-wrap: wrap;
+  /* Permite que los elementos se ajusten al ancho disponible */
+  gap: 1rem;
+  /* Espaciado uniforme entre los elementos */
 }
 
 .col-md-6 {
-  flex: 1 0 48%; /* Ajusta la proporción de los elementos a la mitad */
-  min-width: 300px; /* Añade un tamaño mínimo si es necesario */
+  flex: 1 0 48%;
+  /* Ajusta la proporción de los elementos a la mitad */
+  min-width: 300px;
+  /* Añade un tamaño mínimo si es necesario */
 }
 
 /* Estilo para el título dentro del formulario */
 .form-title {
-  font-family: 'Oswald', sans-serif; /* Fuente moderna */
-  font-size: 1.5rem; /* Tamaño */
-  font-weight: 700; /* Negrita */
-  color: #ffffff; /* Color blanco para contrastar con el fondo oscuro */
-  text-transform: uppercase; /* Texto en mayúsculas */
-  letter-spacing: 1px; /* Espaciado entre letras */
-  text-align: center; /* Centrado */
-  margin-bottom: 1rem; /* Espaciado inferior */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra suave */
+  font-family: 'Oswald', sans-serif;
+  /* Fuente moderna */
+  font-size: 1.5rem;
+  /* Tamaño */
+  font-weight: 700;
+  /* Negrita */
+  color: #ffffff;
+  /* Color blanco para contrastar con el fondo oscuro */
+  text-transform: uppercase;
+  /* Texto en mayúsculas */
+  letter-spacing: 1px;
+  /* Espaciado entre letras */
+  text-align: center;
+  /* Centrado */
+  margin-bottom: 1rem;
+  /* Espaciado inferior */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  /* Sombra suave */
 }
 
 /* Estilos actualizados para el card */
@@ -39,15 +55,19 @@
   border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   background-color: rgba(71, 0, 99, 0.94);
-  margin-top: 20px; /* Reducir el margen superior */
+  margin-top: 20px;
+  /* Reducir el margen superior */
   overflow: hidden;
 }
 
 .card-header {
-  background: linear-gradient(90deg, #e0811a, #ffde04); /* Gradiente horizontal continuo */
+  background: linear-gradient(90deg, #e0811a, #ffde04);
+  /* Gradiente horizontal continuo */
   text-transform: uppercase;
-  font-size: 0.9rem; /* Tamaño de fuente más pequeño */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  font-size: 0.9rem;
+  /* Tamaño de fuente más pequeño */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* Sombra ligera */
 }
 
 .card-header h4 {
@@ -58,14 +78,18 @@
 }
 
 .card-body {
-  padding: 2rem; /* Espaciado interno controlado */
-  overflow: auto; /* Permitir desplazamiento solo si es necesario */
+  padding: 2rem;
+  /* Espaciado interno controlado */
+  overflow: auto;
+  /* Permitir desplazamiento solo si es necesario */
 }
 
 /* Estilos para los inputs */
 .form-control {
-  width: 100%; /* Asegura que los inputs ocupen todo el ancho disponible */
-  box-sizing: border-box; /* Incluye padding y border en el cálculo del ancho */
+  width: 100%;
+  /* Asegura que los inputs ocupen todo el ancho disponible */
+  box-sizing: border-box;
+  /* Incluye padding y border en el cálculo del ancho */
   border: none;
   border-radius: 10px;
   background-color: #f8f8f844;
@@ -77,14 +101,12 @@
 
 .form-control:focus {
   background-color: #ffffff;
-  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2); /* Verde claro */
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+  /* Verde claro */
   outline: none;
 }
 
-.form-label {
-  font-weight: 500;
-  color: #e0e0e0;
-}
+
 
 /* Botón de envío */
 .btn-primary {
@@ -123,7 +145,8 @@ app-cbo-gimnasio {
 .image-upload-container {
   text-align: center;
   padding: 1rem;
-  border: 2px dashed #ccc; /* Borde punteado para indicar área de carga */
+  border: 2px dashed #ccc;
+  /* Borde punteado para indicar área de carga */
   border-radius: 10px;
   cursor: pointer;
   transition: border-color 0.3s ease-in-out;
@@ -132,7 +155,8 @@ app-cbo-gimnasio {
 }
 
 .image-upload-container:hover {
-  border-color: #4CAF50; /* Cambiar color al pasar el mouse */
+  border-color: #4CAF50;
+  /* Cambiar color al pasar el mouse */
 }
 
 /* Ícono y texto */
@@ -140,7 +164,8 @@ app-cbo-gimnasio {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem; /* Espacio entre el ícono y el texto */
+  gap: 0.5rem;
+  /* Espacio entre el ícono y el texto */
   color: #4CAF50;
   font-size: 1rem;
   font-weight: 500;
@@ -158,7 +183,8 @@ app-cbo-gimnasio {
 }
 
 .input-group-text:hover {
-  background-color: #45a049; /* Verde oscuro */
+  background-color: #45a049;
+  /* Verde oscuro */
 }
 
 input[type="date"] {
@@ -192,6 +218,7 @@ input:invalid {
   }
 
   .btn-primary {
-    width: 100%; /* Asegurarse que el botón ocupe el 100% del ancho en pantallas pequeñas */
+    width: 100%;
+    /* Asegurarse que el botón ocupe el 100% del ancho en pantallas pequeñas */
   }
 }

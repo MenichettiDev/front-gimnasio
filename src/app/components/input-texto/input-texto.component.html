@@ -1,11 +1,3 @@
-    <label [for]="'txtInput-' + label" class="form-label">{{ label }}</label>
-    <input
-      [id]="'txtInput-' + label"
-      type="text"
-      [(ngModel)]="value"
-      class="form-control"
-      [placeholder]="placeholder"
-      [attr.aria-label]="label"
-      [disabled]="isDisabled"
-      (ngModelChange)="onValueChange()"
-    />
+<label [for]="'txtInput-' + label" class="form-label-base">{{ label }}</label>
+<input [id]="'txtInput-' + label" type="text" [(ngModel)]="value" class="form-control" [placeholder]="placeholder"
+  [attr.aria-label]="label" [disabled]="isDisabled" (ngModelChange)="onValueChange()" />

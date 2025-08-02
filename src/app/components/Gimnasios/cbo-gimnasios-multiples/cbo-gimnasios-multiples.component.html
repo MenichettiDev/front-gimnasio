@@ -1,5 +1,5 @@
 <div class="mb-3 col-12 col-6">
-    <label class="form-label">{{ label }}</label>
+    <label class="form-label-base">{{ label }}</label>
     <div class="form-check" *ngFor="let gimnasio of gimnasios">
         <input class="form-check-input" type="checkbox" [id]="'gimnasio-' + gimnasio.id_gimnasio"
             [value]="gimnasio.id_gimnasio" [checked]="selectedGimnasios.includes(gimnasio.id_gimnasio)"

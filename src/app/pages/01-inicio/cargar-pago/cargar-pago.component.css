@@ -1,8 +1,11 @@
 /* Estilos generales */
 .container {
-  max-width: 1300px; /* Ancho máximo ajustado para pantallas pequeñas */
-  padding: 0 15px; /* Espaciado lateral */
-  margin: 0 auto; /* Centrado */
+  max-width: 1300px;
+  /* Ancho máximo ajustado para pantallas pequeñas */
+  padding: 0 15px;
+  /* Espaciado lateral */
+  margin: 0 auto;
+  /* Centrado */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   overflow: hidden;
 }
@@ -21,21 +24,28 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   text-align: center;
-  margin-bottom: 1.5rem; /* Aumento del margen inferior para separar mejor el título */
+  margin-bottom: 1.5rem;
+  /* Aumento del margen inferior para separar mejor el título */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 /* Estilo para campos readonly */
 input[readonly] {
-  background-color: #f8f8f844; /* Color de fondo similar al de los campos editables */
-  color: #333333; /* Color del texto */
-  cursor: not-allowed; /* Cambia el cursor para indicar que no se puede editar */
-  border: none; /* Remueve el borde para que no se vea diferente */
+  background-color: #f8f8f844;
+  /* Color de fondo similar al de los campos editables */
+  color: #333333;
+  /* Color del texto */
+  cursor: not-allowed;
+  /* Cambia el cursor para indicar que no se puede editar */
+  border: none;
+  /* Remueve el borde para que no se vea diferente */
 }
 
 input[readonly]:focus {
-  background-color: #f8f8f844; /* Mantén el mismo color de fondo cuando se haga clic */
-  outline: none; /* Elimina el borde del foco (si es necesario) */
+  background-color: #f8f8f844;
+  /* Mantén el mismo color de fondo cuando se haga clic */
+  outline: none;
+  /* Elimina el borde del foco (si es necesario) */
 }
 
 
@@ -48,9 +58,12 @@ input[readonly]:focus {
   margin-top: 20px;
   overflow: hidden;
   transition: transform 0.3s ease-in-out;
-  width: 80%; /* Establecemos un ancho por defecto */
-  max-width: 600px; /* Establecemos un ancho máximo */
-  margin: 0 auto; /* Centrado automático */
+  width: 80%;
+  /* Establecemos un ancho por defecto */
+  max-width: 600px;
+  /* Establecemos un ancho máximo */
+  margin: 0 auto;
+  /* Centrado automático */
 }
 
 .card-header {
@@ -70,13 +83,15 @@ input[readonly]:focus {
 /* Ajustes para pantallas pequeñas */
 @media (max-width: 767px) {
   .card-custom {
-    width: 90%; /* Ocupa el 90% del ancho en pantallas móviles */
+    width: 90%;
+    /* Ocupa el 90% del ancho en pantallas móviles */
   }
 
   /* Ajuste de tamaño de los inputs para pantallas pequeñas */
   .form-control,
   .monto-input {
-    font-size: 0.85rem; /* Reduce el tamaño de la fuente en pantallas móviles */
+    font-size: 0.85rem;
+    /* Reduce el tamaño de la fuente en pantallas móviles */
     padding: 0.7rem;
   }
 
@@ -89,7 +104,8 @@ input[readonly]:focus {
 
 /* Estilos para los inputs */
 .form-control {
-  width: 100%; /* Ocupa todo el ancho disponible */
+  width: 100%;
+  /* Ocupa todo el ancho disponible */
   box-sizing: border-box;
   border: none;
   border-radius: 10px;
@@ -105,14 +121,12 @@ input[readonly]:focus {
   outline: none;
 }
 
-.form-label {
-  font-weight: 500;
-  color: #e0e0e0;
-}
+
 
 /* Estilo específico para el campo de monto */
 .monto-input {
-  max-width: 100%; /* Ocupa el ancho total del contenedor */
+  max-width: 100%;
+  /* Ocupa el ancho total del contenedor */
   width: 100%;
 }
 
@@ -124,9 +138,12 @@ input[readonly]:focus {
   padding: 0.7rem 1.2rem;
   font-size: 0.9rem;
   font-weight: 500;
-  width: auto; /* Ancho automático para mejor alineación */
-  margin-top: 1.5rem; /* Aumento del margen superior para separar del contenido */
-  margin-left: auto; /* Alineación hacia la derecha */
+  width: auto;
+  /* Ancho automático para mejor alineación */
+  margin-top: 1.5rem;
+  /* Aumento del margen superior para separar del contenido */
+  margin-left: auto;
+  /* Alineación hacia la derecha */
   margin-right: auto;
   transition: background-color 0.3s ease-in-out;
 }

@@ -1,16 +1,10 @@
 <div class="mb-3 col-4">
-    <label [for]="'perfil-' + label" class="form-label fs-5">{{ label }}</label>
-    <select
-      [id]="'perfil-' + label"
-      [(ngModel)]="selectedPerfil"
-      (ngModelChange)="onValueChange()"
-      class="form-select form-select-lg"
-      aria-label="Selecciona un perfil"
-      [disabled]="isDisabled"
-    >
-      <option value="" disabled selected>Selecciona un perfil</option>
-      <option *ngFor="let perfil of perfiles" [ngValue]="perfil">
-        {{ perfil.nombre }}
-      </option>
-    </select>
-  </div>
+  <label [for]="'perfil-' + label" class="form-label-base fs-5">{{ label }}</label>
+  <select [id]="'perfil-' + label" [(ngModel)]="selectedPerfil" (ngModelChange)="onValueChange()"
+    class="form-select form-select-lg" aria-label="Selecciona un perfil" [disabled]="isDisabled">
+    <option value="" disabled selected>Selecciona un perfil</option>
+    <option *ngFor="let perfil of perfiles" [ngValue]="perfil">
+      {{ perfil.nombre }}
+    </option>
+  </select>
+</div>

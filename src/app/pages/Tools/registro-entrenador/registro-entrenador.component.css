@@ -63,11 +63,7 @@
     border: 1px solid #dc3545;
 }
 
-.form-label {
-    font-weight: 500;
-    color: #e0e0e0;
-    margin-bottom: 0.5rem;
-}
+
 
 .invalid-feedback {
     display: block;

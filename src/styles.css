@@ -102,9 +102,12 @@
 }
 
 .form-label-base {
-  font-weight: 500;
-  color: var(--text-secondary);
+  font-weight: 100;
+  color: #ffffff;
   margin-bottom: 0.5rem;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+
 }
 
 

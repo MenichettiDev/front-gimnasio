@@ -45,13 +45,13 @@
       <!-- Grupo 1: Nombre y Apellido -->
       <div class="row mb-3">
         <div class="col-md-6">
-          <label for="nombre" class="form-label">
+          <label for="nombre" class="form-label-base">
             <i class="bi bi-person-fill me-2"></i> Nombre
           </label>
           <input type="text" id="nombre" class="form-control" [(ngModel)]="perfil.nombre" name="nombre" required />
         </div>
         <div class="col-md-6">
-          <label for="apellido" class="form-label">
+          <label for="apellido" class="form-label-base">
             <i class="bi bi-person-fill me-2"></i> Apellido
           </label>
           <input type="text" id="apellido" class="form-control" [(ngModel)]="perfil.apellido" name="apellido"
@@ -62,13 +62,13 @@
       <!-- Grupo 2: Correo electrónico y Celular -->
       <div class="row mb-3">
         <div class="col-md-6">
-          <label for="email" class="form-label">
+          <label for="email" class="form-label-base">
             <i class="bi bi-envelope-fill me-2"></i> Correo electrónico
           </label>
           <input type="email" id="email" class="form-control" [(ngModel)]="perfil.email" name="email" required />
         </div>
         <div class="col-md-6">
-          <label for="celular" class="form-label">
+          <label for="celular" class="form-label-base">
             <i class="bi bi-telephone-fill me-2"></i> Celular
           </label>
           <input type="tel" id="celular" class="form-control" [(ngModel)]="perfil.celular" name="celular" />
@@ -78,7 +78,7 @@
       <!-- Grupo 3: Dirección y Fecha de nacimiento -->
       <div class="row mb-3">
         <div class="col-md-12">
-          <label for="direccion" class="form-label">
+          <label for="direccion" class="form-label-base">
             <i class="bi bi-house-door-fill me-2"></i> Dirección
           </label>
           <input type="text" id="direccion" class="form-control" [(ngModel)]="perfil.direccion" name="direccion" />
@@ -87,7 +87,7 @@
 
       <div class="row mb-3">
         <div class="col-md-6">
-          <label for="fechaNacimiento" class="form-label">
+          <label for="fechaNacimiento" class="form-label-base">
             <i class="bi bi-calendar-date me-2"></i> Fecha de nacimiento
           </label>
           <input type="date" id="fechaNacimiento" class="form-control" [(ngModel)]="perfil.fecha_nacimiento"

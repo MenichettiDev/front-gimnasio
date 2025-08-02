@@ -1,13 +1,8 @@
-    <label [for]="'diasEntrenamiento-' + label" class="form-label">{{ label }}</label>
-    <select
-      [id]="'diasEntrenamiento-' + label"
-      [(ngModel)]="diasSeleccionados"
-      class="form-select form-select-lg"
-      aria-label="Selecciona la cantidad de días a entrenar"
-      [disabled]="isDisabled"
-      (ngModelChange)="onValueChange()">
-      <option value="" disabled selected>Selecciona los días de entrenamiento</option>
-      <option *ngFor="let cantidad of diasDeEntrenamiento" [value]="cantidad">
-        {{ cantidad }} días
-      </option>
-    </select>
+<label [for]="'diasEntrenamiento-' + label" class="form-label-base">{{ label }}</label>
+<select [id]="'diasEntrenamiento-' + label" [(ngModel)]="diasSeleccionados" class="form-select form-select-lg"
+  aria-label="Selecciona la cantidad de días a entrenar" [disabled]="isDisabled" (ngModelChange)="onValueChange()">
+  <option value="" disabled selected>Selecciona los días de entrenamiento</option>
+  <option *ngFor="let cantidad of diasDeEntrenamiento" [value]="cantidad">
+    {{ cantidad }} días
+  </option>
+</select>

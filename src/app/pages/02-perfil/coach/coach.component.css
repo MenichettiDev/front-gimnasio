@@ -1,8 +1,11 @@
 /* Estilos generales */
 .container {
-  max-width: 1300px; /* Evitar que el contenedor sea más ancho que la pantalla */
-  padding: 0 15px; /* Espaciado lateral controlado */
-  margin: 0 auto; /* Centrar contenido */
+  max-width: 1300px;
+  /* Evitar que el contenedor sea más ancho que la pantalla */
+  padding: 0 15px;
+  /* Espaciado lateral controlado */
+  margin: 0 auto;
+  /* Centrar contenido */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   overflow: hidden;
 }
@@ -13,16 +16,23 @@
 }
 
 .row.mb-3 {
-  margin: 0; /* Eliminar márgenes por defecto */
-  padding: 0; /* Eliminar padding */
-  display: flex; /* Usamos flexbox para alineación */
-  justify-content: flex-start; /* Alineamos al inicio */
-  width: 100%; /* Aseguramos que ocupe el 100% del espacio */
+  margin: 0;
+  /* Eliminar márgenes por defecto */
+  padding: 0;
+  /* Eliminar padding */
+  display: flex;
+  /* Usamos flexbox para alineación */
+  justify-content: flex-start;
+  /* Alineamos al inicio */
+  width: 100%;
+  /* Aseguramos que ocupe el 100% del espacio */
 }
 
 .col-md-12 {
-  padding: 0; /* Eliminar padding interno */
-  width: 100%; /* Asegurar que ocupe todo el ancho */
+  padding: 0;
+  /* Eliminar padding interno */
+  width: 100%;
+  /* Asegurar que ocupe todo el ancho */
 }
 
 /* Estilo para el título dentro del formulario */
@@ -54,11 +64,16 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: stretch; /* Asegura que los elementos hijos se expandan horizontalmente */
-  padding: 1rem; /* Reduce el padding si es necesario */
-  width: 100%; /* Asegura que ocupe todo el ancho */
-  min-height: 200px; /* Altura mínima para evitar colapsos */
-  height: 100%; /* Expande según sea necesario */
+  align-items: stretch;
+  /* Asegura que los elementos hijos se expandan horizontalmente */
+  padding: 1rem;
+  /* Reduce el padding si es necesario */
+  width: 100%;
+  /* Asegura que ocupe todo el ancho */
+  min-height: 200px;
+  /* Altura mínima para evitar colapsos */
+  height: 100%;
+  /* Expande según sea necesario */
 }
 
 /* Estilos para los inputs */
@@ -79,10 +94,6 @@
   outline: none;
 }
 
-.form-label {
-  font-weight: 500;
-  color: #e0e0e0;
-}
 
 /* Botón de envío */
 .btn-primary {
@@ -114,26 +125,36 @@
 
 /* Estilo para el componente app-visor-medidas */
 app-visor-medidas {
-  display: block; /* Asegura que el componente sea un bloque */
-  width: 100%; /* Ocupa todo el ancho del contenedor padre */
-  box-sizing: border-box; /* Incluye padding y borde en el cálculo del ancho */
-  margin: 0; /* Elimina márgenes adicionales */
-  padding: 0; /* Elimina padding adicional */
+  display: block;
+  /* Asegura que el componente sea un bloque */
+  width: 100%;
+  /* Ocupa todo el ancho del contenedor padre */
+  box-sizing: border-box;
+  /* Incluye padding y borde en el cálculo del ancho */
+  margin: 0;
+  /* Elimina márgenes adicionales */
+  padding: 0;
+  /* Elimina padding adicional */
 }
 
 /* Media queries para pantallas pequeñas */
 @media (max-width: 576px) {
   .d-grid {
-    justify-content: center; /* Centrar el contenido dentro del grid */
-    margin-top: 20px; /* Añadir un margen superior para separar el botón */
+    justify-content: center;
+    /* Centrar el contenido dentro del grid */
+    margin-top: 20px;
+    /* Añadir un margen superior para separar el botón */
   }
 
   .btn-primary {
-    width: 100%; /* Asegurarse que el botón ocupe el 100% del ancho en pantallas pequeñas */
+    width: 100%;
+    /* Asegurarse que el botón ocupe el 100% del ancho en pantallas pequeñas */
   }
 
   app-visor-medidas {
-    width: 100%; /* Asegura que el componente ocupe el 100% del ancho */
-    height: auto; /* Ajusta la altura automáticamente */
+    width: 100%;
+    /* Asegura que el componente ocupe el 100% del ancho */
+    height: auto;
+    /* Ajusta la altura automáticamente */
   }
 }

@@ -1,14 +1,3 @@
-/* Estilo para la etiqueta */
-.form-label {
-  font-weight: 500;
-  color: #ffffff;
-  /* Etiquetas en blanco para mayor contraste */
-  font-size: 1rem;
-  /* Tamaño de fuente para las etiquetas */
-  margin-bottom: 0.5rem;
-  /* Espaciado debajo de la etiqueta */
-}
-
 /* Estilo para el input */
 .form-control {
   background-color: rgba(126, 56, 190, 0.1);
