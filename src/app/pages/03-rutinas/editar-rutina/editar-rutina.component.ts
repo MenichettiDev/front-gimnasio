@@ -18,7 +18,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { ButtonModule } from 'primeng/button';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { RelacionesService } from '../../../service/relaciones.service';
-
+import { ModalToastComponent } from '../../../components/modal/modal-toast/modal-toast.component';
 
 @Component({
   selector: 'app-editar-rutina',
@@ -28,7 +28,7 @@ import { RelacionesService } from '../../../service/relaciones.service';
     CboDiasComponent, CboNiveldificultadComponent,
     CboObjetivoComponent, InputFechaComponent,
     CboGruposmuscularesComponent, CboEjercicioComponent
-    , CboRepeticionesComponent, CalendarModule, ButtonModule, ProgressSpinnerModule],
+    , CboRepeticionesComponent, CalendarModule, ButtonModule, ProgressSpinnerModule, ModalToastComponent],
 
   templateUrl: './editar-rutina.component.html',
   styleUrl: './editar-rutina.component.css'
@@ -40,6 +40,9 @@ export class EditarRutinaComponent implements OnInit {
   rutinaForm: FormGroup; // Formulario reactivo para editar la rutina
   collapsed: boolean[] = []; // Controla el colapso de los días
   loading = false; // Spinner de carga
+  toastVisible: boolean = false;
+  toastMessage: string = '';
+  toastType: string = 'success';
 
   constructor(
     private fb: FormBuilder,
@@ -268,9 +271,25 @@ export class EditarRutinaComponent implements OnInit {
     };
 
     this.rutinaService.createRutina(rutinaData).subscribe({
-      next: () => this.router.navigate(['/home']),
-      error: () => { }
+      next: () => {
+        this.showToast('Rutina creada exitosamente!', 'success');
+        setTimeout(() => {
+          this.router.navigate(['/home']);
+        }, 1800); // Espera 1.8 segundos para mostrar el toast
+      },
+      error: () => {
+        this.showToast('Error al crear la rutina. Por favor, inténtelo de nuevo.', 'error');
+      }
     });
+  }
+
+  showToast(message: string, type: string = 'success') {
+    this.toastMessage = message;
+    this.toastType = type;
+    this.toastVisible = true;
+    setTimeout(() => {
+      this.toastVisible = false;
+    }, 2500);
   }
 
   // Devuelve el control de un ejercicio específico

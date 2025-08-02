@@ -1,3 +1,6 @@
+<app-modal-toast [message]="toastMessage" [isVisible]="toastVisible" [type]="toastType">
+</app-modal-toast>
+
 <p-toast></p-toast>
 <p-confirmDialog header="Confirmación" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
@@ -5,21 +8,20 @@
 
 <div class="container mt-3">
     <form [formGroup]="exerciseForm" (ngSubmit)="cargarEjercicio()">
-        
+
         <!-- Nombre -->
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre</label>
             <input id="nombre" type="text" formControlName="nombre" class="form-control">
         </div>
-        
+
         <!-- Grupo Muscular -->
         <div class="mb-3">
             <label for="grupoMuscular" class="form-label">Grupo Muscular</label>
-            <app-cbo-gruposmusculares formControlName="id_grupo_muscular"
-            ></app-cbo-gruposmusculares>
+            <app-cbo-gruposmusculares formControlName="id_grupo_muscular"></app-cbo-gruposmusculares>
         </div>
-        
-        
+
+
 
         <!-- Descripción -->
         <div class="mb-3">

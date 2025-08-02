@@ -12,15 +12,19 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { ModalToastComponent } from '../../../components/modal/modal-toast/modal-toast.component';
 
 
 @Component({
   selector: 'app-cargar-nuevo',
-  imports: [CboGruposmuscularesComponent,
+  imports: [
+    CboGruposmuscularesComponent,
     FormsModule,
     CommonModule, ReactiveFormsModule,
     ToastModule, ConfirmDialogModule,
-    ProgressSpinnerModule],
+    ProgressSpinnerModule,
+    ModalToastComponent
+  ],
   templateUrl: './cargar-nuevo.component.html',
   styleUrl: './cargar-nuevo.component.css'
 })
@@ -32,11 +36,14 @@ export class CargarNuevoComponent {
   isEditable: boolean = false;
   gruposMusculares: GrupoMuscular[] = [];
 
+  toastVisible: boolean = false;
+  toastMessage: string = '';
+  toastType: string = 'success';
+
   constructor(
     private fb: FormBuilder,
     private grupoMuscularService: GruposMuscularesService,
-    private ejercicioService: EjerciciosService,
-    private confirmacionService: ConfirmacionService
+    private ejercicioService: EjerciciosService
   ) { }
 
   ngOnInit(): void {
@@ -71,42 +78,39 @@ export class CargarNuevoComponent {
 
 
   async cargarEjercicio() {
-    const confirmed = await this.confirmacionService.confirmAction('¿Estás seguro de que deseas proceder?', 'Confirmación');
-
-    if (confirmed) {
-      this.loading = true; // Mostrar spinner
-
-      // Log para depuración
-
-      if (this.exerciseForm.valid) {
-        // Llamar al servicio para crear el ejercicio
-        this.ejercicioService.createEjercicio(this.exerciseForm.value).subscribe(
-          response => {
-            // Si la respuesta es exitosa
-            this.isEditable = false;
-
-            // Limpiar el formulario
-            this.resetStatus();
-
-            // Ocultar el spinner y mostrar el mensaje de éxito
-            this.loading = false;
-            this.confirmacionService.showSuccess('Operación exitosa');
-          },
-          error => {
-            // Si ocurre un error
-            this.loading = false; // Detener el spinner
-            console.error('Error al crear el ejercicio', error);
-            this.confirmacionService.showError('Error al crear el ejercicio');
-          }
-        );
-      } else {
-        // Si el formulario no es válido
-        this.loading = false;
-        this.confirmacionService.showError('Por favor, complete todos los campos');
-      }
+    if (this.exerciseForm.valid) {
+      this.loading = true;
+      this.ejercicioService.createEjercicio(this.exerciseForm.value).subscribe(
+        response => {
+          this.isEditable = false;
+          this.resetStatus();
+          this.loading = false;
+          this.showToast('Ejercicio creado exitosamente!', 'success');
+          setTimeout(() => {
+            // Si necesitas navegar, hazlo aquí, por ejemplo:
+            // this.router.navigate(['/ruta']);
+          }, 1800);
+        },
+        error => {
+          this.loading = false;
+          console.error('Error al crear el ejercicio', error);
+          this.showToast('Error al crear el ejercicio', 'error');
+        }
+      );
+    } else {
+      this.loading = false;
+      this.showToast('Por favor, complete todos los campos', 'error');
     }
   }
 
+  showToast(message: string, type: string = 'success') {
+    this.toastMessage = message;
+    this.toastType = type;
+    this.toastVisible = true;
+    setTimeout(() => {
+      this.toastVisible = false;
+    }, 2500);
+  }
 
   resetStatus(): void {
     this.exerciseForm.reset();

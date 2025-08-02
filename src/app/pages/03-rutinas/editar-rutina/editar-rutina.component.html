@@ -1,5 +1,7 @@
 <div class="container mt-4">
-    <h2 class="mb-4 text-center">Editar Rutina</h2>
+    <app-modal-toast [message]="toastMessage" [isVisible]="toastVisible" [type]="toastType">
+    </app-modal-toast>
+    <h2 class="mb-4 text-center">Reaplicar Rutina</h2>
     <form [formGroup]="rutinaForm" (ngSubmit)="guardarRutina()" class="p-4 border rounded">
         <!-- Primera fila: Nombre, atleta y cantidad de días -->
         <div class="row mb-4">

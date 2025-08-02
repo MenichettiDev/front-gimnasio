@@ -244,7 +244,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   handleConfirm() {
     this.authService.logout();
-    this.router.navigate(['/login/home']);
+    this.router.navigate(['/login/login']);
     this.isModalVisible = false;
   }
 

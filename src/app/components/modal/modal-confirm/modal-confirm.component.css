@@ -5,98 +5,127 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6); /* Fondo sólido semitransparente */
+  background: linear-gradient(135deg, rgba(71, 0, 99, 0.85), rgba(255, 222, 4, 0.15));
+  /* violeta-amarillo */
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 999;
-  opacity: 0; /* Comienza invisible */
-  transition: opacity 0.5s ease-in-out; /* Animación de opacidad */
+  opacity: 0;
+  /* Comienza invisible */
+  transition: opacity 0.5s ease-in-out;
+  /* Animación de opacidad */
 }
 
 .modal-overlay.visible {
-  opacity: 1; /* Se vuelve visible cuando tiene la clase 'visible' */
+  opacity: 1;
+  /* Se vuelve visible cuando tiene la clase 'visible' */
 }
 
 /* Contenedor del modal */
 .modal-container {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #4a1766 90%, #ffde04 100%);
+  padding: 24px 20px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(71, 0, 99, 0.25), 0 2px 8px #ffde04;
   text-align: center;
-  max-width: 400px;
+  max-width: 420px;
   width: 100%;
   transform-origin: center;
+  border: 2px solid #ffde04;
 }
 
 /* Cambio de color del texto */
 .modal-container h2 {
-  color: #333; /* Título en gris oscuro */
-  font-size: 1.5rem;
+  color: #ffde04;
+  /* Título en gris oscuro */
+  font-size: 1.6rem;
   margin-bottom: 10px;
+  font-family: 'Oswald', sans-serif;
+  text-shadow: 2px 2px 8px #4a1766;
 }
 
 .modal-container p {
-  color: #555; /* Mensaje en gris medio */
-  font-size: 1rem;
-  margin-bottom: 20px;
+  color: #fff;
+  /* Mensaje en gris medio */
+  font-size: 1.05rem;
+  margin-bottom: 22px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-shadow: 1px 1px 4px #4a1766;
 }
 
 /* Estilos de los botones */
 .modal-actions button {
   margin: 10px;
-  padding: 10px 20px;
+  padding: 10px 28px;
   border: none;
-  border-radius: 4px;
+  border-radius: 25px;
   cursor: pointer;
   font-size: 1rem;
-  transition: all 0.3s ease; /* Transición suave para el hover */
+  font-weight: 600;
+  transition: all 0.3s ease;
+  /* Transición suave para el hover */
+  box-shadow: 0 2px 8px rgba(71, 0, 99, 0.15);
+  letter-spacing: 0.5px;
 }
 
 .modal-actions button:first-child {
-  background-color: #4caf50; /* Verde para Confirmar */
-  color: white;
+  background: linear-gradient(90deg, #4CAF50, #45a049); /* Verde */
+  color: #fff;
+  border: 1px solid #4CAF50;
 }
 
 .modal-actions button:last-child {
-  background-color: #f44336; /* Rojo para Cancelar */
-  color: white;
+  background: linear-gradient(135deg, #f44336, #e53935 60%); /* Rojo */
+  color: #fff;
+  border: 1px solid #f44336;
 }
 
 /* Efecto hover para los botones */
 .modal-actions button:hover {
-  transform: scale(1.05); /* Aumenta ligeramente el tamaño */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra al pasar el mouse */
+  transform: scale(1.07);
+  /* Aumenta ligeramente el tamaño */
+  box-shadow: 0 4px 16px #4a1766;
+  /* Sombra al pasar el mouse */
 }
 
 .modal-actions button:first-child:hover {
-  background-color: #43a047; /* Verde más oscuro al pasar el mouse */
+  background: linear-gradient(90deg, #45a049, #388e3c); /* Verde más oscuro */
+  color: #fff;
 }
 
 .modal-actions button:last-child:hover {
-  background-color: #e53935; /* Rojo más oscuro al pasar el mouse */
+  background: linear-gradient(135deg, #e53935 40%, #b71c1c 100%); /* Rojo más oscuro */
+  color: #fff;
 }
 
 /* Media query para pantallas pequeñas */
 @media (max-width: 600px) {
   .modal-container {
-    width: 80%; /* Ocupa todo el ancho de la pantalla */
-    max-width: 100%; /* Elimina el límite de ancho máximo */
-    padding: 15px; /* Reduce el padding para ahorrar espacio */
-    border-radius: 0; /* Quita los bordes redondeados para aprovechar mejor el espacio */
+    width: 90%;
+    /* Ocupa todo el ancho de la pantalla */
+    max-width: 100%;
+    /* Elimina el límite de ancho máximo */
+    padding: 15px;
+    /* Reduce el padding para ahorrar espacio */
+    border-radius: 10px;
+    /* Quita los bordes redondeados para aprovechar mejor el espacio */
   }
 
   .modal-container h2 {
-    font-size: 1.2rem; /* Reduce el tamaño del título */
+    font-size: 1.2rem;
+    /* Reduce el tamaño del título */
   }
 
   .modal-container p {
-    font-size: 0.9rem; /* Reduce el tamaño del mensaje */
+    font-size: 0.95rem;
+    /* Reduce el tamaño del mensaje */
   }
 
   .modal-actions button {
-    font-size: 0.9rem; /* Reduce el tamaño del texto de los botones */
-    padding: 8px 16px; /* Reduce el padding de los botones */
+    font-size: 0.95rem;
+    /* Reduce el tamaño del texto de los botones */
+    padding: 8px 14px;
+    /* Reduce el padding de los botones */
   }
 }
