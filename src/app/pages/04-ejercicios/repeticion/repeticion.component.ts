@@ -3,14 +3,15 @@ import { RepeticionService } from '../../../service/repeticion.service'; // Ajus
 import { Repeticion } from '../../../data/interfaces/repeticionInterface';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ModalToastComponent } from '../../../components/modal/modal-toast/modal-toast.component';
 
 @Component({
   selector: 'app-repeticion',
-  imports: [ CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ModalToastComponent],
   templateUrl: './repeticion.component.html',
   styleUrl: './repeticion.component.css'
 })
-export class RepeticionComponent  implements OnInit {
+export class RepeticionComponent implements OnInit {
   repeticiones: Repeticion[] = [];
   nuevaRepeticion: Repeticion = {
     id_repeticion: 0,
@@ -20,8 +21,11 @@ export class RepeticionComponent  implements OnInit {
   };
   modoEdicion = false;
   repeticionSeleccionada: Repeticion | null = null;
+  toastVisible: boolean = false;
+  toastMessage: string = '';
+  toastType: string = 'success';
 
-  constructor(private repeticionService: RepeticionService) {}
+  constructor(private repeticionService: RepeticionService) { }
 
   ngOnInit(): void {
     this.cargarRepeticiones();
@@ -34,6 +38,7 @@ export class RepeticionComponent  implements OnInit {
         this.repeticiones = data;
       },
       (error) => {
+        this.showToast('Error al cargar las repeticiones', 'error');
         console.error('Error al cargar las repeticiones:', error);
       }
     );
@@ -45,10 +50,12 @@ export class RepeticionComponent  implements OnInit {
       .crearRepeticion(this.nuevaRepeticion.nombre, this.nuevaRepeticion.frecuencia, this.nuevaRepeticion.comentario)
       .subscribe(
         () => {
-          this.cargarRepeticiones(); // Refrescar la lista
+          this.cargarRepeticiones();
           this.resetFormulario();
+          this.showToast('Repetición creada exitosamente!', 'success');
         },
         (error) => {
+          this.showToast('Error al crear la repetición', 'error');
           console.error('Error al crear la repetición:', error);
         }
       );
@@ -73,10 +80,12 @@ export class RepeticionComponent  implements OnInit {
         )
         .subscribe(
           () => {
-            this.cargarRepeticiones(); // Refrescar la lista
+            this.cargarRepeticiones();
             this.resetFormulario();
+            this.showToast('Repetición actualizada correctamente!', 'success');
           },
           (error) => {
+            this.showToast('Error al actualizar la repetición', 'error');
             console.error('Error al actualizar la repetición:', error);
           }
         );
@@ -87,12 +96,23 @@ export class RepeticionComponent  implements OnInit {
   eliminarRepeticion(id: number): void {
     this.repeticionService.eliminarRepeticion(id).subscribe(
       () => {
-        this.cargarRepeticiones(); // Refrescar la lista
+        this.cargarRepeticiones();
+        this.showToast('Repetición eliminada correctamente!', 'success');
       },
       (error) => {
+        this.showToast('Error al eliminar la repetición', 'error');
         console.error('Error al eliminar la repetición:', error);
       }
     );
+  }
+
+  showToast(message: string, type: string = 'success') {
+    this.toastMessage = message;
+    this.toastType = type;
+    this.toastVisible = true;
+    setTimeout(() => {
+      this.toastVisible = false;
+    }, 2500);
   }
 
   // Resetear el formulario

@@ -70,13 +70,15 @@
 }
 
 .modal-actions button:first-child {
-  background: linear-gradient(90deg, #4CAF50, #45a049); /* Verde */
+  background: linear-gradient(90deg, #4CAF50, #45a049);
+  /* Verde */
   color: #fff;
   border: 1px solid #4CAF50;
 }
 
 .modal-actions button:last-child {
-  background: linear-gradient(135deg, #f44336, #e53935 60%); /* Rojo */
+  background: linear-gradient(135deg, #f44336, #e53935 60%);
+  /* Rojo */
   color: #fff;
   border: 1px solid #f44336;
 }
@@ -90,12 +92,14 @@
 }
 
 .modal-actions button:first-child:hover {
-  background: linear-gradient(90deg, #45a049, #388e3c); /* Verde más oscuro */
+  background: linear-gradient(90deg, #45a049, #388e3c);
+  /* Verde más oscuro */
   color: #fff;
 }
 
 .modal-actions button:last-child:hover {
-  background: linear-gradient(135deg, #e53935 40%, #b71c1c 100%); /* Rojo más oscuro */
+  background: linear-gradient(135deg, #e53935 40%, #b71c1c 100%);
+  /* Rojo más oscuro */
   color: #fff;
 }
 
