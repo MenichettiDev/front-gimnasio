@@ -1,0 +1,60 @@
+.contacto-container,
+.contacto-container * {
+  color: #fff;
+}
+
+.contacto-header {
+  background-color: #007bff;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.contacto-header h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.contacto-header p {
+  margin: 5px 0 0;
+  font-size: 16px;
+}
+
+.contacto-info,
+.contacto-horarios {
+  background-color: #343a40;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.contacto-info h2,
+.contacto-horarios h2 {
+  margin: 0 0 10px;
+  font-size: 22px;
+}
+
+.contacto-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contacto-info li {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.contacto-info a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.contacto-info a:hover {
+  text-decoration: underline;
+}
+
+.contacto-horarios p {
+  margin: 0;
+  font-size: 16px;
+}
