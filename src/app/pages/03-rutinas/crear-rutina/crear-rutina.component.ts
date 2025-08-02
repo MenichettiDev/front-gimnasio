@@ -19,6 +19,7 @@ import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { RelacionesService } from '../../../service/relaciones.service';
 import { InputFechaComponent } from "../../../components/input-fecha/input-fecha.component";
+import { ModalToastComponent } from '../../../components/modal/modal-toast/modal-toast.component';
 
 @Component({
   selector: 'app-crear-rutina',
@@ -40,7 +41,8 @@ import { InputFechaComponent } from "../../../components/input-fecha/input-fecha
     ButtonModule,
     CalendarModule,
     FormsModule,
-    InputFechaComponent
+    InputFechaComponent,
+    ModalToastComponent
   ]
 })
 export class CrearRutinaComponent implements OnInit {
@@ -48,6 +50,9 @@ export class CrearRutinaComponent implements OnInit {
   loading = false;
   collapsed: boolean[] = [];
   atletas: any[] = []; // Lista de atletas para el select
+  toastVisible: boolean = false;
+  toastMessage: string = '';
+  toastType: string = 'success';
 
   constructor(
     private fb: FormBuilder,
@@ -223,16 +228,17 @@ export class CrearRutinaComponent implements OnInit {
       // Llamar al servicio para crear el ejercicio
       this.rutinaService.createRutina(rutinaData).subscribe(
         response => {
-
-          this.loading = false; // Detener el spinner
-          alert('Rutina creada exitosamente!');
+          this.loading = false;
+          this.showToast('Rutina creada exitosamente!', 'success');
           this.confirmacionService.showSuccess('Operación exitosa');
+          setTimeout(() => {
+            this.router.navigate(['/home']);
+          }, 1800); // Espera 1.8 segundos para que el toast se vea
         },
         error => {
-          // Si ocurre un error
-          this.loading = false; // Detener el spinner
+          this.loading = false;
           console.error('Error al crear la rutina', error);
-          alert('Error al crear la rutina. Por favor, inténtelo de nuevo.');
+          this.showToast('Error al crear la rutina. Por favor, inténtelo de nuevo.', 'error');
           this.confirmacionService.showError('Error al crear la rutina');
         }
       );
@@ -240,14 +246,18 @@ export class CrearRutinaComponent implements OnInit {
       // Si el formulario no es válido
       this.loading = false;
       this.confirmacionService.showError('Por favor, complete todos los campos');
+      this.showToast('Por favor, complete todos los campos', 'error');
     }
-
-    // Navegar a la página de inicio
-    this.router.navigate(['/home']);
-
   }
 
-
+  showToast(message: string, type: string = 'success') {
+    this.toastMessage = message;
+    this.toastType = type;
+    this.toastVisible = true;
+    setTimeout(() => {
+      this.toastVisible = false;
+    }, 2500);
+  }
 
   formatoFecha(fecha: Date | string): string {
     if (!fecha) return '';

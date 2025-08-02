@@ -3,11 +3,12 @@ import { AuthService } from '../../../service/auth/auth.service';
 import { PersonaService } from '../../../service/persona.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ModalToastComponent } from '../../../components/modal/modal-toast/modal-toast.component';
 
 @Component({
   selector: 'app-perfil',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ModalToastComponent],
   templateUrl: './perfil.component.html',
   styleUrl: './perfil.component.css'
 })
@@ -18,6 +19,9 @@ export class PerfilComponent implements OnInit {
   errorMessage: string = '';
   nuevaFoto: File | null = null;
   perfilesUsuario: string[] = [];
+  toastVisible: boolean = false;
+  toastMessage: string = '';
+  toastType: string = 'success';
 
   constructor(
     private authService: AuthService,
@@ -102,12 +106,22 @@ export class PerfilComponent implements OnInit {
 
     this.personaService.editarPersona(idUsuario, this.perfil).subscribe(
       (response) => {
-        alert('Los cambios han sido guardados exitosamente.');
+        this.showToast('Los cambios han sido guardados exitosamente.', 'success');
       },
       (error) => {
         console.error('Error al actualizar el perfil:', error);
         this.errorMessage = 'Ocurrió un error al guardar los cambios.';
+        this.showToast('Ocurrió un error al guardar los cambios.', 'error');
       }
     );
+  }
+
+  showToast(message: string, type: string = 'success') {
+    this.toastMessage = message;
+    this.toastType = type;
+    this.toastVisible = true;
+    setTimeout(() => {
+      this.toastVisible = false;
+    }, 2500);
   }
 }
