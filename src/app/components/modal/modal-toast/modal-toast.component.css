@@ -1,6 +1,6 @@
 .toast {
   position: fixed;
-  top: 32px;
+  top: 82px;
   left: 50%;
   transform: translateX(-50%);
   min-width: 320px;
@@ -11,7 +11,8 @@
   font-weight: 500;
   color: #fff;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-  z-index: 1055;
+  z-index: 9999;
+  /* aumentado para máxima prioridad */
   opacity: 0.98;
   display: flex;
   align-items: center;
