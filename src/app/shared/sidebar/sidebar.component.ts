@@ -108,6 +108,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     { id: 91, descripcion: 'Herramientas', icono: 'bi bi-tools', link: '/herramientas', grupo: 'GM10', principal: true, orden: 10, estado: true, requiredAccess: [1, 2, 3, 4] },
     { id: 92, descripcion: 'Cronometro', icono: '', link: '/herramientas/cronometro', grupo: 'GM10', principal: false, orden: 1, estado: true, requiredAccess: [1, 2, 3, 4] },
     { id: 93, descripcion: 'Calculadora IMC', icono: '', link: '/herramientas/imc-calculadora', grupo: 'GM10', principal: false, orden: 2, estado: true, requiredAccess: [1, 2, 3, 4] },
+    { id: 94, descripcion: 'Calculadora de calorias', icono: '', link: '/herramientas/calorias-calculadora', grupo: 'GM10', principal: false, orden: 3, estado: true, requiredAccess: [1, 2, 3, 4] },
 
 
   ];

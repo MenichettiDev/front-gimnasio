@@ -7,5 +7,6 @@ export const herramientasRoutes: Routes = [
 
     // Rutas para los diferentes componentes de Ayuda
     { path: 'cronometro', loadComponent: () => import('./cronometro/cronometro.component').then(m => m.CronometroComponent) },
-    { path: 'imc-calculadora', loadComponent: () => import('./imc-calculadora/imc-calculadora.component').then(m => m.ImcCalculadoraComponent) }
+    { path: 'imc-calculadora', loadComponent: () => import('./imc-calculadora/imc-calculadora.component').then(m => m.ImcCalculadoraComponent) },
+    { path: 'calorias-calculadora', loadComponent: () => import('./calorias-calculadora/calorias-calculadora.component').then(m => m.CaloriasCalculadoraComponent) }
 ];

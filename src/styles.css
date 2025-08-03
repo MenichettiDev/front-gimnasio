@@ -110,10 +110,6 @@
 
 }
 
-
-
-
-
 /* Mensajes de error */
 .invalid-feedback-base {
   display: block;
@@ -499,4 +495,30 @@ input:focus {
   /* Ajustar la altura para que sea consistente con otros inputs */
   color: #333;
   /* Color de texto más oscuro para mayor legibilidad */
+}
+
+/* Mejorar el select en mobile para scroll y visibilidad */
+.form-select,
+select {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* Para dispositivos móviles: aumentar el tamaño del desplegable y permitir scroll */
+@media (max-width: 576px) {
+  .form-select,
+  select {
+    font-size: 1.1rem;
+    max-height: 220px;
+    overflow-y: auto;
+    /* Forzar el menú desplegable a ser visible y scrollable */
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Opcional: mejorar la visibilidad de las opciones */
+.form-select option,
+select option {
+  padding: 0.7rem 1rem;
+  font-size: 1rem;
 }

@@ -1,0 +1,64 @@
+<div class="container-base card-base" style="max-width:400px; margin:auto;">
+    <form [formGroup]="caloriasForm" class="card-body-base" (ngSubmit)="calcularCalorias()">
+        <h2 class="form-title-base">Calculadora de Calorías</h2>
+        <div class="form-group">
+            <label class="form-label-base" for="sexo">Sexo</label>
+            <select id="sexo" formControlName="sexo" class="form-select">
+                <option value="masculino">Masculino</option>
+                <option value="femenino">Femenino</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-label-base" for="edad">Edad (años)</label>
+            <input type="number" id="edad" formControlName="edad" class="form-control-base" min="10" max="100" />
+            <div *ngIf="caloriasForm.get('edad')?.invalid && caloriasForm.get('edad')?.touched"
+                class="invalid-feedback-base">
+                Ingresa una edad válida
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-label-base" for="peso">Peso (kg)</label>
+            <input type="number" id="peso" formControlName="peso" class="form-control-base" min="30" max="300"
+                step="0.1" />
+            <div *ngIf="caloriasForm.get('peso')?.invalid && caloriasForm.get('peso')?.touched"
+                class="invalid-feedback-base">
+                Ingresa tu peso en kilogramos
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-label-base" for="altura">Altura (m)</label>
+            <input type="number" id="altura" formControlName="altura" class="form-control-base" min="1" max="2.5"
+                step="0.01" />
+            <div *ngIf="caloriasForm.get('altura')?.invalid && caloriasForm.get('altura')?.touched"
+                class="invalid-feedback-base">
+                Ingresa tu altura en metros
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-label-base" for="actividad">Nivel de actividad</label>
+            <select id="actividad" formControlName="actividad" class="form-select">
+                <option *ngFor="let opt of actividadOptions" [value]="opt.value">{{ opt.label }}</option>
+            </select>
+        </div>
+        <button type="submit" class="btn-base btn-primary-base mt-2" [disabled]="caloriasForm.invalid">
+            Calcular
+        </button>
+    </form>
+
+    <div *ngIf="resultado !== null" class="calorias-resultado-visual">
+        <div class="calorias-circle">
+            <span class="calorias-valor">{{ resultado }}</span>
+            <span class="calorias-label">kcal/día</span>
+        </div>
+        <div class="calorias-objetivo">
+            {{ objetivo }}
+        </div>
+        <div class="calorias-explicacion"
+            style="margin-top:1rem; color:#e0e0e0; font-size:0.95rem; text-align:center;">
+            <strong>¿Qué significa este número?</strong><br>
+            Si consumes menos calorías que este valor, tu cuerpo utilizará reservas y podrías perder peso.<br>
+            Si consumes más calorías que este valor, tu cuerpo almacenará el exceso y podrías aumentar de peso.<br>
+            Para mantener tu peso, intenta acercarte a este número según tu objetivo y actividad.
+        </div>
+    </div>
+</div>
