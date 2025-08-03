@@ -1,0 +1,52 @@
+<div class="container-base card-base" style="max-width:400px; margin:auto;">
+    <form [formGroup]="configForm" class="card-body-base" (ngSubmit)="iniciar()">
+        <h2 class="form-title-base">Cronómetro de Series</h2>
+        <div class="form-group">
+            <label class="form-label-base" for="series">Cantidad de series</label>
+            <input type="number" id="series" formControlName="series" class="form-control-base" min="1" />
+            <div *ngIf="configForm.get('series')?.invalid && configForm.get('series')?.touched"
+                class="invalid-feedback-base">
+                Ingresa al menos 1 serie
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-label-base" for="tiempoSerie">Tiempo por serie (segundos)</label>
+            <input type="number" id="tiempoSerie" formControlName="tiempoSerie" class="form-control-base" min="1" />
+            <div *ngIf="configForm.get('tiempoSerie')?.invalid && configForm.get('tiempoSerie')?.touched"
+                class="invalid-feedback-base">
+                Ingresa tiempo válido
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-label-base" for="descanso">Descanso entre series (segundos)</label>
+            <input type="number" id="descanso" formControlName="descanso" class="form-control-base" min="0" />
+            <div *ngIf="configForm.get('descanso')?.invalid && configForm.get('descanso')?.touched"
+                class="invalid-feedback-base">
+                Ingresa tiempo válido
+            </div>
+        </div>
+        <button type="submit" class="btn-base btn-primary-base mt-2" [disabled]="configForm.invalid || corriendo">
+            Iniciar
+        </button>
+        <button type="button" class="btn-base btn-secondary-base" (click)="reiniciar()"
+            [disabled]="!corriendo && !terminado">
+            Reiniciar
+        </button>
+    </form>
+
+    <div *ngIf="corriendo || terminado || (!corriendo && serieActual > 0 && !terminado)" class="cronometro-visual">
+        <div [ngClass]="{'cronometro-circle-serie': !modoDescanso, 'cronometro-circle-descanso': modoDescanso}">
+            <span class="cronometro-tiempo">{{ tiempoMinSec }}</span>
+        </div>
+        <div class="cronometro-info">
+            <span *ngIf="!modoDescanso && !terminado">Serie {{ serieActual }} / {{ configForm.value.series }}</span>
+            <span *ngIf="modoDescanso && !terminado" style="color:#f44336;">Descanso</span>
+            <span *ngIf="terminado" style="color:#4CAF50;">¡Finalizado!</span>
+        </div>
+        <div class="cronometro-controls">
+            <button *ngIf="corriendo" class="btn-base btn-secondary-base" (click)="pausar()">Pausar</button>
+            <button *ngIf="!corriendo && !terminado && tiempoRestante > 0" class="btn-base btn-primary-base"
+                (click)="reanudar()">Reanudar</button>
+        </div>
+    </div>
+</div>

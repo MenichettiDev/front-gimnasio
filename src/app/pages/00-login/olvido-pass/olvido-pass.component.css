@@ -1,0 +1,13 @@
+/* ...copia los estilos del login.component.css aquí... */
+
+/* Mensaje de éxito */
+.success-message {
+    color: #4CAF50;
+    font-size: 13px;
+    margin-top: 5px;
+    margin-left: 10px;
+    opacity: 0;
+    animation: errorFadeIn 0.3s ease forwards;
+}
+
+/* ...resto de estilos igual que login.component.css... */

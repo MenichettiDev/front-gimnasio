@@ -1,0 +1,28 @@
+<div class="fullscreen-background">
+    <div class="container-base card-base">
+        <form [formGroup]="olvidoForm" (ngSubmit)="onSubmit()" aria-labelledby="olvido-form-title">
+            <h1 class="form-title-base mt-2">Recuperar Contraseña</h1>
+            <div class="form-group">
+                <label for="email" class="form-label-base">Correo electrónico</label>
+                <input type="email" formControlName="email" id="email" class="form-control-base"
+                    placeholder="Correo electrónico" required />
+                <i class="bx bxs-envelope" aria-label="Icono de correo"></i>
+                <div *ngIf="isFieldInvalid('email')" class="invalid-feedback-base">
+                    Ingresa un correo válido
+                </div>
+            </div>
+            <div *ngIf="errorMessage" class="invalid-feedback-base">
+                {{ errorMessage }}
+            </div>
+            <div *ngIf="successMessage" style="color:#4CAF50; font-size:0.95rem; margin-top:5px;">
+                {{ successMessage }}
+            </div>
+            <button type="submit" class="btn-base btn-primary-base" [disabled]="olvidoForm.invalid">
+                Enviar instrucciones
+            </button>
+            <div class="register-link">
+                <p class="text-white mt-2">¿Recordaste tu contraseña? <a routerLink="/login/login">Inicia sesión</a></p>
+            </div>
+        </form>
+    </div>
+</div>

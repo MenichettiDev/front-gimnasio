@@ -62,6 +62,11 @@ export const routes: Routes = [
         loadChildren: () => import('./pages/09-ayuda/contacto.routes').then(m => m.ayudaRoutes),
         canActivate: [guardsGuard]
     },
+    {
+        path: 'herramientas',
+        loadChildren: () => import('./pages/10-herramientas/herramientas.routes').then(m => m.herramientasRoutes),
+        canActivate: [guardsGuard]
+    },
 
     {
         path: 'registro-entrenador',

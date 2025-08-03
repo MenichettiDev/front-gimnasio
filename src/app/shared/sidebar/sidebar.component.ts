@@ -103,6 +103,13 @@ export class SidebarComponent implements OnInit, OnDestroy {
     { id: 81, descripcion: 'Ayuda', icono: 'bi bi-info-circle', link: '/ayuda', grupo: 'GM09', principal: true, orden: 9, estado: true, requiredAccess: [1, 2, 3, 4] },
     { id: 82, descripcion: 'Preguntas frecuentes', icono: '', link: '/ayuda/faq', grupo: 'GM09', principal: false, orden: 1, estado: true, requiredAccess: [1, 2, 3, 4] },
     { id: 83, descripcion: 'Contacto', icono: '', link: '/ayuda/contacto', grupo: 'GM09', principal: false, orden: 2, estado: true, requiredAccess: [1, 2, 3, 4] },
+
+    // GM10 - Herramientas
+    { id: 91, descripcion: 'Herramientas', icono: 'bi bi-tools', link: '/herramientas', grupo: 'GM10', principal: true, orden: 10, estado: true, requiredAccess: [1, 2, 3, 4] },
+    { id: 92, descripcion: 'Cronometro', icono: '', link: '/herramientas/cronometro', grupo: 'GM10', principal: false, orden: 1, estado: true, requiredAccess: [1, 2, 3, 4] },
+    { id: 93, descripcion: 'Calculadora IMC', icono: '', link: '/herramientas/calculadora-imc', grupo: 'GM10', principal: false, orden: 2, estado: true, requiredAccess: [1, 2, 3, 4] },
+
+
   ];
 
   // Servicios inyectados
