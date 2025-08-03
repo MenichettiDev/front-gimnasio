@@ -1,1 +1,48 @@
-<p>imc-calculadora works!</p>
+<div class="container-base card-base" style="max-width:400px; margin:auto;">
+    <form [formGroup]="imcForm" class="card-body-base" (ngSubmit)="calcularIMC()">
+        <h2 class="form-title-base">Calculadora IMC</h2>
+        <div class="form-group">
+            <label class="form-label-base" for="peso">Peso (kg)</label>
+            <input type="number" id="peso" formControlName="peso" class="form-control-base" min="1" step="0.1" />
+            <div *ngIf="imcForm.get('peso')?.invalid && imcForm.get('peso')?.touched" class="invalid-feedback-base">
+                Ingresa tu peso en kilogramos
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-label-base" for="altura">Altura (m)</label>
+            <input type="number" id="altura" formControlName="altura" class="form-control-base" min="0.5" step="0.01" />
+            <div *ngIf="imcForm.get('altura')?.invalid && imcForm.get('altura')?.touched" class="invalid-feedback-base">
+                Ingresa tu altura en metros
+            </div>
+        </div>
+        <button type="submit" class="btn-base btn-primary-base mt-3" [disabled]="imcForm.invalid">
+            Calcular
+        </button>
+    </form>
+
+    <div class="imc-rangos-table" style="margin-top:2rem;">
+        <table style="width:100%; text-align:center;">
+            <thead>
+                <tr>
+                    <th>Rango</th>
+                    <th>IMC</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let r of rangos">
+                    <td [style.color]="r.color">{{ r.nombre }}</td>
+                    <td>{{ r.min }} - {{ r.max }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="resultado !== null" class="imc-resultado-visual">
+        <div class="imc-circle" [style.background]="color">
+            <span class="imc-valor">{{ resultado }}</span>
+        </div>
+        <div class="imc-categoria" [style.color]="color">
+            {{ categoria }}
+        </div>
+    </div>
+</div>
