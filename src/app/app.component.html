@@ -1,7 +1,7 @@
 <!-- Barra superior -->
-<div class="alto">
+<div class="alto" *ngIf="!isLoggedIn">
   <!-- Mostrar el componente 'app-barrasup' solo si el usuario NO está logueado -->
-  <app-barrasup *ngIf="!isLoggedIn"></app-barrasup>
+  <app-barrasup></app-barrasup>
 </div>
 
 <!-- Sidebar condicional -->

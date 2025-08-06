@@ -209,7 +209,7 @@
 /* Modal optimizado */
 .modal-overlay {
     position: fixed;
-    top: 0;
+    top: 30;
     left: 0;
     right: 0;
     bottom: 0;
@@ -231,6 +231,7 @@
     overflow-y: auto;
     position: relative;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    margin-top: 100px;
 }
 
 .modal-close {

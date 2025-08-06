@@ -33,7 +33,7 @@
                                 <thead class="table-primary">
                                     <tr>
                                         <th>Nombre</th>
-                                        <th class="hide-mobile">Fecha Creación</th>
+                                        <th>Fecha Creación</th>
                                         <th class="hide-mobile">Objetivo</th>
                                         <th class="hide-mobile">Nivel</th>
                                         <th>Acciones</th>
@@ -42,7 +42,7 @@
                                 <tbody>
                                     <tr *ngFor="let rutina of rutinasDelEntrenador">
                                         <td>{{ rutina.nombre }}</td>
-                                        <td class="hide-mobile">{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
+                                        <td>{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
                                         <td class="hide-mobile">{{ rutina.objetivo }}</td>
                                         <td class="hide-mobile">{{ rutina.nivel_atleta }}</td>
                                         <td>
@@ -71,7 +71,7 @@
                                 <thead class="table-success">
                                     <tr>
                                         <th>Nombre</th>
-                                        <th class="hide-mobile">Fecha Creación</th>
+                                        <th>Fecha Creación</th>
                                         <th class="hide-mobile">Objetivo</th>
                                         <th class="hide-mobile">Nivel</th>
                                         <th>Acciones</th>
@@ -80,7 +80,7 @@
                                 <tbody>
                                     <tr *ngFor="let rutina of rutinasDelGimnasio">
                                         <td>{{ rutina.nombre }}</td>
-                                        <td class="hide-mobile">{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
+                                        <td>{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
                                         <td class="hide-mobile">{{ rutina.objetivo }}</td>
                                         <td class="hide-mobile">{{ rutina.nivel_atleta }}</td>
                                         <td>
@@ -109,7 +109,7 @@
                                 <thead class="table-warning">
                                     <tr>
                                         <th>Nombre</th>
-                                        <th class="hide-mobile">Fecha Creación</th>
+                                        <th>Fecha Creación</th>
                                         <th class="hide-mobile">Objetivo</th>
                                         <th class="hide-mobile">Nivel</th>
                                         <th>Acciones</th>
@@ -118,7 +118,7 @@
                                 <tbody>
                                     <tr *ngFor="let rutina of rutinasDelAtleta">
                                         <td>{{ rutina.nombre }}</td>
-                                        <td class="hide-mobile">{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
+                                        <td>{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
                                         <td class="hide-mobile">{{ rutina.objetivo }}</td>
                                         <td class="hide-mobile">{{ rutina.nivel_atleta }}</td>
                                         <td>
@@ -152,7 +152,7 @@
                                 <thead class="table-info">
                                     <tr>
                                         <th>Nombre</th>
-                                        <th class="hide-mobile">Fecha Creación</th>
+                                        <th>Fecha Creación</th>
                                         <th class="hide-mobile">Objetivo</th>
                                         <th class="hide-mobile">Nivel</th>
                                         <th>Acciones</th>
@@ -161,7 +161,7 @@
                                 <tbody>
                                     <tr *ngFor="let rutina of rutinasGenericasEntrenador">
                                         <td>{{ rutina.nombre }}</td>
-                                        <td class="hide-mobile">{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
+                                        <td>{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
                                         <td class="hide-mobile">{{ rutina.objetivo }}</td>
                                         <td class="hide-mobile">{{ rutina.nivel_atleta }}</td>
                                         <td>
@@ -191,7 +191,7 @@
                                 <thead class="table-secondary">
                                     <tr>
                                         <th>Nombre</th>
-                                        <th class="hide-mobile">Fecha Creación</th>
+                                        <th>Fecha Creación</th>
                                         <th class="hide-mobile">Objetivo</th>
                                         <th class="hide-mobile">Nivel</th>
                                         <th>Acciones</th>
@@ -200,7 +200,7 @@
                                 <tbody>
                                     <tr *ngFor="let rutina of rutinasGenericasGimnasio">
                                         <td>{{ rutina.nombre }}</td>
-                                        <td class="hide-mobile">{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
+                                        <td>{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
                                         <td class="hide-mobile">{{ rutina.objetivo }}</td>
                                         <td class="hide-mobile">{{ rutina.nivel_atleta }}</td>
                                         <td>
@@ -232,7 +232,7 @@
                                         <th>Nombre</th>
                                         <th>ID Creador</th>
                                         <th class="hide-mobile">Asignada a</th>
-                                        <th class="hide-mobile">Fecha Creación</th>
+                                        <th>Fecha Creación</th>
                                         <th class="hide-mobile">Objetivo</th>
                                         <th class="hide-mobile">Nivel</th>
                                         <th>Acciones</th>
