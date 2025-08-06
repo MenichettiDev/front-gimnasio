@@ -1,0 +1,59 @@
+<div class="pdf-rutina-container">
+    <!-- Encabezado profesional -->
+    <div class="pdf-header">
+        <div>
+            <h1>{{ rutinaCruda?.rutina?.nombre || 'Rutina de Entrenamiento' }}</h1>
+            <div class="pdf-header-info">
+                <span><strong>Nivel:</strong> {{ rutinaCruda?.rutina?.nivel_atleta }}</span>
+                <span><strong>Objetivo:</strong> {{ rutinaCruda?.rutina?.objetivo }}</span>
+                <span><strong>Días:</strong> {{ rutinaCruda?.rutina?.cantidad_dias }}</span>
+            </div>
+        </div>
+        <div>
+            <img src="/public/images/gymrats_v002_W.png" alt="Logo Gimnasio">
+        </div>
+    </div>
+
+    <!-- Descripción de la rutina -->
+    <div *ngIf="rutinaCruda?.rutina?.descripcion" class="rutina-descripcion">
+        <h3>Descripción:</h3>
+        <p>{{ rutinaCruda?.rutina?.descripcion }}</p>
+    </div>
+
+    <!-- Detalle de días y ejercicios -->
+    <div class="plan-entrenamiento">
+        <h3>Plan de Entrenamiento</h3>
+
+        <div *ngFor="let diaData of rutinaCruda?.ejercicios; let i = index" class="dia-container">
+            <div class="dia-header">
+                DÍA {{ diaData?.dia || (i + 1) }}
+            </div>
+
+            <table class="ejercicios-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Ejercicio ID</th>
+                        <th>Grupo Muscular</th>
+                        <th>Repeticiones ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let ejercicio of diaData?.ejercicios; let j = index">
+                        <td>{{ j + 1 }}</td>
+                        <td>{{ ejercicio?.id_ejercicio }}</td>
+                        <td>Grupo {{ ejercicio?.id_grupo_muscular }}</td>
+                        <td>{{ ejercicio?.id_repeticion }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Pie de página profesional -->
+    <div class="pdf-footer">
+        <hr>
+        <p><strong>Rutina generada por GimnasioApp</strong> &copy; {{ 'now' | date:'yyyy' }}</p>
+        <p>Fecha de generación: {{ 'now' | date:'dd/MM/yyyy HH:mm' }}</p>
+    </div>
+</div>

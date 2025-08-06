@@ -1,0 +1,153 @@
+.pdf-rutina-container {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+}
+
+.pdf-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem;
+    border-bottom: 3px solid #4CAF50;
+    margin-bottom: 2rem;
+}
+
+.pdf-header h1 {
+    margin: 0 0 0.5rem 0;
+    color: #333;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.pdf-header-info {
+    color: #666;
+    font-size: 1rem;
+}
+
+.pdf-header-info span {
+    margin-left: 2rem;
+}
+
+.pdf-header-info span:first-child {
+    margin-left: 0;
+}
+
+.pdf-header img {
+    height: 60px;
+    border-radius: 10px;
+}
+
+.rutina-descripcion {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    border-left: 4px solid #4CAF50;
+}
+
+.rutina-descripcion h3 {
+    margin: 0 0 1rem 0;
+    color: #333;
+    font-size: 1.2rem;
+}
+
+.rutina-descripcion p {
+    margin: 0;
+    color: #555;
+    line-height: 1.5;
+}
+
+.plan-entrenamiento {
+    margin-top: 2rem;
+}
+
+.plan-entrenamiento h3 {
+    color: #333;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.dia-container {
+    margin-bottom: 2.5rem;
+    page-break-inside: avoid;
+}
+
+.dia-header {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    padding: 1rem;
+    border-radius: 8px 8px 0 0;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.ejercicios-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ejercicios-table thead tr {
+    background: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.ejercicios-table th {
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    color: #333;
+    border: 1px solid #dee2e6;
+}
+
+.ejercicios-table tbody tr {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.ejercicios-table tbody tr:nth-child(even) {
+    background: #f8f9fa;
+}
+
+.ejercicios-table tbody tr:nth-child(odd) {
+    background: #ffffff;
+}
+
+.ejercicios-table td {
+    padding: 12px;
+    border: 1px solid #dee2e6;
+}
+
+.ejercicios-table td:first-child {
+    font-weight: 500;
+}
+
+.pdf-footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid #eee;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.pdf-footer hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin-bottom: 1rem;
+}
+
+.pdf-footer p {
+    margin: 0;
+}
+
+.pdf-footer p:last-child {
+    margin: 0.5rem 0 0 0;
+    font-size: 0.8rem;
+}

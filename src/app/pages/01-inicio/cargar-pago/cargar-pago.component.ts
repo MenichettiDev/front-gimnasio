@@ -1,19 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CboAtletaComponent } from "../../../components/cbo-atleta/cbo-atleta.component";
-import { CboMembresiaComponent } from "../../../components/cbo-membresia/cbo-membresia.component";
-import { EntrenadorService } from '../../../service/entrenador.service';
-import { AtletaService } from '../../../service/atleta.service';
 import { AuthService } from '../../../service/auth/auth.service';
-import { CboGimnasioComponent } from "../../../components/cbo-gimnasio/cbo-gimnasio.component";
-import { Membresia } from '../../../data/interfaces/membresiaInterface';
-import { MembresiaService } from '../../../service/membresia.service';
 import { CommonModule } from '@angular/common';
-import { Atleta } from '../../../data/interfaces/atletaInterface';
-import { GimnasioService } from '../../../service/gimnasio.service';
 import { PagoService } from '../../../service/pago.service';
 import { ModalConfirmComponent } from '../../../components/modal/modal-confirm/modal-confirm.component';
-import { Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Input } from '@angular/core';
+import { environment } from '../../../../environments/environment';
 
 
 @Component({
@@ -70,8 +62,9 @@ export class CargarPagoComponent implements OnInit {
       frequency_type: 'months',
       transaction_amount: this.montoFijo,
       currency_id: 'ARS',
-      payer_email: user?.email,
+      payer_email: environment.production ? user?.email : 'test_user_56660920@testuser.com',
       back_url: 'https://gymrats.com.ar/inicio/resumen',
+      id_persona: user?.id_persona
     };
 
     this.pagoService.crearSuscripcion(suscripcionData).subscribe({

@@ -146,4 +146,15 @@ export class VisorRutinaComponent implements OnInit, OnChanges {
     this.progresoGeneral = (progresoAcumulado / (totalDias * 100)) * 100;
   }
 
+  // Método para expandir toda la rutina (todos los días y grupos musculares)
+  expandirTodaRutina(): void {
+    this.rutina.forEach((dia: any) => {
+      dia.expandido = true;
+      dia.gruposMusculares.forEach((grupo: any) => {
+        grupo.expandido = true;
+      });
+    });
+  }
+
+
 }

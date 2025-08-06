@@ -54,6 +54,32 @@
     box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
 }
 
+/* Botón descargar PDF */
+.btn-descargar {
+    background: linear-gradient(135deg, #f44336, #d32f2f);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 1rem 2rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 15px rgba(244, 67, 54, 0.3);
+    min-width: fit-content;
+}
+
+.btn-descargar:hover {
+    background: linear-gradient(135deg, #d32f2f, #b71c1c);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(244, 67, 54, 0.4);
+}
+
 /* Título base */
 .header h2 {
     font-family: 'Oswald', sans-serif;

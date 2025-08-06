@@ -5,6 +5,10 @@
                 <i class="fas fa-arrow-left"></i>
                 Volver a Mis Rutinas
             </button>
+            <button class="btn-descargar" (click)="descargarPDF()" *ngIf="rutinaCruda">
+                <i class="fas fa-file-pdf"></i>
+                Descargar PDF
+            </button>
             <h2>
                 <i class="fas fa-dumbbell"></i>
                 Detalles de la Rutina
