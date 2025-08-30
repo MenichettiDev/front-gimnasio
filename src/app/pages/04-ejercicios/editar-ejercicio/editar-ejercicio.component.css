@@ -1,11 +1,193 @@
-/* Editar ejercicio optimizado */
+/* ================================================
+   ESTILOS PARA DRAG AND DROP (SHARED)
+   ================================================ */
+
+.drag-drop-area {
+  border: 2px dashed rgba(76, 175, 80, 0.5);
+  border-radius: var(--border-radius-md);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  position: relative;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(10px);
+}
+
+.drag-drop-area:hover {
+  border-color: #4CAF50;
+  background: rgba(76, 175, 80, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(76, 175, 80, 0.2);
+}
+
+.drag-drop-area.drag-over {
+  border-color: #4CAF50;
+  background: rgba(76, 175, 80, 0.15);
+  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(76, 175, 80, 0.4);
+}
+
+.drag-drop-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+}
+
+.drag-drop-area:hover .drag-drop-icon {
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+}
+
+.drag-drop-icon::before {
+  content: '';
+  width: 16px;
+  height: 16px;
+  border: 4px solid #ffffff;
+  border-bottom: none;
+  border-right: none;
+  transform: rotate(45deg);
+  position: absolute;
+  top: 16px;
+}
+
+.drag-drop-icon::after {
+  content: '';
+  width: 5px;
+  height: 22px;
+  background-color: #ffffff;
+  position: absolute;
+  top: 22px;
+  border-radius: 3px;
+}
+
+.drag-drop-text {
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.5px;
+}
+
+.drag-drop-subtext {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.select-file-btn {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.select-file-btn:hover {
+  background: linear-gradient(135deg, #45a049, #3d8b40);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+.file-input {
+  display: none;
+}
+
+.image-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--border-radius-sm);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(76, 175, 80, 0.3);
+}
+
+.drag-drop-area.has-image {
+  padding: 0;
+  min-height: 200px;
+  border: 2px solid rgba(76, 175, 80, 0.5);
+}
+
+.drag-drop-area.has-image:hover {
+  border-color: #4CAF50;
+  transform: none;
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.drag-drop-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.image-validation-error {
+  color: #ff4757;
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background: rgba(255, 71, 87, 0.1);
+  border-radius: 4px;
+  border-left: 3px solid #ff4757;
+}
+
+.image-validation-success {
+  color: #4CAF50;
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background: rgba(76, 175, 80, 0.1);
+  border-radius: 4px;
+  border-left: 3px solid #4CAF50;
+}
+
+.image-requirements {
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  margin-top: 0.25rem;
+  text-align: center;
+}
+
+.drag-drop-area.has-error {
+  border-color: #ff4757;
+  background: rgba(255, 71, 87, 0.1);
+}
+
+.drag-drop-area.has-error .drag-drop-icon {
+  background: linear-gradient(135deg, #ff4757, #ff3838);
+}
+
+/* ================================================
+   ESTILOS ESPECÍFICOS DE EDITAR EJERCICIO
+   ================================================ */
+
 .editar-ejercicio-container {
   min-height: 100vh;
   background: linear-gradient(135deg, rgba(71, 0, 99, 0.95), rgba(71, 0, 99, 0.98));
   padding: 2rem;
 }
 
-/* Header base */
 .page-header {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 20px;
@@ -18,10 +200,8 @@
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 2rem;
 }
 
-/* Título base */
 .page-title {
   font-family: 'Oswald', sans-serif;
   font-size: 2.5rem;
@@ -45,7 +225,6 @@
   font-weight: 300;
 }
 
-/* Secciones base */
 .content-section {
   max-width: 1200px;
   margin: 0 auto 2rem;
@@ -56,8 +235,6 @@
   backdrop-filter: blur(10px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
-
-
 
 .form-control,
 input,
@@ -82,7 +259,6 @@ select:focus {
   outline: none !important;
 }
 
-/* Botones optimizados */
 .btn {
   border: none !important;
   border-radius: 25px !important;
@@ -122,32 +298,46 @@ select:focus {
   box-shadow: 0 6px 20px rgba(244, 67, 54, 0.4) !important;
 }
 
-/* Combos styling */
-:host ::ng-deep app-cbo-gruposmusculares,
-:host ::ng-deep app-cbo-ejercicio {
-  color: #ffffff;
+/* Remove image button */
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
-:host ::ng-deep select option {
-  background: rgba(71, 0, 99, 0.95) !important;
-  color: #ffffff !important;
+.remove-image-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  background: rgba(244, 67, 54, 0.9);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+  font-size: 14px;
 }
 
-/* Loading spinner */
-:host ::ng-deep p-progressSpinner {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1000;
+.remove-image-btn:hover {
+  background: #f44336;
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(244, 67, 54, 0.4);
 }
 
-/* Toast messages */
-:host ::ng-deep .p-toast {
-  z-index: 2000;
+.remove-image-btn i {
+  pointer-events: none;
 }
 
-/* Responsive optimizado */
+/* ================================================
+   RESPONSIVE
+   ================================================ */
+
 @media (max-width: 768px) {
   .editar-ejercicio-container {
     padding: 1rem;
@@ -166,6 +356,41 @@ select:focus {
   .btn {
     width: 100%;
     justify-content: center;
+  }
+
+  .drag-drop-area {
+    padding: 1.5rem;
+    min-height: 100px;
+  }
+
+  .drag-drop-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .drag-drop-icon::before {
+    width: 14px;
+    height: 14px;
+    border: 3px solid #ffffff;
+    border-bottom: none;
+    border-right: none;
+    transform: rotate(45deg);
+    top: 14px;
+  }
+
+  .drag-drop-icon::after {
+    width: 4px;
+    height: 18px;
+    top: 18px;
+    border-radius: 2px;
+  }
+
+  .drag-drop-area.has-image {
+    min-height: 150px;
+  }
+
+  .image-requirements {
+    font-size: 0.65rem;
   }
 }
 
@@ -187,23 +412,44 @@ select:focus {
   .page-subtitle {
     font-size: 1rem;
   }
+
+  .drag-drop-area {
+    padding: 1rem;
+    min-height: 80px;
+  }
+
+  .select-file-btn {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .drag-drop-area.has-image {
+    min-height: 120px;
+  }
 }
 
-.editar-ejercicio-container {
-  padding: 0.5rem;
+/* ================================================
+   ANGULAR DEEP STYLES
+   ================================================ */
+
+:host ::ng-deep app-cbo-gruposmusculares,
+:host ::ng-deep app-cbo-ejercicio {
+  color: #ffffff;
 }
 
-.page-header,
-.content-section {
-  padding: 1rem;
-  border-radius: 15px;
+:host ::ng-deep select option {
+  background: rgba(71, 0, 99, 0.95) !important;
+  color: #ffffff !important;
 }
 
-.page-title {
-  font-size: 1.5rem;
+:host ::ng-deep p-progressSpinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
 }
 
-.page-subtitle {
-  font-size: 1rem;
-}
+:host ::ng-deep .p-toast {
+  z-index: 2000;
 }

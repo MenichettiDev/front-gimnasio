@@ -15,19 +15,19 @@
 
   <div class="content-section">
     <form [formGroup]="exerciseForm" (ngSubmit)="onUpdate()">
-      
+
       <!-- Grupo Muscular -->
       <div class="mb-3">
         <label for="grupoMuscular" class="form-label">Grupo Muscular</label>
         <app-cbo-gruposmusculares formControlName="idGrupoMuscular"
-        (valueChange)="onGrupoMuscularChange($event)"></app-cbo-gruposmusculares>
+          (valueChange)="onGrupoMuscularChange($event)"></app-cbo-gruposmusculares>
       </div>
-      
+
       <!-- Ejercicio -->
       <div class="mb-3">
         <label for="ejercicio" class="form-label">Ejercicio</label>
-        <app-cbo-ejercicio [grupoMuscularId]="selectedGrupoMuscular ?? null"
-        formControlName="idEjercicio" (valueChange)="onEjercicioChange($event)"></app-cbo-ejercicio>
+        <app-cbo-ejercicio [grupoMuscularId]="selectedGrupoMuscular ?? null" formControlName="idEjercicio"
+          (valueChange)="onEjercicioChange($event)"></app-cbo-ejercicio>
       </div>
 
       <!-- ID Ejercicio -->
@@ -35,7 +35,7 @@
         <label for="id_ejercicio" class="form-label">ID Ejercicio</label>
         <input id="id_ejercicio" type="text" formControlName="id_ejercicio" class="form-control" readonly>
       </div>
-      
+
       <!-- ID grupo muscular -->
       <div class="mb-3">
         <label for="id_grupo_muscular" class="form-label">ID Grupo Muscular</label>
@@ -54,22 +54,109 @@
         <textarea id="descripcion" formControlName="descripcion" class="form-control" rows="3"></textarea>
       </div>
 
-      <!-- Imagen 1 -->
-      <div class="mb-3">
-        <label for="img_1" class="form-label">Imagen 1</label>
-        <input id="img_1" type="text" formControlName="img_1" class="form-control">
-      </div>
+      <!-- Imágenes en fila -->
+      <div class="row mb-3">
+        <!-- Imagen 1 -->
+        <div class="col-md-4">
+          <label class="form-label text-white">Imagen 1</label>
+          <div class="drag-drop-area" [class.drag-over]="dragOver" [class.is-valid]="exerciseForm.get('img_1')?.value"
+            [class.has-image]="exerciseForm.get('img_1')?.value" [class.has-error]="imageErrors['img_1']"
+            (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event, 'img_1')"
+            (click)="triggerFileInput('img1Input')">
 
-      <!-- Imagen 2 -->
-      <div class="mb-3">
-        <label for="img_2" class="form-label">Imagen 2</label>
-        <input id="img_2" type="text" formControlName="img_2" class="form-control">
-      </div>
+            <!-- Contenido del drag and drop -->
+            <div class="drag-drop-content" *ngIf="!exerciseForm.get('img_1')?.value">
+              <div class="drag-drop-icon"></div>
+              <div class="drag-drop-text">Arrastra tu imagen aquí</div>
+              <div class="drag-drop-subtext">o haz clic para seleccionar</div>
+              <button type="button" class="select-file-btn" (click)="triggerFileInput('img1Input')">
+                Seleccionar Archivo
+              </button>
+            </div>
 
-      <!-- Imagen 3 -->
-      <div class="mb-3">
-        <label for="img_3" class="form-label">Imagen 3</label>
-        <input id="img_3" type="text" formControlName="img_3" class="form-control">
+            <!-- Previsualización si existe la imagen -->
+            <div *ngIf="exerciseForm.get('img_1')?.value" class="image-container">
+              <img [src]="exerciseForm.get('img_1')?.value" class="image-preview" alt="Vista previa">
+              <button type="button" class="remove-image-btn" (click)="removeImage('img_1')">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+
+            <input #img1Input id="img1Input" type="file" class="file-input" accept="image/*"
+              (change)="onFileSelected($event, 'img_1')">
+          </div>
+          <div class="image-requirements">📏 Se adaptará automáticamente • ⚖️ JPG/PNG únicamente</div>
+          <div *ngIf="imageErrors['img_1']" class="image-validation-error">{{ imageErrors['img_1'] }}</div>
+          <div *ngIf="imageSuccess['img_1']" class="image-validation-success">{{ imageSuccess['img_1'] }}</div>
+        </div>
+
+        <!-- Imagen 2 -->
+        <div class="col-md-4">
+          <label class="form-label text-white">Imagen 2</label>
+          <div class="drag-drop-area" [class.drag-over]="dragOver" [class.is-valid]="exerciseForm.get('img_2')?.value"
+            [class.has-image]="exerciseForm.get('img_2')?.value" [class.has-error]="imageErrors['img_2']"
+            (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event, 'img_2')"
+            (click)="triggerFileInput('img2Input')">
+
+            <!-- Contenido del drag and drop -->
+            <div class="drag-drop-content" *ngIf="!exerciseForm.get('img_2')?.value">
+              <div class="drag-drop-icon"></div>
+              <div class="drag-drop-text">Arrastra tu imagen aquí</div>
+              <div class="drag-drop-subtext">o haz clic para seleccionar</div>
+              <button type="button" class="select-file-btn" (click)="triggerFileInput('img2Input')">
+                Seleccionar Archivo
+              </button>
+            </div>
+
+            <!-- Previsualización si existe la imagen -->
+            <div *ngIf="exerciseForm.get('img_2')?.value" class="image-container">
+              <img [src]="exerciseForm.get('img_2')?.value" class="image-preview" alt="Vista previa">
+              <button type="button" class="remove-image-btn" (click)="removeImage('img_2')">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+
+            <input #img2Input id="img2Input" type="file" class="file-input" accept="image/*"
+              (change)="onFileSelected($event, 'img_2')">
+          </div>
+          <div class="image-requirements">📏 Se adaptará automáticamente • ⚖️ JPG/PNG únicamente</div>
+          <div *ngIf="imageErrors['img_2']" class="image-validation-error">{{ imageErrors['img_2'] }}</div>
+          <div *ngIf="imageSuccess['img_2']" class="image-validation-success">{{ imageSuccess['img_2'] }}</div>
+        </div>
+
+        <!-- Imagen 3 -->
+        <div class="col-md-4">
+          <label class="form-label text-white">Imagen 3</label>
+          <div class="drag-drop-area" [class.drag-over]="dragOver" [class.is-valid]="exerciseForm.get('img_3')?.value"
+            [class.has-image]="exerciseForm.get('img_3')?.value" [class.has-error]="imageErrors['img_3']"
+            (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event, 'img_3')"
+            (click)="triggerFileInput('img3Input')">
+
+            <!-- Contenido del drag and drop -->
+            <div class="drag-drop-content" *ngIf="!exerciseForm.get('img_3')?.value">
+              <div class="drag-drop-icon"></div>
+              <div class="drag-drop-text">Arrastra tu imagen aquí</div>
+              <div class="drag-drop-subtext">o haz clic para seleccionar</div>
+              <button type="button" class="select-file-btn" (click)="triggerFileInput('img3Input')">
+                Seleccionar Archivo
+              </button>
+            </div>
+
+            <!-- Previsualización si existe la imagen -->
+            <div *ngIf="exerciseForm.get('img_3')?.value" class="image-container">
+              <img [src]="exerciseForm.get('img_3')?.value" class="image-preview" alt="Vista previa">
+              <button type="button" class="remove-image-btn" (click)="removeImage('img_3')">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+
+            <input #img3Input id="img3Input" type="file" class="file-input" accept="image/*"
+              (change)="onFileSelected($event, 'img_3')">
+          </div>
+          <div class="image-requirements">📏 Se adaptará automáticamente • ⚖️ JPG/PNG únicamente</div>
+          <div *ngIf="imageErrors['img_3']" class="image-validation-error">{{ imageErrors['img_3'] }}</div>
+          <div *ngIf="imageSuccess['img_3']" class="image-validation-success">{{ imageSuccess['img_3'] }}</div>
+        </div>
       </div>
 
       <!-- Link Video -->

@@ -75,7 +75,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     { id: 32, descripcion: 'Ejercicios', icono: 'bx bx-dumbbell', link: '/ejercicios', grupo: 'GM04', principal: true, orden: 4, estado: true, requiredAccess: [1, 2, 3, 4] },
     { id: 33, descripcion: 'Buscar', icono: '', link: '/ejercicios/buscar', grupo: 'GM04', principal: false, orden: 1, estado: true, requiredAccess: [1, 2, 3, 4] },
     { id: 34, descripcion: 'Cargar nuevo', icono: '', link: '/ejercicios/cargar-nuevo', grupo: 'GM04', principal: false, orden: 2, estado: true, requiredAccess: [1, 2] },
-    { id: 36, descripcion: 'Editar Ejercicio', icono: '', link: '/ejercicios/editar-ejercicio', grupo: 'GM04', principal: false, orden: 3, estado: true, requiredAccess: [1] },
+    { id: 36, descripcion: 'Editar Ejercicio', icono: '', link: '/ejercicios/editar-ejercicio', grupo: 'GM04', principal: false, orden: 3, estado: true, requiredAccess: [1, 2] },
     { id: 37, descripcion: 'Repeticiones', icono: '', link: '/ejercicios/crear-repeticion', grupo: 'GM04', principal: false, orden: 4, estado: true, requiredAccess: [1] },
 
     // GM05 - Asistencia

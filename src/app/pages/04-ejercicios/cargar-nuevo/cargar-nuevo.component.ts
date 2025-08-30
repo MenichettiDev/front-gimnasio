@@ -46,6 +46,13 @@ export class CargarNuevoComponent {
   imageErrors: { [key: string]: string } = {};
   imageSuccess: { [key: string]: string } = {};
 
+  // Add properties to store actual files
+  private imageFiles: { [key: string]: File | null } = {
+    img_1: null,
+    img_2: null,
+    img_3: null
+  };
+
   constructor(
     private fb: FormBuilder,
     private grupoMuscularService: GruposMuscularesService,
@@ -86,7 +93,29 @@ export class CargarNuevoComponent {
   async cargarEjercicio() {
     if (this.exerciseForm.valid) {
       this.loading = true;
-      this.ejercicioService.createEjercicio(this.exerciseForm.value).subscribe(
+
+      // Create FormData for file upload
+      const formData = new FormData();
+
+      // Add text fields
+      formData.append('id_grupo_muscular', this.exerciseForm.get('id_grupo_muscular')?.value || '');
+      formData.append('id_entrenador', this.exerciseForm.get('id_entrenador')?.value || '');
+      formData.append('nombre', this.exerciseForm.get('nombre')?.value || '');
+      formData.append('descripcion', this.exerciseForm.get('descripcion')?.value || '');
+      formData.append('link_video', this.exerciseForm.get('link_video')?.value || '');
+
+      // Add image files
+      if (this.imageFiles['img_1']) {
+        formData.append('img_1', this.imageFiles['img_1']);
+      }
+      if (this.imageFiles['img_2']) {
+        formData.append('img_2', this.imageFiles['img_2']);
+      }
+      if (this.imageFiles['img_3']) {
+        formData.append('img_3', this.imageFiles['img_3']);
+      }
+
+      this.ejercicioService.createEjercicioWithFiles(formData).subscribe(
         response => {
           this.isEditable = false;
           this.resetStatus();
@@ -120,6 +149,15 @@ export class CargarNuevoComponent {
 
   resetStatus(): void {
     this.exerciseForm.reset();
+    // Clear image files
+    this.imageFiles = {
+      img_1: null,
+      img_2: null,
+      img_3: null
+    };
+    // Clear validation messages
+    this.imageErrors = {};
+    this.imageSuccess = {};
     window.scrollTo(0, 0);
     this.obtenerGruposMusculares();
   }
@@ -242,7 +280,11 @@ export class CargarNuevoComponent {
         attempts++;
 
         if (blob.size >= targetMinSize && blob.size <= targetMaxSize) {
-          // Perfect size - convert to base64 and set
+          // Convert blob to file and store
+          const file = new File([blob], `${fieldName}.jpg`, { type: 'image/jpeg' });
+          this.imageFiles[fieldName] = file;
+
+          // Create preview URL for display
           const reader = new FileReader();
           reader.onload = (e) => {
             this.exerciseForm.get(fieldName)?.setValue(e.target?.result);
@@ -262,6 +304,9 @@ export class CargarNuevoComponent {
           tryCompress();
         } else {
           // Couldn't achieve target size after max attempts
+          const file = new File([blob], `${fieldName}.jpg`, { type: 'image/jpeg' });
+          this.imageFiles[fieldName] = file;
+
           const reader = new FileReader();
           reader.onload = (e) => {
             this.exerciseForm.get(fieldName)?.setValue(e.target?.result);
