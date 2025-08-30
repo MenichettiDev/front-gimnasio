@@ -12,6 +12,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-buscar',
@@ -24,13 +25,19 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   styleUrl: './buscar.component.css'
 })
 export class BuscarComponent implements OnInit {
+  private apiUrl = environment.apiEjercicios;
   loading: boolean = false;
   exerciseForm: FormGroup = new FormGroup({});
   selectedGrupoMuscular: number | null = null;
   selectedEjercicio: number | null = null;
   isEditable: boolean = false;
   gruposMusculares: GrupoMuscular[] = [];
-  safeVideoUrl: SafeResourceUrl | null = null; // Variable para almacenar la URL sanitizada
+  safeVideoUrl: SafeResourceUrl | null = null;
+
+  // Add modal properties
+  showModal: boolean = false;
+  selectedImage: string = '';
+  selectedImageTitle: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -100,6 +107,9 @@ export class BuscarComponent implements OnInit {
     this.ejercicioService.getEjercicioById(id_ejercicio).subscribe(data => {
       this.exerciseForm.patchValue(data);
       this.exerciseForm.enable();
+
+      // Load existing images
+      this.loadExerciseImagesUsingPublicUrl(id_ejercicio, this.apiUrl);
     }, error => {
       console.error('Error al cargar el ejercicio', error);
     });
@@ -118,6 +128,10 @@ export class BuscarComponent implements OnInit {
       (data) => {
         this.exerciseForm.patchValue(data); // Actualiza el formulario con los datos del ejercicio
         this.exerciseForm.enable(); // Habilita el formulario si está deshabilitado
+
+        // Load existing images
+        this.loadExerciseImagesUsingPublicUrl(this.selectedEjercicio!, this.apiUrl);
+
         this.loading = false;
       },
       (error) => {
@@ -128,6 +142,19 @@ export class BuscarComponent implements OnInit {
     );
   }
 
+  private loadExerciseImagesUsingPublicUrl(id_ejercicio: number, baseBackendUrl: string): void {
+    const imageFields = ['img_1', 'img_2', 'img_3'];
+
+    imageFields.forEach(field => {
+      const relPath = this.exerciseForm.get(field)?.value; // "Ejercicios/1/123/img_1.jpg"
+      if (relPath) {
+        // normalizar para evitar doble slash
+        const trimmed = relPath.replace(/^\/+/, '');
+        const url = `${baseBackendUrl.replace(/\/+$/, '')}/${trimmed}`;
+        this.exerciseForm.get(field)?.setValue(url); // o guarda en otra variable para <img [src]="...">
+      }
+    });
+  }
 
   resetStatus(): void {
     this.exerciseForm.reset();
@@ -157,6 +184,30 @@ export class BuscarComponent implements OnInit {
 
     // Sanitiza la URL para que Angular la permita en el iframe
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+
+  // Add modal methods
+  openImageModal(imageUrl: string, imageTitle: string): void {
+    if (imageUrl && imageUrl !== 'images/rat.jpeg') {
+      this.selectedImage = imageUrl;
+      this.selectedImageTitle = imageTitle;
+      this.showModal = true;
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+  }
+
+  closeModal(): void {
+    this.showModal = false;
+    this.selectedImage = '';
+    this.selectedImageTitle = '';
+    document.body.style.overflow = 'auto'; // Restore scrolling
+  }
+
+  // Close modal when clicking outside the image
+  onModalBackdropClick(event: MouseEvent): void {
+    if (event.target === event.currentTarget) {
+      this.closeModal();
+    }
   }
 
 }

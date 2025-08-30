@@ -53,6 +53,10 @@ export class CargarNuevoComponent {
     img_3: null
   };
 
+  // Add standard image dimensions
+  private readonly STANDARD_WIDTH = 800;
+  private readonly STANDARD_HEIGHT = 600;
+
   constructor(
     private fb: FormBuilder,
     private grupoMuscularService: GruposMuscularesService,
@@ -197,7 +201,7 @@ export class CargarNuevoComponent {
     input?.click();
   }
 
-  // Add the image validation method
+  // Add the image validation method with standard dimensions
   private processAndValidateImage(file: File, fieldName: string): Promise<boolean> {
     return new Promise((resolve) => {
       // Clear previous messages
@@ -214,7 +218,7 @@ export class CargarNuevoComponent {
 
       const img = new Image();
       img.onload = () => {
-        // Create canvas for resizing and compression
+        // Create canvas with standard dimensions
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
 
@@ -224,28 +228,37 @@ export class CargarNuevoComponent {
           return;
         }
 
-        // Calculate new dimensions (width between 800-1200px)
-        let newWidth = img.width;
-        let newHeight = img.height;
+        // Set canvas to standard size
+        canvas.width = this.STANDARD_WIDTH;
+        canvas.height = this.STANDARD_HEIGHT;
 
-        if (newWidth < 800) {
-          const scale = 800 / newWidth;
-          newWidth = 800;
-          newHeight = Math.round(newHeight * scale);
-        } else if (newWidth > 1200) {
-          const scale = 1200 / newWidth;
-          newWidth = 1200;
-          newHeight = Math.round(newHeight * scale);
+        // Calculate scaling and positioning to maintain aspect ratio
+        const imgAspectRatio = img.width / img.height;
+        const canvasAspectRatio = this.STANDARD_WIDTH / this.STANDARD_HEIGHT;
+
+        let drawWidth = this.STANDARD_WIDTH;
+        let drawHeight = this.STANDARD_HEIGHT;
+        let offsetX = 0;
+        let offsetY = 0;
+
+        if (imgAspectRatio > canvasAspectRatio) {
+          // Image is wider - fit by height and center horizontally
+          drawWidth = this.STANDARD_HEIGHT * imgAspectRatio;
+          offsetX = (this.STANDARD_WIDTH - drawWidth) / 2;
+        } else {
+          // Image is taller - fit by width and center vertically
+          drawHeight = this.STANDARD_WIDTH / imgAspectRatio;
+          offsetY = (this.STANDARD_HEIGHT - drawHeight) / 2;
         }
 
-        // Set canvas size
-        canvas.width = newWidth;
-        canvas.height = newHeight;
+        // Fill with white background first
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(0, 0, this.STANDARD_WIDTH, this.STANDARD_HEIGHT);
 
-        // Draw resized image
-        ctx.drawImage(img, 0, 0, newWidth, newHeight);
+        // Draw image centered and scaled
+        ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
 
-        // Try different quality levels to get file size between 100-250KB
+        // Compress to target size
         this.compressImageToTarget(canvas, fieldName, resolve);
 
         URL.revokeObjectURL(img.src);
@@ -288,7 +301,7 @@ export class CargarNuevoComponent {
           const reader = new FileReader();
           reader.onload = (e) => {
             this.exerciseForm.get(fieldName)?.setValue(e.target?.result);
-            this.imageSuccess[fieldName] = `✓ Imagen adaptada (${canvas.width}x${canvas.height}px, ${Math.round(blob.size / 1024)} KB)`;
+            this.imageSuccess[fieldName] = `✓ Imagen estandarizada (${this.STANDARD_WIDTH}x${this.STANDARD_HEIGHT}px, ${Math.round(blob.size / 1024)} KB)`;
             resolve(true);
           };
           reader.readAsDataURL(blob);
@@ -310,7 +323,7 @@ export class CargarNuevoComponent {
           const reader = new FileReader();
           reader.onload = (e) => {
             this.exerciseForm.get(fieldName)?.setValue(e.target?.result);
-            this.imageSuccess[fieldName] = `✓ Imagen procesada (${canvas.width}x${canvas.height}px, ${Math.round(blob.size / 1024)} KB)`;
+            this.imageSuccess[fieldName] = `✓ Imagen procesada (${this.STANDARD_WIDTH}x${this.STANDARD_HEIGHT}px, ${Math.round(blob.size / 1024)} KB)`;
             resolve(true);
           };
           reader.readAsDataURL(blob);

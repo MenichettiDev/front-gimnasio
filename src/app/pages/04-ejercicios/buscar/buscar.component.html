@@ -67,21 +67,39 @@
                 <label class="form-label">Imágenes de referencia:</label>
                 <div class="row images-grid">
                     <div class="col-md-4 mb-3">
-                        <div class="card">
+                        <div class="card image-card"
+                            (click)="openImageModal(exerciseForm.get('img_1')?.value, 'Imagen 1')"
+                            [class.clickable]="exerciseForm.get('img_1')?.value && exerciseForm.get('img_1')?.value !== 'images/rat.jpeg'">
                             <img [src]="exerciseForm.get('img_1')?.value || 'images/rat.jpeg'" class="card-img-top"
                                 alt="Imagen 1">
+                            <div class="image-overlay"
+                                *ngIf="exerciseForm.get('img_1')?.value && exerciseForm.get('img_1')?.value !== 'images/rat.jpeg'">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-4 mb-3">
-                        <div class="card">
+                        <div class="card image-card"
+                            (click)="openImageModal(exerciseForm.get('img_2')?.value, 'Imagen 2')"
+                            [class.clickable]="exerciseForm.get('img_2')?.value && exerciseForm.get('img_2')?.value !== 'images/rat.jpeg'">
                             <img [src]="exerciseForm.get('img_2')?.value || 'images/rat.jpeg'" class="card-img-top"
                                 alt="Imagen 2">
+                            <div class="image-overlay"
+                                *ngIf="exerciseForm.get('img_2')?.value && exerciseForm.get('img_2')?.value !== 'images/rat.jpeg'">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-4 mb-3">
-                        <div class="card">
+                        <div class="card image-card"
+                            (click)="openImageModal(exerciseForm.get('img_3')?.value, 'Imagen 3')"
+                            [class.clickable]="exerciseForm.get('img_3')?.value && exerciseForm.get('img_3')?.value !== 'images/rat.jpeg'">
                             <img [src]="exerciseForm.get('img_3')?.value || 'images/rat.jpeg'" class="card-img-top"
                                 alt="Imagen 3">
+                            <div class="image-overlay"
+                                *ngIf="exerciseForm.get('img_3')?.value && exerciseForm.get('img_3')?.value !== 'images/rat.jpeg'">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -98,6 +116,16 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Image Modal -->
+    <div class="image-modal" *ngIf="showModal" (click)="onModalBackdropClick($event)">
+        <div class="modal-content">
+            <button type="button" class="close-button" (click)="closeModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <img [src]="selectedImage" alt="{{ selectedImageTitle }}" class="modal-image">
         </div>
     </div>
 </div>
