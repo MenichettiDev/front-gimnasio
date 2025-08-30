@@ -40,6 +40,8 @@ export class CargarNuevoComponent {
   toastMessage: string = '';
   toastType: string = 'success';
 
+  dragOver = false;
+
   constructor(
     private fb: FormBuilder,
     private grupoMuscularService: GruposMuscularesService,
@@ -116,5 +118,48 @@ export class CargarNuevoComponent {
     this.exerciseForm.reset();
     window.scrollTo(0, 0);
     this.obtenerGruposMusculares();
+  }
+
+
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+    this.dragOver = true;
+  }
+
+  onDragLeave(event: DragEvent) {
+    event.preventDefault();
+    this.dragOver = false;
+  }
+
+  onDrop(event: DragEvent, fieldName: string) {
+    event.preventDefault();
+    this.dragOver = false;
+
+    const files = event.dataTransfer?.files;
+    if (files && files.length > 0) {
+      this.handleFile(files[0], fieldName);
+    }
+  }
+
+  onFileSelected(event: any, fieldName: string) {
+    const file = event.target.files[0];
+    if (file) {
+      this.handleFile(file, fieldName);
+    }
+  }
+
+  triggerFileInput(inputId: string) {
+    const input = document.querySelector(`#${inputId}`) as HTMLInputElement;
+    input?.click();
+  }
+
+  private handleFile(file: File, fieldName: string) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      this.exerciseForm.patchValue({
+        [fieldName]: e.target?.result
+      });
+    };
+    reader.readAsDataURL(file);
   }
 }

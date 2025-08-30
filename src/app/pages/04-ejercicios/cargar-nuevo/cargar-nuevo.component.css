@@ -1,108 +1,296 @@
-/* Cargar nuevo ejercicio optimizado */
-.exercise-form {
-    max-width: 800px;
-    margin: 0 auto;
+/* ================================================
+   ESTILOS PARA DRAG AND DROP
+   ================================================ */
+
+.drag-drop-area {
+    border: 2px dashed rgba(76, 175, 80, 0.5);
+    border-radius: var(--border-radius-md);
+    background: rgba(255, 255, 255, 0.05);
     padding: 2rem;
-    background: linear-gradient(135deg, rgba(71, 0, 99, 0.95), rgba(71, 0, 99, 0.98));
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.exercise-form h2 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 2rem;
-    font-weight: 700;
-    color: #ffffff;
-    text-transform: uppercase;
-    letter-spacing: 1px;
     text-align: center;
-    margin-bottom: 2rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    position: relative;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px);
 }
 
-.exercise-form label {
-    display: block;
-    margin: 1.5rem 0 0.8rem;
-    color: #e0e0e0;
-    font-weight: 600;
+.drag-drop-area:hover {
+    border-color: #4CAF50;
+    background: rgba(76, 175, 80, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.2);
+}
+
+.drag-drop-area.drag-over {
+    border-color: #4CAF50;
+    background: rgba(76, 175, 80, 0.15);
+    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.4);
+}
+
+/* Icono de flecha hacia arriba - Versión moderna */
+.drag-drop-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+}
+
+.drag-drop-area:hover .drag-drop-icon {
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+}
+
+.drag-drop-icon::before {
+    content: '';
+    width: 14px;
+    height: 14px;
+    border: 3px solid #ffffff;
+    border-bottom: none;
+    border-right: none;
+    transform: rotate(45deg);
+    position: absolute;
+    top: 18px;
+}
+
+.drag-drop-icon::after {
+    content: '';
+    width: 3px;
+    height: 20px;
+    background-color: #ffffff;
+    position: absolute;
+    top: 24px;
+    border-radius: 2px;
+}
+
+/* Texto del drag and drop */
+.drag-drop-text {
+    color: var(--text-primary);
     font-size: 1rem;
-    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
     letter-spacing: 0.5px;
 }
 
-.exercise-form input,
-.exercise-form select,
-.exercise-form textarea {
-    width: 100%;
-    padding: 0.8rem 1rem;
-    margin-bottom: 1.5rem;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-    color: #ffffff;
-    font-size: 1rem;
-    transition: all 0.3s ease;
+.drag-drop-subtext {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
 }
 
-.exercise-form input:focus,
-.exercise-form select:focus,
-.exercise-form textarea:focus {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: #4CAF50;
-    box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
-    outline: none;
-}
-
-.exercise-form button {
-    display: block;
-    width: 100%;
-    padding: 1rem 2rem;
+/* Botón para seleccionar archivo */
+.select-file-btn {
     background: linear-gradient(135deg, #4CAF50, #45a049);
     color: white;
     border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 1rem;
+    padding: 0.6rem 1.5rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
     font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
 }
 
-.exercise-form button:hover {
+.select-file-btn:hover {
     background: linear-gradient(135deg, #45a049, #3d8b40);
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
 }
 
-.exercise-form button:disabled {
-    background: rgba(255, 255, 255, 0.2);
-    color: #999;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
+/* Input file oculto */
+.file-input {
+    display: none;
 }
 
-.exercise-form img {
-    display: block;
-    margin-top: 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
+/* Previsualización de imagen - Actualizada para ocupar todo el contenedor */
+.image-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--border-radius-sm);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border: 2px solid rgba(76, 175, 80, 0.3);
+}
+
+/* Estado cuando hay imagen cargada */
+.drag-drop-area.has-image {
+    padding: 0;
+    min-height: 200px;
+    border: 2px solid rgba(76, 175, 80, 0.5);
+}
+
+.drag-drop-area.has-image:hover {
+    border-color: #4CAF50;
+    transform: none;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+/* Contenedor del contenido drag and drop */
+.drag-drop-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* Mensajes de validación de imagen */
+.image-validation-error {
+    color: #ff4757;
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
     padding: 0.5rem;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 71, 87, 0.1);
+    border-radius: 4px;
+    border-left: 3px solid #ff4757;
+}
+
+.image-validation-success {
+    color: #4CAF50;
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: rgba(76, 175, 80, 0.1);
+    border-radius: 4px;
+    border-left: 3px solid #4CAF50;
+}
+
+/* Información de requisitos de imagen */
+.image-requirements {
+    color: var(--text-muted);
+    font-size: 0.7rem;
+    margin-top: 0.25rem;
+    text-align: center;
+}
+
+/* Estado de error en drag and drop */
+.drag-drop-area.has-error {
+    border-color: #ff4757;
+    background: rgba(255, 71, 87, 0.1);
+}
+
+.drag-drop-area.has-error .drag-drop-icon {
+    background: linear-gradient(135deg, #ff4757, #ff3838);
+}
+
+/* Animación de pulso cuando se arrastra */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.drag-drop-area.drag-over {
+    animation: pulse 1s infinite;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-    .exercise-form {
-        margin: 1rem;
+    .drag-drop-area {
         padding: 1.5rem;
+        min-height: 100px;
     }
 
-    .exercise-form h2 {
-        font-size: 1.5rem;
+    .drag-drop-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .drag-drop-icon::before {
+        width: 12px;
+        height: 12px;
+        border: 2px solid #ffffff;
+        border-bottom: none;
+        border-right: none;
+        transform: rotate(45deg);
+        top: 16px;
+    }
+
+    .drag-drop-icon::after {
+        width: 2px;
+        height: 16px;
+        top: 20px;
+    }
+
+    .drag-drop-text {
+        font-size: 0.9rem;
+    }
+
+    .drag-drop-subtext {
+        font-size: 0.8rem;
+    }
+
+    .drag-drop-area.has-image {
+        min-height: 150px;
+    }
+
+    .image-requirements {
+        font-size: 0.65rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .drag-drop-area {
+        padding: 1rem;
+        min-height: 80px;
+    }
+
+    .select-file-btn {
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+
+    .drag-drop-area.has-image {
+        min-height: 120px;
+    }
+}
+
+/* Efecto de carga cuando se procesa la imagen */
+.drag-drop-area.loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.drag-drop-area.loading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.3), transparent);
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 100%;
     }
 }
