@@ -33,7 +33,8 @@
             <!-- Imagen 1 -->
             <div class="col-md-4">
                 <label class="form-label text-white">Imagen 1</label>
-                <div class="drag-drop-area" [class.drag-over]="dragOver" [class.is-valid]="exerciseForm.get('img_1')?.value"
+                <div class="drag-drop-area" [class.drag-over]="dragOver"
+                    [class.is-valid]="exerciseForm.get('img_1')?.value"
                     [class.has-image]="exerciseForm.get('img_1')?.value" [class.has-error]="imageErrors['img_1']"
                     (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event, 'img_1')"
                     (click)="triggerFileInput('img1Input')">
@@ -49,8 +50,8 @@
                     </div>
 
                     <!-- Previsualización si existe la imagen -->
-                    <img *ngIf="exerciseForm.get('img_1')?.value" [src]="exerciseForm.get('img_1')?.value" class="image-preview"
-                        alt="Vista previa">
+                    <img *ngIf="exerciseForm.get('img_1')?.value" [src]="exerciseForm.get('img_1')?.value"
+                        class="image-preview" alt="Vista previa">
 
                     <input #img1Input id="img1Input" type="file" class="file-input" accept="image/*"
                         (change)="onFileSelected($event, 'img_1')">
@@ -63,7 +64,8 @@
             <!-- Imagen 2 -->
             <div class="col-md-4">
                 <label class="form-label text-white">Imagen 2</label>
-                <div class="drag-drop-area" [class.drag-over]="dragOver" [class.is-valid]="exerciseForm.get('img_2')?.value"
+                <div class="drag-drop-area" [class.drag-over]="dragOver"
+                    [class.is-valid]="exerciseForm.get('img_2')?.value"
                     [class.has-image]="exerciseForm.get('img_2')?.value" [class.has-error]="imageErrors['img_2']"
                     (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event, 'img_2')"
                     (click)="triggerFileInput('img2Input')">
@@ -93,7 +95,8 @@
             <!-- Imagen 3 -->
             <div class="col-md-4">
                 <label class="form-label text-white">Imagen 3</label>
-                <div class="drag-drop-area" [class.drag-over]="dragOver" [class.is-valid]="exerciseForm.get('img_3')?.value"
+                <div class="drag-drop-area" [class.drag-over]="dragOver"
+                    [class.is-valid]="exerciseForm.get('img_3')?.value"
                     [class.has-image]="exerciseForm.get('img_3')?.value" [class.has-error]="imageErrors['img_3']"
                     (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event, 'img_3')"
                     (click)="triggerFileInput('img3Input')">
