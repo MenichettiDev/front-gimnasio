@@ -56,7 +56,7 @@
                     <input #img1Input id="img1Input" type="file" class="file-input" accept="image/*"
                         (change)="onFileSelected($event, 'img_1')">
                 </div>
-                <div class="image-requirements">📏 800–1200px de ancho • ⚖️ 100–250 KB</div>
+                <div class="image-requirements">📏 Se adaptará automáticamente • ⚖️ JPG/PNG únicamente</div>
                 <div *ngIf="imageErrors['img_1']" class="image-validation-error">{{ imageErrors['img_1'] }}</div>
                 <div *ngIf="imageSuccess['img_1']" class="image-validation-success">{{ imageSuccess['img_1'] }}</div>
             </div>
@@ -87,7 +87,7 @@
                     <input #img2Input id="img2Input" type="file" class="file-input" accept="image/*"
                         (change)="onFileSelected($event, 'img_2')">
                 </div>
-                <div class="image-requirements">📏 800–1200px de ancho • ⚖️ 100–250 KB</div>
+                <div class="image-requirements">📏 Se adaptará automáticamente • ⚖️ JPG/PNG únicamente</div>
                 <div *ngIf="imageErrors['img_2']" class="image-validation-error">{{ imageErrors['img_2'] }}</div>
                 <div *ngIf="imageSuccess['img_2']" class="image-validation-success">{{ imageSuccess['img_2'] }}</div>
             </div>
@@ -118,7 +118,7 @@
                     <input #img3Input id="img3Input" type="file" class="file-input" accept="image/*"
                         (change)="onFileSelected($event, 'img_3')">
                 </div>
-                <div class="image-requirements">📏 800–1200px de ancho • ⚖️ 100–250 KB</div>
+                <div class="image-requirements">📏 Se adaptará automáticamente • ⚖️ JPG/PNG únicamente</div>
                 <div *ngIf="imageErrors['img_3']" class="image-validation-error">{{ imageErrors['img_3'] }}</div>
                 <div *ngIf="imageSuccess['img_3']" class="image-validation-success">{{ imageSuccess['img_3'] }}</div>
             </div>
