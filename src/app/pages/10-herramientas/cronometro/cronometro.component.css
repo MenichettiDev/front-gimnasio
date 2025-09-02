@@ -57,18 +57,82 @@
     letter-spacing: 2px;
 }
 
-.cronometro-info {
-    font-size: 1.2rem;
-    color: #e0e0e0;
-    margin-bottom: 1rem;
-    text-align: center;
+/* Grid de modos (ajustado colores y texto blanco) */
+.mode-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+    margin-bottom: 0.8rem;
 }
 
-.cronometro-controls {
+.mode-card {
+    /* usar el fondo del contenedor (de la app) en lugar de un gradiente propio */
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 0.8rem;
+    border-radius: 10px;
+    text-align: left;
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
     display: flex;
-    gap: 1rem;
-    justify-content: center;
-    margin-top: 1rem;
+    flex-direction: column;
+    gap: 0.2rem;
+    color: #fff;
+    /* texto blanco */
+    min-height: 64px;
+    position: relative;
+    overflow: visible;
+}
+
+.mode-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
+}
+
+/* estado seleccionado: borde verde fuerte y glow profesional */
+.mode-selected {
+    border-color: #4CAF50;
+    box-shadow:
+        0 6px 20px rgba(76, 175, 80, 0.08),
+        0 0 28px rgba(76, 175, 80, 0.18);
+    background: linear-gradient(135deg, rgba(76,175,80,0.06), rgba(0,0,0,0.02));
+    transform: translateY(-4px) scale(1.01);
+    transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease, background 0.16s ease;
+    color: #fff;
+}
+
+.mode-title {
+    font-weight: 600;
+    color: #fff;
+}
+
+.mode-sub {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+/* Forzar texto blanco en todos los mensajes que están arriba de "Reanudar" */
+.cronometro-info span {
+    color: #fff !important;
+}
+
+/* Acciones del formulario: botones adaptativos iguales de ancho */
+.form-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.form-actions .action-btn {
+    flex: 1;
+    color: #fff;
+    /* asegurar texto blanco en los botones */
+    min-height: 40px;
+}
+
+/* margen inferior para reanudar */
+.cronometro-controls .reanudar-btn {
+    margin-bottom: 0.6rem;
 }
 
 @keyframes pulse {
@@ -94,5 +158,13 @@
 
     .cronometro-tiempo {
         font-size: 2rem;
+    }
+
+    .mode-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .form-actions {
+        flex-direction: column;
     }
 }
