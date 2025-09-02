@@ -34,6 +34,9 @@ export class BuscarComponent implements OnInit {
   gruposMusculares: GrupoMuscular[] = [];
   safeVideoUrl: SafeResourceUrl | null = null;
 
+  // nuevo flag
+  currentVideoIsShort: boolean = false;
+
   // Add modal properties
   showModal: boolean = false;
   selectedImage: string = '';
@@ -166,24 +169,44 @@ export class BuscarComponent implements OnInit {
 
   // Método para sanitizar la URL del video
   getSafeUrl(url: string): SafeResourceUrl {
-    // Verifica si la URL es de YouTube
-    if (url.includes('youtube.com/watch?v=')) {
+    // Reset flag
+    this.currentVideoIsShort = false;
+
+    if (!url) {
+      return this.sanitizer.bypassSecurityTrustResourceUrl('');
+    }
+
+    let embedUrl = url;
+
+    // Detectar YouTube Shorts: /shorts/VIDEO_ID
+    if (url.includes('/shorts/')) {
+      const parts = url.split('/shorts/');
+      const id = parts[1]?.split(/[?&]/)[0];
+      if (id) {
+        embedUrl = `https://www.youtube.com/embed/${id}`;
+        this.currentVideoIsShort = true;
+      }
+    } else if (url.includes('youtube.com/watch?v=')) {
       const urlParams = new URLSearchParams(new URL(url).search);
       const videoId = urlParams.get('v');
       if (videoId) {
-        // Convierte la URL al formato de incrustación
-        url = `https://www.youtube.com/embed/${videoId}`;
+        embedUrl = `https://www.youtube.com/embed/${videoId}`;
       }
     } else if (url.includes('youtu.be/')) {
-      // Maneja URLs cortas de YouTube
       const videoId = url.split('youtu.be/')[1].split('?')[0];
       if (videoId) {
-        url = `https://www.youtube.com/embed/${videoId}`;
+        embedUrl = `https://www.youtube.com/embed/${videoId}`;
       }
     }
 
-    // Sanitiza la URL para que Angular la permita en el iframe
-    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    // Opcional: parámetros comunes para evitar sugerencias (rel=0)
+    if (!embedUrl.includes('?')) {
+      embedUrl += '?rel=0';
+    } else if (!/rel=/.test(embedUrl)) {
+      embedUrl += '&rel=0';
+    }
+
+    return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
   }
 
   // Add modal methods

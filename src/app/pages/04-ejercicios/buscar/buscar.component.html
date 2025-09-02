@@ -108,11 +108,20 @@
             <!-- Mostrar el enlace del video -->
             <div class="mb-3" *ngIf="exerciseForm.get('link_video')?.value">
                 <label class="form-label">Video demostrativo:</label>
-                <div class="video-container">
+
+                <!-- Video normal (16:9) -->
+                <div class="video-container" *ngIf="!currentVideoIsShort">
                     <div class="embed-responsive embed-responsive-16by9">
                         <iframe class="embed-responsive-item" [src]="getSafeUrl(exerciseForm.get('link_video')?.value)"
                             allowfullscreen>
                         </iframe>
+                    </div>
+                </div>
+
+                <!-- YouTube Short (vertical 9:16) -->
+                <div class="video-container short" *ngIf="currentVideoIsShort">
+                    <div class="embed-short">
+                        <iframe [src]="getSafeUrl(exerciseForm.get('link_video')?.value)" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
