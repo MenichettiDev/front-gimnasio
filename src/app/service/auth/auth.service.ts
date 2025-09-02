@@ -14,21 +14,21 @@ export class AuthService {
 
   // Guardar los datos del usuario en localStorage y actualizar el estado
   saveUser(user: any): void {
-    sessionStorage.setItem(this.USER_KEY, JSON.stringify(user));
+    localStorage.setItem(this.USER_KEY, JSON.stringify(user));
     this.loggedIn.next(true);
   }
 
   getUser(): any | null {
-    const userData = sessionStorage.getItem(this.USER_KEY);
+    const userData = localStorage.getItem(this.USER_KEY);
     return userData ? JSON.parse(userData) : null;
   }
 
   isLoggedIn(): boolean {
-    return !!sessionStorage.getItem(this.USER_KEY);
+    return !!localStorage.getItem(this.USER_KEY);
   }
 
   logout(): void {
-    sessionStorage.removeItem(this.USER_KEY);
+    localStorage.removeItem(this.USER_KEY);
     this.loggedIn.next(false);
   }
 

@@ -32,7 +32,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // No es necesario volver a inicializar loginForm en ngOnInit
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/inicio/resumen']);
+    }
   }
 
   onSubmit(): void {
