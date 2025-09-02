@@ -29,9 +29,10 @@
 
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="apodo" class="form-label">Apodo</label>
-                        <input type="text" id="apodo" formControlName="apodo" class="form-control"
-                            placeholder="Ingrese su apodo (opcional)" />
+                        <label for="email" class="form-label">Email *</label>
+                        <input type="email" id="email" formControlName="email" class="form-control"
+                            [class.is-invalid]="isFieldInvalid('email')" placeholder="Ingrese su email" />
+                        <div class="invalid-feedback">{{ getFieldError('email') }}</div>
                     </div>
                     <div class="col-md-6">
                         <label for="dni" class="form-label">DNI *</label>
@@ -66,14 +67,7 @@
                     </div>
                 </div>
 
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label for="email" class="form-label">Email *</label>
-                        <input type="email" id="email" formControlName="email" class="form-control"
-                            [class.is-invalid]="isFieldInvalid('email')" placeholder="Ingrese su email" />
-                        <div class="invalid-feedback">{{ getFieldError('email') }}</div>
-                    </div>
-                </div>
+
 
                 <!-- Contraseñas -->
                 <div class="section-header">

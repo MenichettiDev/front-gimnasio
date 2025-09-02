@@ -29,9 +29,10 @@
 
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="apodo" class="form-label">Apodo</label>
-                        <input type="text" id="apodo" formControlName="apodo" class="form-control"
-                            placeholder="Ingrese su apodo (opcional)" />
+                        <label for="email" class="form-label">Email *</label>
+                        <input type="email" id="email" formControlName="email" class="form-control"
+                            [class.is-invalid]="isFieldInvalid('email')" placeholder="Ingrese su email" />
+                        <div class="invalid-feedback">{{ getFieldError('email') }}</div>
                     </div>
                     <div class="col-md-6">
                         <label for="dni" class="form-label">DNI *</label>
@@ -63,21 +64,6 @@
                         <label for="direccion" class="form-label">Dirección</label>
                         <input type="text" id="direccion" formControlName="direccion" class="form-control"
                             placeholder="Ingrese su dirección (opcional)" />
-                    </div>
-                </div>
-
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label for="email" class="form-label">Email *</label>
-                        <input type="email" id="email" formControlName="email" class="form-control"
-                            [class.is-invalid]="isFieldInvalid('email')" placeholder="Ingrese su email" />
-                        <div class="invalid-feedback">{{ getFieldError('email') }}</div>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="fecha_ingreso" class="form-label">Fecha de Ingreso *</label>
-                        <input type="date" id="fecha_ingreso" formControlName="fecha_ingreso" class="form-control"
-                            [class.is-invalid]="isFieldInvalid('fecha_ingreso')" />
-                        <div class="invalid-feedback">{{ getFieldError('fecha_ingreso') }}</div>
                     </div>
                 </div>
 

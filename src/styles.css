@@ -63,6 +63,58 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+/* Asegurar que todos los labels de formulario sean blancos */
+label,
+.form-label,
+.form-label-base,
+.form-check-label {
+  color: var(--text-primary) !important;
+}
+
+/* Placeholders en gris más oscuro (compatibilidad multiplataforma) */
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder,
+.form-control::-webkit-input-placeholder {
+  color: #b0b0b0 !important;
+}
+
+input::-moz-placeholder,
+textarea::-moz-placeholder,
+.form-control::-moz-placeholder {
+  color: #b0b0b0 !important;
+  opacity: 1;
+}
+
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder,
+.form-control:-ms-input-placeholder {
+  color: #b0b0b0 !important;
+}
+
+input::-ms-input-placeholder,
+textarea::-ms-input-placeholder,
+.form-control::-ms-input-placeholder {
+  color: #b0b0b0 !important;
+}
+
+input::placeholder,
+textarea::placeholder,
+.form-control::placeholder {
+  color: #b0b0b0 !important;
+  opacity: 1;
+}
+
+/* Si usas una opción deshabilitada como placeholder en selects */
+.form-select option[disabled] {
+  color: #b0b0b0;
+}
+
+/* Mejor visibilidad para opciones "placeholder" en selects */
+.form-select option.placeholder,
+select option.placeholder {
+  color: #b0b0b0;
+}
+
 /* Headers de sección */
 .section-header-base {
   margin: 2rem 0 1rem 0;
@@ -506,6 +558,7 @@ select {
 
 /* Para dispositivos móviles: aumentar el tamaño del desplegable y permitir scroll */
 @media (max-width: 576px) {
+
   .form-select,
   select {
     font-size: 1.1rem;

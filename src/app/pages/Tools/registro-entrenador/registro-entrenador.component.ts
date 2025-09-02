@@ -33,7 +33,6 @@ export class RegistroEntrenadorComponent implements OnInit {
       dni: ['', [Validators.required, Validators.minLength(8)]],
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
-      apodo: [''],
       fecha_nacimiento: ['', Validators.required],
       celular: ['', [Validators.required, Validators.minLength(10)]],
       direccion: [''],
@@ -41,7 +40,6 @@ export class RegistroEntrenadorComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirm_password: ['', Validators.required],
       // Datos específicos de Entrenador
-      fecha_ingreso: ['', Validators.required],
       gimnasios: [[]],
       acepta_terminos: [false, Validators.requiredTrue]
     }, {
@@ -55,7 +53,6 @@ export class RegistroEntrenadorComponent implements OnInit {
       dni: ['', [Validators.required, Validators.minLength(8), this.dniValidator]],
       nombre: ['', [Validators.required, Validators.minLength(2)]],
       apellido: ['', [Validators.required, Validators.minLength(2)]],
-      apodo: [''],
       fecha_nacimiento: ['', [Validators.required, this.dateValidator]],
       celular: ['', [Validators.required, Validators.pattern(/^[0-9]{10,15}$/)]],
       direccion: [''],
@@ -63,18 +60,12 @@ export class RegistroEntrenadorComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirm_password: ['', Validators.required],
       // Datos específicos de Entrenador
-      fecha_ingreso: ['', Validators.required],
       gimnasios: [[]],
       acepta_terminos: [false, Validators.requiredTrue]
     }, {
       validators: this.passwordMatchValidator
     });
 
-    // Establecer fecha de ingreso como hoy por defecto
-    const today = new Date().toISOString().split('T')[0];
-    this.frmData.patchValue({
-      fecha_ingreso: today
-    });
   }
 
   // Validador de fecha (no puede ser futura para fecha de nacimiento)
@@ -176,14 +167,12 @@ export class RegistroEntrenadorComponent implements OnInit {
       dni: formValue.dni,
       nombre: formValue.nombre,
       apellido: formValue.apellido,
-      apodo: formValue.apodo || null,
       fecha_nacimiento: formValue.fecha_nacimiento,
       celular: formValue.celular,
       direccion: formValue.direccion || null,
       email: formValue.email,
       password: formValue.password, // El backend ya hashea la contraseña
       // Datos específicos de entrenador
-      fecha_ingreso: formValue.fecha_ingreso,
       gimnasios: [] // Array de IDs de gimnasios
     };
 
@@ -201,7 +190,6 @@ export class RegistroEntrenadorComponent implements OnInit {
           id_entrenador: response.id_entrenador,
           // Agregar otros campos que necesites en la sesión
           dni: formValue.dni,
-          apodo: formValue.apodo
         };
 
         // Guardar usuario en sesión
