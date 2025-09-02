@@ -91,13 +91,42 @@
 
 /* estado seleccionado: borde verde fuerte y glow profesional */
 .mode-selected {
+    /* fondo verde sólido/gradiente para resaltar claramente */
+    background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
     border-color: #4CAF50;
     box-shadow:
-        0 6px 20px rgba(76, 175, 80, 0.08),
-        0 0 28px rgba(76, 175, 80, 0.18);
-    background: linear-gradient(135deg, rgba(76, 175, 80, 0.06), rgba(0, 0, 0, 0.02));
-    transform: translateY(-4px) scale(1.01);
-    transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease, background 0.16s ease;
+        0 12px 30px rgba(0, 0, 0, 0.35),
+        0 10px 40px rgba(76, 175, 80, 0.22);
+    transform: translateY(-6px) scale(1.035);
+    transition: transform 0.18s cubic-bezier(.2, .9, .3, 1), box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    color: #fff;
+    z-index: 2;
+}
+
+/* glow suave extra con tono verde (reforzado) */
+.mode-selected::after {
+    content: "";
+    position: absolute;
+    inset: -8px;
+    border-radius: 12px;
+    background: radial-gradient(closest-side, rgba(76, 175, 80, 0.24), rgba(76, 175, 80, 0.10) 40%, transparent 60%);
+    filter: blur(10px);
+    pointer-events: none;
+    z-index: -1;
+    opacity: 1;
+    transition: opacity 0.18s ease;
+}
+
+/* asegurar que títulos/subtítulos sigan blancos sobre el fondo verde */
+.mode-selected .mode-title,
+.mode-selected .mode-sub {
+    color: #fff;
+}
+
+/* incrementar prominencia del título en la card seleccionada */
+.mode-selected .mode-title {
+    font-weight: 700;
+    letter-spacing: 0.6px;
     color: #fff;
 }
 
