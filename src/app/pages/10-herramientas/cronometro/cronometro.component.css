@@ -95,7 +95,7 @@
     box-shadow:
         0 6px 20px rgba(76, 175, 80, 0.08),
         0 0 28px rgba(76, 175, 80, 0.18);
-    background: linear-gradient(135deg, rgba(76,175,80,0.06), rgba(0,0,0,0.02));
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.06), rgba(0, 0, 0, 0.02));
     transform: translateY(-4px) scale(1.01);
     transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease, background 0.16s ease;
     color: #fff;
