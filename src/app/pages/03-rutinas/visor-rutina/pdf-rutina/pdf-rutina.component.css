@@ -1,153 +1,323 @@
-.pdf-rutina-container {
-    font-family: Arial, sans-serif;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background: white;
+/* Importar variables globales de la app */
+@import url('../../../../../styles.css');
+
+/* Configuración de página sin bordes blancos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
+@page {
+    margin: 0;
+    size: A4;
+    background: var(--primary-gradient);
+}
+
+.pdf-rutina-container {
+    width: 210mm;
+    min-height: 297mm;
+    background: var(--primary-gradient);
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-primary);
+    position: relative;
+    overflow: visible;
+    page-break-inside: auto;
+}
+
+/* Marca de agua que se repite en cada página */
+.pdf-rutina-container::before {
+    content: '';
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 180mm;
+    height: 180mm;
+    background-image: url('/assets/images/gymrats_v003_W.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.08;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Contenido principal por encima de la marca de agua */
+.pdf-rutina-container>* {
+    position: relative;
+    z-index: 1;
+}
+
+/* Página individual con padding interno */
+.pdf-page {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 15mm;
+    box-sizing: border-box;
+    page-break-after: always;
+    display: flex;
+    flex-direction: column;
+}
+
+.pdf-page:last-child {
+    page-break-after: avoid;
+}
+
+/* Header del PDF usando estilos de la app */
 .pdf-header {
     display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: space-between;
-    padding: 2rem;
-    border-bottom: 3px solid #4CAF50;
-    margin-bottom: 2rem;
+    margin-bottom: 20px;
+    padding: 20px;
+    background: var(--glass-background);
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--glass-border);
+    text-align: center;
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-base);
 }
 
 .pdf-header h1 {
-    margin: 0 0 0.5rem 0;
-    color: #333;
-    font-size: 2rem;
-    font-weight: bold;
+    font-family: 'Oswald', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 0 12px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .pdf-header-info {
-    color: #666;
-    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-secondary);
 }
 
 .pdf-header-info span {
-    margin-left: 2rem;
+    background: var(--glass-background);
+    padding: 4px 8px;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--glass-border);
 }
 
-.pdf-header-info span:first-child {
-    margin-left: 0;
-}
-
-.pdf-header img {
-    height: 60px;
-    border-radius: 10px;
-}
-
+/* Descripción usando estilos de la app */
 .rutina-descripcion {
-    background: #f8f9fa;
-    padding: 1.5rem;
-    border-radius: 8px;
-    margin-bottom: 2rem;
-    border-left: 4px solid #4CAF50;
-}
-
-.rutina-descripcion h3 {
-    margin: 0 0 1rem 0;
-    color: #333;
-    font-size: 1.2rem;
-}
-
-.rutina-descripcion p {
-    margin: 0;
-    color: #555;
-    line-height: 1.5;
-}
-
-.plan-entrenamiento {
-    margin-top: 2rem;
-}
-
-.plan-entrenamiento h3 {
-    color: #333;
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: var(--glass-background);
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--glass-border);
     text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.dia-container {
-    margin-bottom: 2.5rem;
     page-break-inside: avoid;
 }
 
-.dia-header {
-    background: linear-gradient(135deg, #4CAF50, #45a049);
-    color: white;
-    padding: 1rem;
-    border-radius: 8px 8px 0 0;
-    font-weight: bold;
-    font-size: 1.1rem;
+.rutina-descripcion h3 {
+    background: linear-gradient(90deg, #e0811a, #ffde04);
+    color: #000;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 8px 0;
+    padding: 6px 12px;
+    border-radius: var(--border-radius-sm);
+    text-align: center;
 }
 
+.rutina-descripcion p {
+    font-size: 12px;
+    line-height: 1.4;
+    margin: 0;
+    color: var(--text-secondary);
+}
+
+/* Plan de entrenamiento */
+.plan-entrenamiento {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.plan-entrenamiento h3 {
+    background: linear-gradient(90deg, #e0811a, #ffde04);
+    color: #000;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 0 20px 0;
+    padding: 10px 15px;
+    border-radius: var(--border-radius-sm);
+    text-align: center;
+}
+
+/* Contenedor de día con paginación controlada */
+.dia-container {
+    margin-bottom: 20px;
+    background: var(--glass-background);
+    border-radius: var(--border-radius-sm);
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+/* Si una tabla es muy larga, permitir que se divida */
+.dia-container.allow-break {
+    page-break-inside: auto;
+    break-inside: auto;
+}
+
+.dia-header {
+    background: linear-gradient(90deg, #e0811a, #ffde04);
+    color: #000;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 8px 12px;
+    text-align: center;
+    margin: 0;
+}
+
+/* Tabla usando estilos de la app */
 .ejercicios-table {
     width: 100%;
-    border-collapse: collapse;
-    background: white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-collapse: separate;
+    border-spacing: 0;
+    background: transparent;
+    margin: 0;
 }
 
-.ejercicios-table thead tr {
-    background: #f8f9fa;
-    border-bottom: 2px solid #dee2e6;
+.ejercicios-table thead {
+    background: linear-gradient(90deg, #e0811a, #ffde04);
 }
 
-.ejercicios-table th {
-    padding: 12px;
-    text-align: left;
-    font-weight: 600;
-    color: #333;
-    border: 1px solid #dee2e6;
-}
-
-.ejercicios-table tbody tr {
-    border-bottom: 1px solid #dee2e6;
-}
-
-.ejercicios-table tbody tr:nth-child(even) {
-    background: #f8f9fa;
-}
-
-.ejercicios-table tbody tr:nth-child(odd) {
-    background: #ffffff;
-}
-
-.ejercicios-table td {
-    padding: 12px;
-    border: 1px solid #dee2e6;
-}
-
-.ejercicios-table td:first-child {
-    font-weight: 500;
-}
-
-.pdf-footer {
+.ejercicios-table thead th {
+    padding: 8px 6px;
     text-align: center;
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 2px solid #eee;
-    color: #666;
-    font-size: 0.9rem;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #000;
+    border: none;
+    background: none;
+}
+
+.ejercicios-table tbody td {
+    padding: 8px 6px;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 9px;
+    background-color: var(--glass-background);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.ejercicios-table tbody tr:nth-child(even) td {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Fallback pequeño */
+.small-fallback {
+    font-size: 8px;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 2px;
+}
+
+/* Loading data */
+.loading-data {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 12px;
+}
+
+/* Footer del PDF usando estilos de la app */
+.pdf-footer {
+    margin-top: auto;
+    padding: 12px 15px;
+    text-align: center;
+    border-top: 1px solid var(--glass-border);
+    background: var(--glass-background);
+    border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
 }
 
 .pdf-footer hr {
     border: none;
-    border-top: 1px solid #ddd;
-    margin-bottom: 1rem;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--glass-border), transparent);
+    margin: 0 0 8px 0;
 }
 
 .pdf-footer p {
-    margin: 0;
+    margin: 3px 0;
+    font-size: 9px;
+    color: var(--text-muted);
 }
 
-.pdf-footer p:last-child {
-    margin: 0.5rem 0 0 0;
-    font-size: 0.8rem;
+.pdf-footer a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+/* Configuración de impresión/PDF sin bordes */
+@media print {
+    * {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    @page {
+        margin: 0 !important;
+        padding: 0 !important;
+        background: var(--primary-gradient) !important;
+        -webkit-print-color-adjust: exact !important;
+        color-adjust: exact !important;
+    }
+
+    .pdf-rutina-container {
+        background: var(--primary-gradient) !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .pdf-rutina-container::before {
+        position: absolute !important;
+    }
+
+    /* Forzar saltos de página apropiados */
+    .dia-container {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    .dia-container.allow-break {
+        page-break-inside: auto;
+        break-inside: auto;
+    }
+}
+
+/* Clases auxiliares para paginación dinámica */
+.page-break-before {
+    page-break-before: always;
+    break-before: page;
+}
+
+.page-break-after {
+    page-break-after: always;
+    break-after: page;
+}
+
+.no-page-break {
+    page-break-inside: avoid;
+    break-inside: avoid;
 }
