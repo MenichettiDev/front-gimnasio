@@ -35,7 +35,6 @@ export class RegistroAtletaComponent implements OnInit {
       dni: ['', [Validators.required, Validators.minLength(8), this.dniValidator]],
       nombre: ['', [Validators.required, Validators.minLength(2)]],
       apellido: ['', [Validators.required, Validators.minLength(2)]],
-      apodo: [''],
       fecha_nacimiento: ['', [Validators.required, this.dateValidator]],
       celular: ['', [Validators.required, Validators.pattern(/^[0-9]{10,15}$/)]],
       direccion: [''],
@@ -168,7 +167,6 @@ export class RegistroAtletaComponent implements OnInit {
       dni: formValue.dni,
       nombre: formValue.nombre,
       apellido: formValue.apellido,
-      apodo: formValue.apodo || null,
       fecha_nacimiento: formValue.fecha_nacimiento,
       celular: formValue.celular,
       direccion: formValue.direccion || null,
@@ -192,8 +190,7 @@ export class RegistroAtletaComponent implements OnInit {
           email: formValue.email,
           id_atleta: response.id_atleta,
           // Agregar otros campos que necesites en la sesión
-          dni: formValue.dni,
-          apodo: formValue.apodo
+          dni: formValue.dni
         };
 
         // Guardar usuario en sesión

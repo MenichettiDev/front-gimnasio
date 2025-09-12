@@ -6,7 +6,6 @@ export interface Entrenador {
     id_acceso: number;
     nombre: string;
     apellido: string;
-    apodo: string;
     fecha_nacimiento: Date;
     fecha_registro: Date;
     celular: string;
