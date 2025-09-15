@@ -42,6 +42,7 @@ export class MisRutinasComponent implements OnInit {
   rutinasDelAtleta: any[] = [];
   rutinasGenericasEntrenador: any[] = [];
   rutinasGenericasGimnasio: any[] = [];
+  rutinasGenericasApp: any[] = [];
 
   constructor(
     private authService: AuthService,
@@ -139,63 +140,40 @@ export class MisRutinasComponent implements OnInit {
 
   // Método para categorizar rutinas según el creador
   categorizarRutinas(): void {
-
-    // Verificar los id_creador de cada rutina
-    this.rutinas.forEach((rutina, index) => {
-    });
-
-    // Rutinas dedicadas al atleta (id_atleta == this.id_atleta)
+    // Rutinas propias (id_creador = id_persona)
     this.rutinasDelAtleta = this.rutinas.filter(rutina =>
       Number(rutina.id_creador) === Number(this.id_persona)
     );
 
-    // Rutinas dedicadas al atleta (id_atleta == this.id_atleta y no creadas por el atleta)
-    const dedicadas = this.rutinas.filter(rutina =>
-      Number(rutina.id_atleta) === Number(this.id_atleta) &&
-      Number(rutina.id_creador) !== Number(this.id_persona)
+    // Rutinas asignadas por entrenador (id_creador = id_entrenador & rutina.id_atleta = id_atleta)
+    this.rutinasDelEntrenador = this.rutinas.filter(rutina =>
+      Number(rutina.id_creador) === Number(this.id_entrenador) &&
+      Number(rutina.id_atleta) === Number(this.id_atleta) && Number(rutina.id_creador !== 0)
     );
 
-    // Rutinas genéricas (id_atleta == 0 y no creadas por el atleta)
-    const genericas = this.rutinas.filter(rutina =>
-      Number(rutina.id_atleta) === 0 &&
-      Number(rutina.id_creador) !== Number(this.id_persona)
+    // Rutinas asignadas por gimnasio (id_creador = id_gimnasio & rutina.id_atleta = id_atleta)
+    this.rutinasDelGimnasio = this.rutinas.filter(rutina =>
+      Number(rutina.id_creador) === Number(this.id_gimnasio) &&
+      Number(rutina.id_atleta) === Number(this.id_atleta) && Number(rutina.id_creador !== 0)
     );
 
-    // Obtén los id_creador únicos de las genéricas y dedicadas
-    const idsCreadores = Array.from(new Set([...genericas, ...dedicadas].map(r => r.id_creador)));
+    // Rutinas genéricas de entrenador (id_creador = id_entrenador & rutina.id_atleta = 0)
+    this.rutinasGenericasEntrenador = this.rutinas.filter(rutina =>
+      Number(rutina.id_creador) === Number(this.id_entrenador) &&
+      Number(rutina.id_atleta) === 0 && Number(rutina.id_creador !== 0)
+    );
 
-    forkJoin(
-      idsCreadores.map(id =>
-        this.personaService.obtenerPersonaPorId(id)
-      )
-    ).subscribe((personas: any[]) => {
-      const perfilPorId: { [key: number]: number } = {};
-      personas.forEach(persona => {
-        perfilPorId[persona.id_persona] = Number(persona.id_acceso);
-      });
+    // Rutinas genéricas de gimnasio (id_creador = id_gimnasio & rutina.id_atleta = 0)
+    this.rutinasGenericasGimnasio = this.rutinas.filter(rutina =>
+      Number(rutina.id_creador) === Number(this.id_gimnasio) &&
+      Number(rutina.id_atleta) === 0 && Number(rutina.id_creador !== 0)
+    );
 
-      // Rutinas dedicadas al atleta por entrenador
-      this.rutinasDelEntrenador = dedicadas.filter(rutina =>
-        perfilPorId[rutina.id_creador] === 2 // 2 = Entrenador
-      );
-
-      // Rutinas dedicadas al atleta por gimnasio
-      this.rutinasDelGimnasio = dedicadas.filter(rutina =>
-        perfilPorId[rutina.id_creador] === 4 // 4 = Gimnasio
-      );
-
-      // Genéricas de entrenador
-      this.rutinasGenericasEntrenador = genericas.filter(rutina =>
-        perfilPorId[rutina.id_creador] === 2 // 2 = Entrenador
-      );
-
-      // Genéricas de gimnasio
-      this.rutinasGenericasGimnasio = genericas.filter(rutina =>
-        perfilPorId[rutina.id_creador] === 4 // 4 = Gimnasio
-      );
-
-      // Logs para debug
-    });
+    // Rutinas de la app (id_creador = 0 & rutina.id_atleta = 0)
+    this.rutinasGenericasApp = this.rutinas.filter(rutina =>
+      Number(rutina.id_creador) === 0 &&
+      Number(rutina.id_atleta) === 0
+    );
   }
 
   verDetallesRutina(id_rutina: number): void {

@@ -9,13 +9,14 @@
         <!-- INFO - Información de rutinas -->
         <div class="alert alert-info mb-4" *ngIf="rutinas.length > 0">
             <h6>INFORMACIÓN DE MIS RUTINAS:</h6>
-            <p class="mb-1">Total rutinas: <strong>{{ rutinas.length }}</strong></p>
+            <!-- <p class="mb-1">Total rutinas: <strong>{{ rutinas.length }}</strong></p> -->
             <p class="mb-1">Mis rutinas creadas: <strong>{{ rutinasDelAtleta.length }}</strong></p>
             <p class="mb-1">Rutinas del entrenador: <strong>{{ rutinasDelEntrenador.length }}</strong></p>
             <p class="mb-1">Rutinas del gimnasio: <strong>{{ rutinasDelGimnasio.length }}</strong></p>
             <p class="mb-1">Rutinas genéricas de entrenador: <strong>{{ rutinasGenericasEntrenador.length }}</strong>
             </p>
-            <p class="mb-0">Rutinas genéricas de gimnasio: <strong>{{ rutinasGenericasGimnasio.length }}</strong></p>
+            <p class="mb-1">Rutinas genéricas de gimnasio: <strong>{{ rutinasGenericasGimnasio.length }}</strong></p>
+            <p class="mb-0">Rutinas de la app: <strong>{{ rutinasGenericasApp.length }}</strong></p>
         </div>
 
         <div *ngIf="rutinas.length > 0; else noData">
@@ -23,8 +24,7 @@
             <!-- Sección: Rutinas del Entrenador -->
             <div *ngIf="rutinasDelEntrenador.length > 0" class="mb-5">
                 <h3 class="section-title text-primary mb-3">
-                    <i class="fas fa-user-tie"></i> Rutinas Asignadas por mi Entrenador ({{ rutinasDelEntrenador.length
-                    }})
+                    <i class="fas fa-user-tie"></i> Rutinas Asignadas por mi Entrenador
                 </h3>
                 <div class="card border-primary">
                     <div class="card-body">
@@ -32,20 +32,20 @@
                             <table class="table custom-table">
                                 <thead class="table-primary">
                                     <tr>
-                                        <th>Nombre</th>
-                                        <th>Fecha Creación</th>
-                                        <th class="hide-mobile">Objetivo</th>
-                                        <th class="hide-mobile">Nivel</th>
-                                        <th>Acciones</th>
+                                        <th class="text-start">Nombre</th>
+                                        <th class="text-center">Fecha Creación</th>
+                                        <th class="hide-mobile text-center">Objetivo</th>
+                                        <th class="hide-mobile text-center">Nivel</th>
+                                        <th class="text-center">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let rutina of rutinasDelEntrenador">
-                                        <td>{{ rutina.nombre }}</td>
-                                        <td>{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
-                                        <td class="hide-mobile">{{ rutina.objetivo }}</td>
-                                        <td class="hide-mobile">{{ rutina.nivel_atleta }}</td>
-                                        <td>
+                                        <td class="text-start">{{ rutina.nombre }}</td>
+                                        <td class="text-center">{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
+                                        <td class="hide-mobile text-center">{{ rutina.objetivo }}</td>
+                                        <td class="hide-mobile text-center">{{ rutina.nivel_atleta }}</td>
+                                        <td class="text-center">
                                             <span class="icon-view" (click)="verDetallesRutina(rutina.id_rutina)"
                                                 title="Ver rutina">
                                                 <i class="bi bi-eye-fill text-info fs-5"></i>
@@ -62,7 +62,7 @@
             <!-- Sección: Rutinas del Gimnasio -->
             <div *ngIf="rutinasDelGimnasio.length > 0" class="mb-5">
                 <h3 class="section-title text-success mb-3">
-                    <i class="fas fa-dumbbell"></i> Rutinas del Gimnasio ({{ rutinasDelGimnasio.length }})
+                    <i class="fas fa-dumbbell"></i> Rutinas del Gimnasio
                 </h3>
                 <div class="card border-success">
                     <div class="card-body">
@@ -70,20 +70,20 @@
                             <table class="table custom-table">
                                 <thead class="table-success">
                                     <tr>
-                                        <th>Nombre</th>
-                                        <th>Fecha Creación</th>
-                                        <th class="hide-mobile">Objetivo</th>
-                                        <th class="hide-mobile">Nivel</th>
-                                        <th>Acciones</th>
+                                        <th class="text-start">Nombre</th>
+                                        <th class="text-center">Fecha Creación</th>
+                                        <th class="hide-mobile text-center">Objetivo</th>
+                                        <th class="hide-mobile text-center">Nivel</th>
+                                        <th class="text-center">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let rutina of rutinasDelGimnasio">
-                                        <td>{{ rutina.nombre }}</td>
-                                        <td>{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
-                                        <td class="hide-mobile">{{ rutina.objetivo }}</td>
-                                        <td class="hide-mobile">{{ rutina.nivel_atleta }}</td>
-                                        <td>
+                                        <td class="text-start">{{ rutina.nombre }}</td>
+                                        <td class="text-center">{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
+                                        <td class="hide-mobile text-center">{{ rutina.objetivo }}</td>
+                                        <td class="hide-mobile text-center">{{ rutina.nivel_atleta }}</td>
+                                        <td class="text-center">
                                             <span class="icon-view" (click)="verDetallesRutina(rutina.id_rutina)"
                                                 title="Ver rutina">
                                                 <i class="bi bi-eye-fill text-info fs-5"></i>
@@ -100,7 +100,7 @@
             <!-- Sección: Mis Rutinas Creadas -->
             <div *ngIf="rutinasDelAtleta.length > 0" class="mb-5">
                 <h3 class="section-title text-warning mb-3">
-                    <i class="fas fa-user-edit"></i> Mis Rutinas Creadas ({{ rutinasDelAtleta.length }})
+                    <i class="fas fa-user-edit"></i> Mis Rutinas
                 </h3>
                 <div class="card border-warning">
                     <div class="card-body">
@@ -108,20 +108,20 @@
                             <table class="table custom-table">
                                 <thead class="table-warning">
                                     <tr>
-                                        <th>Nombre</th>
-                                        <th>Fecha Creación</th>
-                                        <th class="hide-mobile">Objetivo</th>
-                                        <th class="hide-mobile">Nivel</th>
-                                        <th>Acciones</th>
+                                        <th class="text-start">Nombre</th>
+                                        <th class="text-center">Fecha Creación</th>
+                                        <th class="hide-mobile text-center">Objetivo</th>
+                                        <th class="hide-mobile text-center">Nivel</th>
+                                        <th class="text-center">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let rutina of rutinasDelAtleta">
-                                        <td>{{ rutina.nombre }}</td>
-                                        <td>{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
-                                        <td class="hide-mobile">{{ rutina.objetivo }}</td>
-                                        <td class="hide-mobile">{{ rutina.nivel_atleta }}</td>
-                                        <td>
+                                        <td class="text-start">{{ rutina.nombre }}</td>
+                                        <td class="text-center">{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
+                                        <td class="hide-mobile text-center">{{ rutina.objetivo }}</td>
+                                        <td class="hide-mobile text-center">{{ rutina.nivel_atleta }}</td>
+                                        <td class="text-center">
                                             <span class="icon-view" (click)="verDetallesRutina(rutina.id_rutina)"
                                                 title="Ver rutina">
                                                 <i class="bi bi-eye-fill text-info fs-5"></i>
@@ -142,8 +142,7 @@
             <!-- Sección: Rutinas Genéricas de Entrenador -->
             <div *ngIf="rutinasGenericasEntrenador.length > 0" class="mb-5">
                 <h3 class="section-title text-info mb-3">
-                    <i class="fas fa-user-tie"></i> Rutinas Genéricas de Entrenador ({{
-                    rutinasGenericasEntrenador.length }})
+                    <i class="fas fa-user-tie"></i> Rutinas Genéricas de Entrenador
                 </h3>
                 <div class="card border-info">
                     <div class="card-body">
@@ -151,20 +150,20 @@
                             <table class="table custom-table">
                                 <thead class="table-info">
                                     <tr>
-                                        <th>Nombre</th>
-                                        <th>Fecha Creación</th>
-                                        <th class="hide-mobile">Objetivo</th>
-                                        <th class="hide-mobile">Nivel</th>
-                                        <th>Acciones</th>
+                                        <th class="text-start">Nombre</th>
+                                        <th class="text-center">Fecha Creación</th>
+                                        <th class="hide-mobile text-center">Objetivo</th>
+                                        <th class="hide-mobile text-center">Nivel</th>
+                                        <th class="text-center">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let rutina of rutinasGenericasEntrenador">
-                                        <td>{{ rutina.nombre }}</td>
-                                        <td>{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
-                                        <td class="hide-mobile">{{ rutina.objetivo }}</td>
-                                        <td class="hide-mobile">{{ rutina.nivel_atleta }}</td>
-                                        <td>
+                                        <td class="text-start">{{ rutina.nombre }}</td>
+                                        <td class="text-center">{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
+                                        <td class="hide-mobile text-center">{{ rutina.objetivo }}</td>
+                                        <td class="hide-mobile text-center">{{ rutina.nivel_atleta }}</td>
+                                        <td class="text-center">
                                             <span class="icon-view" (click)="verDetallesRutina(rutina.id_rutina)"
                                                 title="Ver rutina">
                                                 <i class="bi bi-eye-fill text-info fs-5"></i>
@@ -181,8 +180,7 @@
             <!-- Sección: Rutinas Genéricas de Gimnasio -->
             <div *ngIf="rutinasGenericasGimnasio.length > 0" class="mb-5">
                 <h3 class="section-title text-secondary mb-3">
-                    <i class="fas fa-dumbbell"></i> Rutinas Genéricas de Gimnasio ({{ rutinasGenericasGimnasio.length
-                    }})
+                    <i class="fas fa-dumbbell"></i> Rutinas Genéricas de Gimnasio
                 </h3>
                 <div class="card border-secondary">
                     <div class="card-body">
@@ -190,20 +188,56 @@
                             <table class="table custom-table">
                                 <thead class="table-secondary">
                                     <tr>
-                                        <th>Nombre</th>
-                                        <th>Fecha Creación</th>
-                                        <th class="hide-mobile">Objetivo</th>
-                                        <th class="hide-mobile">Nivel</th>
-                                        <th>Acciones</th>
+                                        <th class="text-start">Nombre</th>
+                                        <th class="text-center">Fecha Creación</th>
+                                        <th class="hide-mobile text-center">Objetivo</th>
+                                        <th class="hide-mobile text-center">Nivel</th>
+                                        <th class="text-center">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let rutina of rutinasGenericasGimnasio">
-                                        <td>{{ rutina.nombre }}</td>
-                                        <td>{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
-                                        <td class="hide-mobile">{{ rutina.objetivo }}</td>
-                                        <td class="hide-mobile">{{ rutina.nivel_atleta }}</td>
-                                        <td>
+                                        <td class="text-start">{{ rutina.nombre }}</td>
+                                        <td class="text-center">{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
+                                        <td class="hide-mobile text-center">{{ rutina.objetivo }}</td>
+                                        <td class="hide-mobile text-center">{{ rutina.nivel_atleta }}</td>
+                                        <td class="text-center">
+                                            <span class="icon-view" (click)="verDetallesRutina(rutina.id_rutina)"
+                                                title="Ver rutina">
+                                                <i class="bi bi-eye-fill text-info fs-5"></i>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rutinas de la App -->
+            <div *ngIf="rutinasGenericasApp.length > 0" class="mb-5">
+                <h3 class="section-title text-primary mb-3">
+                    <i class="fas fa-mobile-alt"></i> Rutinas de la App
+                </h3>
+                <div class="card border-dark">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table custom-table">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th class="text-start">Nombre</th>
+                                        <th class="hide-mobile text-center">Objetivo</th>
+                                        <th class="hide-mobile text-center">Nivel</th>
+                                        <th class="text-center">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let rutina of rutinasGenericasApp">
+                                        <td class="text-start">{{ rutina.nombre }}</td>
+                                        <td class="hide-mobile text-center">{{ rutina.objetivo }}</td>
+                                        <td class="hide-mobile text-center">{{ rutina.nivel_atleta }}</td>
+                                        <td class="text-center">
                                             <span class="icon-view" (click)="verDetallesRutina(rutina.id_rutina)"
                                                 title="Ver rutina">
                                                 <i class="bi bi-eye-fill text-info fs-5"></i>
@@ -218,7 +252,7 @@
             </div>
 
             <!-- FALLBACK: Mostrar todas las rutinas si no hay categorización -->
-            <div *ngIf="rutinasDelEntrenador.length === 0 && rutinasDelGimnasio.length === 0 && rutinasDelAtleta.length === 0"
+            <div *ngIf="rutinasDelAtleta.length === 0 && rutinasDelEntrenador.length === 0 && rutinasDelGimnasio.length === 0 && rutinasGenericasEntrenador.length === 0 && rutinasGenericasGimnasio.length === 0 && rutinasGenericasApp.length === 0 && rutinas.length > 0"
                 class="mb-5">
                 <h3 class="section-title text-secondary mb-3">
                     <i class="fas fa-question-circle"></i> Todas las Rutinas (Sin categorizar)
@@ -229,24 +263,20 @@
                             <table class="table custom-table">
                                 <thead class="table-secondary">
                                     <tr>
-                                        <th>Nombre</th>
-                                        <th>ID Creador</th>
-                                        <th class="hide-mobile">Asignada a</th>
-                                        <th>Fecha Creación</th>
-                                        <th class="hide-mobile">Objetivo</th>
-                                        <th class="hide-mobile">Nivel</th>
-                                        <th>Acciones</th>
+                                        <th class="text-start">Nombre</th>
+                                        <th class="text-center">ID Creador</th>
+                                        <th class="hide-mobile text-center">Objetivo</th>
+                                        <th class="hide-mobile text-center">Nivel</th>
+                                        <th class="text-center">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let rutina of rutinas">
-                                        <td>{{ rutina.nombre }}</td>
-                                        <td>{{ rutina.id_creador }}</td>
-                                        <td class="hide-mobile">{{ rutina.id_atleta || 'General' }}</td>
-                                        <td>{{ rutina.fecha_asignacion | date: 'dd/MM/yyyy' }}</td>
-                                        <td class="hide-mobile">{{ rutina.objetivo }}</td>
-                                        <td class="hide-mobile">{{ rutina.nivel_atleta }}</td>
-                                        <td>
+                                        <td class="text-start">{{ rutina.nombre }}</td>
+                                        <td class="text-center">{{ rutina.id_creador }}</td>
+                                        <td class="hide-mobile text-center">{{ rutina.objetivo }}</td>
+                                        <td class="hide-mobile text-center">{{ rutina.nivel_atleta }}</td>
+                                        <td class="text-center">
                                             <span class="icon-view" (click)="verDetallesRutina(rutina.id_rutina)"
                                                 title="Ver rutina">
                                                 <i class="bi bi-eye-fill text-info fs-5"></i>
