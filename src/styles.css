@@ -436,6 +436,27 @@ tbody td {
   cursor: not-allowed;
 }
 
+.small-title {
+  font-size: 1rem !important;
+  font-weight: 500;
+}
+
+.small-title-dark {
+  font-size: 1rem !important;
+  font-weight: 500;
+  color: #111;
+}
+
+.small-text {
+  font-size: 0.1rem !important;
+  font-weight: 500;
+}
+
+.small-btn {
+  font-size: 0.85rem !important;
+  padding: 0.4rem 1rem !important;
+}
+
 /* ================================================
    Estilos para Scroll Horizontal Responsivo
    ================================================ */

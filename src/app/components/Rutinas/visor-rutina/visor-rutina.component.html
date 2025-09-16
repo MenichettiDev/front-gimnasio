@@ -1,7 +1,7 @@
 <!-- Formulario -->
 <div class="card shadow-lg">
   <div class="card-body">
-    <h1 class="form-title text-center mb-4"><i class="fas fa-dumbbell"></i> MI RUTINA DE EJERCICIOS</h1>
+    <h1 class="form-title text-center mb-4 small-title"><i class="fas fa-dumbbell"></i> MI RUTINA DE EJERCICIOS</h1>
     <!-- Detalles de la Rutina -->
     <div class="card mb-4">
       <div class="card-date">
@@ -18,10 +18,10 @@
         </p>
       </div>
     </div>
-    <!-- Card por Día -->
+    <!-- Card amarilla por Día -->
     <div *ngFor="let dia of rutina; let i = index" class="card mb-3">
       <div class="card-header" (click)="toggleDia(i)">
-        <h3 class="mb-0">
+        <h3 class="mb-0 small-title-dark">
           <i class="fas fa-calendar-day"></i> Día {{ dia.dia }} -
           {{ obtenerNombresGruposMusculares(dia.ejercicios).join(", ") }}
         </h3>
@@ -31,7 +31,7 @@
         <!-- Card por Grupo Muscular -->
         <div *ngFor="let grupoMuscular of obtenerGruposMusculares(dia.ejercicios); let j = index" class="card mb-3">
           <div class="card-header" (click)="toggleGrupoMuscular(i, j)">
-            <h4 class="mb-0">
+            <h4 class="mb-0  small-title-dark">
               <i class="fas fa-muscle"></i> {{ detallesGruposMusculares[grupoMuscular]?.nombre || "---" }}
             </h4>
           </div>
@@ -41,10 +41,24 @@
               *ngFor="let ejercicio of obtenerEjerciciosPorGrupoMuscular(dia.ejercicios, grupoMuscular); let k = index"
               class="card mb-3">
               <div class="card-body">
-                <h5><i class="fas fa-dumbbell"></i> {{ ejercicio.nombre_ejercicio }}</h5>
-                <!-- <p>{{ ejercicio.descripcion_ejercicio }}</p> -->
-                <p><i class="fas fa-redo"></i> {{ ejercicio.repeticion_frecuencia}}</p>
-                <!-- <p> Detalle: {{ ejercicio.repeticion_nombre }}</p> -->
+                <div class="d-flex justify-content-between align-items-start">
+                  <div class="flex-grow-1">
+                    <h5><i class="fas fa-dumbbell"></i> {{ ejercicio.nombre_ejercicio }}</h5>
+                    <p><i class="fas fa-redo"></i> {{ ejercicio.repeticion_frecuencia}}</p>
+                  </div>
+                  <div class="video-link-container"
+                    *ngIf="ejercicio.link_video_ejercicio && ejercicio.link_video_ejercicio !== '---'">
+                    <button type="button" class="video-thumb-btn"
+                      (click)="openVideoModal(ejercicio.link_video_ejercicio, ejercicio.nombre_ejercicio)"
+                      title="Ver video demostrativo">
+                      <img *ngIf="getYoutubeThumbnail(ejercicio.link_video_ejercicio) as thumb" [src]="thumb"
+                        class="video-thumb-img" alt="Miniatura video" loading="lazy">
+                      <span class="video-thumb-overlay">
+                        <i class="fas fa-play-circle"></i>
+                      </span>
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -52,5 +66,34 @@
       </div>
     </div>
     <hr />
+  </div>
+</div>
+
+<!-- Video Modal -->
+<div class="video-modal" *ngIf="showVideoModal" (click)="onVideoModalBackdropClick($event)">
+  <div class="video-modal-content">
+    <div class="video-modal-header">
+      <h5 class="video-modal-title">{{ selectedVideoTitle }}</h5>
+      <button type="button" class="video-close-button" (click)="closeVideoModal()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="video-modal-body">
+      <!-- Video normal (16:9) -->
+      <div class="video-container-modal" *ngIf="!currentVideoIsShort">
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item" [src]="selectedVideoUrl" allowfullscreen frameborder="0">
+          </iframe>
+        </div>
+      </div>
+
+      <!-- YouTube Short (vertical 9:16) -->
+      <div class="video-container-modal short" *ngIf="currentVideoIsShort">
+        <div class="embed-short-modal">
+          <iframe [src]="selectedVideoUrl" allowfullscreen frameborder="0">
+          </iframe>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

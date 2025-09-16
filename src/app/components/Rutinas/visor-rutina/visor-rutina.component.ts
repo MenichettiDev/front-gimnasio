@@ -5,6 +5,7 @@ import { GruposMuscularesService } from '../../../service/grupos-musculares.serv
 import { RepeticionService } from '../../../service/repeticion.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 
 @Component({
@@ -24,10 +25,17 @@ export class VisorRutinaComponent implements OnInit, OnChanges {
   detallesGruposMusculares: { [key: number]: any } = {};
   detallesRepeticiones: { [key: number]: any } = {};
 
+  // Video modal properties
+  showVideoModal: boolean = false;
+  selectedVideoUrl: SafeResourceUrl | null = null;
+  selectedVideoTitle: string = '';
+  currentVideoIsShort: boolean = false;
+
   constructor(
     private ejercicioService: EjerciciosService,
     private grupoMuscularService: GruposMuscularesService,
-    private repeticionService: RepeticionService
+    private repeticionService: RepeticionService,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
@@ -58,8 +66,8 @@ export class VisorRutinaComponent implements OnInit, OnChanges {
         // Obtener detalles del ejercicio, grupo muscular y repetición
         const [ejercicioDetalle, grupoDetalle, repeticionDetalle] = await Promise.all([
           this.ejercicioService.getEjercicioById(ejercicio.id_ejercicio).toPromise()
-            .then(data => data || { nombre: '---', descripcion: '---' }) // Valor predeterminado si es undefined
-            .catch(() => ({ nombre: '---', descripcion: '---' })), // Valor predeterminado si hay error
+            .then(data => data || { nombre: '---', descripcion: '---', link_video: '---' }) // Valor predeterminado si es undefined
+            .catch(() => ({ nombre: '---', descripcion: '---', link_video: '---' })), // Valor predeterminado si hay error
           this.grupoMuscularService.getGrupoMuscularById(ejercicio.id_grupo_muscular).toPromise()
             .then(data => {
               // Guardar el detalle del grupo muscular en this.detallesGruposMusculares
@@ -79,6 +87,7 @@ export class VisorRutinaComponent implements OnInit, OnChanges {
           ...ejercicio,
           nombre_ejercicio: ejercicioDetalle.nombre,
           descripcion_ejercicio: ejercicioDetalle.descripcion,
+          link_video_ejercicio: ejercicioDetalle.link_video,
           nombre_grupo_muscular: grupoDetalle.nombre,
           repeticion_frecuencia: repeticionDetalle.frecuencia,
           repeticion_nombre: repeticionDetalle.nombre,
@@ -156,5 +165,83 @@ export class VisorRutinaComponent implements OnInit, OnChanges {
     });
   }
 
+  // Video modal methods
+  openVideoModal(videoUrl: string, exerciseName: string): void {
+    if (videoUrl && videoUrl !== '---') {
+      this.selectedVideoUrl = this.getSafeUrl(videoUrl);
+      this.selectedVideoTitle = exerciseName;
+      this.showVideoModal = true;
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  closeVideoModal(): void {
+    this.showVideoModal = false;
+    this.selectedVideoUrl = null;
+    this.selectedVideoTitle = '';
+    this.currentVideoIsShort = false;
+    document.body.style.overflow = 'auto';
+  }
+
+  onVideoModalBackdropClick(event: MouseEvent): void {
+    if (event.target === event.currentTarget) {
+      this.closeVideoModal();
+    }
+  }
+
+  // Video URL sanitization method
+  getSafeUrl(url: string): SafeResourceUrl {
+    this.currentVideoIsShort = false;
+
+    if (!url || url === '---') {
+      return this.sanitizer.bypassSecurityTrustResourceUrl('');
+    }
+
+    let embedUrl = url;
+
+    // Detectar YouTube Shorts: /shorts/VIDEO_ID
+    if (url.includes('/shorts/')) {
+      const parts = url.split('/shorts/');
+      const id = parts[1]?.split(/[?&]/)[0];
+      if (id) {
+        embedUrl = `https://www.youtube.com/embed/${id}`;
+        this.currentVideoIsShort = true;
+      }
+    } else if (url.includes('youtube.com/watch?v=')) {
+      const urlParams = new URLSearchParams(new URL(url).search);
+      const videoId = urlParams.get('v');
+      if (videoId) {
+        embedUrl = `https://www.youtube.com/embed/${videoId}`;
+      }
+    } else if (url.includes('youtu.be/')) {
+      const videoId = url.split('youtu.be/')[1].split('?')[0];
+      if (videoId) {
+        embedUrl = `https://www.youtube.com/embed/${videoId}`;
+      }
+    }
+
+    // Opcional: parámetros comunes para evitar sugerencias (rel=0)
+    if (!embedUrl.includes('?')) {
+      embedUrl += '?rel=0';
+    } else if (!/rel=/.test(embedUrl)) {
+      embedUrl += '&rel=0';
+    }
+
+    return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
+  }
+
+  getYoutubeThumbnail(url: string): string | null {
+    if (!url) return null;
+    let videoId: string | null = null;
+    if (url.includes('youtube.com/watch?v=')) {
+      const urlParams = new URLSearchParams(new URL(url).search);
+      videoId = urlParams.get('v');
+    } else if (url.includes('youtu.be/')) {
+      videoId = url.split('youtu.be/')[1].split(/[?&]/)[0];
+    } else if (url.includes('/shorts/')) {
+      videoId = url.split('/shorts/')[1].split(/[?&]/)[0];
+    }
+    return videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : null;
+  }
 
 }
