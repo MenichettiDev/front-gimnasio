@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { ejercicioRutina, plan } from '../../../data/interfaces/rutinaArmadaInterface';
 import { EjerciciosService } from '../../../service/ejercicios.service';
 import { GruposMuscularesService } from '../../../service/grupos-musculares.service';
@@ -30,6 +30,9 @@ export class VisorRutinaComponent implements OnInit, OnChanges {
   selectedVideoUrl: SafeResourceUrl | null = null;
   selectedVideoTitle: string = '';
   currentVideoIsShort: boolean = false;
+
+  @ViewChildren('diaCard') diaCards!: QueryList<ElementRef>;
+  @ViewChildren('grupoCard') grupoCards!: QueryList<ElementRef>;
 
   constructor(
     private ejercicioService: EjerciciosService,
@@ -130,14 +133,50 @@ export class VisorRutinaComponent implements OnInit, OnChanges {
   }
 
   // Método para desplegar/colapsar la card de un día
-  toggleDia(index: number): void {
-    this.rutina[index].expandido = !this.rutina[index].expandido;
+  toggleDia(index: number) {
+    this.rutina.forEach((dia, i) => {
+      dia.expandido = (i === index) ? !dia.expandido : false;
+      if (!dia.expandido && dia.gruposMusculares) {
+        dia.gruposMusculares.forEach((grupo: any) => {
+          grupo.expandido = false;
+          if (grupo.ejercicios) {
+            grupo.ejercicios.forEach((ej: any) => ej.expandido = false);
+          }
+        });
+      }
+    });
+    setTimeout(() => {
+      if (this.rutina[index].expandido && this.diaCards && this.diaCards.toArray()[index]) {
+        this.diaCards.toArray()[index].nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
   }
 
   // Método para desplegar/colapsar la card de un grupo muscular
-  toggleGrupoMuscular(diaIndex: number, grupoIndex: number): void {
-    this.rutina[diaIndex].gruposMusculares[grupoIndex].expandido =
-      !this.rutina[diaIndex].gruposMusculares[grupoIndex].expandido;
+  toggleGrupoMuscular(diaIndex: number, grupoIndex: number) {
+    const grupos = this.rutina[diaIndex].gruposMusculares;
+    grupos.forEach((grupo: any, idx: number) => {
+      grupo.expandido = (idx === grupoIndex) ? !grupo.expandido : false;
+      if (!grupo.expandido && grupo.ejercicios) {
+        grupo.ejercicios.forEach((ej: any) => ej.expandido = false);
+      }
+    });
+    setTimeout(() => {
+      // Encuentra el índice absoluto del grupoCard en el QueryList
+      const grupoCardIndex = this.getGrupoCardIndex(diaIndex, grupoIndex);
+      if (grupos[grupoIndex].expandido && this.grupoCards && this.grupoCards.toArray()[grupoCardIndex]) {
+        this.grupoCards.toArray()[grupoCardIndex].nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 50);
+  }
+
+  // Ayuda a encontrar el índice absoluto del grupoCard en el QueryList
+  getGrupoCardIndex(diaIndex: number, grupoIndex: number): number {
+    let idx = 0;
+    for (let i = 0; i < diaIndex; i++) {
+      idx += this.rutina[i].gruposMusculares.length;
+    }
+    return idx + grupoIndex;
   }
 
   // Métodos para calcular el progreso

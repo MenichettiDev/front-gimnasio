@@ -19,7 +19,7 @@
       </div>
     </div>
     <!-- Card amarilla por Día -->
-    <div *ngFor="let dia of rutina; let i = index" class="card mb-3">
+    <div *ngFor="let dia of rutina; let i = index" class="card mb-3" #diaCard>
       <div class="card-header" (click)="toggleDia(i)">
         <h3 class="mb-0 small-title-dark">
           <i class="fas fa-calendar-day"></i> Día {{ dia.dia }} -
@@ -29,7 +29,8 @@
       <div class="card-date" [ngClass]="{ 'd-none': !dia.expandido }"
         style="min-height: auto; height: auto; max-height: none; overflow: visible;">
         <!-- Card por Grupo Muscular -->
-        <div *ngFor="let grupoMuscular of obtenerGruposMusculares(dia.ejercicios); let j = index" class="card mb-3">
+        <div *ngFor="let grupoMuscular of obtenerGruposMusculares(dia.ejercicios); let j = index" class="card mb-3"
+          #grupoCard>
           <div class="card-header" (click)="toggleGrupoMuscular(i, j)">
             <h4 class="mb-0  small-title-dark">
               <i class="fas fa-muscle"></i> {{ detallesGruposMusculares[grupoMuscular]?.nombre || "---" }}
